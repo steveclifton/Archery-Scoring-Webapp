@@ -21,13 +21,13 @@
         <div class="page-container">
             <div class="container">
                 <div class="row row-offcanvas row-offcanvas-left">
-                    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-                        <?php include('/var/www/archery/Views/layouts/leftside.php'); ?>
-                    </div>
+
+                    <?php include('/var/www/archery/Views/layouts/leftside.php'); ?>
 
                     <div class="col-xs-12 col-sm-9">
                         <?php include($viewName . '.php'); ?>
                     </div>
+
                 </div>
             </div>
         </div>
