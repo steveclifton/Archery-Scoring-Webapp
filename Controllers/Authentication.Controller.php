@@ -84,9 +84,12 @@ class Authentication extends Base
     public function setSession ($data)
     {
         $_SESSION['id'] = $data['id'];
-        $_SESSION['student_id'] = $data['student_id'];
+        $_SESSION['email'] = $data['email'];
         $_SESSION['first_name'] = $data['first_name'];
         $_SESSION['last_name'] = $data['last_name'];
+        $_SESSION['gender'] = $data['gender'];
+        $_SESSION['dob'] = $data['dob'];
+        $_SESSION['user_type'] = $data['user_type'];
         $_SESSION['email'] = $data['email'];
     }
     
