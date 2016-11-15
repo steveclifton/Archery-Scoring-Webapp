@@ -15,14 +15,14 @@ use Archery\Exceptions\CustomException;
 class User extends Base
 {
 
-    public function getUserByStudentId($studentId)
+    public function getUserByEmail($email)
     {
 
         $query = $this->database->query("SELECT *
                                          FROM 
                                          `users` 
                                          WHERE 
-                                         student_id='$studentId'
+                                         email='$email'
                                          LIMIT 1
                                          "
         );
@@ -42,7 +42,7 @@ class User extends Base
     {
 
         /* Sanitizes and filters data before being inserted */
-        $data['student_id'] = $this->database->real_escape_string($userData['username']);
+        $data['email'] = $this->database->real_escape_string($userData['email']);
         $data['first_name'] = ucfirst($this->database->real_escape_string($userData['first_name']));
         $data['last_name'] = ucfirst($this->database->real_escape_string($userData['last_name']));
         $data['password'] = $this->database->real_escape_string($userData['password']);
@@ -71,7 +71,7 @@ class User extends Base
                                              )"
         );
 
-        $newUserData = $this->getUserByStudentId($data['student_id']);
+        $newUserData = $this->getUserByEmail($data['student_id']);
 
         $newUser = new User();
 
@@ -90,10 +90,10 @@ class User extends Base
      */
     public function verify($userData)
     {
-        $data['student_id'] = strtolower($this->database->real_escape_string($userData['student_id']));
+        $data['email'] = strtolower($this->database->real_escape_string($userData['email']));
         $data['password'] = $this->database->real_escape_string($userData['password']);
 
-        $existingUser = $this->getUserByStudentId($data['student_id']);
+        $existingUser = $this->getUserByEmail($data['email']);
 
         /* Checks the database to see whether passwords match, if they do, user details are returned */
         if (password_verify($data['password'], $existingUser['password'])) {
