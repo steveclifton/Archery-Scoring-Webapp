@@ -12,18 +12,30 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     </head>
     <body>
-    
         <div class="container">
             <?php include('/var/www/archery/Views/layouts/header.php'); ?>
         </div>
 
-        <div class="container">
-            <?php include($viewName . '.php'); ?>
+
+
+        <div class="page-container">
+            <div class="container">
+                <div class="row row-offcanvas row-offcanvas-left">
+                    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                        <?php include('/var/www/archery/Views/layouts/leftside.php'); ?>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-9">
+                        <?php include($viewName . '.php'); ?>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
 
         <div class="container">
             <?php include('/var/www/archery/Views/layouts/footer.php')?>
         </div>
-
     </body>
 </html>
