@@ -11,6 +11,7 @@
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
+                <li><a></a></li>
                 <li><a href="#">Results</a></li>
                 <li><a href="#">Rules</a></li>
                 <li><a href="#">Contact</a></li>
@@ -18,7 +19,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <?php
-                    if (!isset($_SESSION['id'])) {
+                    if (isset($_SESSION['id'])) {
                         $username = "Steve Clifton"; //$_SESSION['first_name'] . " " . $_SESSION['last_name'];
                         echo "
                                 <li class='dropdown'>
@@ -31,7 +32,7 @@
                         ";
                     } else {
                         echo "
-                                <form class=\"navbar-form navbar-right\" action=\"login\">
+                                <form class=\"navbar-form navbar-right\" method='post' ' action=\"login\">
                                 <div class=\"form-group\">
                                 <input type=\"email\" class=\"form-control\" name=\"email\" placeholder=\"Username\">
                                 </div>
