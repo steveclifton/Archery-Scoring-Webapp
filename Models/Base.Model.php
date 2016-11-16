@@ -4,6 +4,7 @@ namespace Archery\Models;
 
 use Archery\Exceptions\CustomException;
 use Archery\Services\Database;
+use Archery\Services\DB;
 
 
 /**
@@ -19,7 +20,7 @@ abstract class Base
 
     public function __construct()
     {
-        $this->database = Database::getInstance();
+        $this->database = DB::getInstance();
     }
 
 }
