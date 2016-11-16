@@ -4,6 +4,8 @@ namespace Archery\Models;
 
 use Archery\Exceptions\CustomException;
 
+use PDO;
+
 
 /**
  * Class User
@@ -17,17 +19,13 @@ class User extends Base
 
     public function getUserByEmail($email)
     {
+        $sql = "SELECT * FROM `users` WHERE email='$email' LIMIT 1 ";
 
-        $query = $this->database->query("SELECT *
-                                         FROM 
-                                         `users` 
-                                         WHERE 
-                                         email='$email'
-                                         LIMIT 1
-                                         "
-        );
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $data = $query->fetch_assoc();
+        $stm->execute(array('$email'));
+
+        $data = $stm->fetchAll();
 
         return $data;
     }
@@ -41,45 +39,45 @@ class User extends Base
     public function create($userData)
     {
 
-        /* Sanitizes and filters data before being inserted */
-        $data['email'] = $this->database->real_escape_string($userData['email']);
-        $data['first_name'] = ucfirst($this->database->real_escape_string($userData['first_name']));
-        $data['last_name'] = ucfirst($this->database->real_escape_string($userData['last_name']));
-        $data['password'] = $this->database->real_escape_string($userData['password']);
-        $data['email'] = strtolower($this->database->real_escape_string($userData['email']));
-
-        $data['email'] = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
-
-        $password = password_hash($data['password'], PASSWORD_DEFAULT);
-
-        $this->database->query("INSERT INTO `users` (
-                                            `id`,
-                                            `student_id`,
-                                            `first_name`,
-                                            `last_name`,
-                                            `password`,
-                                            `email`,
-                                            `create_date`
-                                            ) VALUES (
-                                            NULL,
-                                             '".$data['student_id']."',
-                                             '".$data['first_name']."', 
-                                             '".$data['last_name']."', 
-                                             '".$password."',
-                                             '".$data['email']."',
-                                             CURRENT_TIMESTAMP
-                                             )"
-        );
-
-        $newUserData = $this->getUserByEmail($data['student_id']);
-
-        $newUser = new User();
-
-        foreach ($newUserData as $key => $value) {
-            $newUser->$key = $value;
-        }
-
-        return $newUser;
+//        /* Sanitizes and filters data before being inserted */
+//        $data['email'] = $this->database->real_escape_string($userData['email']);
+//        $data['first_name'] = ucfirst($this->database->real_escape_string($userData['first_name']));
+//        $data['last_name'] = ucfirst($this->database->real_escape_string($userData['last_name']));
+//        $data['password'] = $this->database->real_escape_string($userData['password']);
+//        $data['email'] = strtolower($this->database->real_escape_string($userData['email']));
+//
+//        $data['email'] = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
+//
+//        $password = password_hash($data['password'], PASSWORD_DEFAULT);
+//
+//        $this->database->query("INSERT INTO `users` (
+//                                            `id`,
+//                                            `student_id`,
+//                                            `first_name`,
+//                                            `last_name`,
+//                                            `password`,
+//                                            `email`,
+//                                            `create_date`
+//                                            ) VALUES (
+//                                            NULL,
+//                                             '".$data['student_id']."',
+//                                             '".$data['first_name']."',
+//                                             '".$data['last_name']."',
+//                                             '".$password."',
+//                                             '".$data['email']."',
+//                                             CURRENT_TIMESTAMP
+//                                             )"
+//        );
+//
+//        $newUserData = $this->getUserByEmail($data['student_id']);
+//
+//        $newUser = new User();
+//
+//        foreach ($newUserData as $key => $value) {
+//            $newUser->$key = $value;
+//        }
+//
+//        return $newUser;
     }
 
     /**
@@ -90,13 +88,18 @@ class User extends Base
      */
     public function verify($userData)
     {
-        $data['email'] = strtolower($this->database->real_escape_string($userData['email']));
-        $data['password'] = $this->database->real_escape_string($userData['password']);
+        //$data['email'] = strtolower($this->database->real_escape_string($userData['email']));
+        //$data['password'] = $this->database->real_escape_string($userData['password']);
 
-        $existingUser = $this->getUserByEmail($data['email']);
+        $existingUser = $this->getUserByEmail($userData['email']);
+
+        if (isset($existingUser)) {
+            $existingUser = $existingUser['0'];
+        }
+
 
         /* Checks the database to see whether passwords match, if they do, user details are returned */
-        if (password_verify($data['password'], $existingUser['password'])) {
+        if (password_verify($userData['password'], $existingUser['password'])) {
             return $existingUser;
         }
     }
