@@ -5,14 +5,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="login">Archery League Series</a>
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
                 <li><a></a></li>
-                <li><a href="#">Results</a></li>
                 <li><a href="#">Rules</a></li>
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">Register</a></li>
