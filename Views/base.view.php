@@ -25,6 +25,7 @@
                     <?php include('/var/www/archery/Views/layouts/leftside.php'); ?>
 
                     <div class="col-xs-12 col-sm-9">
+                        <?= "<h1 style=\"padding-bottom: 10px; font-family: 'Droid Sans', sans-serif; text-align: center; \">2016 Outdoor League Series</h1>" ?>
                         <?php include($viewName . '.php'); ?>
                     </div>
 
