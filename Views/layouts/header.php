@@ -16,17 +16,17 @@
                 <li><a href="#">Register</a></li>
                 <?php
                     if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin') {
-                        echo "<li><a href=\"#\">Admin</a></li>";
+                        echo "<li><a href=\"admin\">Admin</a></li>";
                     }
                 ?>
             </ul>
             <div class="col-xs-2 pull-left">
                 <p id="noStudent" style="color: red; text-align: end; padding-top: 14px">
                     <?php
-                    if(isset($_SESSION['failedLogin'])) {
-                        echo $_SESSION['failedLogin'];
-                        unset($_SESSION['failedLogin']);
-                    }
+                        if(isset($_SESSION['failedLogin'])) {
+                            echo $_SESSION['failedLogin'];
+                            unset($_SESSION['failedLogin']);
+                        }
                     ?>
                 </p>
             </div>
