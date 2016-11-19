@@ -8,7 +8,6 @@ use Archery\Models\User;
 
 class Authentication extends Base
 {
-
     /**
      * Checks the users login credentials
      * - If authorised, redirect to account view
@@ -52,7 +51,6 @@ class Authentication extends Base
     public function register()
     {
         $user = new User();
-
 
         $this->isLoggedIn();
 
