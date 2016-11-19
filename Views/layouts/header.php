@@ -14,6 +14,11 @@
                 <li><a href="#">Rules</a></li>
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">Register</a></li>
+                <?php
+                    if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin') {
+                        echo "<li><a href=\"#\">Admin</a></li>";
+                    }
+                ?>
             </ul>
             <div class="col-xs-2 pull-left">
                 <p id="noStudent" style="color: red; text-align: end; padding-top: 14px">
