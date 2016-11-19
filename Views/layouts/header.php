@@ -8,13 +8,23 @@
             </button>
             <a class="navbar-brand" href="login">Archery League Series</a>
         </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
+        <div class="navbar-collapse" id="navbar-main">
             <ul class="nav navbar-nav">
                 <li><a></a></li>
                 <li><a href="#">Rules</a></li>
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">Register</a></li>
             </ul>
+            <div class="col-xs-2 pull-left">
+                <p id="noStudent" style="color: red; text-align: end; padding-top: 14px">
+                    <?php
+                    if(isset($_SESSION['failedLogin'])) {
+                        echo $_SESSION['failedLogin'];
+                        unset($_SESSION['failedLogin']);
+                    }
+                    ?>
+                </p>
+            </div>
             <ul class="nav navbar-nav navbar-right">
                 <?php
                     if (isset($_SESSION['id'])) {
