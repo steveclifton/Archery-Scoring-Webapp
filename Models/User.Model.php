@@ -88,9 +88,6 @@ class User extends Base
      */
     public function verify($userData)
     {
-        //$data['email'] = strtolower($this->database->real_escape_string($userData['email']));
-        //$data['password'] = $this->database->real_escape_string($userData['password']);
-
         $existingUser = $this->getUserByEmail($userData['email']);
 
         if (isset($existingUser)) {
@@ -104,7 +101,6 @@ class User extends Base
         } else {
             $_SESSION['failedLogin'] = "*Invalid Login";
         }
-
     }
 
 
