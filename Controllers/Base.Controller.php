@@ -26,6 +26,21 @@ abstract class Base
     }
 
     /**
+     * Ensures that the user is an admin
+     *
+     */
+    public function isAdminLoggedIn()
+    {
+        if (isset($_SESSION['id'])) {
+            if ($_SESSION['user_type'] != 'admin') {
+                header('location: /welcome');
+                die();
+            }
+
+        }
+    }
+
+    /**
      * Redirects unauthorised access to 'logged in' Views back to the login page
      *
      * eg - if a non logged in user tries to access the products page.
