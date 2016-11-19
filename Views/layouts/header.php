@@ -18,7 +18,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <?php
                     if (isset($_SESSION['id'])) {
-                        $username = "Steve Clifton"; //$_SESSION['first_name'] . " " . $_SESSION['last_name'];
+                        $username = $_SESSION['first_name'] . " " . $_SESSION['last_name'];
                         echo "
                                 <li class='dropdown'>
                                     <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">$username <b class=\"caret\"></b></a>
