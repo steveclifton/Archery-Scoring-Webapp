@@ -12,24 +12,23 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     </head>
     <body>
-        <div class="container">
-            <?php include('/var/www/archery/Views/layouts/header.php'); ?>
+        <div class="container-fluid">
+            <div class="row">
+                <?php include('/var/www/archery/Views/layouts/header.php'); ?>
+            </div>
         </div>
 
 
 
         <div class="page-container">
-            <div class="container">
-                <div class="row row-offcanvas row-offcanvas-left">
+            <div class="container-fluid">
 
                     <?php include('/var/www/archery/Views/layouts/leftside.php'); ?>
 
-                    <div class="col-xs-12 col-sm-9">
+                    <div class="col-md-10">
                         <?= "<h1 style=\"padding-bottom: 10px; font-family: 'Droid Sans', sans-serif; text-align: center; \">2016 Outdoor League Series</h1>" ?>
                         <?php include($viewName . '.php'); ?>
                     </div>
-
-                </div>
             </div>
         </div>
 
