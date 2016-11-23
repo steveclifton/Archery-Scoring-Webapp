@@ -20,5 +20,10 @@ class Welcome extends Base
         $this->render('Welcome', 'welcome.view', $viewData);
     }
 
+    public function displayRules()
+    {
+        $this->render('Rules', 'rules.view');
+    }
+
 }
 
