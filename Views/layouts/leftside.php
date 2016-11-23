@@ -1,4 +1,4 @@
-<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation" style="padding-top: 10px">
+<div class="col-md-2" id="sidebar" role="navigation" style="padding-top: 10px">
 
     <ul class="nav" style="padding-top: 14px">
         <?php
