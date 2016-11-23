@@ -11,7 +11,7 @@
         <div class="navbar-collapse" id="navbar-main">
             <ul class="nav navbar-nav">
                 <li><a></a></li>
-                <li><a href="#">Rules</a></li>
+                <li><a href="/rules">Rules</a></li>
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">Register</a></li>
                 <?php
