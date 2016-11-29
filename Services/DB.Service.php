@@ -2,8 +2,10 @@
 
 namespace Archery\Services;
 
+use Archery\Env;
 use PDO;
 use PDOException;
+use Archery\Services\Evn;
 
 class DB extends PDO
 {
@@ -12,7 +14,8 @@ class DB extends PDO
     public function __construct()
     {
         try {
-            parent::__construct("mysql:host=localhost;dbname=ass", "root", "root");
+            $env = new Env();
+            parent::__construct($env->database, $env->username, $env->password);
         } catch (PDOException $Exception) {
             header('location: /error');
         }
