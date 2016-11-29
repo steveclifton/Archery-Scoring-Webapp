@@ -2,7 +2,6 @@
 
 namespace Archery\Services;
 
-use Archery\Env;
 use PDO;
 use PDOException;
 use Archery\Services\Evn;
