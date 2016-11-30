@@ -1,6 +1,4 @@
 $(document).ready(function () {
-
-
     /**
      * Checks the Score to ensure the user only enters
      *    - Valid digits 0-9
@@ -9,6 +7,7 @@ $(document).ready(function () {
     $('#score').on('keyup', function() {
         var score = $('#score').val();
         reg = /^[0-9]+$/;
+
         if (score != "") {
             if (!reg.test(score)) {
                 $("#incorrect").html("*Please enter numbers only!");
@@ -29,7 +28,6 @@ $(document).ready(function () {
      */
     $('#xcount').on('keyup', function () {
         var xcount = $('#xcount').val();
-
         reg = /^[0-9]+$/;
 
         if (xcount != "") {
@@ -44,8 +42,26 @@ $(document).ready(function () {
             $("#incorrect").html("*Invalid X-Count");
         }
     });
-
-
 });
+
+/**
+ * Validates form, pretty ugly but it works
+ */
+function validateForm() {
+    var score = document.forms["scoreform"]["score"].value;
+    var xcount = document.forms["scoreform"]["xcount"].value;
+    reg = /^[0-9]+$/;
+
+    if  (  (score > 360 || score < 0)
+        || (!reg.test(score))
+        || (xcount > 36 || xcount < 0)
+        || (!reg.test(xcount))
+        ) {
+            $("#incorrect").html("*Please check details and try again");
+            return false;
+    }
+}
+
+
 
 
