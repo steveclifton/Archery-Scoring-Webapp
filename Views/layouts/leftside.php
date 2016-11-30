@@ -9,12 +9,13 @@
             }
 
 
-            $weeks = ['1', '2', '3', '4', '5'];
+            $weeks = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '9', '10', '11', '12', '13', '14', '15'];
 
             foreach ($weeks as $week) {
-                print "<li><a href=\"#\">Week $week</a></li>";
+                echo "<li><a href=\"/week?week=$week\" style='text-decoration: underline; font-size: 12pt;'>Week $week</a></li>";
             }
         ?>
     </ul>
+    <br><br>
 
 </div>
