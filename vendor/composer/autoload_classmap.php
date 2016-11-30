@@ -18,5 +18,5 @@ return array(
     'Archery\\Models\\User' => $baseDir . '/Models/User.Model.php',
     'Archery\\Services\\DB' => $baseDir . '/Services/DB.Service.php',
     'Archery\\Services\\Database' => $baseDir . '/Services/Database.Service.php',
-    'Archery\\Services\\Evn' => $baseDir . '/Services/Env.php',
+    'Archery\\Services\\Env' => $baseDir . '/Services/Env.php',
 );

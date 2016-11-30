@@ -3,7 +3,7 @@
     <ul class="nav" style="padding-top: 14px">
         <?php
             if (isset($_SESSION['id'])) {
-                echo "<a class=\"btn-success btn pull-left\" href='/submitscore'>Submit Score!</a><br><br><br>";
+                echo "<a class=\"btn-success btn pull-left\" href='/submitscore' style=\"margin-left: 20px\">Submit Score!</a><br><br><br>";
             } else {
                 echo "<br><br><br>";
             }

@@ -21,9 +21,10 @@ class Results extends Base
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $score = new Score();
-            $score->setScore($_POST['score'], $_POST['xcount'], $_POST['date_shot']);
 
-            $score->getAllLoggedInUsersScores();
+            $score->liu_setScore($_POST['score'], $_POST['xcount']);
+
+            //$score->getAllLoggedInUsersScores();
 
             print_r($_POST);
         }

@@ -1,12 +1,11 @@
 <h3>ANZ Outdoor League</h3>
 <br>
 <p>
-    The ANZ League indoor league series has been a great success over this winter season. We have had
+    The ANZ League indoor league series was a great success over the winter season. We had
     over 90 individual archers join in on submitting scores, with several archers have chosen to shoot
-    multiple disciplines.
-    Multiple clubs and individuals have expressed great interest in continuing this league series past the
-    indoor season and to create an outdoor equivalent, so we have decided to continue this shoot over
-    the summer months (with some changes to the round being shot).
+    multiple disciplines. Multiple clubs and individuals expressed great interest in continuing this league
+    series past the indoor season and to create an outdoor equivalent, so it was decided to continue this
+    shoot over the summer months (with some changes to the round being shot).
 </p>
 <p>
     <ul>

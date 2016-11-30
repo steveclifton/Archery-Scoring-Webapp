@@ -1,12 +1,17 @@
-<h3>
-    Submit score here!
-</h3>
+
 
 <form action="/submitscore" method="post">
-    <input type="text" id="score" name="score" placeholder="Score">
-    <input type="text" id="xcount" name="xcount" placeholder="X-Count">
-    <input type="datetime" id="datetime" name="date_shot">
-    <input type="submit" name="submit" value="submit">
-</form>
+    <div class="form-group">
+            <h3 style="margin-left: 14px">Submit <?= $_SESSION['first_name']?>'s score here!</h3>
+            <div class="col-md-2">
+                <input type="text" id="score" class="form-control" name="score" placeholder="Score" required>
+            </div>
+            <div class="col-md-2">
+                <input type="text" id="xcount" class="form-control" name="xcount" placeholder="X-Count" required>
+            </div>
+            <div class="col-md-2">
+                <input type="submit" name="submit" class="btn btn-danger" value="submit">
+            </div>
 
-<p id="incorrect"></p>
+    </div>
+</form>

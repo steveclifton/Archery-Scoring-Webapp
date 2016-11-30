@@ -4,7 +4,7 @@ namespace Archery\Services;
 
 use PDO;
 use PDOException;
-use Archery\Services\Evn;
+use Archery\Services\Env;
 
 class DB extends PDO
 {

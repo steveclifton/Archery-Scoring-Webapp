@@ -36,8 +36,8 @@
 
 
 
-        <div class="container">
-            <?php include('/var/www/archery/Views/layouts/footer.php')?>
-        </div>
+<!--        <div class="container">-->
+<!--            --><?php //include('/var/www/archery/Views/layouts/footer.php')?>
+<!--        </div>-->
     </body>
 </html>
