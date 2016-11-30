@@ -25,14 +25,14 @@ class Score extends Base
      *                                         Setters                                           *
      *********************************************************************************************/
 
-    public function liu_setScore($score, $xCount)
+    public function liu_setScore($score, $xCount, $week)
     {
         $user = $_SESSION['id'];
 
         $sql = "INSERT INTO `30m_round` 
-                                (`id`, `entered_by_id`,`user_id`, `score`, `xcount`, `created_at`) 
+                                (`id`, `entered_by_id`,`user_id`, `score`, `xcount`, `week`, `created_at`) 
                             VALUES 
-                                (NULL, '$user','$user', '$score', '$xCount', CURRENT_TIMESTAMP);
+                                (NULL, '$user','$user', '$score', '$xCount', '$week' ,CURRENT_TIMESTAMP);
                ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -52,6 +52,9 @@ class Score extends Base
      *                                       Getters                                              *
      **********************************************************************************************/
 
+    /**
+     * Logged In User Method
+     */
     public function liu_getAllScores()
     {
         $loggedUser = $_SESSION['id'];
@@ -64,21 +67,39 @@ class Score extends Base
 
         $data = $stm->fetchAll();
 
-        var_dump($data);
-        die();
-        // return $data;
+        return $data;
     }
 
-    public function liu_getCWScore()
+
+    /**
+     * Logged In User Method
+     */
+    public function liu_getCWScore($week)
     {
-        // Gets the current weeks score for the logged in user
+        $loggedUser = $_SESSION['id'];
+
+        $sql = " SELECT * FROM `30m_round` WHERE week='$week' AND user_id='$loggedUser' ";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute(array('$week'));
+
+        $data = $stm->fetchAll();
+
+        return $data;
     }
+
+
 
     public function all_getCWScores()
     {
         // Gets all scores from the current week
     }
 
+
+    /**
+     * Specific User Method
+     */
     public function sfu_getAllScores($userId)
     {
         $sql = " SELECT * FROM `30m_round` WHERE user_id='$userId' ";
