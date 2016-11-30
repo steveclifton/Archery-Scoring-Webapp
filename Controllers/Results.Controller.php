@@ -17,19 +17,25 @@ class Results extends Base
         // if they have , present them the score they have submited with the option 'Request Change'
         //
 
-
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $score = new Score();
 
-            $score->liu_setScore($_POST['score'], $_POST['xcount']);
+            $viewData = $score->liu_getCWScore($_GET['week']);
+
+        }
+
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $score = new Score();
+
+            $score->liu_setScore($_POST['score'], $_POST['xcount'], $_POST['week']);
 
             //$score->getAllLoggedInUsersScores();
 
             print_r($_POST);
         }
 
-        $this->render('Scoring', 'submitscore.view');
+        $this->render('Scoring', 'week.view', $viewData);
 
 
     }
