@@ -58,9 +58,9 @@ else if ($uri == 'rules') {
     $rules->displayRules();
 }
 
-else if ($uri == 'submitscore') {
-    $score = new Results();
-    $score->processScore();
+else if ($uri == 'week') {
+    $week = new Results();
+    $week->processScore();
 }
 
 else {
