@@ -93,7 +93,6 @@ class Score extends Base
 
     public function all_getCWScores($week)
     {
-        $loggedUser = $_SESSION['id'];
 
         $sql = " SELECT * FROM `30m_round` WHERE week='$week' ";
 
