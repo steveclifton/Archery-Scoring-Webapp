@@ -4,13 +4,12 @@ if (isset($_SESSION['id'])) {
         include('Views/layouts/submitscore.php');
     }
 }
-
 ?>
 
 
 <div class="table-responsive">
     <div class="container">
-        <h2>Week <?= $_GET['week'] ?> Results</h2>
+        <h2>Week's Results</h2>
         <p>Current weeks results</p>
         <table class="table table-condensed">
             <thead>
