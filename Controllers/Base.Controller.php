@@ -88,6 +88,20 @@ abstract class Base
         include ('Views/base.view.php');
     }
 
+    public function renderScores($title, $name, $data = array(), $uResults = array())
+    {
+        $pageTitle = $title;
+
+        $viewName = $name;
+
+        $viewData = $data;
+
+        $userResults = $uResults;
+
+        include ('Views/base.view.php');
+    }
+
+
     public function renderAjax($name, $data = array())
     {
 
