@@ -27,18 +27,26 @@ class Results extends Base
         }
 
 
-        else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $this->render('Scoring', 'week.view', $viewData);
+    }
+
+    public function processScore()
+    {
+        $this->isNotLoggedIn();
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $score = new Score();
 
             $score->liu_setScore($_POST['score'], $_POST['xcount'], $_POST['week']);
 
-            //$score->getAllLoggedInUsersScores();
+            $viewData = $score->all_getCWScores($_POST['week']);
 
-            print_r($_POST);
+            $userResults = $score->liu_getCWScore($_POST['week']);
+
         }
 
-        $this->render('Scoring', 'week.view', $viewData);
 
+        $this->renderScores('Scoring', 'week.view', $viewData, $userResults);
 
     }
 
