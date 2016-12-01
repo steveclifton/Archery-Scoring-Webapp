@@ -60,6 +60,10 @@ else if ($uri == 'rules') {
 
 else if ($uri == 'week') {
     $week = new Results();
+    $week->viewScores();
+}
+else if ($uri == 'submitscore') {
+    $week = new Results();
     $week->processScore();
 }
 
