@@ -1,6 +1,8 @@
 <?php
-if (isset($viewData[0])) {
-    print_r($viewData);
+if (isset($_SESSION['id'])) {
+    if (!isset($userResults)) {
+        include('Views/layouts/submitscore.php');
+    }
 }
 ?>
 <div class="form-group">
