@@ -99,8 +99,8 @@ class Score extends Base
                 INNER JOIN users 
                 ON 30m_round.user_id = users.id
                 WHERE 30m_round.week = '$week'
+                ORDER BY 30m_round.score DESC 
                 ";
-        //$sql = " SELECT * FROM `30m_round` JOIN `users` WHERE week='$week' ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
@@ -115,18 +115,22 @@ class Score extends Base
     /**
      * Specific User Method
      */
-    public function sfu_getAllScores($userId)
+    public function sfu_getAllScores($userId, $week)
     {
-        $sql = " SELECT * FROM `30m_round` WHERE user_id='$userId' ";
+        $sql = "
+                SELECT * 
+                FROM 30m_round
+                INNER JOIN users 
+                ON 30m_round.user_id = '$userId'
+                WHERE 30m_round.week = '$week'
+                ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $stm->execute(array('$userId'));
+        $stm->execute(array('$userId, $week'));
 
         $data = $stm->fetchAll();
 
-        var_dump($data);
-        die();
         return $data;
     }
 
