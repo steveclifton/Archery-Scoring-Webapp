@@ -10,7 +10,7 @@ if (isset($_SESSION['id'])) {
 
 <div class="table-responsive">
     <div class="container">
-        <h2>Results</h2>
+        <h2>Week <?= $_GET['week'] ?> Results</h2>
         <p>Current weeks results</p>
         <table class="table table-condensed">
             <thead>
@@ -22,18 +22,16 @@ if (isset($_SESSION['id'])) {
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Mary</td>
-                <td>Moe</td>
-                <td>359</td>
-                <td>31</td>
-            </tr>
-            <tr>
-                <td>July</td>
-                <td>Dooley</td>
-                <td>358</td>
-                <td>31</td>
-            </tr>
+            <?php
+                foreach ($viewData as $data) {
+                    echo "<tr>";
+                    echo "<td>" . $data['first_name'] . "</td>";
+                    echo "<td>" . $data['last_name'] . "</td>";
+                    echo "<td>" . $data['score'] . "</td>";
+                    echo "<td>" . $data['xcount'] . "</td>";
+                    echo "</tr>";
+                }
+            ?>
             </tbody>
         </table>
     </div>
