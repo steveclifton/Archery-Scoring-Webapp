@@ -11,7 +11,6 @@ class Results extends Base
 
     public function viewScores()
     {
-        $this->isNotLoggedIn();
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $score = new Score();
@@ -44,10 +43,7 @@ class Results extends Base
             $userResults = $score->liu_getCWScore($_POST['week']);
 
         }
-
-
         $this->renderScores('Scoring', 'week.view', $viewData, $userResults);
-
     }
 
 
