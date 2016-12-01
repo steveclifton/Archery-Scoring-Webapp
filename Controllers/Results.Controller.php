@@ -16,13 +16,18 @@ class Results extends Base
             $score = new Score();
 
             $viewData = $score->all_getCWScores($_GET['week']);
+//            var_dump($viewData);
+//            die();
 
-            foreach ($viewData as $data) {
-                if ($data['user_id'] == $_SESSION['id']) {
-                    $userResults = $data;
-                    $this->renderScores('Scoring', 'week.view', $viewData, $userResults);
+            if(isset($_SESSION['id'])) {
+                foreach ($viewData as $data) {
+                    if ($data['user_id'] == $_SESSION['id']) {
+                        $userResults = $data;
+                        $this->renderScores('Scoring', 'week.view', $viewData, $userResults);
+                    }
                 }
             }
+
         }
 
 
