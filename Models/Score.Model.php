@@ -94,7 +94,7 @@ class Score extends Base
     public function all_getCWScores($week)
     {
 
-        $sql = " SELECT * FROM `30m_round` WHERE week='$week' ";
+        $sql = " SELECT * FROM `30m_round` JOIN `users` WHERE week='$week' ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
