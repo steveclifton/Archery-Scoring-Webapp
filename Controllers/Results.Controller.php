@@ -16,10 +16,8 @@ class Results extends Base
             $score = new Score();
 
             $viewData = $score->all_getCWScores($_GET['week']);
-//            var_dump($viewData);
-//            die();
 
-            if(isset($_SESSION['id'])) {
+            if (isset($_SESSION['id'])) {
                 foreach ($viewData as $data) {
                     if ($data['user_id'] == $_SESSION['id']) {
                         $userResults = $data;
@@ -27,9 +25,7 @@ class Results extends Base
                     }
                 }
             }
-
         }
-
 
         $this->render('Scoring', 'week.view', $viewData);
     }
@@ -48,7 +44,8 @@ class Results extends Base
             $userResults = $score->liu_getCWScore($_POST['week']);
 
         }
-        $this->renderScores('Scoring', 'week.view', $viewData, $userResults);
+        header("Location: /week?week=" . $_POST['week']);
+        die();
     }
 
 
