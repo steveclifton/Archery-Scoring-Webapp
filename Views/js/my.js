@@ -42,6 +42,20 @@ $(document).ready(function () {
             $("#incorrect").html("*Invalid X-Count");
         }
     });
+    $('#confirm_password').on('focusout', function () {
+        var password = $('#password').val();
+        var confirmPassword = $('#confirm_password').val();
+
+        if ($('#validation_password').length > 0) {
+            $('#validation_password').remove();
+        }
+        if (password != null && confirmPassword != null) {
+            if (password != confirmPassword) {
+                $('#confirm_password').parent().after("<div id='validation_password' style='color:red;'>Passwords do not match</div>");
+            }
+        }
+    });
+
 });
 
 /**
