@@ -38,46 +38,24 @@ class User extends Base
      */
     public function create($userData)
     {
+        $email = $userData['email'];
+        $firstName = $userData['first_name'];
+        $lastName = $userData['last_name'];
+        $anzNum = $userData['anz_num'];
+        $club = $userData['club'];
+        $ipAddress = $_SERVER['REMOTE_ADDR'];
+        $password = password_hash($userData['password'], PASSWORD_DEFAULT);
 
-//        /* Sanitizes and filters data before being inserted */
-//        $data['email'] = $this->database->real_escape_string($userData['email']);
-//        $data['first_name'] = ucfirst($this->database->real_escape_string($userData['first_name']));
-//        $data['last_name'] = ucfirst($this->database->real_escape_string($userData['last_name']));
-//        $data['password'] = $this->database->real_escape_string($userData['password']);
-//        $data['email'] = strtolower($this->database->real_escape_string($userData['email']));
-//
-//        $data['email'] = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
-//
-//        $password = password_hash($data['password'], PASSWORD_DEFAULT);
-//
-//        $this->database->query("INSERT INTO `users` (
-//                                            `id`,
-//                                            `student_id`,
-//                                            `first_name`,
-//                                            `last_name`,
-//                                            `password`,
-//                                            `email`,
-//                                            `create_date`
-//                                            ) VALUES (
-//                                            NULL,
-//                                             '".$data['student_id']."',
-//                                             '".$data['first_name']."',
-//                                             '".$data['last_name']."',
-//                                             '".$password."',
-//                                             '".$data['email']."',
-//                                             CURRENT_TIMESTAMP
-//                                             )"
-//        );
-//
-//        $newUserData = $this->getUserByEmail($data['student_id']);
-//
-//        $newUser = new User();
-//
-//        foreach ($newUserData as $key => $value) {
-//            $newUser->$key = $value;
-//        }
-//
-//        return $newUser;
+
+        $sql = "INSERT INTO `temp_user` (`id`, `email`, `anz_num`, `first_name`, `last_name`, `club`, `password`, `ip_address`, `created_at`) 
+                VALUES (NULL, '$email', '$anzNum', '$firstName', '$lastName', '$club', '$password', '$ipAddress', CURRENT_TIMESTAMP);";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $success = $stm->execute(array('$email, $anzNum, $firstName, $lastName, $club, $password, $ipAddress'));
+
+        return $success;
+
     }
 
     /**
