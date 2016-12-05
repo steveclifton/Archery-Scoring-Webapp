@@ -77,8 +77,6 @@ class Authentication extends Base
 
     /**
      * Sets the SESSION data
-     *
-     * @param $data
      */
     public function setSession($data)
     {
