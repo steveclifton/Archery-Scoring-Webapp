@@ -81,12 +81,18 @@ class Score extends Base
 
     /**
      * Logged In User Method
+     *  Returns
+     *   - All data from the round for a logged in users week
      */
     public function liu_getCWScore($week)
     {
         $loggedUser = $_SESSION['id'];
 
-        $sql = " SELECT * FROM `30m_round` WHERE week='$week' AND user_id='$loggedUser' ";
+        $sql =  "SELECT * 
+                 FROM `30m_round` 
+                 WHERE week='$week' 
+                 AND user_id='$loggedUser' 
+                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
@@ -98,7 +104,11 @@ class Score extends Base
     }
 
 
-
+    /**
+     * All Users Method
+     *  Returns
+     *   - All user data and score date for a particular week
+     */
     public function all_getCWScores($week)
     {
         $sql = "SELECT * 
@@ -121,6 +131,8 @@ class Score extends Base
 
     /**
      * Specific User Method
+     *  Returns
+     *   - All user data and score data for a specific user and week
      */
     public function sfu_getAllScores($userId, $week)
     {
