@@ -103,6 +103,22 @@ class User extends Base
         }
     }
 
+    public function doesAnzNumberExist($numToCheck)
+    {
+        $sql = "SELECT * FROM `users` WHERE anz_num = '$numToCheck' LIMIT 1 ";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute(array('$numToCheck'));
+
+        $data = $stm->fetchAll();
+
+        if (isset($data[0])) {
+            return true;
+        }
+
+        return false;
+    }
 
 
 
