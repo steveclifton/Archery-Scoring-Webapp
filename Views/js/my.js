@@ -1,4 +1,9 @@
 $(document).ready(function () {
+
+    /****************************************************************
+     *                      Score Methods                           *
+     ****************************************************************/
+
     /**
      * Checks the Score to ensure the user only enters
      *    - Valid digits 0-9
@@ -42,6 +47,28 @@ $(document).ready(function () {
             $("#incorrect").html("*Invalid X-Count");
         }
     });
+
+
+
+    /****************************************************************
+     *                      Register Methods                        *
+     ****************************************************************/
+
+    $('#anz_num').on('focusout', function () {
+       var anzNum = $('#anz_num').val();
+       reg = /^[0-9]+$/;
+
+       if ($('#validation_anz').length > 0) {
+           $('#validation_anz').remove();
+       }
+
+       if (anzNum != "") {
+           if (!reg.test(anzNum)) {
+               $('#anz_num').parent().after("<div id='validation_anz' style='color:red;'>Please enter a valid ANZ Number</div>");
+           }
+       }
+    });
+
     $('#confirm_password').on('focusout', function () {
         var password = $('#password').val();
         var confirmPassword = $('#confirm_password').val();
