@@ -56,7 +56,6 @@ class Authentication extends Base
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = $_POST;
             $user = new User();
-
             try {
                 $existingAnzNum = $user->doesAnzNumberExist($data['anz_num']);
 
@@ -81,16 +80,15 @@ class Authentication extends Base
      *
      * @param $data
      */
-    public function setSession ($data)
+    public function setSession($data)
     {
         $_SESSION['id'] = $data['id'];
+        $_SESSION['anz_num'] = $data['anz_num'];
         $_SESSION['email'] = $data['email'];
         $_SESSION['first_name'] = $data['first_name'];
         $_SESSION['last_name'] = $data['last_name'];
         $_SESSION['gender'] = $data['gender'];
-        $_SESSION['dob'] = $data['dob'];
         $_SESSION['user_type'] = $data['user_type'];
-        $_SESSION['email'] = $data['email'];
     }
     
 }
