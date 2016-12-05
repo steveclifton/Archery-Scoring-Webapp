@@ -54,12 +54,20 @@ class Score extends Base
 
     /**
      * Logged In User Method
+     *  Returns
+     *   - Score
+     *   - X-Count
+     *   - Week
      */
     public function liu_getAllScores()
     {
         $loggedUser = $_SESSION['id'];
 
-        $sql = " SELECT * FROM `30m_round` WHERE user_id='$loggedUser' ";
+        $sql = "SELECT score, xcount, week 
+                FROM `30m_round`
+                WHERE `user_id` = '$loggedUser'
+                ORDER BY `week` ASC 
+                ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
