@@ -93,8 +93,7 @@ class Score extends Base
 
     public function all_getCWScores($week)
     {
-        $sql = "
-                SELECT * 
+        $sql = "SELECT * 
                 FROM 30m_round
                 INNER JOIN users 
                 ON 30m_round.user_id = users.id
@@ -117,8 +116,7 @@ class Score extends Base
      */
     public function sfu_getAllScores($userId, $week)
     {
-        $sql = "
-                SELECT * 
+        $sql = "SELECT * 
                 FROM 30m_round
                 INNER JOIN users 
                 ON 30m_round.user_id = '$userId'
