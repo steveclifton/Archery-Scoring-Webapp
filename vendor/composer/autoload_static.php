@@ -20,6 +20,7 @@ class ComposerStaticInit371750710b20fffdf056fc7317885737
         'Archery\\Services\\DB' => __DIR__ . '/../..' . '/Services/DB.Service.php',
         'Archery\\Services\\Database' => __DIR__ . '/../..' . '/Services/Database.Service.php',
         'Archery\\Services\\Env' => __DIR__ . '/../..' . '/Services/Env.php',
+        'Event' => __DIR__ . '/../..' . '/Configurations/Event.Config.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

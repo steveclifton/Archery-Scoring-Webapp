@@ -19,4 +19,5 @@ return array(
     'Archery\\Services\\DB' => $baseDir . '/Services/DB.Service.php',
     'Archery\\Services\\Database' => $baseDir . '/Services/Database.Service.php',
     'Archery\\Services\\Env' => $baseDir . '/Services/Env.php',
+    'Event' => $baseDir . '/Configurations/Event.Config.php',
 );
