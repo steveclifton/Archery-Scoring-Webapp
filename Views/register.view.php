@@ -55,6 +55,13 @@
                 <button class="btn btn-success" id="register">Register</button>
             </div>
         </div>
+        <?php
+            if (isset($viewData['success'])) {
+                if ($viewData['success'] === true) {
+                    echo "<p style='color: green;;'>Success</p>";
+                } else {
+                    echo "<p style='color: red'>Account Creation Failed, please check details and try again</p>";
+                }
 
             }
         ?>
