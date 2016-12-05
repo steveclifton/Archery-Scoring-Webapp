@@ -4,6 +4,8 @@
 namespace Archery\Controllers;
 
 
+use Archery\Models\Score;
+
 class Welcome extends Base
 {
 
@@ -16,6 +18,10 @@ class Welcome extends Base
 
         $viewData['first_name'] = $_SESSION['first_name'];
         $viewData['last_name'] = $_SESSION['last_name'];
+
+        $scores = new Score();
+        $scores = $scores->liu_getAllScores();
+        $viewData['scores'] = $scores;
 
         $this->render('Welcome', 'welcome.view', $viewData);
     }
