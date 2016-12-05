@@ -1,2 +1,3 @@
 # Archery-Scoring-Webapp
-Archery League Series Online Webapp
+Archery New Zealand League Series Online Webapp
+
