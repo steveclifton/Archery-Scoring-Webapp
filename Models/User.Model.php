@@ -19,7 +19,11 @@ class User extends Base
 
     public function getUserByEmail($email)
     {
-        $sql = "SELECT * FROM `users` WHERE email='$email' LIMIT 1 ";
+        $sql = "SELECT * 
+                FROM `users` 
+                WHERE email='$email' 
+                LIMIT 1 
+                ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
@@ -46,7 +50,6 @@ class User extends Base
         $ipAddress = $_SERVER['REMOTE_ADDR'];
         $password = password_hash($userData['password'], PASSWORD_DEFAULT);
 
-
         $sql = "INSERT INTO `temp_user` (`id`, `email`, `anz_num`, `first_name`, `last_name`, `club`, `password`, `ip_address`, `created_at`) 
                 VALUES (NULL, '$email', '$anzNum', '$firstName', '$lastName', '$club', '$password', '$ipAddress', CURRENT_TIMESTAMP);";
 
@@ -72,7 +75,6 @@ class User extends Base
             $existingUser = $existingUser['0'];
         }
 
-
         /* Checks the database to see whether passwords match, if they do, user details are returned */
         if (password_verify($userData['password'], $existingUser['password'])) {
             return $existingUser;
@@ -97,8 +99,5 @@ class User extends Base
 
         return false;
     }
-
-
-
 
 }
