@@ -58,13 +58,16 @@ class Authentication extends Base
             $user = new User();
 
             try {
-                $newUser = $user->create($data);
-                if (isset($newUser)) {
-                    $newUser = $user->verify($data);
-                    $this->setSession($newUser);
-                    header('location: /welcome');
-                    die();
+                $existingAnzNum = $user->doesAnzNumberExist($data['anz_num']);
+
+                if ($existingAnzNum) {
+                    $viewData['success'] = false;
+                } else {
+                    $user->create($data);
+                    $viewData['success'] = true;
                 }
+
+                $this->render('Register New User', 'register.view', $viewData);
             } catch (Exception $e) {
                 header('location: /register');
             }
