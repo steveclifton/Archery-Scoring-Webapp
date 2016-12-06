@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Archery\\Configurations\\Event' => $baseDir . '/Configurations/Event.Config.php',
     'Archery\\Controllers\\Admin' => $baseDir . '/Controllers/Admin.Controller.php',
     'Archery\\Controllers\\Authentication' => $baseDir . '/Controllers/Authentication.Controller.php',
     'Archery\\Controllers\\Base' => $baseDir . '/Controllers/Base.Controller.php',
@@ -19,5 +20,4 @@ return array(
     'Archery\\Services\\DB' => $baseDir . '/Services/DB.Service.php',
     'Archery\\Services\\Database' => $baseDir . '/Services/Database.Service.php',
     'Archery\\Services\\Env' => $baseDir . '/Services/Env.php',
-    'Event' => $baseDir . '/Configurations/Event.Config.php',
 );
