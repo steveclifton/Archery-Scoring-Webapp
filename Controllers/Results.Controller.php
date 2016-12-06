@@ -24,6 +24,10 @@ class Results extends Base
             }
             $viewData = $score->all_getCWScores($_GET['week']);
 
+            /**
+             * This function checks to see if the users score for this week has been set in the DB
+             *  - if it has been, then the 'submit score' form is not displayed
+             */
             if (isset($_SESSION['id'])) {
                 foreach ($viewData as $data) {
                     if ($data['user_id'] == $_SESSION['id']) {
