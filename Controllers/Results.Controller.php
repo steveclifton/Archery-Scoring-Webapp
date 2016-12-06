@@ -25,6 +25,7 @@ class Results extends Base
                     if ($data['user_id'] == $_SESSION['id']) {
                         $userResults = $data;
                         $this->renderScores('Scoring', 'week.view', $viewData, $userResults);
+                        die();
                     }
                 }
             }
