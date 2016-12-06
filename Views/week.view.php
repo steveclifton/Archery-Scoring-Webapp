@@ -5,32 +5,32 @@ if (isset($_SESSION['id'])) {
     }
 }
 ?>
-
-
 <div class="table-responsive">
     <div class="container">
-        <h2>Week <?php if (isset($_GET['week'])) echo $_GET['week']; ?> Results</h2>
+        <h2>Week <?= $_GET['week']; ?> Results</h2>
         <p>Current weeks results</p>
-        <table class="table table-condensed">
+        <table class="table table-bordered table-hover">
             <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Score</th>
-                <th>X-Count</th>
-            </tr>
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Score</th>
+                    <th>X-Count</th>
+                </tr>
             </thead>
             <tbody>
             <?php
-                foreach ($viewData as $data) {
-                    echo "<tr>";
-                    echo "<td>" . $data['first_name'] . "</td>";
-                    echo "<td>" . $data['last_name'] . "</td>";
-                    echo "<td>" . $data['score'] . "</td>";
-                    echo "<td>" . $data['xcount'] . "</td>";
-                    echo "</tr>";
-                }
-            ?>
+                $i = 1;
+                foreach ($viewData as $data) { ?>
+                    <tr>
+                        <th scope="row"> <?php echo $i; $i++; ?></th>
+                        <td> <?= $data['first_name'] ?></td>
+                        <td> <?=$data['last_name'] ?></td>
+                        <td> <?=$data['score'] ?></td>
+                        <td> <?=$data['xcount'] ?></td>
+                    </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>
