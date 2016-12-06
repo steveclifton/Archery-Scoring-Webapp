@@ -9,7 +9,7 @@ if (isset($_SESSION['id'])) {
 
 <div class="table-responsive">
     <div class="container">
-        <h2>Week's Results</h2>
+        <h2>Week <?php if (isset($_GET['week'])) echo $_GET['week']; ?> Results</h2>
         <p>Current weeks results</p>
         <table class="table table-condensed">
             <thead>
