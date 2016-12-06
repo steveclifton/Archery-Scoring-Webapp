@@ -14,7 +14,10 @@ class Results extends Base
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $score = new Score();
-
+            if (!isset($_GET['week'])) {
+                header('location: /welcome');
+                die();
+            }
             $viewData = $score->all_getCWScores($_GET['week']);
 
             if (isset($_SESSION['id'])) {
