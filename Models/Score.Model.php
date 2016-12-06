@@ -2,8 +2,7 @@
 
 namespace Archery\Models;
 
-use Archery\Exceptions\CustomException;
-
+use Archery\Configurations\Event;
 use PDO;
 
 
@@ -20,6 +19,15 @@ use PDO;
 
 class Score extends Base
 {
+    private $tableName;
+
+    public function __construct()
+    {
+        parent::__CONSTRUCT();
+        $name = new Event();
+        $this->tableName = $name->getTableName();
+    }
+
 
     /*********************************************************************************************
      *                                         Setters                                           *
@@ -28,11 +36,12 @@ class Score extends Base
     public function liu_setScore($score, $xCount, $week)
     {
         $user = $_SESSION['id'];
+        $table = $this->tableName;
 
-        $sql = "INSERT INTO `30m_round` 
+        $sql = "INSERT INTO `$table` 
                                 (`id`, `entered_by_id`,`user_id`, `score`, `xcount`, `week`, `created_at`) 
                             VALUES 
-                                (NULL, '$user','$user', '$score', '$xCount', '$week' ,CURRENT_TIMESTAMP);
+                                (NULL, '$user','$user', '$score', '$xCount', '$week', CURRENT_TIMESTAMP);
                ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -62,9 +71,10 @@ class Score extends Base
     public function liu_getAllScores()
     {
         $loggedUser = $_SESSION['id'];
+        $table = $this->tableName;
 
         $sql = "SELECT score, xcount, week 
-                FROM `30m_round`
+                FROM `$table`
                 WHERE `user_id` = '$loggedUser'
                 ORDER BY `week` ASC 
                 ";
@@ -87,9 +97,10 @@ class Score extends Base
     public function liu_getCWScore($week)
     {
         $loggedUser = $_SESSION['id'];
+        $table = $this->tableName;
 
         $sql =  "SELECT * 
-                 FROM `30m_round` 
+                 FROM `$table` 
                  WHERE week='$week' 
                  AND user_id='$loggedUser' 
                  ";
@@ -111,12 +122,14 @@ class Score extends Base
      */
     public function all_getCWScores($week)
     {
+        $table = $this->tableName;
+
         $sql = "SELECT * 
-                FROM 30m_round
+                FROM `$table`
                 INNER JOIN users 
-                ON 30m_round.user_id = users.id
-                WHERE 30m_round.week = '$week'
-                ORDER BY 30m_round.score DESC 
+                ON `$table`.user_id = users.id
+                WHERE `$table`.week = '$week'
+                ORDER BY `$table`.score DESC 
                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -136,11 +149,13 @@ class Score extends Base
      */
     public function sfu_getAllScores($userId, $week)
     {
+        $table = $this->tableName;
+
         $sql = "SELECT * 
-                FROM 30m_round
+                FROM `$table`
                 INNER JOIN users 
-                ON 30m_round.user_id = '$userId'
-                WHERE 30m_round.week = '$week'
+                ON `$table`.user_id = '$userId'
+                WHERE `$table`.week = '$week'
                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -154,7 +169,11 @@ class Score extends Base
 
     public function gou_getAllScores($userId)
     {
-        $sql = " SELECT * FROM `30m_round` WHERE user_id='$userId' ";
+        $table = $this->tableName;
+        $sql = " SELECT * 
+                 FROM `$table` 
+                 WHERE user_id='$userId' 
+                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
