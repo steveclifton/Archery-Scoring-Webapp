@@ -1,5 +1,5 @@
 <h2>Welcome <?= $viewData['first_name'] ?></h2>
-<h4><li>Current submitted scores</li></h4>
+<h4>Current submitted scores</h4>
 <div class="table-responsive">
     <div class="container">
         <table class="table table-condensed">
@@ -12,14 +12,13 @@
         </thead>
         <tbody>
             <?php
-            foreach ($viewData['scores'] as $data) {
-                echo "<tr>";
-                    echo "<td>" . $data['week'] . "</td>";
-                    echo "<td>" . $data['score'] . "</td>";
-                    echo "<td>" . $data['xcount'] . "</td>";
-                echo "</tr>";
-            }
-            ?>
+                foreach ($viewData['scores'] as $data) { ?>
+                <tr>
+                    <td> <?= $data['week'] ?> </td>
+                    <td> <?= $data['score'] ?> </td>
+                    <td> <?= $data['xcount'] ?> </td>
+                </tr>
+            <?php } ?>
         </tbody>
     </table>
 </div>
