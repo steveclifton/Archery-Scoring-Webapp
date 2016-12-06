@@ -5,7 +5,11 @@ namespace Archery\Controllers;
 
 use Archery\Models\Score;
 
-
+/**
+ * Results Class
+ *
+ * Controllers results based queries
+ */
 class Results extends Base
 {
 
