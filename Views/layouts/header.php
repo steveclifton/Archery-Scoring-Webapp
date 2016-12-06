@@ -13,7 +13,11 @@
                 <li><a></a></li>
                 <li><a href="/rules">Rules</a></li>
                 <li><a href="#">Contact</a></li>
-                <li><a href="/register">Register</a></li>
+                <?php
+                    if (!isset($_SESSION['id'])) {
+                        echo "<li><a href=\"/register\">Register</a></li>";
+                    }
+                ?>
                 <li><a href="http://www.facebook.com/ArcheryNZIndoor" target="_blank">Facebook</a></li>
                 <?php
                     if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin') {
