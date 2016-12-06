@@ -8,6 +8,7 @@ if (isset($_SESSION['id'])) {
 <div class="table-responsive">
     <div class="container">
         <h2>Week <?= $_GET['week']; ?> Results</h2>
+
         <p>Current weeks results</p>
         <table class="table table-bordered table-hover">
             <thead>
@@ -17,6 +18,7 @@ if (isset($_SESSION['id'])) {
                     <th>Last Name</th>
                     <th>Score</th>
                     <th>X-Count</th>
+                    <th>Division</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,6 +31,7 @@ if (isset($_SESSION['id'])) {
                         <td> <?=$data['last_name'] ?></td>
                         <td> <?=$data['score'] ?></td>
                         <td> <?=$data['xcount'] ?></td>
+                        <td> <?= ucfirst($data['division']) ?></td>
                     </tr>
                 <?php } ?>
             </tbody>
