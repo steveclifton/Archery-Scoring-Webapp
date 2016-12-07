@@ -109,7 +109,8 @@ function checkIfSubmitted() {
 
     $.get("/ajax_searchScoreWeekDiv?div=" + div + "&week=" + weekNum, function (data) {
         if (data == 'true') {
-            $("#incorrect").html("*Score Already Submitted for this Division");
+            div = capitalizeFirstLetter(div);
+            $("#incorrect").html("Score Submitted for " + div + " Division");
             $('input[type="submit"]').prop('disabled', true);
         } else {
             $('input[type="submit"]').prop('disabled', false);
@@ -117,7 +118,9 @@ function checkIfSubmitted() {
     });
 }
 
-
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 
 /**
