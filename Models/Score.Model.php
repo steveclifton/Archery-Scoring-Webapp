@@ -167,6 +167,35 @@ class Score extends Base
         return $data;
     }
 
+    /**
+     * Logged In User Method
+     *  Returns
+     *   - All data from the round for a logged in users week
+     */
+    public function liu_getCWAndBowTypeScores($week, $division)
+    {
+        $loggedUser = $_SESSION['id'];
+        $table = $this->tableName;
+
+        $sql =  "SELECT * 
+                 FROM `$table` 
+                 WHERE week='$week' 
+                 AND user_id='$loggedUser' 
+                 AND division='$division'
+                 ";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute(array('$week, $division'));
+
+        $data = $stm->fetchAll();
+
+        return $data;
+    }
+
+
+
+
     public function gou_getAllScores($userId)
     {
         $table = $this->tableName;
