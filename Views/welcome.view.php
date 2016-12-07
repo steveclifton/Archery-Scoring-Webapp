@@ -8,6 +8,7 @@
                     <th>Week</th>
                     <th>Score</th>
                     <th>X-Count</th>
+                    <th>Division</th>
                 </tr>
         </thead>
         <tbody>
@@ -22,4 +23,4 @@
         </tbody>
     </table>
 </div>
-
+                    <td> <?= ucfirst($data['division']) ?> </td>
