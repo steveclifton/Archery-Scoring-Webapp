@@ -27,7 +27,8 @@
         <div class="col-md-2">
             <input id="submit" type="submit" name="submit" class="btn btn-success" value="Submit">
         </div>
-        <input type="hidden" name="week" value="<?= $_GET['week'] ?>">
+
+        <input type="hidden" name="week" id="week_num" value="<?= $_GET['week'] ?>">
         <input type="hidden" id="prefered_type" value="<?= $_SESSION['prefered_type'] ?>">
 
         <br>
