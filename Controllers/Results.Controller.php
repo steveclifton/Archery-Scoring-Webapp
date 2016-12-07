@@ -23,7 +23,7 @@ class Results extends Base
                 die();
             }
             $viewData = $score->all_getCWScores($_GET['week']);
-            
+
             if (isset($_SESSION['id'])) {
                 $this->render('Scoring', 'week.view', $viewData);
                 die();
@@ -39,18 +39,31 @@ class Results extends Base
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $score = new Score();
-
             $score->liu_setScore($_POST['score'], $_POST['xcount'], $_POST['week'], $_POST['division']);
-
-            $viewData = $score->all_getCWScores($_POST['week']);
-
-            $userResults = $score->liu_getCWScore($_POST['week']);
-
         }
         header("Location: /week?week=" . $_POST['week']);
         die();
     }
 
+
+
+
+    public function ajaxSearchUserScoreWeekDiv()
+    {
+        $week = $_GET['week'];
+        $div = $_GET['div'];
+
+        $score = new Score();
+
+        $results = $score->liu_getCWAndBowTypeScores($week, $div);
+//
+//        if (isset($hasUserScored[0])) {
+//            $results = 'true';
+//        } else {
+//            $results = 'false';
+//        }
+        $this->renderAjax('searchresults.view', $results);
+    }
 
 }
 
