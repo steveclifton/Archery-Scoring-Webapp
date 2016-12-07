@@ -7,7 +7,7 @@ class Event
 {
     private $currentEvent = 'Outdoor League Series';
     private $dbTableName = '30m_round';
-    private $currentWeek = 5;
+    private $currentWeek = 10;
 
     public function getCurrentEventName()
     {
