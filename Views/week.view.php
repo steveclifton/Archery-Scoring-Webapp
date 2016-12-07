@@ -1,9 +1,5 @@
 <?php
-if (isset($_SESSION['id'])) {
-    if (!isset($userResults)) {
-        include('Views/layouts/submitscore.php');
-    }
-}
+    include('Views/layouts/submitscore.php');
 ?>
 <div class="table-responsive">
     <div class="container">
