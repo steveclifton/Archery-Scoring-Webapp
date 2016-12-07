@@ -33,15 +33,15 @@ class Score extends Base
      *                                         Setters                                           *
      *********************************************************************************************/
 
-    public function liu_setScore($score, $xCount, $week)
+    public function liu_setScore($score, $xCount, $week, $div)
     {
         $user = $_SESSION['id'];
         $table = $this->tableName;
 
         $sql = "INSERT INTO `$table` 
-                                (`id`, `entered_by_id`,`user_id`, `score`, `xcount`, `week`, `created_at`) 
+                                (`id`, `entered_by_id`,`user_id`, `score`, `xcount`, `week`, `division`, `created_at`) 
                             VALUES 
-                                (NULL, '$user','$user', '$score', '$xCount', '$week', CURRENT_TIMESTAMP);
+                                (NULL, '$user','$user', '$score', '$xCount', '$week', '$div', CURRENT_TIMESTAMP);
                ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
