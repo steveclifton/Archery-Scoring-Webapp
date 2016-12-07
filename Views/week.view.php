@@ -2,10 +2,14 @@
 <hr>
 
 <?php
+if (isset($_SESSION['id'])) {
     include('Views/layouts/submitscore.php');
+    echo "<hr>";
+}
+
 ?>
 
-<hr>
+
 <div class="table-responsive">
     <div class="container">
 
