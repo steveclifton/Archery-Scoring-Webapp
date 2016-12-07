@@ -46,6 +46,6 @@
     </form>
 </div>
 <div id="row">
-    <p id="incorrect" style="color: red; padding-left: 30px"></p>
+    <p id="incorrect" style="color: red; padding-left: 36px"></p>
 </div>
 <br>
