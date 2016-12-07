@@ -93,6 +93,24 @@ $(document).ready(function () {
 
 });
 
+function checkIfSubmitted() {
+    var div = $('div.bow select').val();
+    var weekNum = $('#week_num').val();
+    console.log(div);
+
+    $.get("/ajax_searchScoreWeekDiv?div=" + div + "&week=" + weekNum, function (data) {
+        if (data == 'true') {
+            $("#incorrect").html("*Score Already Submitted for this Division");
+            $('input[type="submit"]').prop('disabled', true);
+        } else {
+            $('input[type="submit"]').prop('disabled', false);
+        }
+    });
+}
+
+
+
+
 /**
  * Validates form, pretty ugly but it works
  */
