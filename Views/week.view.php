@@ -1,11 +1,15 @@
+<h2 style="text-align: center;">Week <?= $_GET['week']; ?> Results</h2>
+<hr>
+
 <?php
     include('Views/layouts/submitscore.php');
 ?>
+
+<hr>
 <div class="table-responsive">
     <div class="container">
-        <h2>Week <?= $_GET['week']; ?> Results</h2>
-        <p>Current weeks results</p>
-        <h2>Compound</h2>
+
+        <h3 style="text-align: center;">Compound</h3>
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
@@ -32,7 +36,7 @@
                 <?php } ?>
             </tbody>
         </table>
-        <h2>Recurve</h2>
+        <h3 style="text-align: center;">Recurve</h3>
         <table class="table table-bordered table-hover">
             <thead>
             <tr>
