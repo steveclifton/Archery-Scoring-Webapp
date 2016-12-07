@@ -49,7 +49,7 @@ class Results extends Base
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $score = new Score();
 
-            $score->liu_setScore($_POST['score'], $_POST['xcount'], $_POST['week']);
+            $score->liu_setScore($_POST['score'], $_POST['xcount'], $_POST['week'], $_POST['division']);
 
             $viewData = $score->all_getCWScores($_POST['week']);
 
