@@ -73,7 +73,7 @@ class Score extends Base
         $loggedUser = $_SESSION['id'];
         $table = $this->tableName;
 
-        $sql = "SELECT score, xcount, week 
+        $sql = "SELECT score, xcount, week, division 
                 FROM `$table`
                 WHERE `user_id` = '$loggedUser'
                 ORDER BY `week` ASC 
