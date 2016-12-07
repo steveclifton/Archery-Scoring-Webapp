@@ -91,6 +91,15 @@ $(document).ready(function () {
         }
     });
 
+    $('div.bow select').ready(function () {
+        checkIfSubmitted();
+    });
+
+    $('div.bow select').on('change', function () {
+        $("#incorrect").html("");
+        checkIfSubmitted();
+    });
+
 });
 
 function checkIfSubmitted() {
@@ -128,21 +137,6 @@ function validateForm(form) {
             return false;
     }
 
-    var div = $('div.bow select').val();
-    var weekNum = $('#week_num').val();
-    // var result = false;
-
-    $.get("/ajax_searchScoreWeekDiv?div=" + div + "&week=" + weekNum, function (data) {
-        if (data == 'true') {
-            alert('Score for this week and division already exists!');
-            // result = false;
-            return false;
-        } else {
-            // result = true;
-            return true;
-        }
-    });
-    // return result;
 }
 
 
