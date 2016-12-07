@@ -23,6 +23,17 @@
             </select>
             </div>
         </div>
+<!--        <div class="col-md-3">-->
+<!--            <div class="bow">-->
+<!--                    <select name="division" id="division" class="selectpicker show-menu-arrow">-->
+<!--                        <option value="compound" id="Compound">Compound</option>-->
+<!--                        <option value="recurve" id="Recurve">Recurve</option>-->
+<!--                        <option value="recurve_bb" id="Recurve_bb">Recurve Barebow</option>-->
+<!--                        <option value="longbow" id="Longbow">Longbow</option>-->
+<!--                        <option value="crossbow" id="Crossbow">Crossbow</option>-->
+<!--                    </select>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <div class="col-md-2">
             <input id="submit" type="submit" name="submit" class="btn btn-success" value="Submit">
@@ -35,6 +46,6 @@
     </form>
 </div>
 <div id="row">
-    <p id="incorrect" style="color: red"></p>
+    <p id="incorrect" style="color: red; padding-left: 30px"></p>
 </div>
 <br>
