@@ -96,12 +96,12 @@ $(document).ready(function () {
 /**
  * Validates form, pretty ugly but it works
  */
-function validateForm() {
+function validateForm(form) {
     var score = document.forms["scoreform"]["score"].value;
     var xcount = document.forms["scoreform"]["xcount"].value;
     reg = /^[0-9]+$/;
 
-    if  (  (score > 360 || score < 0)
+    if  ((score > 360 || score < 0)
         || (!reg.test(score))
         || (xcount > 36 || xcount < 0)
         || (!reg.test(xcount))
@@ -109,7 +109,25 @@ function validateForm() {
             $("#incorrect").html("*Please check details and try again");
             return false;
     }
+
+    var div = $('div.bow select').val();
+    var weekNum = $('#week_num').val();
+    // var result = false;
+
+    $.get("/ajax_searchScoreWeekDiv?div=" + div + "&week=" + weekNum, function (data) {
+        if (data == 'true') {
+            alert('Score for this week and division already exists!');
+            // result = false;
+            return false;
+        } else {
+            // result = true;
+            return true;
+        }
+    });
+    // return result;
 }
+
+
 
 
 
