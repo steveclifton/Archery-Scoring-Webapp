@@ -1,5 +1,3 @@
-<?php if(isset($viewData['error'])) {echo "HERE";}?>
-
 <div class="form-group" style="margin-left: 22px">
     <form action="/submitscore" method="POST" name="scoreform" onsubmit="return validateForm(this)">
         <h3 style="margin-left: 14px">Submit <?= $_SESSION['first_name'] ?>'s score here!</h3>
@@ -34,7 +32,6 @@
 <!--                    </select>-->
 <!--            </div>-->
 <!--        </div>-->
-
         <div class="col-md-2">
             <input id="submit" type="submit" name="submit" class="btn btn-success" value="Submit">
         </div>
