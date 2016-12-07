@@ -67,6 +67,11 @@ else if ($uri == 'submitscore') {
     $week->processScore();
 }
 
+else if ($uri == 'ajax_searchScoreWeekDiv') {
+    $week = new Results();
+    $week->ajaxSearchUserScoreWeekDiv();
+}
+
 else {
     $errorController = new Errors();
     $errorController->notFound();
