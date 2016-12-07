@@ -87,6 +87,7 @@ class Authentication extends Base
         $_SESSION['last_name'] = $data['last_name'];
         $_SESSION['gender'] = $data['gender'];
         $_SESSION['user_type'] = $data['user_type'];
+        $_SESSION['prefered_type'] = $data['prefered_type'];
     }
     
 }
