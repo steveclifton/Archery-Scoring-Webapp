@@ -49,7 +49,18 @@
                 <input type="text" id="club" name="club" class="input-xlarge" required>
             </div>
         </div>
-        <br>
+        <div class="control-group">
+            <!-- Prefered Bow Type-->
+            <label class="control-label" for="password">Prefered Bow Type</label><br>
+            <select name="prefered_type" id="prefered_type" class="selectpicker show-menu-arrow">
+                <option value="compound">Compound</option>
+                <option value="recurve">Recurve</option>
+                <option value="recurve_bb">Recurve Barebow</option>
+                <option value="longbow">Longbow</option>
+                <option value="crossbow">Crossbow</option>
+            </select>
+        </div>
+        <br><br>
         <div class="control-group">
             <div class="controls">
                 <button class="btn btn-success" id="register">Register</button>
@@ -67,3 +78,4 @@
         ?>
     </fieldset>
 </form>
+<br><br>
