@@ -2,7 +2,7 @@
 <h4>Current submitted scores</h4>
 <div class="table-responsive">
     <div class="container">
-        <table class="table table-condensed">
+        <table class="table table-bordered table-hover">
             <thead>
                 <tr>
                     <th>Week</th>
@@ -18,9 +18,9 @@
                     <td> <?= $data['week'] ?> </td>
                     <td> <?= $data['score'] ?> </td>
                     <td> <?= $data['xcount'] ?> </td>
+                    <td> <?= ucfirst($data['division']) ?> </td>
                 </tr>
             <?php } ?>
         </tbody>
     </table>
 </div>
-                    <td> <?= ucfirst($data['division']) ?> </td>
