@@ -36,22 +36,22 @@ class User extends Base
 
     /**
      * Creates a new user if registration information is valid
-     *
-     * @param $userData
-     * @return User - returns a new user object - used to log the user in automatically
+
+     * - returns a new user object - used to log the user in automatically
      */
     public function create($userData)
     {
-        $email = $userData['email'];
-        $firstName = $userData['first_name'];
-        $lastName = $userData['last_name'];
+        $email = ucfirst($userData['email']);
+        $firstName = ucfirst($userData['first_name']);
+        $lastName = ucfirst($userData['last_name']);
         $anzNum = $userData['anz_num'];
-        $club = $userData['club'];
+        $club = ucfirst($userData['club']);
+        $preferedType = $userData['prefered_type'];
         $ipAddress = $_SERVER['REMOTE_ADDR'];
         $password = password_hash($userData['password'], PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO `temp_user` (`id`, `email`, `anz_num`, `first_name`, `last_name`, `club`, `password`, `ip_address`, `created_at`) 
-                VALUES (NULL, '$email', '$anzNum', '$firstName', '$lastName', '$club', '$password', '$ipAddress', CURRENT_TIMESTAMP);";
+        $sql = "INSERT INTO `temp_user` (`id`, `email`, `anz_num`, `first_name`, `last_name`, `club`, `prefered_type`, `password`, `ip_address`, `created_at`) 
+                VALUES (NULL, '$email', '$anzNum', '$firstName', '$lastName', '$club', '$preferedType', '$password', '$ipAddress', CURRENT_TIMESTAMP);";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
