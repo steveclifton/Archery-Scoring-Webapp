@@ -48,6 +48,14 @@ $(document).ready(function () {
         }
     });
 
+    /**
+     * Selects the users 'prefered bow type' as a default
+     */
+    $(function () {
+        var preferedType = $('#prefered_type').val();
+        $('div.bow select').val(preferedType);
+    });
+
 
 
     /****************************************************************
