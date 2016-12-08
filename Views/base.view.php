@@ -25,21 +25,17 @@
             </div>
         </div>
 
-
-
         <div class="page-container">
             <div class="container-fluid">
 
-                    <?php include('/var/www/archery/Views/layouts/leftside.php'); ?>
+                <?php include('/var/www/archery/Views/layouts/leftside.php'); ?>
 
-                    <div class="col-md-10">
-                        <?= "<h1 style=\"padding-bottom: 10px; font-family: 'Droid Sans', sans-serif; text-align: center; \">2016 Outdoor League Series</h1>" ?>
-                        <?php include($viewName . '.php'); ?>
-                    </div>
+                <div class="col-md-10">
+                    <?= "<h1 style=\"padding-bottom: 10px; font-family: 'Droid Sans', sans-serif; text-align: center; \">2016 Outdoor League Series</h1>" ?>
+                    <?php include($viewName . '.php'); ?>
+                </div>
             </div>
         </div>
-
-
 
 <!--        <div class="container">-->
 <!--            --><?php //include('/var/www/archery/Views/layouts/footer.php')?>
