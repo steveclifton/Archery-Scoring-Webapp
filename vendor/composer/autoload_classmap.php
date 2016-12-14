@@ -16,6 +16,7 @@ return array(
     'Archery\\Exceptions\\CustomException' => $baseDir . '/Exceptions/Custom.Exception.php',
     'Archery\\Models\\Base' => $baseDir . '/Models/Base.Model.php',
     'Archery\\Models\\Score' => $baseDir . '/Models/Score.Model.php',
+    'Archery\\Models\\TempUser' => $baseDir . '/Models/TempUser.Model.php',
     'Archery\\Models\\User' => $baseDir . '/Models/User.Model.php',
     'Archery\\Services\\DB' => $baseDir . '/Services/DB.Service.php',
     'Archery\\Services\\Database' => $baseDir . '/Services/Database.Service.php',
