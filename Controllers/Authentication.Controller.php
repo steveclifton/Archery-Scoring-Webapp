@@ -2,6 +2,7 @@
 
 namespace Archery\Controllers;
 
+use Archery\Models\TempUser;
 use Exception;
 use Archery\Models\User;
 
@@ -55,6 +56,7 @@ class Authentication extends Base
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = $_POST;
+            $tempUser = new TempUser();
             $user = new User();
             try {
                 $existingAnzNum = $user->doesAnzNumberExist($data['anz_num']);
@@ -62,11 +64,12 @@ class Authentication extends Base
                 if ($existingAnzNum) {
                     $viewData['success'] = false;
                 } else {
+                    $tempUser->create($data);
                     $user->create($data);
                     $viewData['success'] = true;
                 }
-
                 $this->render('Register New User', 'register.view', $viewData);
+                die();
             } catch (Exception $e) {
                 header('location: /register');
             }
