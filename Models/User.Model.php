@@ -44,18 +44,19 @@ class User extends Base
         $email = ucfirst($userData['email']);
         $firstName = ucfirst($userData['first_name']);
         $lastName = ucfirst($userData['last_name']);
-        $anzNum = $userData['anz_num'];
+        $anzNum = 'PENDING';
+        $userType = 'PENDING';
         $club = ucfirst($userData['club']);
         $preferedType = $userData['prefered_type'];
         $ipAddress = $_SERVER['REMOTE_ADDR'];
         $password = password_hash($userData['password'], PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO `temp_user` (`id`, `email`, `anz_num`, `first_name`, `last_name`, `club`, `prefered_type`, `password`, `ip_address`, `created_at`) 
-                VALUES (NULL, '$email', '$anzNum', '$firstName', '$lastName', '$club', '$preferedType', '$password', '$ipAddress', CURRENT_TIMESTAMP);";
+        $sql = "INSERT INTO `users` (`id`, `anz_num`, `first_name`, `last_name`, `gender`, `dob`, `phone`, `address`, `user_type`, `email`, `password`, `prefered_type`, `last_ip`, `created_at`) 
+                VALUES (NULL, '$anzNum', '$firstName', '$lastName', NULL, NULL, NULL, NULL, '$userType', '$email', '$password', '$preferedType', '$ipAddress', CURRENT_TIMESTAMP)";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $success = $stm->execute(array('$email, $anzNum, $firstName, $lastName, $club, $password, $ipAddress'));
+        $success = $stm->execute(array('$anzNum, $firstName, $lastName, $userType, $email, $password, $preferedType, $ipAddress'));
 
         return $success;
 
