@@ -21,7 +21,22 @@ $(document).ready(function () {
         });
     });
 
+    /****************************************************************
+     *                      Profile Methods                           *
+     ****************************************************************/
 
+    /**
+     * Checks that the phone number is only digits
+     */
+    $('#phone').on('change', function () {
+        var phone = $(this).val();
+        reg = /^[0-9]+$/;
+
+        $('#valid_phone').remove();
+        if (!reg.test(phone)) {
+            $('#phone').parent().after("<div id='valid_phone' style='color:red;'>Numbers only</div>");
+        }
+    });
 
 
     /****************************************************************
