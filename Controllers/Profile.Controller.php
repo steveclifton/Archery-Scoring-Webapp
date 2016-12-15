@@ -15,11 +15,14 @@ class Profile extends Base
         $this->isNotLoggedIn();
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            foreach ($_POST as $key => $post) {
-                echo $key . " _ " . $post;
-                echo "<br><br>";
-            }
-            die();
+            $profile = new User();
+            $auth = new Authentication();
+
+            $result = $profile->updateUserProfileDetails($_POST);
+            $viewData['success'] = $result;
+
+            $userDetails = $profile->getUserByEmail($_POST['email']);
+            $auth->setSession($userDetails[0]);
         }
 
         $user = new User();
