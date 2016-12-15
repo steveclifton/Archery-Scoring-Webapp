@@ -14,6 +14,7 @@ class Profile extends Base
     {
         $this->isNotLoggedIn();
 
+        // Updates the users details in the
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $profile = new User();
             $auth = new Authentication();
@@ -26,10 +27,10 @@ class Profile extends Base
         }
 
         $user = new User();
-        $viewData = $user->getUserByEmail($_SESSION['email']);
+        $details = $user->getUserByEmail($_SESSION['email']);
+        $viewData['user'] = $details[0];
 
-
-        $this->render('Profile', 'profile.view', $viewData[0]);
+        $this->render('Profile', 'profile.view', $viewData);
     }
 
 
