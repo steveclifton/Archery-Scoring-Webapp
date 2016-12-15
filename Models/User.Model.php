@@ -34,6 +34,39 @@ class User extends Base
         return $data;
     }
 
+    public function updateUserProfileDetails($userData)
+    {
+        $id = $_SESSION['id'];
+        $email = ucfirst($userData['email']);
+        $firstName = ucfirst($userData['first_name']);
+        $lastName = ucfirst($userData['last_name']);
+        $club = strtoupper($userData['club']);
+        $phone = $userData['phone'];
+        $address = $userData['address'];
+        $preferedType = $userData['prefered_type'];
+        $ipAddress = $_SERVER['REMOTE_ADDR'];
+
+        $sql = "UPDATE `users` 
+                SET 
+                  `first_name` = '$firstName',
+                  `last_name` = '$lastName',
+                  `email` = '$email',
+                  `club` = '$club', 
+                  `phone` = '$phone',
+                  `address` = '$address',
+                  `prefered_type` = '$preferedType',
+                  `last_ip` = '$ipAddress',
+                  `updated_at` = CURRENT_TIMESTAMP 
+                WHERE `users`.`id` = '$id'";
+
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $success = $stm->execute(array('$firstName, $lastName, $email, $club, $phone, $address, $preferedType, $ipAddress, $id'));
+
+        return $success;
+    }
+
     /**
      * Creates a new user if registration information is valid
 
