@@ -31,7 +31,7 @@
                 <?php include('/var/www/archery/Views/layouts/leftside.php'); ?>
 
                 <div class="col-sm-6 col-md-10">
-                    <?= "<h1 style=\"padding-bottom: 10px; font-family: 'Droid Sans', sans-serif; text-align: center; \">2016 Outdoor League Series</h1>" ?>
+                    <?= "<h2 style=\"font-family: 'Droid Sans', sans-serif; text-align: center; \">2016 Outdoor League Series</h2>" ?>
                     <?php include($viewName . '.php'); ?>
                 </div>
             </div>
