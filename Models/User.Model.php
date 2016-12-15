@@ -78,6 +78,34 @@ class User extends Base
         return $data;
     }
 
+    public function confirmPendingUsers($userData)
+    {
+        //var_dump($userData);die();
+        $email = ucfirst($userData['email']);
+        $firstName = ucfirst($userData['first_name']);
+        $lastName = ucfirst($userData['last_name']);
+        $anzNum = $userData['anz_num'];
+        $userType = 'user';
+        $club = $userData['club'];
+        $ipAddress = $_SERVER['REMOTE_ADDR'];
+
+        $sql = "UPDATE `users` 
+                SET 
+                  `anz_num` = '$anzNum', 
+                  `first_name` = '$firstName',
+                  `last_name` = '$lastName',
+                  `club` = '$club', 
+                  `user_type` = '$userType',
+                  `last_ip` = '$ipAddress'
+                WHERE `users`.`email` = '$email'";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $success = $stm->execute(array('$anzNum, $firstName, $lastName, $club, $userType, $ipAddress, $email'));
+
+        return $success;
+    }
+
     /**
      * Verifies whether the users student id and password exist and match
      *
