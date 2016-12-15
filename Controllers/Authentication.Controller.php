@@ -56,15 +56,12 @@ class Authentication extends Base
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = $_POST;
-            $tempUser = new TempUser();
             $user = new User();
             try {
                 $existingAnzNum = $user->doesAnzNumberExist($data['anz_num']);
-
                 if ($existingAnzNum) {
                     $viewData['success'] = false;
                 } else {
-                    $tempUser->create($data);
                     $user->create($data);
                     $viewData['success'] = true;
                 }
