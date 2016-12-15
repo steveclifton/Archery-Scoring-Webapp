@@ -43,8 +43,8 @@
                                 <li class='dropdown'>
                                     <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">$username <b class=\"caret\"></b></a>
                                     <ul class=\"dropdown-menu\">
-                                        <li><a href='#'>Profile</a></li>
-                                        <li><a href='logout'>Logout</a></li>
+                                        <li><a href='/userprofile'>Profile</a></li>
+                                        <li><a href='/logout'>Logout</a></li>
                                     </ul>
                                 </li>
                         ";
