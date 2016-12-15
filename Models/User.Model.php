@@ -62,6 +62,22 @@ class User extends Base
 
     }
 
+    public function getPendingUsers()
+    {
+        $sql = "SELECT * 
+                FROM `users` 
+                WHERE `user_type`='PENDING'
+                ";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute();
+
+        $data = $stm->fetchAll();
+
+        return $data;
+    }
+
     /**
      * Verifies whether the users student id and password exist and match
      *
