@@ -132,7 +132,8 @@ class User extends Base
                   `last_name` = '$lastName',
                   `club` = '$club', 
                   `user_type` = '$userType',
-                  `last_ip` = '$ipAddress'
+                  `last_ip` = '$ipAddress',
+                  `updated_at` = CURRENT_TIMESTAMP
                 WHERE `users`.`email` = '$email'";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
