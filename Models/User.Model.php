@@ -122,7 +122,7 @@ class User extends Base
         $lastName = ucfirst($userData['last_name']);
         $anzNum = $userData['anz_num'];
         $userType = 'user';
-        $club = $userData['club'];
+        $club = strtoupper($userData['club']);
         $ipAddress = $_SERVER['REMOTE_ADDR'];
 
         $sql = "UPDATE `users` 
