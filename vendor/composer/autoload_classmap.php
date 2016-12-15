@@ -11,6 +11,7 @@ return array(
     'Archery\\Controllers\\Authentication' => $baseDir . '/Controllers/Authentication.Controller.php',
     'Archery\\Controllers\\Base' => $baseDir . '/Controllers/Base.Controller.php',
     'Archery\\Controllers\\Errors' => $baseDir . '/Controllers/Errors.Controller.php',
+    'Archery\\Controllers\\Profile' => $baseDir . '/Controllers/Profile.Controller.php',
     'Archery\\Controllers\\Results' => $baseDir . '/Controllers/Results.Controller.php',
     'Archery\\Controllers\\Welcome' => $baseDir . '/Controllers/Welcome.Controller.php',
     'Archery\\Exceptions\\CustomException' => $baseDir . '/Exceptions/Custom.Exception.php',
