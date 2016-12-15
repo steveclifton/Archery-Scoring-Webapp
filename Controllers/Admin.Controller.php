@@ -4,6 +4,7 @@ namespace Archery\Controllers;
 
 
 use Archery\Models\TempUser;
+use Archery\Models\User;
 
 class Admin extends Base
 {
@@ -21,7 +22,7 @@ class Admin extends Base
 
     private function getPendingAccounts()
     {
-        $pendingUsers = new TempUser();
+        $pendingUsers = new User();
         $users = $pendingUsers->getPendingUsers();
 
         if (is_array($users)) {
@@ -30,6 +31,15 @@ class Admin extends Base
             return false;
         }
 
+    }
+
+    public function confirmPendingAccounts()
+    {
+        $updatedUser = $_POST;
+        $user = new User();
+
+        $user->confirmPendingUsers($updatedUser);
+        $this->adminView();
     }
 
 }
