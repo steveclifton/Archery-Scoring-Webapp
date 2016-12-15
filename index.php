@@ -52,6 +52,10 @@ else if ($uri == 'admin') {
     $admin = new Admin();
     $admin->adminView();
 }
+else if ($uri == 'confirmusers') {
+    $admin = new Admin();
+    $admin->confirmPendingAccounts();
+}
 
 else if ($uri == 'rules') {
     $rules = new Welcome();
