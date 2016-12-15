@@ -50,6 +50,13 @@
             </div>
         </div>
         <div class="control-group">
+            <label class="control-label">Gender</label><br>
+            <select name="gender" id="gender" class="selectpicker show-menu-arrow">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+        <div class="control-group">
             <!-- Prefered Bow Type-->
             <label class="control-label">Prefered Bow Type</label><br>
             <select name="prefered_type" id="prefered_type" class="selectpicker show-menu-arrow">
