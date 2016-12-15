@@ -80,7 +80,7 @@ class User extends Base
         $anzNum = "PENDING-" . $userData['anz_num'];
         $gender = strtoupper($userData['gender']);
         $userType = 'PENDING';
-        $club = ucfirst($userData['club']);
+        $club = strtoupper($userData['club']);
         $preferedType = $userData['prefered_type'];
         $ipAddress = $_SERVER['REMOTE_ADDR'];
         $password = password_hash($userData['password'], PASSWORD_DEFAULT);
