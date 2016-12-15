@@ -44,7 +44,7 @@ class User extends Base
         $email = ucfirst($userData['email']);
         $firstName = ucfirst($userData['first_name']);
         $lastName = ucfirst($userData['last_name']);
-        $anzNum = 'PENDING';
+        $anzNum = "PENDING-" . $userData['anz_num'];
         $userType = 'PENDING';
         $club = ucfirst($userData['club']);
         $preferedType = $userData['prefered_type'];
