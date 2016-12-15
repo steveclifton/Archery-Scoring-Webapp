@@ -7,8 +7,10 @@ require 'vendor/autoload.php';
 
 use Archery\Controllers\Admin;
 use Archery\Controllers\Authentication;
+use Archery\Controllers\Profile;
 use Archery\Controllers\Results;
 use Archery\Controllers\Score;
+use Archery\Controllers\User;
 use Archery\Controllers\Welcome;
 use Archery\Controllers\Errors;
 
@@ -56,6 +58,11 @@ else if ($uri == 'confirmusers') {
     $admin = new Admin();
     $admin->confirmPendingAccounts();
 }
+else if ($uri == 'userprofile') {
+    $user = new Profile();
+    $user->viewProfile();
+}
+
 
 else if ($uri == 'rules') {
     $rules = new Welcome();
