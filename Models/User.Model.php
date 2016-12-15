@@ -92,7 +92,7 @@ class User extends Base
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $success = $stm->execute(array('$anzNum, $firstName, $lastName, $userType, $email, $password, $preferedType, $ipAddress'));
+        $success = $stm->execute(array('$anzNum, $firstName, $lastName, $gender, $userType, $email, $password, $preferedType, $ipAddress'));
 
         return $success;
 
