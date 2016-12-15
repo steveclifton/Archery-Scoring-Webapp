@@ -85,8 +85,10 @@ class User extends Base
         $ipAddress = $_SERVER['REMOTE_ADDR'];
         $password = password_hash($userData['password'], PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO `users` (`id`, `anz_num`, `first_name`, `last_name`, `gender`, `dob`, `phone`, `address`, `user_type`, `email`, `password`, `prefered_type`, `last_ip`, `created_at`) 
-                VALUES (NULL, '$anzNum', '$firstName', '$lastName', NULL, NULL, NULL, NULL, '$userType', '$email', '$password', '$preferedType', '$ipAddress', CURRENT_TIMESTAMP)";
+        $sql = "INSERT INTO `users` 
+                  (`id`, `anz_num`, `first_name`, `last_name`, `gender`, `club`, `phone`, `address`, `user_type`, `email`, `password`, `prefered_type`, `last_ip`, `created_at`) 
+                VALUES 
+                  (NULL, '$anzNum', '$firstName', '$lastName', '$gender', '$club', NULL, NULL, '$userType', '$email', '$password', '$preferedType', '$ipAddress', CURRENT_TIMESTAMP)";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
