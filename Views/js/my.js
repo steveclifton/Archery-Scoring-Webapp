@@ -1,6 +1,30 @@
 $(document).ready(function () {
 
     /****************************************************************
+     *                      Admin Methods                           *
+     ****************************************************************/
+
+    /**
+     * Hides/Shows the pending users table
+     */
+    $('#pendingbutton').ready(function () {
+        $('#pendingusers').toggle();
+
+        $('#pendingbutton').on('click', function () {
+            if ($(this).val() == 'Hide') {
+                $('#pendingbutton').prop('value', 'Show');
+            } else {
+                $('#pendingbutton').prop('value', 'Hide');
+            }
+            $('#pendingusers').toggle();
+
+        });
+    });
+
+
+
+
+    /****************************************************************
      *                      Score Methods                           *
      ****************************************************************/
 
@@ -118,6 +142,10 @@ function checkIfSubmitted() {
     });
 }
 
+
+/**
+ * Capitalises the first letter of a string
+ */
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
