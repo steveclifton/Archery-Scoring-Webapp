@@ -17,6 +17,9 @@ use PDO;
 class User extends Base
 {
 
+    /**
+     * Returns a users details by email
+     */
     public function getUserByEmail($email)
     {
         $sql = "SELECT * 
@@ -69,7 +72,6 @@ class User extends Base
 
     /**
      * Creates a new user if registration information is valid
-
      * - returns a new user object - used to log the user in automatically
      */
     public function create($userData)
@@ -95,9 +97,11 @@ class User extends Base
         $success = $stm->execute(array('$anzNum, $firstName, $lastName, $gender, $userType, $email, $password, $preferedType, $ipAddress'));
 
         return $success;
-
     }
 
+    /**
+     * Returns a list of users that a pending approval
+     */
     public function getPendingUsers()
     {
         $sql = "SELECT * 
@@ -114,9 +118,12 @@ class User extends Base
         return $data;
     }
 
+    /**
+     * Updates a users type from Pending to be 'user'
+     *  - This is controlled from the admin view
+     */
     public function confirmPendingUsers($userData)
     {
-        //var_dump($userData);die();
         $email = ucfirst($userData['email']);
         $firstName = ucfirst($userData['first_name']);
         $lastName = ucfirst($userData['last_name']);
@@ -165,6 +172,9 @@ class User extends Base
         }
     }
 
+    /**
+     * Check to see whether the ANZ number exists in the database or not
+     */
     public function doesAnzNumberExist($numToCheck)
     {
         $sql = "SELECT * 
