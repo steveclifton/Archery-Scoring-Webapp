@@ -3,6 +3,7 @@
 </div>
 <input type="button" value="Hide" id="profileformbutton" class="btn btn-warning">
 <hr>
+
 <form class="form-horizontal" action="/userprofileupdate" method="POST" id="userprofileform">
     <fieldset>
         <div class="control-group">
@@ -93,31 +94,33 @@
 <hr>
 
 <div class="table-responsive" id="ffff">
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Anz Num</th>
-                    <th>Email</th>
-                    <th>Club</th>
-                    <th>Access</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-            foreach ($viewData['access_users'] as $user) { ?>
-                <tr>
-                    <form action="/updateassociateduser" method="post">
-                        <td><input type="text" value="<?= $user['first_name']?>" name="first_name" readonly></td>
-                        <td><input type="text" value="<?= $user['last_name'] ?>" name="last_name" readonly></td>
-                        <td><input type="text" value="<?= $user['anz_num'] ?>" name="anz_num" readonly></td>
-                        <td><input type="text" value="<?= $user['email'] ?>" name="email" readonly></td>
-                        <td><input type="text" value="<?= $user['club'] ?>" name="club" readonly></td>
-                        <td><input type="submit" name="submit" class="btn btn-danger" value="Remove"></input></td>
-                    </form>
-                </tr>
-            <?php } ?>
-            </tbody>
-        </table>
+    <table class="table table-bordered table-hover table-condensed">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Anz Num</th>
+            <th>Email</th>
+            <th>Club</th>
+            <th>Status</th>
+            <th>Access</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($viewData['access_users'] as $user) { ?>
+            <tr>
+                <form action="/updateassociateduser" method="post">
+                    <td><input type="text" value="<?= $user['first_name'] ?>" name="first_name" readonly></td>
+                    <td><input type="text" value="<?= $user['last_name'] ?>" name="last_name" readonly></td>
+                    <td><input type="text" value="<?= $user['anz_num'] ?>" name="anz_num" readonly></td>
+                    <td><input type="text" value="<?= $user['email'] ?>" name="email" readonly></td>
+                    <td><input type="text" value="<?= $user['club'] ?>" name="club" readonly></td>
+                    <td><input type="text" value="<?= $user['status'] ?>" name="status" readonly></td>
+                    <td><input type="submit" name="submit" class="btn btn-danger" value="Remove"></input></td>
+                </form>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
 </div>
