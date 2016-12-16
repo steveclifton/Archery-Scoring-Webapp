@@ -102,7 +102,6 @@
             <th>Anz Num</th>
             <th>Email</th>
             <th>Club</th>
-            <th>Status</th>
             <th>Access</th>
         </tr>
         </thead>
@@ -116,7 +115,6 @@
                     <td><input type="text" value="<?= $user['anz_num'] ?>" name="anz_num" readonly></td>
                     <td><input type="text" value="<?= $user['email'] ?>" name="email" readonly></td>
                     <td><input type="text" value="<?= $user['club'] ?>" name="club" readonly></td>
-                    <td><input type="text" value="<?= $user['status'] ?>" name="status" readonly></td>
                     <td><input type="submit" name="submit" class="btn btn-danger" value="Remove"></input></td>
                 </form>
             </tr>
