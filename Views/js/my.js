@@ -40,13 +40,13 @@ $(document).ready(function () {
 
 
 
-    $('#profileformbuton').ready(function () {
+    $('#profileformbutton').ready(function () {
 
-        $('#profileformbuton').on('click', function () {
+        $('#profileformbutton').on('click', function () {
             if ($(this).val() == 'Hide') {
-                $('#profileformbuton').prop('value', 'Show');
+                $('#profileformbutton').prop('value', 'Show');
             } else {
-                $('#profileformbuton').prop('value', 'Hide');
+                $('#profileformbutton').prop('value', 'Hide');
             }
             $('#userprofileform').toggle();
 
