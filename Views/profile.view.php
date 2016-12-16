@@ -1,8 +1,10 @@
-<form class="form-horizontal" action="/userprofile" method="POST">
+<div id="legend">
+    <legend>Update Details</legend>
+</div>
+<input type="button" value="Hide" id="profileformbuton" class="btn btn-danger">
+<hr>
+<form class="form-horizontal" action="/userprofileupdate" method="POST" id="userprofileform">
     <fieldset>
-        <div id="legend">
-            <legend>Update Details</legend>
-        </div>
         <div class="control-group">
             <label class="control-label">ANZ Number</label>
             <div class="controls">
@@ -65,15 +67,6 @@
                 <button class="btn btn-success" id="update">Update</button>
             </div>
         </div>
-        <?php
-        if (isset($viewData['success'])) {
-            if ($viewData['success'] === true) {
-                echo "<p style='color: green;;'>Success</p>";
-            } else {
-                echo "<p style='color: red'>Account Creation Failed, please check details and try again</p>";
-            }
-        }
-        ?>
     </fieldset>
 </form>
 <br><br>
