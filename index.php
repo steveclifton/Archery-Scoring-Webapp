@@ -62,7 +62,10 @@ else if ($uri == 'userprofile') {
     $user = new Profile();
     $user->viewProfile();
 }
-
+else if ($uri == 'userprofileupdate') {
+    $user = new Profile();
+    $user->updateProfile();
+}
 
 else if ($uri == 'rules') {
     $rules = new Welcome();
