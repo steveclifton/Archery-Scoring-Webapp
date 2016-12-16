@@ -34,6 +34,12 @@ class Profile extends Base
         $this->viewProfile();
     }
 
+    public function requestAccessToAssociate()
+    {
+        print_r($_POST);
+        die();
+    }
+
 }
 
 
