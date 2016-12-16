@@ -150,9 +150,12 @@ class User extends Base
         return $success;
     }
 
+    /**
+     * Returns all users that the logged in user has an association with
+     */
     public function getAssociatedUsers($userId)
     {
-        $sql = "SELECT users.first_name, users.last_name, users.anz_num, users.club, users.email 
+        $sql = "SELECT users.first_name, users.last_name, users.anz_num, users.club, users.email, join_users.status 
                 FROM `join_users` 
                 INNER JOIN users 
                 ON `join_users`.associate_id = users.id 
