@@ -150,6 +150,26 @@ class User extends Base
         return $success;
     }
 
+    public function getAssociatedUsers($userId)
+    {
+        $sql = "SELECT users.first_name, users.last_name, users.anz_num, users.club, users.email 
+                FROM `join_users` 
+                INNER JOIN users 
+                ON `join_users`.associate_id = users.id 
+                WHERE `join_users`.user_id = '$userId'
+                ";
+
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute();
+
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+//
+//        print_r($data); die();
+        return $data;
+    }
+
     /**
      * Verifies whether the users student id and password exist and match
      *
