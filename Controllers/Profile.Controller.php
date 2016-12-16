@@ -40,6 +40,16 @@ class Profile extends Base
         die();
     }
 
+
+    private function getAssociatedUsers()
+    {
+        $user = new User();
+
+        $associatedUsers = $user->getAssociatedUsers($_SESSION['id']);
+
+        return $associatedUsers;
+    }
+
 }
 
 
