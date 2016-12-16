@@ -18,6 +18,10 @@ class Profile extends Base
         $details = $user->getUserByEmail($_SESSION['email']);
         $viewData['user'] = $details[0];
 
+        $associatedUsers = $this->getAssociatedUsers();
+
+        $viewData['access_users'] = $associatedUsers;
+
         $this->render('Profile', 'profile.view', $viewData);
     }
 
