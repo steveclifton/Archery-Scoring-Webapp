@@ -39,6 +39,20 @@ $(document).ready(function () {
     });
 
 
+
+    $('#profileformbuton').ready(function () {
+
+        $('#profileformbuton').on('click', function () {
+            if ($(this).val() == 'Hide') {
+                $('#profileformbuton').prop('value', 'Show');
+            } else {
+                $('#profileformbuton').prop('value', 'Hide');
+            }
+            $('#userprofileform').toggle();
+
+        });
+    });
+
     /****************************************************************
      *                      Score Methods                           *
      ****************************************************************/
