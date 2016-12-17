@@ -99,7 +99,6 @@
         <tr>
             <th style="text-align: center">ANZ #</th>
             <th style="text-align: center">Name</th>
-            <th style="text-align: center">Email</th>
             <th style="text-align: center">Club</th>
             <th style="text-align: center">Access</th>
         </tr>
@@ -109,10 +108,9 @@
         foreach ($viewData['access_users'] as $user) { ?>
             <tr>
                 <form action="/updateassociateduser" method="post">
-                    <td><input class="form-control" type="text" value="<?= $user['anz_num'] ?>" name="anz_num" readonly></td>
-                    <td><input class="form-control" type="text" value="<?= $user['first_name'] ?> <?= $user['last_name'] ?>" name="full_name" readonly></td>
-                    <td><input class="form-control" type="text" value="<?= $user['email'] ?>" name="email" readonly></td>
-                    <td><input class="form-control" type="text" value="<?= $user['club'] ?>" name="club" readonly></td>
+                    <td><input style="text-align: center" class="form-control" type="text" value="<?= $user['anz_num'] ?>" name="anz_num" readonly></td>
+                    <td><input style="text-align: center" class="form-control" type="text" value="<?= $user['first_name'] ?> <?= $user['last_name'] ?>" name="full_name" readonly></td>
+                    <td><input style="text-align: center" class="form-control" type="text" value="<?= $user['club'] ?>" name="club" readonly></td>
                     <td style="text-align: center"><input type="submit" name="submit" class="btn btn-danger" value="Remove"></td>
                 </form>
             </tr>
