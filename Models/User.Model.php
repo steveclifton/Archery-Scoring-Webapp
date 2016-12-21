@@ -118,6 +118,23 @@ class User extends Base
         return $data;
     }
 
+
+    public function getUserByAnzNum($anzNum)
+    {
+        $sql = "SELECT users.id 
+                FROM `users` 
+                WHERE `anz_num`='$anzNum'
+                LIMIT 1
+                ";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute();
+
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        return $data[0]['id'];
+    }
     /**
      * Updates a users type from Pending to be 'user'
      *  - This is controlled from the admin view
