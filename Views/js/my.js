@@ -132,10 +132,10 @@ $(document).ready(function () {
 
     $('#confirm_password').on('focusout', function () {
         var password = $('#password').val();
-        var confirmPassword = $('#confirm_password').val();
+        var confirmPassword = $(this).val();
 
         if ($('#validation_password').length > 0) {
-            $('#validation_password').remove();
+            $(this).remove();
         }
         if (password != null && confirmPassword != null) {
             if (password != confirmPassword) {
