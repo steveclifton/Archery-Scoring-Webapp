@@ -119,7 +119,7 @@
             <?php
             $i = 1;
             foreach ($viewData as $data) { ?>
-                <?php if ($data['division'] == 'recurve-bb') {?>
+                <?php if ($data['division'] == 'recurve_bb') {?>
                     <tr>
                         <th scope="row"> <?php echo $i; $i++; ?></th>
                         <td> <?= $data['first_name'] ?></td>
