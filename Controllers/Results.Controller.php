@@ -4,6 +4,7 @@
 namespace Archery\Controllers;
 
 use Archery\Models\Score;
+use Archery\Models\User;
 
 /**
  * Results Class
@@ -39,7 +40,10 @@ class Results extends Base
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $score = new Score();
-            $score->liu_setScore($_POST['score'], $_POST['xcount'], $_POST['week'], $_POST['division']);
+            $archer = new User();
+            $archerId = $archer->getUserByAnzNum($_POST['anz_num']);
+
+            $score->setScore($archerId, $_POST['score'], $_POST['xcount'], $_POST['week'], $_POST['division']);
         }
         header("Location: /week?week=" . $_POST['week']);
         die();
