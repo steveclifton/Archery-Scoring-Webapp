@@ -1,45 +1,58 @@
 <h2 style="text-align: center;">Week <?= $_GET['week']; ?> Results</h2>
+<legend>Submit Scores</legend>
 
-<div id="legend">
-    <legend>Submit Scores</legend>
+
+<div id="subscores">
+    <?php
+    if (isset($_SESSION['id'])) {
+        foreach ($viewData['archers'] as $archer) { ?>
+            <form class="form-inline" action="/submitscore" method="POST" name="scoreform" onsubmit="return validateForm(this)" style="padding-top: 10px">
+                <div class="form-group">
+                    <input class="form-control" type="text" value="<?= $archer['first_name'] ?> <?= $archer['last_name'] ?>" name="full_name" readonly>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="score" class="form-control" name="score" placeholder="Score" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="xcount" class="form-control" name="xcount" placeholder="X-Count" required>
+                </div>
+                <!--Select Bow Division data-->
+                <div class="form-group">
+                    <div class="bow">
+                        <select name="division" id="division">
+                            <option value="compound" id="Compound">Compound</option>
+                            <option value="recurve" id="Recurve">Recurve</option>
+                            <option value="recurve_bb" id="Recurve_bb">Recurve Barebow</option>
+                            <option value="longbow" id="Longbow">Longbow</option>
+                            <option value="crossbow" id="Crossbow">Crossbow</option>
+                        </select>
+                    </div>
+                </div>
+                <!--Hidden data-->
+                <div class="form-group">
+                    <input type="hidden" name="anz_num" id="anz_num" value="<?= $archer['anz_num'] ?>">
+                    <input type="hidden" name="week" id="week_num" value="<?= $_GET['week'] ?>">
+                    <input type="hidden" id="prefered_type" value="<?= $archer['prefered_type'] ?>">
+                </div>
+                <input type="submit" class="btn btn-success" name="submit" value="Submit"></input>
+                <div id="row">
+                    <p id="incorrect" style="color: red; padding-left: 36px"></p>
+                </div>
+            </form>
+
+        <?php } ?>
+    <?php } ?>
+
+    <form class="form-inline" action="/addtempuser" method="POST" name="scoreform" style="padding-top: 10px">
+        <input type="button" value="Add Another Archer" id="addarcherbutton" class="btn btn-warning">
+        <div class="form-group" id="searcharcherform">
+            <input type="text" name="anz_num" id="searcharcher" class="form-control" placeholder="Search ANZ Number">
+            <input type="submit" id="addsubmit" class="btn btn-success" name="submit" value="Add!"></input>
+        </div>
+            <input type="hidden" name="week" id="week_num" value="<?= $_GET['week'] ?>">
+    </form>
 </div>
 
-<?php
-if (isset($_SESSION['id'])) {
-    foreach ($viewData['archers'] as $archer) { ?>
-        <form class="form-inline" action="/submitscore" method="POST" name="scoreform" onsubmit="return validateForm(this)">
-            <div class="form-group">
-                <input class="form-control" type="text" value="<?= $archer['first_name'] ?> <?= $archer['last_name'] ?>" name="full_name" readonly>
-            </div>
-                <div class="form-group">
-                <input type="text" id="score" class="form-control" name="score" placeholder="Score" required>
-            </div>
-            <div class="form-group">
-                <input type="text" id="xcount" class="form-control" name="xcount" placeholder="X-Count" required>
-            </div>
-            <div class="form-group">
-                <div class="bow">
-                    <select name="division" id="division">
-                        <option value="compound" id="Compound">Compound</option>
-                        <option value="recurve" id="Recurve">Recurve</option>
-                        <option value="recurve_bb" id="Recurve_bb">Recurve Barebow</option>
-                        <option value="longbow" id="Longbow">Longbow</option>
-                        <option value="crossbow" id="Crossbow">Crossbow</option>
-                    </select>
-                </div>
-                <input type="hidden" name="anz_num" id="anz_num" value="<?= $archer['anz_num'] ?>">
-                <input type="hidden" name="week" id="week_num" value="<?= $_GET['week'] ?>">
-                <input type="hidden" id="prefered_type" value="<?= $archer['prefered_type'] ?>">
-            </div>
-
-            <input type="submit" class="btn btn-success" name="submit" value="Submit"></input>
-            <div id="row">
-                <p id="incorrect" style="color: red; padding-left: 36px"></p>
-            </div>
-        </form>
-    <hr>
-    <?php } ?>
-<?php } ?>
 
 <div class="table-responsive">
     <div class="container">
