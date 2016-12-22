@@ -95,20 +95,20 @@ class Score extends Base
      *  Returns
      *   - All data from the round for a logged in users week
      */
-    public function liu_getCWScore($week)
+    public function getCWScore($userId, $week, $div)
     {
-        $loggedUser = $_SESSION['id'];
         $table = $this->tableName;
 
         $sql =  "SELECT * 
                  FROM `$table` 
                  WHERE week='$week' 
-                 AND user_id='$loggedUser' 
+                 AND user_id='$userId' 
+                 AND division='$div'
                  ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $stm->execute(array('$week'));
+        $stm->execute(array('$userId, $week'));
 
         $data = $stm->fetchAll();
 
