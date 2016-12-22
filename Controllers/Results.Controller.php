@@ -32,6 +32,9 @@ class Results extends Base
                 $this->render('Scoring', 'week.view', $viewData);
                 die();
             }
+        } else {
+            header('location: /welcome');
+            die();
         }
 
         $this->render('Scoring', 'week.view', $viewData);
