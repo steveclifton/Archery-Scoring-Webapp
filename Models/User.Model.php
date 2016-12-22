@@ -135,8 +135,12 @@ class User extends Base
         $stm->execute();
 
         $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+        if (isset($data[0]['id'])) {
+            return $data[0]['id'];
+        } else {
+            return false;
+        }
 
-        return $data[0]['id'];
     }
 
 
@@ -171,7 +175,7 @@ class User extends Base
         $success = $stm->execute(array('$anzNum, $firstName, $lastName, $club, $userType, $ipAddress, $email'));
 
         $userId = $this->getUserByAnzNum($anzNum);
-        $this->setAssociatedUser($userId, $userId);
+        $this->setAssociatedUser($userId, $userId, "CONFIRMED");
 
         return $success;
     }
@@ -179,15 +183,15 @@ class User extends Base
     /**
      * Creates an association between users
      */
-    public function setAssociatedUser($userId, $assocUser)
+    public function setAssociatedUser($userId, $assocUser, $status)
     {
 
         $sql = "INSERT INTO `join_users` (`id`, `user_id`, `associate_id`, `status`) 
-                VALUES (NULL, '$userId', '$assocUser', 'PENDING');";
+                VALUES (NULL, '$userId', '$assocUser', '$status');";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $stm->execute(array('$userId, $assocUser'));
+        $stm->execute(array('$userId, $assocUser, $status'));
 
         $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
@@ -229,6 +233,7 @@ class User extends Base
                 ON `join_users`.associate_id = users.id 
                 WHERE `join_users`.user_id = '$userId'
                 AND `join_users`.status = 'CONFIRMED'
+                OR `join_users`.status = 'TEMP'
                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
