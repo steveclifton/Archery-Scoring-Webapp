@@ -18,11 +18,11 @@ class Results extends Base
     {
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $score = new Score();
             if (!isset($_GET['week'])) {
                 header('location: /welcome');
                 die();
             }
+            $score = new Score();
             $viewData['scores'] = $score->all_getCWScores($_GET['week']);
 
             if (isset($_SESSION['id'])) {
@@ -40,6 +40,9 @@ class Results extends Base
         $this->render('Scoring', 'week.view', $viewData);
     }
 
+    /**
+     * Processes score
+     */
     public function processScore()
     {
         $this->isNotLoggedIn();
@@ -98,6 +101,9 @@ class Results extends Base
 
 
 
+    /**
+     * Working on this later
+     */
     public function ajaxSearchUserScoreWeekDiv()
     {
         $week = $_GET['week'];
