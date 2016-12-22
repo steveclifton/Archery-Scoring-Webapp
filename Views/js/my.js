@@ -57,6 +57,16 @@ $(document).ready(function () {
      *                      Score Methods                           *
      ****************************************************************/
 
+
+    $('#searcharcherform').ready(function () {
+        $('#searcharcherform').toggle();
+        $('#addarcherbutton').click(function () {
+            $('#searcharcherform').toggle();
+        });
+    });
+
+
+
     /**
      * Checks the Score to ensure the user only enters
      *    - Valid digits 0-9
