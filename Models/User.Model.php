@@ -214,6 +214,27 @@ class User extends Base
     }
 
     /**
+     * Remove association
+     */
+    public function removeAssociation($userId, $assocUser)
+    {
+        $sql = "DELETE FROM `join_users` 
+                WHERE `join_users`.`user_id` = '$userId'
+                AND `join_users`.`associate_id` = '$assocUser'
+                ";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute(array('$userId, $assocUser'));
+
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        return $data;
+
+
+    }
+
+    /**
      * Returns all users that the logged in user has an association with
      */
     public function getAssociatedUsers($userId)
