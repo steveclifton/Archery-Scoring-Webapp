@@ -69,7 +69,7 @@ else if ($uri == 'userprofileupdate') {
 
 else if ($uri == 'updateassociateduser') {
     $profile = new Profile();
-    $profile->requestAccessToAssociate();
+    $profile->updateAssociation();
 }
 
 else if ($uri == 'rules') {
