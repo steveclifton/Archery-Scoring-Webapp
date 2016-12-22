@@ -38,10 +38,10 @@ $(document).ready(function () {
         }
     });
 
-        $('#userprofileform').toggle();
+
 
     $('#profileformbutton').ready(function () {
-
+        $('#userprofileform').toggle();
         $('#profileformbutton').on('click', function () {
             if ($(this).val() == 'Hide') {
                 $('#profileformbutton').prop('value', 'Show');
