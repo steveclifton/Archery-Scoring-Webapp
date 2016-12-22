@@ -71,6 +71,29 @@ class Results extends Base
     }
 
 
+    /**
+     * Ajax searches whether the ANZ number exists or not
+     */
+    public function getUserByAnz()
+    {
+        $anzNum = $_GET['anz_num'];
+
+        $user = new User();
+
+        $existingUser = $user->getUserByAnzNum($anzNum);
+        if (!$existingUser) {
+            echo "ANZ number not found";
+        } else if (is_numeric($existingUser)){
+
+            echo "Found user";
+        }
+
+        return;
+    }
+
+
+
+
 
     public function ajaxSearchUserScoreWeekDiv()
     {
