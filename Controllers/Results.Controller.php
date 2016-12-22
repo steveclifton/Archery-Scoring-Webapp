@@ -23,9 +23,12 @@ class Results extends Base
                 header('location: /welcome');
                 die();
             }
-            $viewData = $score->all_getCWScores($_GET['week']);
+            $viewData['scores'] = $score->all_getCWScores($_GET['week']);
 
             if (isset($_SESSION['id'])) {
+                $user = new User();
+                $viewData['archers'] = $user->getAllUsersForScoring();
+
                 $this->render('Scoring', 'week.view', $viewData);
                 die();
             }
