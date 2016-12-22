@@ -185,13 +185,28 @@ class User extends Base
      */
     public function setAssociatedUser($userId, $assocUser, $status)
     {
-
         $sql = "INSERT INTO `join_users` (`id`, `user_id`, `associate_id`, `status`) 
                 VALUES (NULL, '$userId', '$assocUser', '$status');";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
         $stm->execute(array('$userId, $assocUser, $status'));
+
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        return $data;
+    }
+
+    /**
+     * Check whether an association exists or not
+     */
+    public function checkAssociation($userId, $assocUser)
+    {
+        $sql = "SELECT * FROM `join_users` WHERE user_id = '$userId' AND associate_id = '$assocUser'";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute(array('$userId, $assocUser'));
 
         $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
