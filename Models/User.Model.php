@@ -179,6 +179,30 @@ class User extends Base
                 WHERE `join_users`.user_id = '$userId'
                 ";
 
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute();
+
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        return $data;
+    }
+
+    /**
+     * Gets all associated users for scoring
+     *  - (includes self)
+     */
+    public function getAllUsersForScoring()
+    {
+        $userId = $_SESSION['id'];
+
+        $sql = "SELECT users.first_name, users.last_name, users.anz_num, users.club, users.email, join_users.status 
+                FROM `join_users` 
+                INNER JOIN users 
+                ON `join_users`.associate_id = users.id 
+                WHERE `join_users`.user_id = '$userId'
+                AND `join_users`.status = 'CONFIRMED'
+                ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
