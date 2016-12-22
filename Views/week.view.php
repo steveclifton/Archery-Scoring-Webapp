@@ -43,7 +43,6 @@ if (isset($_SESSION['id'])) {
 
 <div class="table-responsive">
     <div class="container">
-
         <h3 style="text-align: center;">Compound</h3>
         <table class="table table-bordered table-hover">
             <thead>
@@ -58,7 +57,7 @@ if (isset($_SESSION['id'])) {
             <tbody>
             <?php
                 $i = 1;
-                foreach ($viewData as $data) { ?>
+                foreach ($viewData['scores'] as $data) { ?>
                     <?php if ($data['division'] == 'compound') {?>
                     <tr>
                         <th scope="row"> <?php echo $i; $i++; ?></th>
@@ -85,7 +84,7 @@ if (isset($_SESSION['id'])) {
             <tbody>
             <?php
             $i = 1;
-            foreach ($viewData as $data) { ?>
+            foreach ($viewData['scores'] as $data) { ?>
                 <?php if ($data['division'] == 'recurve') {?>
                     <tr>
                         <th scope="row"> <?php echo $i; $i++; ?></th>
@@ -113,7 +112,7 @@ if (isset($_SESSION['id'])) {
             <tbody>
             <?php
             $i = 1;
-            foreach ($viewData as $data) { ?>
+            foreach ($viewData['scores'] as $data) { ?>
                 <?php if ($data['division'] == 'recurve_bb') {?>
                     <tr>
                         <th scope="row"> <?php echo $i; $i++; ?></th>
@@ -141,7 +140,7 @@ if (isset($_SESSION['id'])) {
             <tbody>
             <?php
             $i = 1;
-            foreach ($viewData as $data) { ?>
+            foreach ($viewData['scores'] as $data) { ?>
                 <?php if ($data['division'] == 'longbow') {?>
                     <tr>
                         <th scope="row"> <?php echo $i; $i++; ?></th>
