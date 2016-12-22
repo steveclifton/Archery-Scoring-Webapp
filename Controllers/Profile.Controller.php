@@ -49,6 +49,10 @@ class Profile extends Base
             if (!isset($result[0])) {
                 $result = $user->setAssociatedUser($_SESSION['id'], $requestAnz, 'CONFIRMED');
             }
+        } else if ($_POST['submit'] == 'Remove') {
+            $result = $user->removeAssociation($_SESSION['id'], $requestAnz);
+        }
+        header('location: /userprofile');
         die();
     }
 
