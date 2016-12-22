@@ -202,7 +202,11 @@ class User extends Base
      */
     public function checkAssociation($userId, $assocUser)
     {
-        $sql = "SELECT * FROM `join_users` WHERE user_id = '$userId' AND associate_id = '$assocUser'";
+        $sql = "SELECT * 
+                FROM `join_users` 
+                WHERE user_id = '$userId' 
+                AND associate_id = '$assocUser'
+                ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
