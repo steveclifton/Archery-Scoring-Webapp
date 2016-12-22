@@ -16,6 +16,7 @@ class ComposerStaticInit371750710b20fffdf056fc7317885737
         'Archery\\Controllers\\Results' => __DIR__ . '/../..' . '/Controllers/Results.Controller.php',
         'Archery\\Controllers\\Welcome' => __DIR__ . '/../..' . '/Controllers/Welcome.Controller.php',
         'Archery\\Exceptions\\CustomException' => __DIR__ . '/../..' . '/Exceptions/Custom.Exception.php',
+        'Archery\\Models\\AdminConfig' => __DIR__ . '/../..' . '/Models/AdminConfig.Model.php',
         'Archery\\Models\\Base' => __DIR__ . '/../..' . '/Models/Base.Model.php',
         'Archery\\Models\\Score' => __DIR__ . '/../..' . '/Models/Score.Model.php',
         'Archery\\Models\\User' => __DIR__ . '/../..' . '/Models/User.Model.php',

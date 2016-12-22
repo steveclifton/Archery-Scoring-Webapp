@@ -15,6 +15,7 @@ return array(
     'Archery\\Controllers\\Results' => $baseDir . '/Controllers/Results.Controller.php',
     'Archery\\Controllers\\Welcome' => $baseDir . '/Controllers/Welcome.Controller.php',
     'Archery\\Exceptions\\CustomException' => $baseDir . '/Exceptions/Custom.Exception.php',
+    'Archery\\Models\\AdminConfig' => $baseDir . '/Models/AdminConfig.Model.php',
     'Archery\\Models\\Base' => $baseDir . '/Models/Base.Model.php',
     'Archery\\Models\\Score' => $baseDir . '/Models/Score.Model.php',
     'Archery\\Models\\User' => $baseDir . '/Models/User.Model.php',
