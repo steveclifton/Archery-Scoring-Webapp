@@ -38,9 +38,17 @@ class Profile extends Base
         $this->viewProfile();
     }
 
-    public function requestAccessToAssociate()
+    public function updateAssociation()
     {
-        print_r($_POST);
+        $user = new User();
+        $requestAnz = $user->getUserByAnzNum($_POST['anz_num']);
+
+        if ($_POST['submit'] == 'Request Access') {
+            //user is requesting access here
+            $result = $user->checkAssociation($_SESSION['id'], $requestAnz);
+            if (!isset($result[0])) {
+                $result = $user->setAssociatedUser($_SESSION['id'], $requestAnz, 'CONFIRMED');
+            }
         die();
     }
 
