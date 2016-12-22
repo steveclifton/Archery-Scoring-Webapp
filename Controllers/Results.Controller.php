@@ -41,7 +41,7 @@ class Results extends Base
     }
 
     /**
-     * Processes score
+     * Processes score for a weeks view submission
      */
     public function processScore()
     {
@@ -52,7 +52,15 @@ class Results extends Base
             $archer = new User();
             $archerId = $archer->getUserByAnzNum($_POST['anz_num']);
 
-            $score->setScore($archerId, $_POST['score'], $_POST['xcount'], $_POST['week'], $_POST['division']);
+            // validate score
+            if ($_POST['score'] >= 0 && $_POST['score'] <= 360 && $_POST['xcount'] >= 0 && $_POST['xcount'] <= 36) {
+                // check to see if a score already exists
+                $existingScore = $score->getCWScore($archerId, $_POST['week'], $_POST['division']);
+                // if a score doesnt exist, create one
+                if (!isset($existingScore[0])) {
+                    $score->setScore($archerId, $_POST['score'], $_POST['xcount'], $_POST['week'], $_POST['division']);
+                }
+            }
         }
         header("Location: /week?week=" . $_POST['week']);
         die();
