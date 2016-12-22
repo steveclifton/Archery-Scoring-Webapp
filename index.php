@@ -91,6 +91,10 @@ else if ($uri == 'ajax_searchScoreWeekDiv') {
     $week->ajaxSearchUserScoreWeekDiv();
 }
 
+else if ($uri == 'addtempuser') {
+    $result = new Results();
+    $result->addTempUser();
+}
 else {
     $errorController = new Errors();
     $errorController->notFound();
