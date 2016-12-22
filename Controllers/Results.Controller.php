@@ -59,17 +59,15 @@ class Results extends Base
     {
         $week = $_GET['week'];
         $div = $_GET['div'];
+        $anz = $_GET['anz'];
 
         $score = new Score();
 
-        $results = $score->liu_getCWAndBowTypeScores($week, $div);
-//
-//        if (isset($hasUserScored[0])) {
-//            $results = 'true';
-//        } else {
-//            $results = 'false';
-//        }
-        $this->renderAjax('searchresults.view', $results);
+        $results = $score->liu_getCWAndBowTypeScores($week, $div, $anz);
+
+        if (isset($results)) {return false;} else {return true;}
+
+//        $this->renderAjax('searchresults.view', $results);
     }
 
 }
