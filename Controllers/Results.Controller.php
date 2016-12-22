@@ -61,6 +61,13 @@ class Results extends Base
                     $score->setScore($archerId, $_POST['score'], $_POST['xcount'], $_POST['week'], $_POST['division']);
                 }
             }
+
+            // Removes the association of temp users
+            $tempAssoc = $archer->checkAssociation($_SESSION['id'], $archerId);
+            if (isset($tempAssoc[0]) && $tempAssoc[0]['status'] == 'TEMP') {
+                $archer->removeAssociation($_SESSION['id'], $archerId);
+            }
+            
         }
         header("Location: /week?week=" . $_POST['week']);
         die();
