@@ -91,6 +91,10 @@ else if ($uri == 'ajax_searchScoreWeekDiv') {
     $week->ajaxSearchUserScoreWeekDiv();
 }
 
+else if ($uri == 'ajax_searchAnzArcher') {
+    $user = new Results();
+    $user->getUserByAnz();
+}
 else if ($uri == 'addtempuser') {
     $result = new Results();
     $result->addTempUser();
