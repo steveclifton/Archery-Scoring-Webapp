@@ -38,7 +38,7 @@ $(document).ready(function () {
         }
     });
 
-
+        $('#userprofileform').toggle();
 
     $('#profileformbutton').ready(function () {
 
@@ -57,6 +57,33 @@ $(document).ready(function () {
      *                      Score Methods                           *
      ****************************************************************/
 
+
+    $('#searcharcher').on('keyup', function () {
+        var anzNum = $(this).val();
+        if ($('#validation_anz').length > 0) {
+            $('#validation_anz').remove();
+        }
+
+        $.get("/ajax_searchAnzArcher?anz_num=" + anzNum, function (data) {
+            if (data == "ANZ number not found") {
+                $('#searcharcher').parent().after("<div id='validation_anz' style='color:red;'>ANZ Number Not Found</div>");
+                $('#addsubmit').prop('disabled', true);
+            } else if (data == "Found user") {
+                $('#searcharcher').parent().after("<div id='validation_anz' style='color:green;'>Found Archer</div>");
+                $('#addsubmit').prop('disabled', false);
+            }
+        });
+
+
+    });
+
+    // $('#subscores').ready(function () {
+    //
+    //     $('#scorelegend').click(function () {
+    //         $('#subscores').toggle();
+    //     });
+    //
+    // });
 
     $('#searcharcherform').ready(function () {
         $('#searcharcherform').toggle();
@@ -194,18 +221,18 @@ function capitalizeFirstLetter(string) {
  * Validates form, pretty ugly but it works
  */
 function validateForm(form) {
-    var score = document.forms[this]["score"].value;
-    var xcount = document.forms[this]["xcount"].value;
-    reg = /^[0-9]+$/;
-
-    if  ((score > 360 || score < 0)
-        || (!reg.test(score))
-        || (xcount > 36 || xcount < 0)
-        || (!reg.test(xcount))
-        ) {
-            $("#incorrect").html("*Please check details and try again");
-            return false;
-    }
+    // var score = document.forms[this]["score"].value;
+    // var xcount = document.forms[this]["xcount"].value;
+    // reg = /^[0-9]+$/;
+    //
+    // if  ((score > 360 || score < 0)
+    //     || (!reg.test(score))
+    //     || (xcount > 36 || xcount < 0)
+    //     || (!reg.test(xcount))
+    //     ) {
+    //         $("#incorrect").html("*Please check details and try again");
+    //         return false;
+    // }
 
 }
 
