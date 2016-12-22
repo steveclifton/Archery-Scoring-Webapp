@@ -53,6 +53,23 @@ class Results extends Base
     }
 
 
+    /**
+     * Adds a temp user to the users profile
+     *  - 1 time use, removes after entering a score
+     */
+    public function addTempUser()
+    {
+        $user = new User();
+
+        $anzNum = $user->getUserByAnzNum($_POST['anz_num']);
+        if (isset($anzNum)) {
+            $user->setAssociatedUser($_SESSION['id'], $anzNum, "TEMP");
+        }
+
+        header('location: /week?week=' . $_POST['week']);
+        die();
+    }
+
 
 
     public function ajaxSearchUserScoreWeekDiv()
