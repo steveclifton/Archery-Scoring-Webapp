@@ -69,7 +69,10 @@ class Results extends Base
 
         $anzNum = $user->getUserByAnzNum($_POST['anz_num']);
         if (isset($anzNum)) {
-            $user->setAssociatedUser($_SESSION['id'], $anzNum, "TEMP");
+            $result = $user->checkAssociation($_SESSION['id'], $anzNum);
+            if (!isset($result[0])) {
+                $user->setAssociatedUser($_SESSION['id'], $anzNum, "TEMP");
+            }
         }
 
         header('location: /week?week=' . $_POST['week']);
@@ -90,7 +93,6 @@ class Results extends Base
         if (!$existingUser) {
             echo "ANZ number not found";
         } else if (is_numeric($existingUser)){
-
             echo "Found user";
         }
 
