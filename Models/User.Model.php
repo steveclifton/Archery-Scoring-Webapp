@@ -119,6 +119,9 @@ class User extends Base
     }
 
 
+    /**
+     * Returns a ID number for a anz_num
+     */
     public function getUserByAnzNum($anzNum)
     {
         $sql = "SELECT users.id 
@@ -135,9 +138,12 @@ class User extends Base
 
         return $data[0]['id'];
     }
+
+
     /**
      * Updates a users type from Pending to be 'user'
      *  - This is controlled from the admin view
+     *  - Creates an association between the user and themself
      */
     public function confirmPendingUsers($userData)
     {
@@ -164,7 +170,28 @@ class User extends Base
 
         $success = $stm->execute(array('$anzNum, $firstName, $lastName, $club, $userType, $ipAddress, $email'));
 
+        $userId = $this->getUserByAnzNum($anzNum);
+        $this->setAssociatedUser($userId, $userId);
+
         return $success;
+    }
+
+    /**
+     * Creates an association between users
+     */
+    public function setAssociatedUser($userId, $assocUser)
+    {
+
+        $sql = "INSERT INTO `join_users` (`id`, `user_id`, `associate_id`, `status`) 
+                VALUES (NULL, '$userId', '$assocUser', 'PENDING');";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute(array('$userId, $assocUser'));
+
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        return $data;
     }
 
     /**
@@ -209,8 +236,7 @@ class User extends Base
         $stm->execute();
 
         $data = $stm->fetchAll(PDO::FETCH_ASSOC);
-//
-//        print_r($data); die();
+
         return $data;
     }
 
