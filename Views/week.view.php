@@ -1,7 +1,7 @@
 <h2 style="text-align: center;">Week <?= $_GET['week']; ?> Results</h2>
-<legend>Submit Scores</legend>
 
-
+<div class="container">
+    <legend>Submit Scores</legend>
 <div id="subscores">
     <?php
     if (isset($_SESSION['id'])) {
@@ -42,6 +42,7 @@
 
         <?php } ?>
     <?php } ?>
+</div>
 
     <form class="form-inline" action="/addtempuser" method="POST" name="scoreform" style="padding-top: 10px">
         <input type="button" value="Add Another Archer" id="addarcherbutton" class="btn btn-warning">
