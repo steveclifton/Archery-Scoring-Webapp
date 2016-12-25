@@ -177,7 +177,7 @@ class Score extends Base
     {
         $table = $this->tableName;
         $user = new User();
-        $userId = $user->getUserByAnzNum($anz);
+        $userId = $user->getUserIdByAnzNum($anz);
 
         $sql =  "SELECT * 
                  FROM `$table` 

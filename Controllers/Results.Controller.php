@@ -50,7 +50,7 @@ class Results extends Base
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $score = new Score();
             $archer = new User();
-            $archerId = $archer->getUserByAnzNum($_POST['anz_num']);
+            $archerId = $archer->getUserIdByAnzNum($_POST['anz_num']);
 
             // validate score
             if ($_POST['score'] >= 0 && $_POST['score'] <= 360 && $_POST['xcount'] >= 0 && $_POST['xcount'] <= 36) {
@@ -82,7 +82,7 @@ class Results extends Base
     {
         $user = new User();
 
-        $anzNum = $user->getUserByAnzNum($_POST['anz_num']);
+        $anzNum = $user->getUserIdByAnzNum($_POST['anz_num']);
         if (isset($anzNum)) {
             $result = $user->checkAssociation($_SESSION['id'], $anzNum);
             if (!isset($result[0])) {
@@ -104,7 +104,7 @@ class Results extends Base
 
         $user = new User();
 
-        $existingUser = $user->getUserByAnzNum($anzNum);
+        $existingUser = $user->getUserIdByAnzNum($anzNum);
         if (!$existingUser) {
             echo "ANZ number not found";
         } else if (is_numeric($existingUser)){

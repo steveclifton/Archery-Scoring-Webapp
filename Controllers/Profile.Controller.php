@@ -41,7 +41,7 @@ class Profile extends Base
     public function updateAssociation()
     {
         $user = new User();
-        $requestAnz = $user->getUserByAnzNum($_POST['anz_num']);
+        $requestAnz = $user->getUserIdByAnzNum($_POST['anz_num']);
 
         if ($_POST['submit'] == 'Request Access') {
             //user is requesting access here

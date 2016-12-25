@@ -122,7 +122,7 @@ class User extends Base
     /**
      * Returns a ID number for a anz_num
      */
-    public function getUserByAnzNum($anzNum)
+    public function getUserIdByAnzNum($anzNum)
     {
         $sql = "SELECT users.id 
                 FROM `users` 
@@ -174,7 +174,7 @@ class User extends Base
 
         $success = $stm->execute(array('$anzNum, $firstName, $lastName, $club, $userType, $ipAddress, $email'));
 
-        $userId = $this->getUserByAnzNum($anzNum);
+        $userId = $this->getUserIdByAnzNum($anzNum);
         $this->setAssociatedUser($userId, $userId, "CONFIRMED");
 
         return $success;
