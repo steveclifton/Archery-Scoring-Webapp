@@ -4,7 +4,7 @@
 <input type="button" value="Hide" id="profileformbutton" class="btn btn-warning">
 <hr>
 
-<form class="form-horizontal" action="/userprofileupdate" method="POST" id="userprofileform">
+<form class="form-horizontal hidden" action="/userprofileupdate" method="POST" id="userprofileform">
     <fieldset>
         <div class="control-group">
             <label class="control-label">ANZ Number</label>
