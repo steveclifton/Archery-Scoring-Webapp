@@ -1,7 +1,7 @@
 <div id="legend">
     <legend>Update Details</legend>
 </div>
-<input type="button" value="Hide" id="profileformbutton" class="btn btn-warning">
+<input type="button" value="Show" id="profileformbutton" class="btn btn-warning">
 <hr>
 
 <form class="form-horizontal hidden" action="/userprofileupdate" method="POST" id="userprofileform">
