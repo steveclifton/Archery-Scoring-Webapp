@@ -46,7 +46,7 @@
 
     <form class="form-inline" action="/addtempuser" method="POST" name="scoreform" style="padding-top: 10px">
         <input type="button" value="Add Another Archer" id="addarcherbutton" class="btn btn-warning">
-        <div class="form-group" id="searcharcherform">
+        <div class="form-group hidden" id="searcharcherform">
             <input type="text" name="anz_num" id="searcharcher" class="form-control" placeholder="Search ANZ Number">
             <input type="submit" id="addsubmit" class="btn btn-success" name="submit" value="Add!"></input>
         </div>
