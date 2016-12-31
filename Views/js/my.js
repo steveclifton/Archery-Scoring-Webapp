@@ -21,16 +21,8 @@ $(document).ready(function () {
      * Hides/Shows the pending users table
      */
     $('#pendingbutton').ready(function () {
-        $('#pendingusers').toggle();
-
         $('#pendingbutton').on('click', function () {
-            if ($(this).val() == 'Hide') {
-                $('#pendingbutton').prop('value', 'Show');
-            } else {
-                $('#pendingbutton').prop('value', 'Hide');
-            }
-            $('#pendingusers').toggle();
-
+            toggleView('#pendingusers', '#pendingbutton');
         });
     });
 
@@ -52,19 +44,17 @@ $(document).ready(function () {
     });
 
 
-
+    /**
+     * Toggles the view of profile form button
+     */
     $('#profileformbutton').ready(function () {
-        $('#userprofileform').toggle();
         $('#profileformbutton').on('click', function () {
-            if ($(this).val() == 'Hide') {
-                $('#profileformbutton').prop('value', 'Show');
-            } else {
-                $('#profileformbutton').prop('value', 'Hide');
-            }
-            $('#userprofileform').toggle();
-
+            toggleView('#userprofileform', '#profileformbutton');
         });
     });
+
+
+
 
     /****************************************************************
      *                      Score Methods                           *
@@ -90,18 +80,13 @@ $(document).ready(function () {
 
     });
 
-    // $('#subscores').ready(function () {
-    //
-    //     $('#scorelegend').click(function () {
-    //         $('#subscores').toggle();
-    //     });
-    //
-    // });
 
+    /**
+     * Toggles the search archer form
+     */
     $('#searcharcherform').ready(function () {
-        $('#searcharcherform').toggle();
         $('#addarcherbutton').click(function () {
-            $('#searcharcherform').toggle();
+            $('#searcharcherform').toggleClass('hidden');
         });
     });
 
