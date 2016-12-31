@@ -1,5 +1,18 @@
 $(document).ready(function () {
 
+    /**
+     * Function to toggle the view
+     */
+    function toggleView(element, button) {
+        if ($(button).val() == 'Hide') {
+            $(button).prop('value', 'Show');
+        } else {
+            $(button).prop('value', 'Hide');
+        }
+        $(element).toggleClass('hidden');
+    }
+    
+
     /****************************************************************
      *                      Admin Methods                           *
      ****************************************************************/
