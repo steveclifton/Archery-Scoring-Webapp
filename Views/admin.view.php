@@ -2,7 +2,7 @@
 <input type="button" value="Show" id="pendingbutton" class="btn btn-danger">
 <hr>
 
-<div class="table-responsive" id="pendingusers">
+<div class="table-responsive hidden" id="pendingusers">
     <div class="container">
         <table class="table table-bordered table-hover">
             <thead>
