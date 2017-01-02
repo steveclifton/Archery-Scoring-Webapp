@@ -26,7 +26,7 @@
                             <select name="division" id="division">
                                 <option value="compound" id="Compound">Compound</option>
                                 <option value="recurve" id="Recurve">Recurve</option>
-                                <option value="recurve_bb" id="Recurve_bb">Recurve Barebow</option>
+                                <option value="recurve barebow" id="Recurve_bb">Recurve Barebow</option>
                                 <option value="longbow" id="Longbow">Longbow</option>
                                 <option value="crossbow" id="Crossbow">Crossbow</option>
                             </select>
@@ -64,7 +64,7 @@
 <div class="container">
     <?php foreach ($viewData['scores'] as $key => $value) {?>
     <div class="table-responsive">
-        <h3 style="text-align: center;"><?= ucfirst($key); ?></h3>
+        <h3 style="text-align: center;"><?= ucwords($key); ?></h3>
         <table class="table table-bordered table-hover table-condensed">
             <thead>
                 <tr>

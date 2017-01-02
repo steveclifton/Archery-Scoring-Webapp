@@ -143,7 +143,7 @@ class Score extends Base
 
         $returnData['compound'] = array();
         $returnData['recurve'] = array();
-        $returnData['recurve_bb'] = array();
+        $returnData['recurve barebow'] = array();
         $returnData['crossbow'] = array();
         $returnData['longbow'] = array();
         foreach ($data as $d) {
@@ -153,8 +153,8 @@ class Score extends Base
                 array_push($returnData['recurve'], $d);
             } else if ($d['division'] == 'crossbow'){
                 array_push($returnData['crossbow'], $d);
-            } else if ($d['division'] == 'recurve_bb'){
-                array_push($returnData['recurve_bb'], $d);
+            } else if ($d['division'] == 'recurve barebow'){
+                array_push($returnData['recurve barebow'], $d);
             } else if ($d['division'] == 'longbow'){
                 array_push($returnData['longbow'], $d);
             }

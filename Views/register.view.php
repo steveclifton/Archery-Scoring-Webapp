@@ -62,7 +62,7 @@
             <select name="prefered_type" id="prefered_type" class="selectpicker show-menu-arrow">
                 <option value="compound">Compound</option>
                 <option value="recurve">Recurve</option>
-                <option value="recurve_bb">Recurve Barebow</option>
+                <option value="recurve barebow">Recurve Barebow</option>
                 <option value="longbow">Longbow</option>
                 <option value="crossbow">Crossbow</option>
             </select>

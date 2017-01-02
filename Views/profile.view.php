@@ -62,7 +62,7 @@
                 <select name="prefered_type" id="division">
                     <option value="compound" id="Compound">Compound</option>
                     <option value="recurve" id="Recurve">Recurve</option>
-                    <option value="recurve_bb" id="Recurve_bb">Recurve Barebow</option>
+                    <option value="recurve barebow" id="Recurve_bb">Recurve Barebow</option>
                     <option value="longbow" id="Longbow">Longbow</option>
                     <option value="crossbow" id="Crossbow">Crossbow</option>
                 </select>
