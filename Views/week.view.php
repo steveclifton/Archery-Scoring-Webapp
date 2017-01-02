@@ -59,125 +59,38 @@
             <input type="hidden" name="week" id="week_num" value="<?= $_GET['week'] ?>">
         </form>
     <?php } ?>
+</div>
 
-    <div class="container">
-
-        <div class="table-responsive">
-
-            <h3 style="text-align: center;">Compound</h3>
-            <table class="table table-bordered table-hover table-condensed">
-                <thead>
+<div class="container">
+    <?php foreach ($viewData['scores'] as $key => $value) {?>
+    <div class="table-responsive">
+        <h3 style="text-align: center;"><?= ucfirst($key); ?></h3>
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
                 <tr>
                     <th class="col-sm-1 col-md-1">#</th>
                     <th class="col-sm-1 col-md-2">Name</th>
-                    <th class="col-sm-1 col-md-1">Average</th>
-                    <th class="col-sm-1 col-md-1">Score</th>
-                    <th class="col-sm-1 col-md-1">X-Count</th>
+                    <th class="col-sm-1 col-md-2">Average</th>
+                    <th class="col-sm-1 col-md-2">Handicap Average</th>
+                    <th class="col-sm-1 col-md-2">Score</th>
+                    <th class="col-sm-1 col-md-2">X-Count</th>
                 </tr>
-                </thead>
-                <tbody>
-                <?php
+            </thead>
+            <tbody>
+            <?php
                 $i = 1;
-                foreach ($viewData['scores'] as $data) { ?>
-                    <?php if ($data['division'] == 'compound') { ?>
-                        <tr>
-                            <th scope="row"> <?php echo $i;
-                                $i++; ?></th>
-                            <td> <?= $data['first_name'] . " " . $data['last_name'] ?></td>
-                            <td>Av</td>
-                            <td> <?= $data['score'] ?></td>
-                            <td> <?= $data['xcount'] ?></td>
-                        </tr>
-                    <?php } ?>
-                <?php } ?>
-                </tbody>
-            </table>
-
-            <h3 style="text-align: center;">Recurve</h3>
-            <table class="table table-bordered table-hover table-condensed">
-                <thead>
-                <tr>
-                    <th class="col-sm-1 col-md-1">#</th>
-                    <th class="col-sm-1 col-md-2">Name</th>
-                    <th class="col-sm-1 col-md-1">Average</th>
-                    <th class="col-sm-1 col-md-1">Score</th>
-                    <th class="col-sm-1 col-md-1">X-Count</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                $i = 1;
-                foreach ($viewData['scores'] as $data) { ?>
-                    <?php if ($data['division'] == 'recurve') { ?>
-                        <tr>
-                            <th scope="row"> <?php echo $i;
-                                $i++; ?></th>
-                            <td> <?= $data['first_name'] . " " . $data['last_name'] ?></td>
-                            <td>Av</td>
-                            <td> <?= $data['score'] ?></td>
-                            <td> <?= $data['xcount'] ?></td>
-                        </tr>
-                    <?php } ?>
-                <?php } ?>
-                </tbody>
-            </table>
-
-            <h3 style="text-align: center;">Recurve Barebow</h3>
-            <table class="table table-bordered table-hover table-condensed">
-                <thead>
-                <tr>
-                    <th class="col-sm-1 col-md-1">#</th>
-                    <th class="col-sm-1 col-md-2">Name</th>
-                    <th class="col-sm-1 col-md-1">Average</th>
-                    <th class="col-sm-1 col-md-1">Score</th>
-                    <th class="col-sm-1 col-md-1">X-Count</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                $i = 1;
-                foreach ($viewData['scores'] as $data) { ?>
-                    <?php if ($data['division'] == 'recurve_bb') { ?>
-                        <tr>
-                            <th scope="row"> <?php echo $i;
-                                $i++; ?></th>
-                            <td> <?= $data['first_name'] . " " . $data['last_name'] ?></td>
-                            <td>Av</td>
-                            <td> <?= $data['score'] ?></td>
-                            <td> <?= $data['xcount'] ?></td>
-                        </tr>
-                    <?php } ?>
-                <?php } ?>
-                </tbody>
-            </table>
-
-            <h3 style="text-align: center;">Longbow</h3>
-            <table class="table table-bordered table-hover table-condensed">
-                <thead>
-                <tr>
-                    <th class="col-sm-1 col-md-1">#</th>
-                    <th class="col-sm-1 col-md-2">Name</th>
-                    <th class="col-sm-1 col-md-1">Average</th>
-                    <th class="col-sm-1 col-md-1">Score</th>
-                    <th class="col-sm-1 col-md-1">X-Count</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                $i = 1;
-                foreach ($viewData['scores'] as $data) { ?>
-                    <?php if ($data['division'] == 'longbow') { ?>
-                        <tr>
-                            <th scope="row"> <?php echo $i;
-                                $i++; ?></th>
-                            <td> <?= $data['first_name'] . " " . $data['last_name'] ?></td>
-                            <td>Av</td>
-                            <td> <?= $data['score'] ?></td>
-                            <td> <?= $data['xcount'] ?></td>
-                        </tr>
-                    <?php } ?>
-                <?php } ?>
-                </tbody>
-            </table>
-        </div>
+                foreach ($value as $vKey => $vData) { ?>
+                    <tr>
+                        <td> <?= $i++; ?></td>
+                        <td> <?= $vData['first_name'] . " " . $vData['last_name'] ?></td>
+                        <td>Av</td>
+                        <td>HandiAv</td>
+                        <td> <?= $vData['score'] ?></td>
+                        <td> <?= $vData['xcount'] ?></td>
+                    </tr>
+            <?php } ?>
+            </tbody>
+        </table>
     </div>
+    <?php } ?>
+</div>
