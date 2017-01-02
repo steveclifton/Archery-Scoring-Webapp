@@ -232,6 +232,7 @@ function validateForm(form) {
     //         $("#incorrect").html("*Please check details and try again");
     //         return false;
     // }
+    return true;
 
 }
 
