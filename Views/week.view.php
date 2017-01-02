@@ -1,4 +1,4 @@
-<h2 style="text-align: center;">Week <?= $_GET['week']; ?> Results</h2>
+<h2 style="text-align: center;">Week <?= $_GET['week']; ?></h2>
 
 <div class="container">
     <legend>Submit Scores</legend>
@@ -68,12 +68,11 @@
             <table class="table table-bordered table-hover table-condensed">
                 <thead>
                 <tr>
-                    <th class="col-md-1">#</th>
-                    <th class="col-md-2">First Name</th>
-                    <th class="col-md-2">Last Name</th>
-                    <th class="col-md-1">Season Average</th>
-                    <th class="col-md-1">Score</th>
-                    <th class="col-md-1">X-Count</th>
+                    <th class="col-sm-1 col-md-1">#</th>
+                    <th class="col-sm-1 col-md-2">Name</th>
+                    <th class="col-sm-1 col-md-1">Average</th>
+                    <th class="col-sm-1 col-md-1">Score</th>
+                    <th class="col-sm-1 col-md-1">X-Count</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -84,8 +83,7 @@
                         <tr>
                             <th scope="row"> <?php echo $i;
                                 $i++; ?></th>
-                            <td> <?= $data['first_name'] ?></td>
-                            <td> <?= $data['last_name'] ?></td>
+                            <td> <?= $data['first_name'] . " " . $data['last_name'] ?></td>
                             <td>Av</td>
                             <td> <?= $data['score'] ?></td>
                             <td> <?= $data['xcount'] ?></td>
@@ -96,15 +94,14 @@
             </table>
 
             <h3 style="text-align: center;">Recurve</h3>
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover table-condensed">
                 <thead>
                 <tr>
-                    <th class="col-md-1">#</th>
-                    <th class="col-md-2">First Name</th>
-                    <th class="col-md-2">Last Name</th>
-                    <th class="col-md-1">Season Average</th>
-                    <th class="col-md-1">Score</th>
-                    <th class="col-md-1">X-Count</th>
+                    <th class="col-sm-1 col-md-1">#</th>
+                    <th class="col-sm-1 col-md-2">Name</th>
+                    <th class="col-sm-1 col-md-1">Average</th>
+                    <th class="col-sm-1 col-md-1">Score</th>
+                    <th class="col-sm-1 col-md-1">X-Count</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -115,8 +112,7 @@
                         <tr>
                             <th scope="row"> <?php echo $i;
                                 $i++; ?></th>
-                            <td> <?= $data['first_name'] ?></td>
-                            <td> <?= $data['last_name'] ?></td>
+                            <td> <?= $data['first_name'] . " " . $data['last_name'] ?></td>
                             <td>Av</td>
                             <td> <?= $data['score'] ?></td>
                             <td> <?= $data['xcount'] ?></td>
@@ -127,15 +123,14 @@
             </table>
 
             <h3 style="text-align: center;">Recurve Barebow</h3>
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover table-condensed">
                 <thead>
                 <tr>
-                    <th class="col-md-1">#</th>
-                    <th class="col-md-2">First Name</th>
-                    <th class="col-md-2">Last Name</th>
-                    <th class="col-md-1">Season Average</th>
-                    <th class="col-md-1">Score</th>
-                    <th class="col-md-1">X-Count</th>
+                    <th class="col-sm-1 col-md-1">#</th>
+                    <th class="col-sm-1 col-md-2">Name</th>
+                    <th class="col-sm-1 col-md-1">Average</th>
+                    <th class="col-sm-1 col-md-1">Score</th>
+                    <th class="col-sm-1 col-md-1">X-Count</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -146,8 +141,7 @@
                         <tr>
                             <th scope="row"> <?php echo $i;
                                 $i++; ?></th>
-                            <td> <?= $data['first_name'] ?></td>
-                            <td> <?= $data['last_name'] ?></td>
+                            <td> <?= $data['first_name'] . " " . $data['last_name'] ?></td>
                             <td>Av</td>
                             <td> <?= $data['score'] ?></td>
                             <td> <?= $data['xcount'] ?></td>
@@ -158,15 +152,14 @@
             </table>
 
             <h3 style="text-align: center;">Longbow</h3>
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover table-condensed">
                 <thead>
                 <tr>
-                    <th class="col-md-1">#</th>
-                    <th class="col-md-2">First Name</th>
-                    <th class="col-md-2">Last Name</th>
-                    <th class="col-md-1">Season Average</th>
-                    <th class="col-md-1">Score</th>
-                    <th class="col-md-1">X-Count</th>
+                    <th class="col-sm-1 col-md-1">#</th>
+                    <th class="col-sm-1 col-md-2">Name</th>
+                    <th class="col-sm-1 col-md-1">Average</th>
+                    <th class="col-sm-1 col-md-1">Score</th>
+                    <th class="col-sm-1 col-md-1">X-Count</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -177,8 +170,7 @@
                         <tr>
                             <th scope="row"> <?php echo $i;
                                 $i++; ?></th>
-                            <td> <?= $data['first_name'] ?></td>
-                            <td> <?= $data['last_name'] ?></td>
+                            <td> <?= $data['first_name'] . " " . $data['last_name'] ?></td>
                             <td>Av</td>
                             <td> <?= $data['score'] ?></td>
                             <td> <?= $data['xcount'] ?></td>
