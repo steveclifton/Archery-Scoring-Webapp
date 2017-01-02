@@ -125,7 +125,7 @@ class Score extends Base
     {
         $table = $this->tableName;
 
-        $sql = "SELECT * 
+        $sql = "SELECT users.first_name, users.last_name, `$table`.score, `$table`.xcount, `$table`.division  
                 FROM `$table`
                 INNER JOIN users 
                 ON `$table`.user_id = users.id
