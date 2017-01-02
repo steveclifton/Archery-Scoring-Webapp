@@ -105,10 +105,13 @@ class Results extends Base
         $user = new User();
 
         $existingUser = $user->getUserIdByAnzNum($anzNum);
+
+        header('Content-Type: application/json');
+
         if (!$existingUser) {
-            echo "ANZ number not found";
+            echo json_encode(array("status" => "failed", "message" => "user not found"));// "ANZ number not found";
         } else if (is_numeric($existingUser)){
-            echo "Found user";
+            echo json_encode(array("status" => "success", "message" => "user found"));//echo "Found user";
         }
 
         return;
