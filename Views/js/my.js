@@ -11,7 +11,7 @@ $(document).ready(function () {
         }
         $(element).toggleClass('hidden');
     }
-    
+
 
     /****************************************************************
      *                      Admin Methods                           *
@@ -57,7 +57,7 @@ $(document).ready(function () {
 
 
     /****************************************************************
-     *                      Score Methods                           *
+     *                      Scoring Methods                           *
      ****************************************************************/
 
 
@@ -68,10 +68,11 @@ $(document).ready(function () {
         }
 
         $.get("/ajax_searchAnzArcher?anz_num=" + anzNum, function (data) {
-            if (data == "ANZ number not found") {
+            console.log(data);
+            if (data.status == "failed") {
                 $('#searcharcher').parent().after("<div id='validation_anz' style='color:red;'>ANZ Number Not Found</div>");
                 $('#addsubmit').prop('disabled', true);
-            } else if (data == "Found user") {
+            } else if (data.status == "success") {
                 $('#searcharcher').parent().after("<div id='validation_anz' style='color:green;'>Found Archer</div>");
                 $('#addsubmit').prop('disabled', false);
             }
