@@ -137,9 +137,30 @@ class Score extends Base
 
         $stm->execute(array('$week'));
 
-        $data = $stm->fetchAll();
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
-        return $data;
+
+
+        $returnData['compound'] = array();
+        $returnData['recurve'] = array();
+        $returnData['recurve_bb'] = array();
+        $returnData['crossbow'] = array();
+        $returnData['longbow'] = array();
+        foreach ($data as $d) {
+            if ($d['division'] == 'compound'){
+                array_push($returnData['compound'], $d);
+            } else if ($d['division'] == 'recurve'){
+                array_push($returnData['recurve'], $d);
+            } else if ($d['division'] == 'crossbow'){
+                array_push($returnData['crossbow'], $d);
+            } else if ($d['division'] == 'recurve_bb'){
+                array_push($returnData['recurve_bb'], $d);
+            } else if ($d['division'] == 'longbow'){
+                array_push($returnData['longbow'], $d);
+            }
+        }
+
+        return $returnData;
     }
 
 
