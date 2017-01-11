@@ -35,3 +35,58 @@
     </div>
 </div>
 
+
+    <form class="form-horizontal" action="/updatesetup" method="POST">
+        <div>
+            <legend class="">Marking System Setup</legend>
+        </div>
+        <fieldset>
+            <div class="control-group">
+                <label class="control-label">Current Week Number</label>
+                <div class="controls">
+                    <input type="text" id="currentweek" name="currentweek" class="input-xlarge"
+                           value="<?= $viewData['current_week'] ?>" required>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Number of Weeks</label>
+                <div class="controls">
+                    <input type="text" id="numweeks" name="numweeks" placeholder="" class="input-xlarge"
+                           value="<?= $viewData['num_weeks'] ?>" required>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Current Event</label>
+                <div class="controls">
+                    <input type="text" id="currentevent" name="currentevent" placeholder="" class="input-xlarge"
+                           value="<?= $viewData['current_event'] ?>" required>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Current Round Distance</label>
+                <div class="controls">
+                    <input type="text" id="currentround" name="currentround" placeholder="" class="input-xlarge"
+                           value="<?= $viewData['current_round'] ?>" required >
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Database Table Name</label>
+                <div class="controls">
+                    <input type="text" id="tablename" name="tablename" placeholder="" class="input-xlarge"
+                           value="<?= $viewData['db_name'] ?>" required >
+                </div>
+            </div>
+            <br>
+            <div class="control-group">
+                <div class="controls">
+                    <button class="btn btn-success" id="update">Update</button>
+                </div>
+            </div>
+            <div>
+                <h5 style="color: red;"><?php if(isset($viewData['updated'])) { echo "Updated Successfully";} ?></h5>
+            </div>
+        </fieldset>
+    </form>
+
+
+
