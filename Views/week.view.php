@@ -22,8 +22,9 @@
                     </div>
                     <!--Select Bow Division data-->
                     <div class="form-group">
-                        <div class="bow">
-                            <select name="division" id="division">
+                        <div class="bows">
+                            <select name="division" id="division" required>
+                                <option disabled selected value> -- select divison -- </option>
                                 <option value="compound" id="Compound">Compound</option>
                                 <option value="recurve" id="Recurve">Recurve</option>
                                 <option value="recurve barebow" id="Recurve_bb">Recurve Barebow</option>
