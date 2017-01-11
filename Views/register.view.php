@@ -89,7 +89,7 @@
         </form>
     </div>
     <div class="col-sm-4 col-md-4">
-        <form class="form-horizontal" action="/register" method="POST">
+        <form class="form-horizontal" action="/#" method="POST">
             <fieldset>
                 <div id="legend">
                     <legend class="">Request A New Profile</legend>
