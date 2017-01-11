@@ -14,11 +14,6 @@ class Event
         $this->setup = new AdminConfig();
     }
 
-    private $currentEvent = 'Outdoor League Series';
-    private $dbTableName = '30m_round';
-    private $currentWeek = 10;
-    private $numberOfWeeks = 15;
-
     public function setSetup()
     {
         $this->setup->getCurrentWeek();
