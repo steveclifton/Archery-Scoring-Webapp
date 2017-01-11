@@ -36,14 +36,12 @@
                     <div class="form-group">
                         <input type="hidden" name="anz_num" id="anz_num" value="<?= $archer['anz_num'] ?>">
                         <input type="hidden" name="week" id="week_num" value="<?= $_GET['week'] ?>">
-                        <input type="hidden" id="prefered_type" value="<?= $archer['prefered_type'] ?>">
                     </div>
                     <input type="submit" class="btn btn-success" name="submit" value="Submit"></input>
                     <div id="row">
                         <p id="incorrect" style="color: red; padding-left: 36px"></p>
                     </div>
                 </form>
-
             <?php } ?>
         <?php } ?>
     </div>
