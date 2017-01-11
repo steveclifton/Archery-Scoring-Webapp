@@ -3,6 +3,7 @@
 namespace Archery\Controllers;
 
 
+use Archery\Models\AdminConfig;
 use Archery\Models\TempUser;
 use Archery\Models\User;
 
@@ -14,8 +15,15 @@ class Admin extends Base
         $this->isAdminLoggedIn();
 
         $pendingUsers = $this->getPendingAccounts();
-
         $viewData['pending_users'] = $pendingUsers;
+
+        $setup = new AdminConfig();
+        $viewData['current_week'] = $setup->getCurrentWeek();
+        $viewData['num_weeks'] = $setup->getNumWeeks();
+        $viewData['current_event'] = $setup->getCurrentEvent();
+        $viewData['current_round'] = $setup->getCurrentRound();
+        $viewData['db_name'] = $setup->getCurrentDB();
+
 
         $this->render('Admin', 'admin.view', $viewData);
     }
