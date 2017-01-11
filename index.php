@@ -46,16 +46,10 @@ else if ($uri == 'register') {
     $authentication->register();
 }
 
-else if ($uri == 'error') {
-    $errorController = new Errors();
-    $errorController->notFound();
-}
-
 else if ($uri == 'updatesetup') {
     $admin = new Event();
     $admin->setSetup();
 }
-
 
 else if ($uri == 'admin') {
     $admin = new Admin();
@@ -106,6 +100,7 @@ else if ($uri == 'addtempuser') {
     $result = new Results();
     $result->addTempUser();
 }
+
 else {
     $errorController = new Errors();
     $errorController->notFound();
