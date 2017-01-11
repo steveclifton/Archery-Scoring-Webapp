@@ -5,6 +5,7 @@ namespace Archery;
 
 require 'vendor/autoload.php';
 
+use Archery\Configurations\Event;
 use Archery\Controllers\Admin;
 use Archery\Controllers\Authentication;
 use Archery\Controllers\Profile;
@@ -49,6 +50,12 @@ else if ($uri == 'error') {
     $errorController = new Errors();
     $errorController->notFound();
 }
+
+else if ($uri == 'updatesetup') {
+    $admin = new Event();
+    $admin->setSetup();
+}
+
 
 else if ($uri == 'admin') {
     $admin = new Admin();
