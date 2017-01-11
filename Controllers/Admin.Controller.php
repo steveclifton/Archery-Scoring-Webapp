@@ -43,6 +43,8 @@ class Admin extends Base
 
     public function confirmPendingAccounts()
     {
+        $this->isAdminLoggedIn();
+
         $updatedUser = $_POST;
         $user = new User();
 
