@@ -94,7 +94,7 @@
             <fieldset>
                 <div id="legend">
                     <legend class="">Request A New Profile</legend>
-                    <p>Profiles enable you to compete in the league series and are usually approved within 24-Hours</p>
+                    <p>Profiles enable you to compete in the league series</p>
                 </div>
                 <div class="control-group">
                     <label class="control-label">First Name</label>
@@ -109,9 +109,22 @@
                     </div>
                 </div>
                 <div class="control-group">
+                    <label class="control-label">Email</label>
+                    <div class="controls">
+                        <input type="email" id="email" name="email" placeholder="" class="input-xlarge" required>
+                    </div>
+                </div>
+                <div class="control-group">
                     <label class="control-label">ANZ Number</label>
                     <div class="controls">
                         <input type="text" id="anz_num" name="anz_num" class="input-xlarge" required>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <!-- Club-->
+                    <label class="control-label">Club</label>
+                    <div class="controls">
+                        <input type="text" id="club" name="club" class="input-xlarge" required>
                     </div>
                 </div>
                 <div class="control-group">
@@ -140,8 +153,8 @@
                     </div>
                 </div>
                 <?php
-                if (isset($viewData['success'])) {
-                    if ($viewData['success'] === true) {
+                if (isset($viewData['successProfile'])) {
+                    if ($viewData['successProfile'] === true) {
                         echo "<p style='color: green;;'>Success</p>";
                     } else {
                         echo "<p style='color: red'>Account Creation Failed, please check details and try again</p>";
