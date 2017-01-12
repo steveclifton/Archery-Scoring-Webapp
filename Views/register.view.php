@@ -62,7 +62,8 @@
                 <div class="control-group">
                     <!-- Prefered Bow Type-->
                     <label class="control-label">Prefered Bow Type</label><br>
-                    <select name="prefered_type" id="prefered_type" class="selectpicker show-menu-arrow">
+                    <select name="prefered_type" id="prefered_type" class="selectpicker show-menu-arrow" required>
+                        <option disabled selected value> -- select bow type -- </option>
                         <option value="compound">Compound</option>
                         <option value="recurve">Recurve</option>
                         <option value="recurve barebow">Recurve Barebow</option>
@@ -89,7 +90,7 @@
         </form>
     </div>
     <div class="col-sm-4 col-md-4">
-        <form class="form-horizontal" action="/#" method="POST">
+        <form class="form-horizontal" action="/registerprofile" method="POST">
             <fieldset>
                 <div id="legend">
                     <legend class="">Request A New Profile</legend>
@@ -123,7 +124,8 @@
                 <div class="control-group">
                     <!-- Prefered Bow Type-->
                     <label class="control-label">Prefered Bow Type</label><br>
-                    <select name="prefered_type" id="prefered_type" class="selectpicker show-menu-arrow">
+                    <select name="prefered_type" id="prefered_type" class="selectpicker show-menu-arrow" required>
+                        <option disabled selected value> -- select bow type -- </option>
                         <option value="compound">Compound</option>
                         <option value="recurve">Recurve</option>
                         <option value="recurve barebow">Recurve Barebow</option>
