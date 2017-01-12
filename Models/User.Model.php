@@ -71,10 +71,10 @@ class User extends Base
     }
 
     /**
-     * Creates a new user if registration information is valid
+     * Creates an account if registration information is valid
      * - returns a new user object - used to log the user in automatically
      */
-    public function create($userData)
+    public function createAccount($userData)
     {
         $email = ucfirst($userData['email']);
         $firstName = ucfirst($userData['first_name']);
@@ -91,6 +91,36 @@ class User extends Base
                   (`id`, `anz_num`, `first_name`, `last_name`, `gender`, `club`, `phone`, `address`, `user_type`, `email`, `password`, `prefered_type`, `last_ip`, `created_at`) 
                 VALUES 
                   (NULL, '$anzNum', '$firstName', '$lastName', '$gender', '$club', NULL, NULL, '$userType', '$email', '$password', '$preferedType', '$ipAddress', CURRENT_TIMESTAMP)";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $success = $stm->execute(array('$anzNum, $firstName, $lastName, $gender, $userType, $email, $password, $preferedType, $ipAddress'));
+
+        return $success;
+    }
+
+
+    /**
+     * Creates a profile if registration information is valid
+     * - returns a new user object - used to log the user in automatically
+     */
+    public function createProfile($userData)
+    {
+        $email = ucfirst($userData['email']);
+        $firstName = ucfirst($userData['first_name']);
+        $lastName = ucfirst($userData['last_name']);
+        $anzNum = "PENDING-" . $userData['anz_num'];
+        $gender = strtoupper($userData['gender']);
+        $userType = 'PENDING';
+        $club = strtoupper($userData['club']);
+        $preferedType = $userData['prefered_type'];
+        $ipAddress = $_SERVER['REMOTE_ADDR'];
+
+
+        $sql = "INSERT INTO `users` 
+                  (`id`, `anz_num`, `first_name`, `last_name`, `gender`, `club`, `phone`, `address`, `user_type`, `email`, `prefered_type`, `last_ip`, `created_at`) 
+                VALUES 
+                  (NULL, '$anzNum', '$firstName', '$lastName', '$gender', '$club', NULL, NULL, '$userType', '$email', '$preferedType', '$ipAddress', CURRENT_TIMESTAMP)";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
@@ -151,12 +181,14 @@ class User extends Base
      */
     public function confirmPendingUsers($userData)
     {
-        $email = ucfirst($userData['email']);
         $firstName = ucfirst($userData['first_name']);
         $lastName = ucfirst($userData['last_name']);
         $anzNum = $userData['anz_num'];
         $userType = 'user';
+
         $club = strtoupper($userData['club']);
+        $email = ucfirst($userData['email']);
+
         $ipAddress = $_SERVER['REMOTE_ADDR'];
 
         $sql = "UPDATE `users` 
@@ -168,13 +200,15 @@ class User extends Base
                   `user_type` = '$userType',
                   `last_ip` = '$ipAddress',
                   `updated_at` = CURRENT_TIMESTAMP
-                WHERE `users`.`email` = '$email'";
+                WHERE `users`.`email` = '$email'
+                ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
         $success = $stm->execute(array('$anzNum, $firstName, $lastName, $club, $userType, $ipAddress, $email'));
 
         $userId = $this->getUserIdByAnzNum($anzNum);
+
         $this->setAssociatedUser($userId, $userId, "CONFIRMED");
 
         return $success;
