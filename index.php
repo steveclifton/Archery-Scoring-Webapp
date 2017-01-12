@@ -107,8 +107,8 @@ else if ($uri == 'addtempuser') {
 }
 
 else {
-    $errorController = new Errors();
-    $errorController->notFound();
+    header('location: /login');
+    die();
 }
 
 
