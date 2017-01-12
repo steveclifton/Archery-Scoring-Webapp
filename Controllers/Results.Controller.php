@@ -59,7 +59,13 @@ class Results extends Base
                 // if a score doesnt exist, create one
                 if (!isset($existingScore[0])) {
                     $score->setScore($archerId, $_POST['score'], $_POST['xcount'], $_POST['week'], $_POST['division']);
+                } else {
+                    $_SESSION['invalidscore'] = "*Score already entered";
+                    header("Location: /week?week=" . $_POST['week']);
                 }
+            } else {
+                $_SESSION['invalidscore'] = "*Invalid score";
+                header("Location: /week?week=" . $_POST['week']);
             }
 
             // Removes the association of temp users
