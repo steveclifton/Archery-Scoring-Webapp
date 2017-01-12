@@ -68,7 +68,6 @@ $(document).ready(function () {
         }
 
         $.get("/ajax_searchAnzArcher?anz_num=" + anzNum, function (data) {
-            console.log(data);
             if (data.status == "failed") {
                 $('#searcharcher').parent().after("<div id='validation_anz' style='color:red;'>ANZ Number Not Found</div>");
                 $('#addsubmit').prop('disabled', true);
