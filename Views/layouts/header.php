@@ -12,7 +12,7 @@
             <ul class="nav navbar-nav">
                 <li><a></a></li>
                 <li><a href="/rules">Rules</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="mailto:anzindoor@gmail.com">Contact</a></li>
                 <?php
                     if (!isset($_SESSION['id'])) {
                         echo "<li><a href=\"/register\">Register</a></li>";
@@ -50,7 +50,7 @@
                         ";
                     } else {
                         echo "
-                                <form class=\"navbar-form navbar-right\" method='post' ' action=\"login\">
+                                <form class=\"navbar-form navbar-right\" method='post' action=\"login\">
                                 <div class=\"form-group\">
                                 <input type=\"email\" class=\"form-control\" name=\"email\" placeholder=\"Username\">
                                 </div>
