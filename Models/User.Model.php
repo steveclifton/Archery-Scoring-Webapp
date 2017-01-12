@@ -295,14 +295,15 @@ class User extends Base
     {
         $existingUser = $this->getUserByEmail($userData['email']);
 
-        if (isset($existingUser)) {
+        if (isset($existingUser['0'])) {
             $existingUser = $existingUser['0'];
+            if (password_verify($userData['password'], $existingUser['password'])) {
+                return $existingUser;
+            }
         }
 
         /* Checks the database to see whether passwords match, if they do, user details are returned */
-        if (password_verify($userData['password'], $existingUser['password'])) {
-            return $existingUser;
-        } else {
+         else {
             $_SESSION['failedLogin'] = "*Invalid Login";
         }
     }
