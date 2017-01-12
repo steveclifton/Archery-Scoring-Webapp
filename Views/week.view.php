@@ -46,6 +46,7 @@
             <?php } ?>
         <?php } ?>
     </div>
+    <p style="color: red"><?php if (isset($_SESSION['invalidscore'])) echo $_SESSION['invalidscore']; unset($_SESSION['invalidscore']);?></p>
 
     <?php if (isset($_SESSION['id'])) { ?>
         <form class="form-inline" action="/addtempuser" method="POST" name="scoreform" style="padding-top: 10px">
