@@ -5,7 +5,7 @@ namespace Archery\Controllers;
 use Archery\Models\TempUser;
 use Exception;
 use Archery\Models\User;
-
+use Archery\Models\Score;
 
 class Authentication extends Base
 {
@@ -18,14 +18,19 @@ class Authentication extends Base
         $this->isLoggedIn();
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $data = $_POST;
-
             $user = new User();
-            $existingUser = $user->verify($data);
+            $existingUser = $user->verify($_POST);
 
             if (isset($existingUser)) {
                 $this->setSession($existingUser);
-                header('location: /welcome');
+                $viewData['first_name'] = $_SESSION['first_name'];
+                $viewData['last_name'] = $_SESSION['last_name'];
+
+                $scores = new Score();
+                $scores = $scores->liu_getAllScores();
+                $viewData['scores'] = $scores;
+
+                $this->render('Welcome', 'welcome.view', $viewData);
                 die();
             } else {
                 header('location: /login');
@@ -62,7 +67,7 @@ class Authentication extends Base
                 if ($existingAnzNum) {
                     $viewData['success'] = false;
                 } else {
-                    $user->create($data);
+                    $user->createAccount($data);
                     $viewData['success'] = true;
                 }
                 $this->render('Register New User', 'register.view', $viewData);
@@ -73,6 +78,33 @@ class Authentication extends Base
         }
 
         $this->render('Register New User', 'register.view');
+    }
+
+    /**
+     * Attempts to register a new user
+     */
+    public function registerProfile()
+    {
+        $this->isLoggedIn();
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //var_dump($_POST);die();
+
+            $data = $_POST;
+            $user = new User();
+            $existingAnzNum = $user->doesAnzNumberExist($data['anz_num']);
+
+            if ($existingAnzNum) {
+                $viewData['successProfile'] = false;
+            } else {
+                $as = $user->createProfile($data);
+                $viewData['successProfile'] = true;
+            }
+            $this->render('Register New User', 'register.view', $viewData);
+            die();
+
+        }
+
     }
 
     /**
