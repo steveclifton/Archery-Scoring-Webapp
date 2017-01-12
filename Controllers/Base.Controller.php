@@ -88,14 +88,5 @@ abstract class Base
         include ('Views/base.view.php');
     }
 
-    public function renderAjax($name, $data = array())
-    {
-
-        $viewName = $name;
-
-        $viewData = $data;
-
-        include ("Views/" . $name . ".php");
-    }
 }
 
