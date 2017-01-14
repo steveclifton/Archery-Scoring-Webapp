@@ -180,29 +180,42 @@ class Score extends Base
     }
 
 
+
     /**
-     * Specific User Method
-     *  Returns
-     *   - All user data and score data for a specific user and week
+     * Returns all the scores for a user
+     * - Ordered by score
      */
-    public function sfu_getAllScores($userId, $week)
+    public function getTotalScoresAveraged($userId, $division)
     {
         $table = $this->tableName;
 
-        $sql = "SELECT * 
-                FROM `$table`
-                INNER JOIN users 
-                ON `$table`.user_id = '$userId'
-                WHERE `$table`.week = '$week'
+        $sql = "SELECT score 
+                FROM `$table` 
+                WHERE `user_id` = '$userId' 
+                AND `division` LIKE '$division' 
+                ORDER BY `score` DESC
                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $stm->execute(array('$userId, $week'));
+        $stm->execute(array('$userId'));
 
-        $data = $stm->fetchAll();
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+        if (isset($data[0])) {
+            $i = 0;
+            $total = 0;
+            foreach ($data as $d) {
+                $total += $d['score'];
+                $i++;
+            }
+            $data['average'] = round($total / $i, 1);
+            $data['handicap'] = 360 - $data['average'];
+            return $data;
+        } else {
+            return 0;
+        }
 
-        return $data;
+
     }
 
     /**
