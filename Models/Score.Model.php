@@ -220,30 +220,4 @@ class Score extends Base
 
 
 
-    public function gou_getAllScores($userId)
-    {
-        $table = $this->tableName;
-        $sql = " SELECT * 
-                 FROM `$table` 
-                 WHERE user_id='$userId' 
-                 ";
-
-        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-        $stm->execute(array('$userId'));
-
-        $data = $stm->fetchAll();
-
-        var_dump($data);
-        die();
-        return $data;
-    }
-
-
-    public function getGroupOfScores($userList)
-    {
-        // here is where a club sec could request all the scores for their shooters
-
-    }
-
 }
