@@ -184,6 +184,7 @@ class Score extends Base
     /**
      * Returns all the scores for a user
      * - Ordered by score
+     * - Creates and returns an average and Handicap Score
      */
     public function getTotalScoresAveraged($userId, $division)
     {
@@ -208,8 +209,9 @@ class Score extends Base
                 $total += $d['score'];
                 $i++;
             }
+            $admin = new AdminConfig();
             $data['average'] = round($total / $i, 1);
-            $data['handicap'] = 360 - $data['average'];
+            $data['handicap'] = $admin->getCurrentMaxScore() - $data['average'];
             return $data;
         } else {
             return 0;
