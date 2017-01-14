@@ -23,8 +23,10 @@ class Event
         $currentRound =$_POST['currentround'];
         $currentEvent=$_POST['currentevent'];
         $tableName=$_POST['tablename'];
+        $maxScore = $_POST['maxscore'];
+        $maxxCount = $_POST['maxxcount'];
 
-        $this->setup->setSetup($currentWeek, $numWeeks, $currentRound, $currentEvent, $tableName);
+        $this->setup->setSetup($currentWeek, $numWeeks, $currentRound, $currentEvent, $tableName, $maxScore, $maxxCount);
 
         header('location: /admin');
         die();
