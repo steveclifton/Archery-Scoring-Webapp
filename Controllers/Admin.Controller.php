@@ -23,6 +23,8 @@ class Admin extends Base
         $viewData['current_event'] = $setup->getCurrentEvent();
         $viewData['current_round'] = $setup->getCurrentRound();
         $viewData['db_name'] = $setup->getCurrentDB();
+        $viewData['max_score'] = $setup->getCurrentMaxScore();
+        $viewData['max_xcount'] = $setup->getCurrentMaxXCount();
 
 
         $this->render('Admin', 'admin.view', $viewData);
