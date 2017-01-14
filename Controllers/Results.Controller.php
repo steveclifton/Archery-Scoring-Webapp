@@ -53,15 +53,18 @@ class Results extends Base
             $archerId = $archer->getUserIdByAnzNum($_POST['anz_num']);
 
             // validate score
-            if ($_POST['score'] >= 0 && $_POST['score'] <= 360 && $_POST['xcount'] >= 0 && $_POST['xcount'] <= 36) {
-                // check to see if a score already exists
-                $existingScore = $score->getCWScore($archerId, $_POST['week'], $_POST['division']);
-                // if a score doesnt exist, create one
-                if (!isset($existingScore[0])) {
-                    $score->setScore($archerId, $_POST['score'], $_POST['xcount'], $_POST['week'], $_POST['division']);
-                } else {
-                    $_SESSION['invalidscore'] = "*Score already entered";
-                    header("Location: /week?week=" . $_POST['week']);
+
+            if (is_numeric($_POST['score']) || is_numeric($_POST['xcount'])) {
+                if ($_POST['score'] >= 0 && $_POST['score'] <= 360 && $_POST['xcount'] >= 0 && $_POST['xcount'] <= 36) {
+                    // check to see if a score already exists
+                    $existingScore = $score->getCWScore($archerId, $_POST['week'], $_POST['division']);
+                    // if a score doesnt exist, create one
+                    if (!isset($existingScore[0])) {
+                        $score->setScore($archerId, $_POST['score'], $_POST['xcount'], $_POST['week'], $_POST['division']);
+                    } else {
+                        $_SESSION['invalidscore'] = "*Score already entered";
+                        header("Location: /week?week=" . $_POST['week']);
+                    }
                 }
             } else {
                 $_SESSION['invalidscore'] = "*Invalid score";
