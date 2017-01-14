@@ -20,15 +20,15 @@ class AdminConfig extends Base
     /**
      * Sets the admin config
      */
-    public function setSetup($currentWeek, $numWeeks, $currentRound, $currentEvent, $tableName)
+    public function setSetup($currentWeek, $numWeeks, $currentRound, $currentEvent, $tableName, $maxScore, $maxXCount)
     {
-        $sql = "INSERT INTO `admin_configuration` (`id`, `current_week`, `number_weeks`, `current_round`, `current_event`, `table_name`) 
-                VALUES (NULL, '$currentWeek', '$numWeeks', '$currentRound', '$currentEvent', '$tableName');
+        $sql = "INSERT INTO `admin_configuration` (`id`, `current_week`, `number_weeks`, `current_round`, `current_event`, `table_name`, `max_score`, `max_xcount`) 
+                VALUES (NULL, '$currentWeek', '$numWeeks', '$currentRound', '$currentEvent', '$tableName', '$maxScore', '$maxXCount');
                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $stm->execute(array('$currentWeek, $numWeeks, $currentRound, $currentEvent, $tableName'));
+        $stm->execute(array('$currentWeek, $numWeeks, $currentRound, $currentEvent, $tableName, $maxScore, $maxXCount'));
 
         return;
     }
@@ -150,6 +150,54 @@ class AdminConfig extends Base
 
         if (isset($data[0]['table_name'])) {
             return $data[0]['table_name'];
+        }
+        header('location: /welcome');
+        die();
+    }
+
+    /**
+     * Returns the current max score
+     */
+    public function getCurrentMaxScore()
+    {
+        $sql = "SELECT `max_score` 
+                FROM `admin_configuration` 
+                ORDER BY created_at DESC 
+                LIMIT 1
+                ";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute();
+
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        if (isset($data[0]['max_score'])) {
+            return $data[0]['max_score'];
+        }
+        header('location: /welcome');
+        die();
+    }
+
+    /**
+     * Returns the current max X-Count
+     */
+    public function getCurrentMaxXCount()
+    {
+        $sql = "SELECT `max_xcount` 
+                FROM `admin_configuration` 
+                ORDER BY created_at DESC 
+                LIMIT 1
+                ";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute();
+
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        if (isset($data[0]['max_xcount'])) {
+            return $data[0]['max_xcount'];
         }
         header('location: /welcome');
         die();
