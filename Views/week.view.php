@@ -1,10 +1,11 @@
 <h2 style="text-align: center;">Week <?= $_GET['week']; ?></h2>
 
 <div class="container">
-    <legend>Submit Scores</legend>
     <div id="subscores">
         <?php
+
         if (isset($_SESSION['id'])) {
+            echo "<legend>Submit Scores</legend>";
             foreach ($viewData['archers'] as $archer) { ?>
                 <form class="form-inline" action="/submitscore" method="POST" name="scoreform"
                       onsubmit="return validateForm(this)" style="padding-top: 10px">
