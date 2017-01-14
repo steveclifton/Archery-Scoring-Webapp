@@ -72,9 +72,10 @@
                     <th class="col-sm-1 col-md-1">#</th>
                     <th class="col-sm-1 col-md-2">Name</th>
                     <th class="col-sm-1 col-md-2">Average</th>
-                    <th class="col-sm-1 col-md-2">Handicap Average</th>
-                    <th class="col-sm-1 col-md-2">Score</th>
+                    <th class="col-sm-1 col-md-2">Handicap Score</th>
                     <th class="col-sm-1 col-md-2">X-Count</th>
+                    <th class="col-sm-1 col-md-2">Score</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -84,10 +85,11 @@
                     <tr>
                         <td> <?= $i++; ?></td>
                         <td> <?= $vData['first_name'] . " " . $vData['last_name'] ?></td>
-                        <td>Av</td>
-                        <td>HandiAv</td>
-                        <td> <?= $vData['score'] ?></td>
+                        <td> <?= $vData['average'] ?></td>
+                        <td> <?= ($vData['score'] + $vData['handicap']) ?></td>
                         <td> <?= $vData['xcount'] ?></td>
+                        <td> <?= $vData['score'] ?></td>
+
                     </tr>
             <?php } ?>
             </tbody>
