@@ -2,6 +2,7 @@
 
 namespace Archery\Controllers;
 
+use Archery\Models\AdminConfig;
 use Archery\Models\TempUser;
 use Exception;
 use Archery\Models\User;
@@ -36,9 +37,15 @@ class Authentication extends Base
                 header('location: /login');
                 die();
             }
+        } else {
+            $score = new Score();
+            $setup = new AdminConfig();
+            $currentWeek = $setup->getCurrentWeek();
+            $viewData['scores'] = $score->all_getCWScores($currentWeek);
+            $viewData['current_week'] = $currentWeek;
         }
 
-        $this->render('Login Page', 'login.view');
+        $this->render('Login Page', 'login.view', $viewData);
     }
 
     /**
