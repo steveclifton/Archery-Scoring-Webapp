@@ -70,6 +70,20 @@
                 </div>
             </div>
             <div class="control-group">
+                <label class="control-label">Max Score</label>
+                <div class="controls">
+                    <input type="text" id="maxscore" name="maxscore" placeholder="" class="input-xlarge"
+                           value="<?= $viewData['max_score'] ?>" required>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Max X-Count</label>
+                <div class="controls">
+                    <input type="text" id="maxxcount" name="maxxcount" placeholder="" class="input-xlarge"
+                           value="<?= $viewData['max_xcount'] ?>" required>
+                </div>
+            </div>
+            <div class="control-group">
                 <label class="control-label">Database Table Name</label>
                 <div class="controls">
                     <input type="text" id="tablename" name="tablename" placeholder="" class="input-xlarge"
