@@ -112,15 +112,15 @@ class User extends Base
         $anzNum = "PENDING-" . $userData['anz_num'];
         $gender = strtoupper($userData['gender']);
         $userType = 'PENDING';
-        $club = strtoupper($userData['club']);
+
         $preferedType = $userData['prefered_type'];
         $ipAddress = $_SERVER['REMOTE_ADDR'];
 
 
         $sql = "INSERT INTO `users` 
-                  (`id`, `anz_num`, `first_name`, `last_name`, `gender`, `club`, `phone`, `address`, `user_type`, `email`, `prefered_type`, `last_ip`, `created_at`) 
+                  (`id`, `anz_num`, `first_name`, `last_name`, `gender`, `club`, `phone`, `address`, `user_type`, `email`, `password`, `prefered_type`, `last_ip`, `created_at`) 
                 VALUES 
-                  (NULL, '$anzNum', '$firstName', '$lastName', '$gender', '$club', NULL, NULL, '$userType', '$email', '$preferedType', '$ipAddress', CURRENT_TIMESTAMP)";
+                  (NULL, '$anzNum', '$firstName', '$lastName', '$gender', NULL, NULL, NULL, '$userType', '$email', NULL, '$preferedType', '$ipAddress', CURRENT_TIMESTAMP)";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
