@@ -95,7 +95,6 @@ class Authentication extends Base
         $this->isLoggedIn();
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            //var_dump($_POST);die();
 
             $data = $_POST;
             $user = new User();
@@ -104,7 +103,7 @@ class Authentication extends Base
             if ($existingAnzNum) {
                 $viewData['successProfile'] = false;
             } else {
-                $as = $user->createProfile($data);
+                $user->createProfile($data);
                 $viewData['successProfile'] = true;
             }
             $this->render('Register New User', 'register.view', $viewData);
