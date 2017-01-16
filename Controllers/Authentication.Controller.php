@@ -69,19 +69,16 @@ class Authentication extends Base
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = $_POST;
             $user = new User();
-            try {
-                $existingAnzNum = $user->doesAnzNumberExist($data['anz_num']);
-                if ($existingAnzNum) {
-                    $viewData['success'] = false;
-                } else {
-                    $user->createAccount($data);
-                    $viewData['success'] = true;
-                }
-                $this->render('Register New User', 'register.view', $viewData);
-                die();
-            } catch (Exception $e) {
-                header('location: /register');
+            $existingAnzNum = $user->doesAnzNumberExist($data['anz_num']);
+
+            if ($existingAnzNum) {
+                $_SESSION['success'] = false;
+            } else {
+                $user->createAccount($data);
+                $_SESSION['success'] = true;
             }
+            header('location: /register');
+            die();
         }
 
         $this->render('Register New User', 'register.view');
@@ -101,15 +98,18 @@ class Authentication extends Base
             $existingAnzNum = $user->doesAnzNumberExist($data['anz_num']);
 
             if ($existingAnzNum) {
-                $viewData['successProfile'] = false;
+                $_SESSION['successProfile'] = false;
             } else {
+
                 $user->createProfile($data);
-                $viewData['successProfile'] = true;
+                $_SESSION['successProfile'] = true;
             }
-            $this->render('Register New User', 'register.view', $viewData);
+            header('location: /register');
             die();
 
         }
+        header('location: /register');
+        die();
 
     }
 
