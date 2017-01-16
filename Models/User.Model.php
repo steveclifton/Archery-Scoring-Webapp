@@ -76,13 +76,13 @@ class User extends Base
      */
     public function createAccount($userData)
     {
-        $email = ucfirst($userData['email']);
-        $firstName = ucfirst($userData['first_name']);
-        $lastName = ucfirst($userData['last_name']);
-        $anzNum = "PENDING-" . $userData['anz_num'];
-        $gender = strtoupper($userData['gender']);
+        $email = trim(ucfirst($userData['email']));
+        $firstName = trim(ucfirst($userData['first_name']));
+        $lastName = trim(ucfirst($userData['last_name']));
+        $anzNum = "PENDING-" . trim($userData['anz_num']);
+        $gender = trim(strtoupper($userData['gender']));
         $userType = 'PENDING';
-        $club = strtoupper($userData['club']);
+        $club = trim(strtoupper($userData['club']));
         $preferedType = $userData['prefered_type'];
         $ipAddress = $_SERVER['REMOTE_ADDR'];
         $password = password_hash($userData['password'], PASSWORD_DEFAULT);
@@ -106,11 +106,11 @@ class User extends Base
      */
     public function createProfile($userData)
     {
-        $email = ucfirst($userData['email']);
-        $firstName = ucfirst($userData['first_name']);
-        $lastName = ucfirst($userData['last_name']);
-        $anzNum = "PENDING-" . $userData['anz_num'];
-        $gender = strtoupper($userData['gender']);
+        $email = trim(ucfirst($userData['email']));
+        $firstName = trim(ucfirst($userData['first_name']));
+        $lastName = trim(ucfirst($userData['last_name']));
+        $anzNum = "PENDING-" . trim($userData['anz_num']);
+        $gender = trim(strtoupper($userData['gender']));
         $userType = 'PENDING';
 
         $preferedType = $userData['prefered_type'];
