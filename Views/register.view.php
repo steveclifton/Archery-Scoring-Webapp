@@ -78,9 +78,10 @@
                     </div>
                 </div>
                 <?php
-                if (isset($viewData['success'])) {
-                    if ($viewData['success'] === true) {
-                        echo "<p style='color: green;;'>Success</p>";
+                if (isset($_SESSION['success'])) {
+                    if ($_SESSION['success'] === true) {
+                        echo "<p style='color: green;'>Success</p>";
+                        unset($_SESSION['success']);
                     } else {
                         echo "<p style='color: red'>Account Creation Failed, please check details and try again</p>";
                     }
@@ -121,13 +122,6 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <!-- Club-->
-                    <label class="control-label">Club</label>
-                    <div class="controls">
-                        <input type="text" id="club" name="club" class="input-xlarge" required>
-                    </div>
-                </div>
-                <div class="control-group">
                     <label class="control-label">Gender</label><br>
                     <select name="gender" id="gender" class="selectpicker show-menu-arrow">
                         <option value="male">Male</option>
@@ -153,13 +147,13 @@
                     </div>
                 </div>
                 <?php
-                if (isset($viewData['successProfile'])) {
-                    if ($viewData['successProfile'] === true) {
-                        echo "<p style='color: green;;'>Success</p>";
+                if (isset($_SESSION['successProfile'])) {
+                    if ($_SESSION['successProfile'] === true) {
+                        echo "<p style='color: green;'>Success</p>";
+                        unset($_SESSION['successProfile']);
                     } else {
                         echo "<p style='color: red'>Account Creation Failed, please check details and try again</p>";
                     }
-
                 }
                 ?>
             </fieldset>
