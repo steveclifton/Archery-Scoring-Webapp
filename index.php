@@ -105,6 +105,9 @@ else if ($uri == 'addtempuser') {
     $result = new Results();
     $result->addTempUser();
 }
+else if ($uri == 'resetpassword') {
+    var_dump($_GET);die();
+}
 
 else {
     header('location: /login');
