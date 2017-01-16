@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="login">Archery League Series</a>
+            <a class="navbar-brand" href="login">Archery OSA</a>
         </div>
         <div class="navbar-collapse" id="navbar-main">
             <ul class="nav navbar-nav">
@@ -52,13 +52,14 @@
                         echo "
                                 <form class=\"navbar-form navbar-right\" method='post' action=\"login\">
                                 <div class=\"form-group\">
-                                <input type=\"email\" class=\"form-control\" name=\"email\" placeholder=\"Username\">
+                                <input type=\"email\" class=\"form-control\" name=\"email\" placeholder=\"Email\">
                                 </div>
                                 <div class=\"form-group\">
                                 <input type=\"password\" class=\"form-control\" name=\"password\" placeholder=\"Password\">
                                 </div>
                                 <button type=\"submit\" class=\"btn btn-default\">Sign In</button>
                                 </form>
+                                <li><a href='/#'>Reset Password</a></li>
                         ";
                     }
                 ?>
