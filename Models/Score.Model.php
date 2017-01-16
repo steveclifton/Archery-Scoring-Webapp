@@ -52,6 +52,24 @@ class Score extends Base
         return true;
     }
 
+    public function setHandicap($archerId, $score, $week, $div)
+    {
+        $table = $this->tableName;
+
+        $sql = "INSERT INTO `handicap_score` 
+                                (`id`, `user_id`, `week`, `division`, `handicap_score`, `created_at`) 
+                            VALUES 
+                                (NULL, '$archerId', '$week', '$div', '$score', CURRENT_TIMESTAMP);
+               ";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute(array('$archeryId, $week, $div, $score'));
+
+        return true;
+    }
+
+
     public function setMultipleScores($enteries)
     {
         // Here club sect can enter multiple scores for multiple archers
