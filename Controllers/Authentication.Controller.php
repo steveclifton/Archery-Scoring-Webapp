@@ -31,8 +31,9 @@ class Authentication extends Base
                 $scores = $scores->liu_getAllScores();
                 $viewData['scores'] = $scores;
 
-                $this->render('Welcome', 'welcome.view', $viewData);
+                header('location: /welcome');
                 die();
+
             } else {
                 header('location: /login');
                 die();
