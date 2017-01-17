@@ -45,7 +45,7 @@ class Authentication extends Base
             $viewData['current_week'] = $currentWeek;
         }
 
-        $this->render('Login Page', 'login.view', $viewData);
+        $this->render('Login Page', 'week.view', $viewData);
     }
 
     /**
