@@ -63,9 +63,9 @@
         </form>
     <?php } ?>
 </div>
-
+<?php foreach ($viewData['scores'] as $key => $value) {?>
 <div class="container">
-    <?php foreach ($viewData['scores'] as $key => $value) {?>
+
     <div class="table">
         <h3 style="text-align: center;"><?= ucwords($key); ?></h3>
         <table class="table table-bordered table-hover" id="table-<?= ucwords($key); ?>">
@@ -75,7 +75,7 @@
                     <th class="col-sm-1 col-md-2">Name</th>
                     <th class="col-sm-1 col-md-2">Average</th>
                     <th class="col-sm-1 col-md-2">Handicap Score</th>
-                    <th class="col-sm-1 col-md-2">X-Count</th>
+                    <th class="col-sm-1 col-md-2">X</th>
                     <th class="col-sm-1 col-md-2">Score</th>
                 </tr>
             </thead>
@@ -95,5 +95,6 @@
             </tbody>
         </table>
     </div>
-    <?php } ?>
+
 </div>
+<?php } ?>

@@ -10,7 +10,7 @@
                 <tr>
                     <th class="col-sm-1 col-md-1">Week</th>
                     <th class="col-sm-1 col-md-1">Score</th>
-                    <th class="col-sm-1 col-md-1">X-Count</th>
+                    <th class="col-sm-1 col-md-1">X</th>
                     <th class="col-sm-1 col-md-1">Division</th>
                 </tr>
             </thead>
