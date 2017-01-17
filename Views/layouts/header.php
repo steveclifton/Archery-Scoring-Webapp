@@ -8,7 +8,7 @@
             </button>
             <a class="navbar-brand" href="login">Archery OSA</a>
         </div>
-        <div class="navbar-collapse" id="navbar-main">
+        <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
                 <li><a></a></li>
                 <li><a href="/rules">Rules</a></li>
@@ -50,7 +50,7 @@
                         ";
                     } else {
                         echo "
-                                <form class=\"navbar-form navbar-right\" method='post' action=\"login\">
+                                <form class=\"navbar-form navbar-right navbar-fixed\" method='post' action=\"login\">
                                 <div class=\"form-group\">
                                 <input type=\"email\" class=\"form-control\" name=\"email\" placeholder=\"Email\">
                                 </div>
