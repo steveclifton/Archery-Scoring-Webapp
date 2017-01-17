@@ -1,5 +1,36 @@
 $(document).ready(function () {
 
+
+
+
+    $('.selectpicker').ready(function () {
+        var url = window.location.href;
+        var data = url.split('?');
+        var welcome = url.split('/');
+        if (welcome[3] == 'welcome') {
+            $('.selectpicker').selectpicker('val', welcome['3']);
+        } else if (welcome[3] == 'login') {
+            var currentweek = $('#currentWeek').text();
+            $('.selectpicker').selectpicker('val', currentweek);
+        } else {
+            $('.selectpicker').selectpicker('val', data);
+        }
+
+
+    });
+
+    /**
+     * Redirects the page to the right week after being selected
+     */
+    $('.selectpicker').on('change', function () {
+        var week = $('.selectpicker').children('option').filter(":selected").val();
+        //console.log(week);
+        var url = "week?" + week;
+        if (url) {
+            window.location = url;
+        }
+    });
+
     /**
      * Function to toggle the view
      */
