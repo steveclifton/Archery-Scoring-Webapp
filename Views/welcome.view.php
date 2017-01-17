@@ -1,26 +1,30 @@
 <h2>Welcome <?= $viewData['first_name'] ?></h2>
+<div class="row">
+    <?php include('layouts/weekselect.view.php') ?>
+</div>
 <h4>Current submitted scores</h4>
-<div class="table-responsive">
-    <div class="container">
+<div class="container">
+    <div class="table">
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>Week</th>
-                    <th>Score</th>
-                    <th>X-Count</th>
-                    <th>Division</th>
+                    <th class="col-sm-1 col-md-1">Week</th>
+                    <th class="col-sm-1 col-md-1">Score</th>
+                    <th class="col-sm-1 col-md-1">X-Count</th>
+                    <th class="col-sm-1 col-md-1">Division</th>
                 </tr>
-        </thead>
-        <tbody>
-            <?php
+            </thead>
+            <tbody>
+                <?php
                 foreach ($viewData['scores'] as $data) { ?>
-                <tr>
-                    <td> <?= $data['week'] ?> </td>
-                    <td> <?= $data['score'] ?> </td>
-                    <td> <?= $data['xcount'] ?> </td>
-                    <td> <?= ucfirst($data['division']) ?> </td>
-                </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+                    <tr>
+                        <td> <?= $data['week'] ?> </td>
+                        <td> <?= $data['score'] ?> </td>
+                        <td> <?= $data['xcount'] ?> </td>
+                        <td> <?= ucfirst($data['division']) ?> </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
 </div>
