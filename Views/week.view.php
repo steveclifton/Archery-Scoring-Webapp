@@ -1,9 +1,11 @@
-<h2 style="text-align: center;">Week <?= $_GET['week']; ?></h2>
+<div class="row">
+    <?php include('layouts/weekselect.view.php') ?>
+</div>
 
 <div class="container">
+    <hr>
     <div id="subscores">
         <?php
-
         if (isset($_SESSION['id'])) {
             echo "<legend>Submit Scores</legend>";
             foreach ($viewData['archers'] as $archer) { ?>
@@ -64,9 +66,9 @@
 
 <div class="container">
     <?php foreach ($viewData['scores'] as $key => $value) {?>
-    <div class="table-responsive">
+    <div class="table">
         <h3 style="text-align: center;"><?= ucwords($key); ?></h3>
-        <table class="table table-bordered table-hover table-condensed">
+        <table class="table table-bordered table-hover" id="table-<?= ucwords($key); ?>">
             <thead>
                 <tr>
                     <th class="col-sm-1 col-md-1">#</th>
@@ -75,7 +77,6 @@
                     <th class="col-sm-1 col-md-2">Handicap Score</th>
                     <th class="col-sm-1 col-md-2">X-Count</th>
                     <th class="col-sm-1 col-md-2">Score</th>
-
                 </tr>
             </thead>
             <tbody>
@@ -89,7 +90,6 @@
                         <td> <?= ($vData['score'] + $vData['handicap']) ?></td>
                         <td> <?= $vData['xcount'] ?></td>
                         <td> <?= $vData['score'] ?></td>
-
                     </tr>
             <?php } ?>
             </tbody>
