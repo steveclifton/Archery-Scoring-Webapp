@@ -1,6 +1,6 @@
 <br>
 <div class="row">
-    <div class="col-sm-4 col-md-4">
+    <div class="col-sm-5 col-md-5">
         <form class="form-horizontal" action="/register" method="POST">
             <fieldset>
                 <div id="legend">
@@ -90,7 +90,7 @@
             </fieldset>
         </form>
     </div>
-    <div class="col-sm-4 col-md-4">
+    <div class="col-sm-5 col-md-5">
         <form class="form-horizontal" action="/registerprofile" method="POST">
             <fieldset>
                 <div id="legend">
