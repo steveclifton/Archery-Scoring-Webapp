@@ -1,7 +1,6 @@
-<br>
 <div class="row">
     <div class="col-sm-5 col-md-5">
-        <form class="form-horizontal" action="/register" method="POST" id="formAccount" onsubmit="return false">
+        <form class="form-horizontal" id="formAccount" method="post" onsubmit="return checkProfileForm()">
             <fieldset>
                 <div id="legend">
                     <legend class="">Request A New Account</legend>
@@ -77,21 +76,11 @@
                         <button class="btn btn-success" id="registerAccount">Register</button>
                     </div>
                 </div>
-                <?php
-                if (isset($_SESSION['success'])) {
-                    if ($_SESSION['success'] === true) {
-                        echo "<p style='color: green;'>Success</p>";
-                        unset($_SESSION['success']);
-                    } else {
-                        echo "<p style='color: red'>Account Creation Failed, please check details and try again</p>";
-                    }
-                }
-                ?>
             </fieldset>
         </form>
     </div>
     <div class="col-sm-5 col-md-5">
-        <form class="form-horizontal" action="/registerprofile" method="POST">
+        <form class="form-horizontal" id="formProfile" method="post" onsubmit="return checkProfileForm()">
             <fieldset>
                 <div id="legend">
                     <legend class="">Request A New Profile</legend>
@@ -146,16 +135,6 @@
                         <button class="btn btn-success" id="registerProfile">Register</button>
                     </div>
                 </div>
-                <?php
-                if (isset($_SESSION['successProfile'])) {
-                    if ($_SESSION['successProfile'] === true) {
-                        echo "<p style='color: green;'>Success</p>";
-                        unset($_SESSION['successProfile']);
-                    } else {
-                        echo "<p style='color: red'>Account Creation Failed, please check details and try again</p>";
-                    }
-                }
-                ?>
             </fieldset>
         </form>
     </div>
