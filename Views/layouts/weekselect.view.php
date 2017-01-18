@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row" id="testing">
         <div class="col-xs-2 col-xs-offset-3 col-sm-2 col-sm-offset-5 col-md-2 col-md-offset-5">
-            <select class="selectpicker">
+            <select class="selectpicker" id="archeryselect">
                 <?php
                     $weeks = new \Archery\Configurations\Event();
                     $weeks = $weeks->getCurrentWeek();
