@@ -63,28 +63,6 @@ class Authentication extends Base
      */
     public function register()
     {
-        var_dump($_POST); die();
-
-
-        $user = new User();
-
-        $this->isLoggedIn();
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $data = $_POST;
-            $user = new User();
-            $existingAnzNum = $user->doesAnzNumberExist($data['anz_num']);
-
-            if ($existingAnzNum) {
-                $_SESSION['success'] = false;
-            } else {
-                $user->createAccount($data);
-                $_SESSION['success'] = true;
-            }
-            header('location: /register');
-            die();
-        }
-
         $this->render('Register New User', 'register.view');
     }
 
