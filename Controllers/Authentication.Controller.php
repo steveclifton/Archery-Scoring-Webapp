@@ -63,6 +63,9 @@ class Authentication extends Base
      */
     public function register()
     {
+        var_dump($_POST); die();
+
+
         $user = new User();
 
         $this->isLoggedIn();
