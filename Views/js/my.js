@@ -1,33 +1,8 @@
 $(document).ready(function () {
 
-    /**
-     * Ajax form checking
-     */
-    $('#formAccount').submit(function () {
-        var values = {};
-        $.each($('#formAccount').serializeArray(), function (i, field) {
-            values[field.name] = field.value;
-        });
 
-        $.ajax({
-            type: 'POST',
-            url: '/ajax_createaccount',
-            data: {
-                'anz_num' : values['anz_num'],
-                'club' : values['club'],
-                'password' : values['password'],
-                'confirm_password' : values['confirm_password'],
-                'email' : values['email'],
-                'first_name' : values['first_name'],
-                'last_name' : values['last_name'],
-                'prefered_type' : values['prefered_type'],
-                'gender' : values['gender']
-            },
-            success: function(msg){
-                alert(msg);
-            }
-        });
-    });
+
+
 
 
 
@@ -212,6 +187,12 @@ $(document).ready(function () {
      *                      Register Methods                        *
      ****************************************************************/
 
+
+
+
+    /**
+     * Works
+     */
     $('#anz_num').on('focusout', function () {
        var anzNum = $('#anz_num').val();
        reg = /^[0-9]+$/;
@@ -223,10 +204,17 @@ $(document).ready(function () {
        if (anzNum != "") {
            if (!reg.test(anzNum)) {
                $('#anz_num').parent().after("<div id='validation_anz' style='color:red;'>Please enter a valid ANZ Number</div>");
+               $('#registerAccount').prop('disabled', true);
+           } else {
+               $('#registerAccount').prop('disabled', false);
            }
        }
     });
 
+
+    /**
+     * Works
+     */
     $('#confirm_password').on('focusout', function () {
         var password = $('#password').val();
         var confirmPassword = $('#confirm_password').val();
@@ -237,9 +225,15 @@ $(document).ready(function () {
         if (password != null && confirmPassword != null) {
             if (password != confirmPassword) {
                 $('#confirm_password').parent().after("<div id='validation_password' style='color:red;'>Passwords do not match</div>");
+                $('#registerAccount').prop('disabled', true);
+            } else {
+                $('#registerAccount').prop('disabled', false);
             }
         }
     });
+
+
+
 
     $('div.bow select').ready(function () {
         checkIfSubmitted();
@@ -294,6 +288,92 @@ function validateForm(form) {
     //         return false;
     // }
     return true;
+
+}
+
+
+/**
+ *
+ * Checks the register account form
+ */
+function checkMyForm() {
+    /**
+     * Ajax form checking
+     */
+    var values = {};
+    $.each($('#formAccount').serializeArray(), function (i, field) {
+        values[field.name] = field.value;
+    });
+
+    if (values['password'] != values['confirm_password']) {
+        return false;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '/ajax_createaccount',
+        data: {
+            'anz_num': values['anz_num'],
+            'club': values['club'],
+            'password': values['password'],
+            'confirm_password': values['confirm_password'],
+            'email': values['email'],
+            'first_name': values['first_name'],
+            'last_name': values['last_name'],
+            'prefered_type': values['prefered_type'],
+            'gender': values['gender']
+        },
+        success: function (data) {
+            var json = $.parseJSON(data);
+            if (json.status == 'failed') {
+                alert(json.message);
+            } else {
+                alert('Profile created');
+                location.reload();
+            }
+
+        }
+    });
+    return false;
+
+}
+
+function checkProfileForm() {
+    /**
+     * Ajax form checking
+     */
+    var values = {};
+    $.each($('#formProfile').serializeArray(), function (i, field) {
+        values[field.name] = field.value;
+    });
+
+    if (values['password'] != values['confirm_password']) {
+        return false;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '/ajax_createprofile',
+        data: {
+            'anz_num': values['anz_num'],
+            'email': values['email'],
+            'first_name': values['first_name'],
+            'last_name': values['last_name'],
+            'prefered_type': values['prefered_type'],
+            'gender': values['gender']
+        },
+        success: function (data) {
+            var json = $.parseJSON(data);
+            if (json.status == 'failed') {
+                alert(json.message);
+            } else {
+                alert('Profile created');
+                location.reload();
+            }
+
+        }
+    });
+    return false;
 
 }
 
