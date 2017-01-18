@@ -100,8 +100,13 @@ else if ($uri == 'ajax_searchScoreWeekDiv') {
 
 else if ($uri == 'ajax_createaccount') {
     $auth = new Authentication();
-    $auth->register();
+    $auth->ajaxRegisterAccount();
 }
+else if ($uri == 'ajax_createprofile') {
+    $auth = new Authentication();
+    $auth->ajaxRegisterProfile();
+}
+
 
 else if ($uri == 'ajax_searchAnzArcher') {
     $user = new Results();
