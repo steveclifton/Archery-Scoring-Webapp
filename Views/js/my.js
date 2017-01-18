@@ -1,19 +1,50 @@
 $(document).ready(function () {
 
+    /**
+     * Ajax form checking
+     */
+    $('#formAccount').submit(function () {
+        var values = {};
+        $.each($('#formAccount').serializeArray(), function (i, field) {
+            values[field.name] = field.value;
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: '/ajax_createaccount',
+            data: {
+                'anz_num' : values['anz_num'],
+                'club' : values['club'],
+                'password' : values['password'],
+                'confirm_password' : values['confirm_password'],
+                'email' : values['email'],
+                'first_name' : values['first_name'],
+                'last_name' : values['last_name'],
+                'prefered_type' : values['prefered_type'],
+                'gender' : values['gender']
+            },
+            success: function(msg){
+                alert(msg);
+            }
+        });
+    });
 
 
 
-    $('.selectpicker').ready(function () {
+    /**
+     * Sets the button display to be where the url is
+     */
+    $('#archeryselect').ready(function () {
         var url = window.location.href;
         var data = url.split('?');
         var welcome = url.split('/');
         if (welcome[3] == 'welcome') {
-            $('.selectpicker').selectpicker('val', welcome['3']);
+            $('#archeryselect').selectpicker('val', welcome['3']);
         } else if (welcome[3] == 'login') {
             var currentweek = $('#currentWeek').text();
-            $('.selectpicker').selectpicker('val', currentweek);
+            $('#archeryselect').selectpicker('val', currentweek);
         } else {
-            $('.selectpicker').selectpicker('val', data);
+            $('#archeryselect').selectpicker('val', data);
         }
 
 
@@ -22,8 +53,8 @@ $(document).ready(function () {
     /**
      * Redirects the page to the right week after being selected
      */
-    $('.selectpicker').on('change', function () {
-        var week = $('.selectpicker').children('option').filter(":selected").val();
+    $('#archeryselect').on('change', function () {
+        var week = $('#archeryselect').children('option').filter(":selected").val();
         //console.log(week);
         var url = "week?" + week;
         if (url) {
