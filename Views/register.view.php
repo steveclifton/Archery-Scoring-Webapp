@@ -1,7 +1,7 @@
 <br>
 <div class="row">
     <div class="col-sm-5 col-md-5">
-        <form class="form-horizontal" action="/register" method="POST">
+        <form class="form-horizontal" action="/register" method="POST" id="formAccount" onsubmit="return false">
             <fieldset>
                 <div id="legend">
                     <legend class="">Request A New Account</legend>
@@ -74,7 +74,7 @@
                 <br><br>
                 <div class="control-group">
                     <div class="controls">
-                        <button class="btn btn-success" id="register">Register</button>
+                        <button class="btn btn-success" id="registerAccount">Register</button>
                     </div>
                 </div>
                 <?php
@@ -143,7 +143,7 @@
                 <br><br>
                 <div class="control-group">
                     <div class="controls">
-                        <button class="btn btn-success" id="register">Register</button>
+                        <button class="btn btn-success" id="registerProfile">Register</button>
                     </div>
                 </div>
                 <?php
