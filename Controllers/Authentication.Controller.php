@@ -117,6 +117,37 @@ class Authentication extends Base
 
     }
 
+    public function ajaxRegisterProfile()
+    {
+        $anz_num = trim($_POST['anz_num']);
+        $email = trim(ucfirst($_POST['email']));
+        $first_name = trim(ucfirst($_POST['first_name']));
+        $last_name = trim(ucfirst($_POST['last_name']));
+        $pref_type = strtolower($_POST['prefered_type']);
+        $gender = strtoupper($_POST['gender']);
+        $userType = 'user';
+
+        $user = new User();
+        $existingAnzNum = $user->doesAnzNumberExist($anz_num);
+
+        if (!$existingAnzNum) {
+            $result = $user->createProfile($anz_num, $first_name, $last_name, $gender, $userType, $email, $pref_type);
+            if ($result) {
+                echo json_encode(array("status" => "success", "message" => "Account Created"));
+                return;
+            } else {
+                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
+                return;
+            }
+        } else {
+            echo json_encode(array("status" => "failed", "message" => "ANZ Number already exists"));
+            return;
+        }
+
+
+    }
+
+
     /**
      * Sets the SESSION data
      */
