@@ -74,18 +74,10 @@ class User extends Base
      * Creates an account if registration information is valid
      * - returns a new user object - used to log the user in automatically
      */
-    public function createAccount($userData)
+    public function createAccount($anzNum, $firstName, $lastName, $gender, $club, $userType, $email, $password, $preferedType)
     {
-        $email = trim(ucfirst($userData['email']));
-        $firstName = trim(ucfirst($userData['first_name']));
-        $lastName = trim(ucfirst($userData['last_name']));
-        $anzNum = "PENDING-" . trim($userData['anz_num']);
-        $gender = trim(strtoupper($userData['gender']));
-        $userType = 'PENDING';
-        $club = trim(strtoupper($userData['club']));
-        $preferedType = $userData['prefered_type'];
         $ipAddress = $_SERVER['REMOTE_ADDR'];
-        $password = password_hash($userData['password'], PASSWORD_DEFAULT);
+        $password = password_hash($password, PASSWORD_DEFAULT);
 
         $sql = "INSERT INTO `users` 
                   (`id`, `anz_num`, `first_name`, `last_name`, `gender`, `club`, `phone`, `address`, `user_type`, `email`, `password`, `prefered_type`, `last_ip`, `created_at`) 
@@ -104,18 +96,9 @@ class User extends Base
      * Creates a profile if registration information is valid
      * - returns a new user object - used to log the user in automatically
      */
-    public function createProfile($userData)
+    public function createProfile($anzNum, $firstName, $lastName, $gender, $userType, $email, $preferedType)
     {
-        $email = trim(ucfirst($userData['email']));
-        $firstName = trim(ucfirst($userData['first_name']));
-        $lastName = trim(ucfirst($userData['last_name']));
-        $anzNum = "PENDING-" . trim($userData['anz_num']);
-        $gender = trim(strtoupper($userData['gender']));
-        $userType = 'PENDING';
-
-        $preferedType = $userData['prefered_type'];
         $ipAddress = $_SERVER['REMOTE_ADDR'];
-
 
         $sql = "INSERT INTO `users` 
                   (`id`, `anz_num`, `first_name`, `last_name`, `gender`, `club`, `phone`, `address`, `user_type`, `email`, `password`, `prefered_type`, `last_ip`, `created_at`) 
