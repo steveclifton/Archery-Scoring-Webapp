@@ -17,6 +17,7 @@ use Archery\Controllers\Errors;
 
 session_start();
 
+
 if (isset($_SERVER['REDIRECT_URL'])) {
     $uri = str_replace('/', '', $_SERVER['REDIRECT_URL']);
 }
@@ -95,6 +96,11 @@ else if ($uri == 'submitscore') {
 else if ($uri == 'ajax_searchScoreWeekDiv') {
     $week = new Results();
     $week->ajaxSearchUserScoreWeekDiv();
+}
+
+else if ($uri == 'ajax_createaccount') {
+    $auth = new Authentication();
+    $auth->register();
 }
 
 else if ($uri == 'ajax_searchAnzArcher') {
