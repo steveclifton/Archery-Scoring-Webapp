@@ -117,6 +117,44 @@ class Authentication extends Base
 
     }
 
+    public function ajaxRegisterAccount()
+    {
+        $anz_num = trim($_POST['anz_num']);
+        $club = trim(strtoupper($_POST['club']));
+        $password = trim($_POST['password']);
+        $confirmPassword = trim($_POST['confirm_password']);
+        $email = trim(ucfirst($_POST['email']));
+        $first_name = trim(ucfirst($_POST['first_name']));
+        $last_name = trim(ucfirst($_POST['last_name']));
+        $pref_type = strtolower($_POST['prefered_type']);
+        $gender = strtoupper($_POST['gender']);
+        $userType = 'user';
+
+        if ($password != $confirmPassword) {
+            echo json_encode(array("status" => "failed", "message" => "passwords do not match"));
+            return;
+        }
+
+        $user = new User();
+        $existingAnzNum = $user->doesAnzNumberExist($anz_num);
+
+        if (!$existingAnzNum) {
+            $result = $user->createAccount($anz_num, $first_name, $last_name, $gender, $club, $userType, $email, $password, $pref_type);
+            if ($result) {
+                echo json_encode(array("status" => "success", "message" => "Account Created"));
+                return;
+            } else {
+                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
+                return;
+            }
+        } else {
+            echo json_encode(array("status" => "failed", "message" => "ANZ Number already exists"));
+            return;
+        }
+
+
+    }
+
     public function ajaxRegisterProfile()
     {
         $anz_num = trim($_POST['anz_num']);
