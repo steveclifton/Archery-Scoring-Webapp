@@ -2,8 +2,8 @@
     <?php include('layouts/weekselect.view.php') ?>
 </div>
 
-<?php
-if (isset($_SESSION['id'])) { ?>
+
+<?php if (isset($_SESSION['id'])) { ?>
 <div class="container">
     <div class="row" id="subscores">
         <div class="container">
@@ -45,8 +45,8 @@ if (isset($_SESSION['id'])) { ?>
             </div>
         </div>
     </div>
-</div>
-<div class="container">
+
+
     <div class="row">
         <div class="col-xs col-md-1"">
         <button class="btn btn-success" id="submit">Submit</button>
@@ -54,9 +54,9 @@ if (isset($_SESSION['id'])) { ?>
     <div class="col-xs col-md-2">
         <p><input type="checkbox" id="correctScores">Scores Correct</p>
     </div>
-</div>
 
-<div class="container">
+
+
     <div class="row">
         <form class="form-inline" action="#" id="form<?=$i?>" onsubmit="return false" style="padding-top: 10px">
             <div class="form-group">
@@ -73,17 +73,16 @@ if (isset($_SESSION['id'])) { ?>
         <div class="validation">
         </div>
     </div>
-</div>
+
 <?php } ?>
 
 <br><br>
 <?php foreach ($viewData['scores'] as $key => $value) {?>
-<div class="container">
+
     <div class="row">
         <div class="container">
             <legend><?= ucwords($key); ?></legend>
             <div class="table">
-
                 <table class="table table-bordered table-hover" id="table-<?= ucwords($key); ?>">
                     <thead>
                         <tr>
@@ -113,8 +112,9 @@ if (isset($_SESSION['id'])) { ?>
             </div>
         </div>
     </div>
-</div>
+
 <?php } ?>
+</div>
 
 
 
