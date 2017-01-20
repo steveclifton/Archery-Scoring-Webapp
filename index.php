@@ -88,9 +88,9 @@ else if ($uri == 'week') {
     $week = new Results();
     $week->viewScores();
 }
-else if ($uri == 'submitscore') {
+else if ($uri == 'ajax_submitScore') {
     $week = new Results();
-    $week->processScore();
+    $week->ajax_processScore();
 }
 
 else if ($uri == 'ajax_searchScoreWeekDiv') {
@@ -107,14 +107,13 @@ else if ($uri == 'ajax_createprofile') {
     $auth->ajaxRegisterProfile();
 }
 
-
 else if ($uri == 'ajax_searchAnzArcher') {
     $user = new Results();
     $user->getUserByAnz();
 }
-else if ($uri == 'addtempuser') {
+else if ($uri == 'ajax_addTempUser') {
     $result = new Results();
-    $result->addTempUser();
+    $result->ajax_addTempUser();
 }
 else if ($uri == 'resetpassword') {
     var_dump($_GET);die();
