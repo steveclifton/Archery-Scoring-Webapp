@@ -2,9 +2,8 @@
     <?php include('layouts/weekselect.view.php') ?>
 </div>
 
-
-<?php if (isset($_SESSION['id'])) { ?>
 <div class="container">
+<?php if (isset($_SESSION['id'])) { ?>
     <div class="row" id="subscores">
         <legend>Submit Scores</legend>
         <p>Only enter scores for those who shot this week</p>
