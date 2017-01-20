@@ -1,10 +1,30 @@
 $(document).ready(function () {
 
 
+    //$('<p id="validation" style="color: green">Found</p>').insertAfter($('#searcharcher'));
+
+
+    // Disables the Add Archer Button by Default
+    $('#addArcherButton').prop('disabled', true);
+
+
+    // Toggles the confirm scores button
+    if (!$('#correctScores').is(' :checked')) {
+        $('#submit').prop('disabled', true);
+    }
+    $('#correctScores').change(function() {
+        if (!$('#correctScores').is(' :checked')) {
+            $('#submit').prop('disabled', true);
+        } else {
+            $('#submit').prop('disabled', false);
+        }
+    });
 
 
 
-
+    /***************************************************************
+     *       SELECT PICKER CONTROLS
+     ****************************************************************/
 
     /**
      * Sets the button display to be where the url is
@@ -98,87 +118,151 @@ $(document).ready(function () {
      ****************************************************************/
 
 
+    /**
+     * Ajax finds the user if they exist ready to be added to temp scoring
+     */
     $('#searcharcher').on('keyup', function () {
         var anzNum = $(this).val();
-        if ($('#validation_anz').length > 0) {
-            $('#validation_anz').remove();
-        }
 
         $.get("/ajax_searchAnzArcher?anz_num=" + anzNum, function (data) {
             if (data.status == "failed") {
-                $('#searcharcher').parent().after("<div id='validation_anz' style='color:red;'>ANZ Number Not Found</div>");
-                $('#addsubmit').prop('disabled', true);
+                $('#validation').remove();
+                $('<p id="validation" style="color: red; margin-left: 14px">Not Found</p>').insertAfter($('div.validation'));
+                $('#addArcherButton').prop('disabled', true);
             } else if (data.status == "success") {
-                $('#searcharcher').parent().after("<div id='validation_anz' style='color:green;'>Found Archer</div>");
-                $('#addsubmit').prop('disabled', false);
+                $('#validation').remove();
+                $('<p id="validation" style="color: green; margin-left: 14px">Found</p>').insertAfter($('div.validation'));
+                $('#addArcherButton').prop('disabled', false);
+            }
+        });
+
+    });
+
+
+    /**
+     * Adds a temp association between users
+     */
+    $('#addArcherButton').on('click', function () {
+        var anzNum = $('#searcharcher').val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/ajax_addTempUser',
+            data: {
+                'anz_num': anzNum
+            },
+            success: function (data) {
+                var json = $.parseJSON(data);
+                if (json.status == 'failed') {
+                    alert('Cannot add account');
+                } else {
+                    location.reload();
+                }
             }
         });
 
 
+
     });
+
+    // Method here that when they press 'Add archer for scoring' the post data is sent and the page is refreshed (displaying the new person)
 
 
     /**
-     * Toggles the search archer form
+     *  On Submit button, scores are sent via AJAX to be entered in the DB
+     *
      */
-    $('#searcharcherform').ready(function () {
-        $('#addarcherbutton').click(function () {
-            $('#searcharcherform').toggleClass('hidden');
+    $('#submit').on('click', function () {
+
+        $('tr.archer').each(function () {
+            $("#invalidScore").remove();
+            $("#invalidXCount").remove();
         });
-    });
+
+
+        $("tr.archer").each(function() {
+            $this = $(this);
+            var name = $this.find("span.name").html();
+            var anz = $this.find("input#anz_num").val();
+
+            var score = $this.find("input#score").val();
+            if (score != '' && !checkScore(score)) {
+                $('<p id="invalidScore" style="color: red">Invalid Score</p>').insertAfter($($this.find("input#score")));
+                return;
+            }
+
+            var xcount = $this.find("input#xcount").val();
+            if (xcount != '' && !checkXCount(xcount)) {
+                $('<p id="invalidXCount" style="color: red">Invalid XCount</p>').insertAfter($($this.find("input#xcount")));
+                return;
+            }
+
+            if (score == '' && xcount == '') {
+                return;
+            }
+
+            var div = $this.find("select#div").val();
+            var week = $this.find("span.week").html();
+
+            var archer = { "name":name, "anz":anz, "score":score, "xcount":xcount, "div":div, "week":week };
+
+
+            $.ajax({
+                type: 'POST',
+                url: '/ajax_submitScore',
+                data: {
+                    archer:archer
+                },
+                success: function (data) {
+                    var json = $.parseJSON(data);
+                    if (json.status == 'failed') {
+                        $("tr.archer").each(function() {
+                            $this = $(this);
+                            var name = $this.find("span.name").html();
+                            if (name == archer.name) {
+                                $('<p id="invalidXCount" style="color: red">Score already entered</p>').insertAfter($($this.find("span.name")));
+                            }
+
+                        });
+                    } else {
+                        $("tr.archer").each(function() {
+                            $this = $(this);
+                            var name = $this.find("span.name").html();
+                            if (name == archer.name) {
+                                $('<p id="invalidXCount" style="color: green">Score Updated</p>').insertAfter($($this.find("span.name")));
+                            }
+                        });
+                    }
+                }
+            });
+        });
 
 
 
-    /**
-     * Checks the Score to ensure the user only enters
-     *    - Valid digits 0-9
-     *    - A score between 0 - 360
-     */
-    // $('#score').on('keyup', function() {
-    //     var score = $('#score').val();
-    //     reg = /^[0-9]+$/;
-    //
-    //     if (score != "") {
-    //         if (!reg.test(score)) {
-    //             $("#incorrect").html("*Please enter numbers only!");
-    //         } else {
-    //             $("#incorrect").html("");
-    //         }
-    //     }
-    //
-    //     if (Number(score) > 360 || Number(score) < 0) {
-    //         $("#incorrect").html("*Invalid Score");
-    //     }
-    // });
 
-    /**
-     * Checks the X-Count to ensure the user only enters
-     *    - Valid digits 0-9
-     *    - An X-Count between 0-36
-     */
-    // $('#xcount').on('keyup', function () {
-    //     var xcount = $('#xcount').val();
-    //     reg = /^[0-9]+$/;
-    //
-    //     if (xcount != "") {
-    //         if (!reg.test(xcount)) {
-    //             $("#incorrect").html("*Please enter numbers only!");
-    //         } else {
-    //             $("#incorrect").html("");
-    //         }
-    //     }
-    //
-    //     if (Number(xcount) > 36 || Number(xcount) < 0) {
-    //         $("#incorrect").html("*Invalid X-Count");
-    //     }
-    // });
+        function checkScore(score) {
+            if (isNaN(score)) {
+                return false;
+            } else if (score > 360 || score < 0) {
+                return false;
+            }
 
-    /**
-     * Selects the users 'prefered bow type' as a default
-     */
-    $(function () {
-        var preferedType = $('#prefered_type').val();
-        $('div.bow select').val(preferedType);
+            return true;
+        }
+        function checkXCount(xcount) {
+            if (isNaN(xcount)) {
+                return false;
+            } else if (xcount > 36 || xcount < 0) {
+                return false;
+            }
+
+            return true;
+        }
+
+
+
+
+
     });
 
 
@@ -191,7 +275,7 @@ $(document).ready(function () {
 
 
     /**
-     * Works
+     * Alerts the user that the ANZ number needs to be a number
      */
     $('#anz_num').on('focusout', function () {
        var anzNum = $('#anz_num').val();
@@ -213,7 +297,7 @@ $(document).ready(function () {
 
 
     /**
-     * Works
+     * Ensures that the passwords match, disables the submit button if not
      */
     $('#confirm_password').on('focusout', function () {
         var password = $('#password').val();
@@ -232,35 +316,35 @@ $(document).ready(function () {
         }
     });
 
-
-
-
-    $('div.bow select').ready(function () {
-        checkIfSubmitted();
-    });
-
-    $('div.bow select').on('change', function () {
-        $("#incorrect").html("");
-        checkIfSubmitted();
-    });
-
 });
 
-function checkIfSubmitted() {
-    // var div = $('div.bow select').val();
-    // var weekNum = $('#week_num').val();
-    // console.log(div);
-    //
-    // $.get("/ajax_searchScoreWeekDiv?div=" + div + "&week=" + weekNum, function (data) {
-    //     if (data == 'true') {
-    //         div = capitalizeFirstLetter(div);
-    //         $("#incorrect").html("Score Submitted for " + div + " Division");
-    //         $('input[type="submit"]').prop('disabled', true);
-    //     } else {
-    //         $('input[type="submit"]').prop('disabled', false);
-    //     }
-    // });
-}
+
+//     $('div.bow select').ready(function () {
+//         checkIfSubmitted();
+//     });
+//
+//     $('div.bow select').on('change', function () {
+//         $("#incorrect").html("");
+//         checkIfSubmitted();
+//     });
+//
+//
+//
+// function checkIfSubmitted() {
+//     // var div = $('div.bow select').val();
+//     // var weekNum = $('#week_num').val();
+//     // console.log(div);
+//     //
+//     // $.get("/ajax_searchScoreWeekDiv?div=" + div + "&week=" + weekNum, function (data) {
+//     //     if (data == 'true') {
+//     //         div = capitalizeFirstLetter(div);
+//     //         $("#incorrect").html("Score Submitted for " + div + " Division");
+//     //         $('input[type="submit"]').prop('disabled', true);
+//     //     } else {
+//     //         $('input[type="submit"]').prop('disabled', false);
+//     //     }
+//     // });
+// }
 
 
 /**
@@ -271,35 +355,13 @@ function capitalizeFirstLetter(string) {
 }
 
 
-/**
- * Validates form, pretty ugly but it works
- */
-function validateForm(form) {
-    // var score = document.forms[this]["score"].value;
-    // var xcount = document.forms[this]["xcount"].value;
-    // reg = /^[0-9]+$/;
-    //
-    // if  ((score > 360 || score < 0)
-    //     || (!reg.test(score))
-    //     || (xcount > 36 || xcount < 0)
-    //     || (!reg.test(xcount))
-    //     ) {
-    //         $("#incorrect").html("*Please check details and try again");
-    //         return false;
-    // }
-    return true;
-
-}
 
 
 /**
- *
- * Checks the register account form
+ * Checks the register account form, if correct, AJAX Sends the data to be added
  */
-function checkMyForm() {
-    /**
-     * Ajax form checking
-     */
+function checkAccountForm()
+{
     var values = {};
     $.each($('#formAccount').serializeArray(), function (i, field) {
         values[field.name] = field.value;
@@ -338,10 +400,13 @@ function checkMyForm() {
 
 }
 
-function checkProfileForm() {
-    /**
-     * Ajax form checking
-     */
+/**
+ *
+ * Checks the Profile Form data and if correct, AJAX sends to be created in system
+ */
+
+function checkProfileForm()
+{
     var values = {};
     $.each($('#formProfile').serializeArray(), function (i, field) {
         values[field.name] = field.value;
@@ -370,7 +435,6 @@ function checkProfileForm() {
                 alert('Profile created');
                 location.reload();
             }
-
         }
     });
     return false;
