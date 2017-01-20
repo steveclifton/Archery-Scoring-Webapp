@@ -55,7 +55,7 @@
     <div class="row">
         <form class="form-inline" action="#" id="form<?=$i?>" onsubmit="return false" style="padding-top: 10px">
             <div class="form-group">
-                <div class="col-xs-4 col-sm-2 col-md-2">
+                <div class="col-xs col-sm-2 col-md-2">
                     <input class="form-control" type="text" placeholder="ANZ Num" id="searcharcher">
                 </div>
             </div>
@@ -65,8 +65,7 @@
                 </div>
             </div>
         </form>
-        <div class="validation">
-        </div>
+        <div class="validation"></div>
     </div>
 
     <?php } ?>
