@@ -27,7 +27,7 @@
                     <td><input type="text" id="score" class="form-control" placeholder="Score" ></td>
                     <td><input type="text" id="xcount" class="form-control" placeholder="X" ></td>
                     <td>
-                        <select class="selectpicker" id="div" data-width="50%">
+                        <select class="selectpicker" id="div" data-width="fit">
                             <option value="compound" <?php if ($archer['prefered_type'] == 'compound') echo "selected"; ?>>Compound</option>
                             <option value="recurve" <?php if ($archer['prefered_type'] == 'recurve') echo "selected"; ?>>Recurve</option>
                             <option value="recurve barebow" <?php if ($archer['prefered_type'] == 'recurve barebow') echo "selected"; ?>>Recurve Barebow</option>
@@ -55,7 +55,7 @@
     <div class="row">
         <form class="form-inline" action="#" id="form<?=$i?>" onsubmit="return false" style="padding-top: 10px">
             <div class="form-group">
-                <div class="col-xs col-sm-2 col-md-2">
+                <div class="col-xs-4 col-sm-2 col-md-2">
                     <input class="form-control" type="text" placeholder="ANZ Num" id="searcharcher">
                 </div>
             </div>
