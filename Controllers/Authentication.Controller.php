@@ -67,45 +67,19 @@ class Authentication extends Base
     }
 
     /**
-     * Attempts to register a new user
+     * Method used by AJAX to register an ACCOUNT
      */
-    public function registerProfile()
-    {
-        $this->isLoggedIn();
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $data = $_POST;
-            $user = new User();
-            $existingAnzNum = $user->doesAnzNumberExist($data['anz_num']);
-
-            if ($existingAnzNum) {
-                $_SESSION['successProfile'] = false;
-            } else {
-
-                $user->createProfile($data);
-                $_SESSION['successProfile'] = true;
-            }
-            header('location: /register');
-            die();
-
-        }
-        header('location: /register');
-        die();
-
-    }
-
     public function ajaxRegisterAccount()
     {
-        $anz_num = trim($_POST['anz_num']);
-        $club = trim(strtoupper($_POST['club']));
+        $anz_num = trim(strtolower(['anz_num']));
+        $club = trim(strtolower($_POST['club']));
         $password = trim($_POST['password']);
         $confirmPassword = trim($_POST['confirm_password']);
-        $email = trim(ucfirst($_POST['email']));
-        $first_name = trim(ucfirst($_POST['first_name']));
-        $last_name = trim(ucfirst($_POST['last_name']));
+        $email = trim(strtolower($_POST['email']));
+        $first_name = trim(strtolower($_POST['first_name']));
+        $last_name = trim(strtolower($_POST['last_name']));
         $pref_type = strtolower($_POST['prefered_type']);
-        $gender = strtoupper($_POST['gender']);
+        $gender = strtolower($_POST['gender']);
         $userType = 'user';
 
         if ($password != $confirmPassword) {
@@ -133,14 +107,17 @@ class Authentication extends Base
 
     }
 
+    /**
+     * Method used by AJAX to register a PROFILE
+     */
     public function ajaxRegisterProfile()
     {
         $anz_num = trim($_POST['anz_num']);
-        $email = trim(ucfirst($_POST['email']));
-        $first_name = trim(ucfirst($_POST['first_name']));
-        $last_name = trim(ucfirst($_POST['last_name']));
+        $email = trim(strtolower($_POST['email']));
+        $first_name = trim(strtolower($_POST['first_name']));
+        $last_name = trim(strtolower($_POST['last_name']));
         $pref_type = strtolower($_POST['prefered_type']);
-        $gender = strtoupper($_POST['gender']);
+        $gender = strtolower($_POST['gender']);
         $userType = 'user';
 
         $user = new User();
@@ -171,10 +148,10 @@ class Authentication extends Base
     {
         $_SESSION['id'] = $data['id'];
         $_SESSION['anz_num'] = $data['anz_num'];
-        $_SESSION['email'] = $data['email'];
-        $_SESSION['first_name'] = $data['first_name'];
-        $_SESSION['last_name'] = $data['last_name'];
-        $_SESSION['gender'] = $data['gender'];
+        $_SESSION['email'] = ucwords($data['email']);
+        $_SESSION['first_name'] = ucfirst(['first_name']);
+        $_SESSION['last_name'] = ucfirst(['last_name']);
+        $_SESSION['gender'] = ucfirst(['gender']);
         $_SESSION['user_type'] = $data['user_type'];
         $_SESSION['prefered_type'] = $data['prefered_type'];
     }

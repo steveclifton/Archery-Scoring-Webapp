@@ -22,9 +22,11 @@ class User extends Base
      */
     public function getUserByEmail($email)
     {
+        $email = strtolower($email);
+
         $sql = "SELECT * 
                 FROM `users` 
-                WHERE email='$email' 
+                WHERE email LIKE '$email' 
                 LIMIT 1 
                 ";
 
@@ -40,7 +42,7 @@ class User extends Base
     public function updateUserProfileDetails($userData)
     {
         $id = $_SESSION['id'];
-        $email = ucfirst($userData['email']);
+        $email = strtolower($userData['email']);
         $firstName = ucfirst($userData['first_name']);
         $lastName = ucfirst($userData['last_name']);
         $club = strtoupper($userData['club']);
@@ -78,6 +80,8 @@ class User extends Base
     {
         $ipAddress = $_SERVER['REMOTE_ADDR'];
         $password = password_hash($password, PASSWORD_DEFAULT);
+
+
 
         $sql = "INSERT INTO `users` 
                   (`id`, `anz_num`, `first_name`, `last_name`, `gender`, `club`, `phone`, `address`, `user_type`, `email`, `password`, `prefered_type`, `last_ip`, `created_at`) 
