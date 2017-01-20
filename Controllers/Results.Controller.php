@@ -43,43 +43,31 @@ class Results extends Base
     /**
      * Processes score for a weeks view submission
      */
-    public function processScore()
+    public function ajax_processScore()
     {
-        $this->isNotLoggedIn();
+        $score = new Score();
+        $user = new User();
+        $archer = $_POST['archer'];
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $score = new Score();
-            $archer = new User();
-            $archerId = $archer->getUserIdByAnzNum($_POST['anz_num']);
+        $userId = $user->getUserIdByAnzNum($archer['anz']);
+        $existingScore = $score->getCWScore($userId, $archer['week'], $archer['div']);
+        if (!isset($existingScore[0])) {
+            $score->setScore($userId, $archer['score'], $archer['xcount'], $archer['week'], $archer['div']);
+            echo json_encode(array('status' => 'passed', 'message' => 'Score entered'));
+        } else {
+            echo json_encode(array('status' => 'failed', 'message' => 'Score already entered'));
+        }
 
-            // validate score
 
-            if (is_numeric($_POST['score']) || is_numeric($_POST['xcount'])) {
-                if ($_POST['score'] >= 0 && $_POST['score'] <= 360 && $_POST['xcount'] >= 0 && $_POST['xcount'] <= 36) {
-                    // check to see if a score already exists
-                    $existingScore = $score->getCWScore($archerId, $_POST['week'], $_POST['division']);
-                    // if a score doesnt exist, create one
-                    if (!isset($existingScore[0])) {
-                        $score->setScore($archerId, $_POST['score'], $_POST['xcount'], $_POST['week'], $_POST['division']);
-                    } else {
-                        $_SESSION['invalidscore'] = "*Score already entered";
-                        header("Location: /week?week=" . $_POST['week']);
-                    }
-                }
-            } else {
-                $_SESSION['invalidscore'] = "*Invalid score";
-                header("Location: /week?week=" . $_POST['week']);
-            }
+        die();
+
 
             // Removes the association of temp users
             $tempAssoc = $archer->checkAssociation($_SESSION['id'], $archerId);
             if (isset($tempAssoc[0]) && $tempAssoc[0]['status'] == 'TEMP') {
                 $archer->removeAssociation($_SESSION['id'], $archerId);
             }
-            
-        }
-        header("Location: /week?week=" . $_POST['week']);
-        die();
+
     }
 
 
@@ -87,20 +75,21 @@ class Results extends Base
      * Adds a temp user to the users profile
      *  - 1 time use, removes after entering a score
      */
-    public function addTempUser()
+    public function ajax_addTempUser()
     {
+
         $user = new User();
 
         $anzNum = $user->getUserIdByAnzNum($_POST['anz_num']);
         if (isset($anzNum)) {
             $result = $user->checkAssociation($_SESSION['id'], $anzNum);
             if (!isset($result[0])) {
-                $user->setAssociatedUser($_SESSION['id'], $anzNum, "TEMP");
+                $result = $user->setAssociatedUser($_SESSION['id'], $anzNum, "TEMP");
+                echo json_encode(array("status" => "success", "message" => "added")); die();
             }
         }
+        echo json_encode(array("status" => "failed", "message" => "Could Not Add Association")); die();
 
-        header('location: /week?week=' . $_POST['week']);
-        die();
     }
 
 
@@ -110,6 +99,10 @@ class Results extends Base
     public function getUserByAnz()
     {
         $anzNum = $_GET['anz_num'];
+
+        if ($anzNum == '') {
+            return;
+        }
 
         $user = new User();
 
