@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-5 col-md-5">
-        <form class="form-horizontal" id="formAccount" method="post" onsubmit="return checkProfileForm()">
+        <form class="form-horizontal" id="formAccount" method="post" action="#" onsubmit="return checkAccountForm()">
             <fieldset>
                 <div id="legend">
                     <legend class="">Request A New Account</legend>
@@ -80,7 +80,7 @@
         </form>
     </div>
     <div class="col-sm-5 col-md-5">
-        <form class="form-horizontal" id="formProfile" method="post" onsubmit="return checkProfileForm()">
+        <form class="form-horizontal" id="formProfile" method="post" action="#" onsubmit="return checkProfileForm()">
             <fieldset>
                 <div id="legend">
                     <legend class="">Request A New Profile</legend>
