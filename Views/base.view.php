@@ -35,7 +35,7 @@
 
         <div class="page-container">
             <div class="container">
-                <div class="col-sm-6 col-md-10">
+                <div class="col-xs-12 col-sm-12 col-md-12">
                     <?php include($viewName . '.php'); ?>
                 </div>
             </div>
