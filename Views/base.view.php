@@ -34,12 +34,11 @@
         <br>
 
         <div class="page-container">
-            <div class="container">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <?php include($viewName . '.php'); ?>
-                </div>
+            <div class="col-xs-16 col-sm-12 col-md-12">
+                <?php include($viewName . '.php'); ?>
             </div>
         </div>
+
         <br><br><br><br><br><br><br><br>
 
 
