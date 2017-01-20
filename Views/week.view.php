@@ -77,7 +77,7 @@
     <div class="row">
         <legend><?= ucwords($key); ?></legend>
         <div class="table">
-            <table class="table table-bordered table-hover" id="table-<?= ucwords($key); ?>">
+            <table class="table table-bordered table-hover table-responsive" id="table-<?= ucwords($key); ?>">
                 <thead>
                     <tr>
                         <th class="col-sm-1 col-md-1">#</th>
