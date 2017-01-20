@@ -6,11 +6,9 @@
     <hr>
     <div class="row" id="subscores">
         <?php
-        if (isset($_SESSION['id'])) {
-            echo "<legend>Submit Scores</legend>";
-            echo "<p style='margin-left: 14px'>Only enter scores for those who shot this week</p>";
-        }
-        ?>
+        if (isset($_SESSION['id'])) { ?>
+            <legend>Submit Scores</legend>
+            <p style='margin-left: 14px'>Only enter scores for those who shot this week</p>
         <div class="container">
             <div class="table" id="scoreTable">
                 <table class="table table-bordered table-hover">
@@ -78,7 +76,7 @@
         </div>
     </div>
 </div>
-
+<?php } ?>
 
 <br><br>
 <?php foreach ($viewData['scores'] as $key => $value) {?>
