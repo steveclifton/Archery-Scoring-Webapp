@@ -1,9 +1,9 @@
-<h2>Welcome <?= $viewData['first_name'] ?></h2>
 <div class="row">
     <?php include('layouts/weekselect.view.php') ?>
 </div>
-<h4>Current submitted scores</h4>
 <div class="container">
+    <h2>Welcome <?= $viewData['first_name'] ?></h2>
+    <h4>Current submitted scores</h4>
     <div class="table">
         <table class="table table-bordered table-hover">
             <thead>
