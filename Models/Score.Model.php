@@ -128,7 +128,7 @@ class Score extends Base
 
         $stm->execute(array('$userId, $week'));
 
-        $data = $stm->fetchAll();
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
         return $data;
     }
@@ -143,7 +143,7 @@ class Score extends Base
     {
         $table = $this->tableName;
 
-        $sql = "SELECT users.id, users.first_name, users.last_name, `$table`.score, `$table`.xcount, `$table`.division  
+        $sql = "SELECT users.id, users.anz_num, users.prefered_type, users.first_name, users.last_name, `$table`.score, `$table`.xcount, `$table`.division  
                 FROM `$table`
                 INNER JOIN users 
                 ON `$table`.user_id = users.id
