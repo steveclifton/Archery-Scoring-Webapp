@@ -2,14 +2,13 @@
     <?php include('layouts/weekselect.view.php') ?>
 </div>
 
+<?php
+if (isset($_SESSION['id'])) { ?>
 <div class="container">
-    <hr>
     <div class="row" id="subscores">
-        <?php
-        if (isset($_SESSION['id'])) { ?>
-            <legend>Submit Scores</legend>
-            <p style='margin-left: 14px'>Only enter scores for those who shot this week</p>
         <div class="container">
+            <legend>Submit Scores</legend>
+            <p>Only enter scores for those who shot this week</p>
             <div class="table" id="scoreTable">
                 <table class="table table-bordered table-hover">
                     <thead>
@@ -41,7 +40,7 @@
                         <td class="hidden-xs hidden-sm hidden-md hidden-lg"><span class="week"><?= $_GET['week'] ?></td>
                     </tr>
                     </tbody>
-                <?php } ?>
+                    <?php } ?>
                 </table>
             </div>
         </div>
@@ -55,7 +54,6 @@
     <div class="col-xs col-md-2">
         <p><input type="checkbox" id="correctScores">Scores Correct</p>
     </div>
-
 </div>
 
 <div class="container">
@@ -81,35 +79,39 @@
 <br><br>
 <?php foreach ($viewData['scores'] as $key => $value) {?>
 <div class="container">
+    <div class="row">
+        <div class="container">
+            <legend><?= ucwords($key); ?></legend>
+            <div class="table">
 
-    <div class="table">
-        <h3 style="text-align: center;"><?= ucwords($key); ?></h3>
-        <table class="table table-bordered table-hover" id="table-<?= ucwords($key); ?>">
-            <thead>
-                <tr>
-                    <th class="col-sm-1 col-md-1">#</th>
-                    <th class="col-sm-1 col-md-2">Name</th>
-                    <th class="col-sm-1 col-md-2">Average</th>
-                    <th class="col-sm-1 col-md-2">Handicap Score</th>
-                    <th class="col-sm-1 col-md-2">X</th>
-                    <th class="col-sm-1 col-md-2">Score</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-                $i = 1;
-                foreach ($value as $vKey => $vData) { ?>
-                    <tr>
-                        <td> <?= $i++; ?></td>
-                        <td> <?= $vData['first_name'] . " " . $vData['last_name'] ?></td>
-                        <td> <?= $vData['average'] ?></td>
-                        <td> <?= ($vData['score'] + $vData['handicap']) ?></td>
-                        <td> <?= $vData['xcount'] ?></td>
-                        <td> <?= $vData['score'] ?></td>
-                    </tr>
-            <?php } ?>
-            </tbody>
-        </table>
+                <table class="table table-bordered table-hover" id="table-<?= ucwords($key); ?>">
+                    <thead>
+                        <tr>
+                            <th class="col-sm-1 col-md-1">#</th>
+                            <th class="col-sm-1 col-md-2">Name</th>
+                            <th class="col-sm-1 col-md-2">Average</th>
+                            <th class="col-sm-1 col-md-2">Handicap Score</th>
+                            <th class="col-sm-1 col-md-2">X</th>
+                            <th class="col-sm-1 col-md-2">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                        $i = 1;
+                        foreach ($value as $vKey => $vData) { ?>
+                            <tr>
+                                <td> <?= $i++; ?></td>
+                                <td> <?= $vData['first_name'] . " " . $vData['last_name'] ?></td>
+                                <td> <?= $vData['average'] ?></td>
+                                <td> <?= ($vData['score'] + $vData['handicap']) ?></td>
+                                <td> <?= $vData['xcount'] ?></td>
+                                <td> <?= $vData['score'] ?></td>
+                            </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 <?php } ?>
