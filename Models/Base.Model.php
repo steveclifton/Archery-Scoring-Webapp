@@ -2,8 +2,6 @@
 
 namespace Archery\Models;
 
-use Archery\Exceptions\CustomException;
-use Archery\Services\Database;
 use Archery\Services\DB;
 
 
