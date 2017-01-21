@@ -5,17 +5,20 @@ namespace Archery;
 
 require 'vendor/autoload.php';
 
+use Dotenv\Dotenv;
 use Archery\Configurations\Event;
 use Archery\Controllers\Admin;
 use Archery\Controllers\Authentication;
 use Archery\Controllers\Profile;
 use Archery\Controllers\Results;
-use Archery\Controllers\Score;
-use Archery\Controllers\User;
 use Archery\Controllers\Welcome;
 use Archery\Controllers\Errors;
 
+
 session_start();
+
+$dotenv = new Dotenv(__DIR__);
+$dotenv->load();
 
 
 if (isset($_SERVER['REDIRECT_URL'])) {
