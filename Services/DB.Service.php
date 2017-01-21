@@ -13,7 +13,6 @@ class DB extends PDO
     public function __construct()
     {
         try {
-            $env = new Env();
             parent::__construct(getenv('DATABASE'), getenv('DB_USER'), getenv('DB_PASS'));
         } catch (PDOException $Exception) {
             header('location: /error');
