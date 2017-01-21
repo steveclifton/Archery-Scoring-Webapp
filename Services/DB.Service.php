@@ -14,7 +14,7 @@ class DB extends PDO
     {
         try {
             $env = new Env();
-            parent::__construct($env->database, $env->username, $env->password);
+            parent::__construct(getenv('DATABASE'), getenv('DB_USER'), getenv('DB_PASS'));
         } catch (PDOException $Exception) {
             header('location: /error');
         }
