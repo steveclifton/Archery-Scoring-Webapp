@@ -47,15 +47,12 @@ else if ($uri == 'register') {
     $authentication->register();
 }
 
-else if ($uri == 'registerprofile') {
-    $authentication = new Authentication();
-    $authentication->registerProfile();
-}
-
 else if ($uri == 'updatesetup') {
     $admin = new Event();
     $admin->setSetup();
 }
+
+
 
 else if ($uri == 'admin') {
     $admin = new Admin();
