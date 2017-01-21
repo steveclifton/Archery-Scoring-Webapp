@@ -1,7 +1,15 @@
 $(document).ready(function () {
 
+    //$('#spinning').append('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
 
-    //$('<p id="validation" style="color: green">Found</p>').insertAfter($('#searcharcher'));
+    var $loading = $('#spinning').hide();
+    $(document)
+        .ajaxStart(function () {
+            $loading.show();
+        })
+        .ajaxStop(function () {
+            $loading.hide();
+        });
 
 
     // Disables the Add Archer Button by Default
