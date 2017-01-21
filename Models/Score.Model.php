@@ -5,18 +5,6 @@ namespace Archery\Models;
 use Archery\Configurations\Event;
 use PDO;
 
-
-/**
- * Terms
- *        - CW - Current Week
- *        - LIU - Logged In User
- *        - GOU - Group Of Users
- *        - ALL - All Active Users
- *        - SFU - Specific User
- *
- */
-
-
 class Score extends Base
 {
     private $tableName;
@@ -69,11 +57,6 @@ class Score extends Base
         return true;
     }
 
-
-    public function setMultipleScores($enteries)
-    {
-        // Here club sect can enter multiple scores for multiple archers
-    }
 
 
     /**********************************************************************************************
@@ -158,7 +141,9 @@ class Score extends Base
         $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
 
-
+        /**
+         * TODO
+         */
         $returnData['compound'] = array();
         $returnData['recurve'] = array();
         $returnData['recurve barebow'] = array();
