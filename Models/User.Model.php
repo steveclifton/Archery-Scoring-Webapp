@@ -39,13 +39,16 @@ class User extends Base
         return $data;
     }
 
+    /**
+     * Updates the users profile details
+     */
     public function updateUserProfileDetails($userData)
     {
         $id = $_SESSION['id'];
         $email = strtolower($userData['email']);
-        $firstName = ucfirst($userData['first_name']);
-        $lastName = ucfirst($userData['last_name']);
-        $club = strtoupper($userData['club']);
+        $firstName = strtolower($userData['first_name']);
+        $lastName = strtolower($userData['last_name']);
+        $club = strtolower($userData['club']);
         $phone = $userData['phone'];
         $address = $userData['address'];
         $preferedType = $userData['prefered_type'];
@@ -76,12 +79,19 @@ class User extends Base
      * Creates an account if registration information is valid
      * - returns a new user object - used to log the user in automatically
      */
-    public function createAccount($anzNum, $firstName, $lastName, $gender, $club, $userType, $email, $password, $preferedType)
+    public function createAccount($userData)
     {
+        $anzNum = trim($userData['anz_num']);
+        $firstName = strtolower(trim($userData['first_name']));
+        $lastName = strtolower(trim($userData['last_name']));
+        $gender = strtolower(trim($userData['gender']));
+        $club = strtolower(trim($userData['club']));
+        $email = strtolower(trim($userData['email']));
+        $preferedType = strtolower(trim($userData['prefered_type']));
+        $userType = 'user';
+
         $ipAddress = $_SERVER['REMOTE_ADDR'];
-        $password = password_hash($password, PASSWORD_DEFAULT);
-
-
+        $password = password_hash($userData['password'], PASSWORD_DEFAULT);
 
         $sql = "INSERT INTO `users` 
                   (`id`, `anz_num`, `first_name`, `last_name`, `gender`, `club`, `phone`, `address`, `user_type`, `email`, `password`, `prefered_type`, `last_ip`, `created_at`) 
@@ -100,8 +110,16 @@ class User extends Base
      * Creates a profile if registration information is valid
      * - returns a new user object - used to log the user in automatically
      */
-    public function createProfile($anzNum, $firstName, $lastName, $gender, $userType, $email, $preferedType)
+    public function createProfile($userData)
     {
+        $anzNum = $_POST['anz_num'];
+        $firstName = strtolower(trim($userData['first_name']));
+        $lastName = strtolower(trim($userData['last_name']));
+        $gender = strtolower(trim($userData['gender']));
+        $email = strtolower(trim($userData['email']));
+        $preferedType = strtolower(trim($userData['prefered_type']));
+        $userType = 'user';
+
         $ipAddress = $_SERVER['REMOTE_ADDR'];
 
         $sql = "INSERT INTO `users` 
@@ -168,13 +186,13 @@ class User extends Base
      */
     public function confirmPendingUsers($userData)
     {
-        $firstName = ucfirst($userData['first_name']);
-        $lastName = ucfirst($userData['last_name']);
+        $firstName = strtolower($userData['first_name']);
+        $lastName = strtolower($userData['last_name']);
         $anzNum = $userData['anz_num'];
         $userType = 'user';
 
-        $club = strtoupper($userData['club']);
-        $email = ucfirst($userData['email']);
+        $club = strtolower($userData['club']);
+        $email = strtolower($userData['email']);
 
         $ipAddress = $_SERVER['REMOTE_ADDR'];
 
@@ -206,6 +224,7 @@ class User extends Base
      */
     public function setAssociatedUser($userId, $assocUser, $status)
     {
+
         $sql = "INSERT INTO `join_users` (`id`, `user_id`, `associate_id`, `status`) 
                 VALUES (NULL, '$userId', '$assocUser', '$status');";
 
@@ -307,14 +326,11 @@ class User extends Base
     }
 
     /**
-     * Verifies whether the users student id and password exist and match
-     *
-     * @param $userData
-     * @return mixed
+     * Verifies whether the users account exists
      */
     public function verify($userData)
     {
-        $existingUser = $this->getUserByEmail($userData['email']);
+        $existingUser = $this->getUserByEmail(strtolower($userData['email']));
 
         if (isset($existingUser['0'])) {
             $existingUser = $existingUser['0'];
