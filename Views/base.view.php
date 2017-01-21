@@ -39,7 +39,13 @@
             </div>
         </div>
 
-        <br><br><br><br><br><br><br><br>
+        <div class="page-container">
+            <div class="col-xs-16 col-sm-12 col-md-12">
+                <?php include('Views/layouts/footer.php'); ?>
+            </div>
+        </div>
+
+
 
 
     </body>
