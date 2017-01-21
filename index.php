@@ -12,14 +12,11 @@ use Archery\Controllers\Authentication;
 use Archery\Controllers\Profile;
 use Archery\Controllers\Results;
 use Archery\Controllers\Welcome;
-use Archery\Controllers\Errors;
-
 
 session_start();
 
 $dotenv = new Dotenv(__DIR__);
 $dotenv->load();
-
 
 if (isset($_SERVER['REDIRECT_URL'])) {
     $uri = str_replace('/', '', $_SERVER['REDIRECT_URL']);
