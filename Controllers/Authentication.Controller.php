@@ -71,16 +71,8 @@ class Authentication extends Base
      */
     public function ajaxRegisterAccount()
     {
-        $anz_num = trim(strtolower(['anz_num']));
-        $club = trim(strtolower($_POST['club']));
         $password = trim($_POST['password']);
         $confirmPassword = trim($_POST['confirm_password']);
-        $email = trim(strtolower($_POST['email']));
-        $first_name = trim(strtolower($_POST['first_name']));
-        $last_name = trim(strtolower($_POST['last_name']));
-        $pref_type = strtolower($_POST['prefered_type']);
-        $gender = strtolower($_POST['gender']);
-        $userType = 'user';
 
         if ($password != $confirmPassword) {
             echo json_encode(array("status" => "failed", "message" => "passwords do not match"));
@@ -88,10 +80,10 @@ class Authentication extends Base
         }
 
         $user = new User();
-        $existingAnzNum = $user->doesAnzNumberExist($anz_num);
+        $existingAnzNum = $user->doesAnzNumberExist($_POST['anz_num']);
 
         if (!$existingAnzNum) {
-            $result = $user->createAccount($anz_num, $first_name, $last_name, $gender, $club, $userType, $email, $password, $pref_type);
+            $result = $user->createAccount($_POST);
             if ($result) {
                 echo json_encode(array("status" => "success", "message" => "Account Created"));
                 return;
@@ -112,19 +104,11 @@ class Authentication extends Base
      */
     public function ajaxRegisterProfile()
     {
-        $anz_num = trim($_POST['anz_num']);
-        $email = trim(strtolower($_POST['email']));
-        $first_name = trim(strtolower($_POST['first_name']));
-        $last_name = trim(strtolower($_POST['last_name']));
-        $pref_type = strtolower($_POST['prefered_type']);
-        $gender = strtolower($_POST['gender']);
-        $userType = 'user';
-
         $user = new User();
-        $existingAnzNum = $user->doesAnzNumberExist($anz_num);
+        $existingAnzNum = $user->doesAnzNumberExist($_POST['anz_num']);
 
         if (!$existingAnzNum) {
-            $result = $user->createProfile($anz_num, $first_name, $last_name, $gender, $userType, $email, $pref_type);
+            $result = $user->createProfile($_POST);
             if ($result) {
                 echo json_encode(array("status" => "success", "message" => "Account Created"));
                 return;
@@ -149,9 +133,9 @@ class Authentication extends Base
         $_SESSION['id'] = $data['id'];
         $_SESSION['anz_num'] = $data['anz_num'];
         $_SESSION['email'] = ucwords($data['email']);
-        $_SESSION['first_name'] = ucfirst(['first_name']);
-        $_SESSION['last_name'] = ucfirst(['last_name']);
-        $_SESSION['gender'] = ucfirst(['gender']);
+        $_SESSION['first_name'] = ucfirst($data['first_name']);
+        $_SESSION['last_name'] = ucfirst($data['last_name']);
+        $_SESSION['gender'] = ucfirst($data['gender']);
         $_SESSION['user_type'] = $data['user_type'];
         $_SESSION['prefered_type'] = $data['prefered_type'];
     }
