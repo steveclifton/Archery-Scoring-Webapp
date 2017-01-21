@@ -1,5 +1,4 @@
 /.idea
-Services/Env.php
 pma
 vendor
 .env
