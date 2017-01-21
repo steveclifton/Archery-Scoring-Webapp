@@ -22,7 +22,7 @@
                 <?php foreach ($viewData['archers'] as $archer) {?>
                 <tbody>
                     <tr class="archer">
-                    <td><span class="name"><?= $archer['first_name'] . " " . $archer['last_name'] ?></span></td>
+                    <td><span class="name"><?= ucfirst($archer['first_name']) . " " . ucfirst($archer['last_name']) ?></span></td>
                     <td class="hidden-xs hidden-sm"><input type="text" id="anz_num" class="form-control" value="<?= $archer['anz_num'] ?>" readonly></td>
                     <td><input type="text" id="score" class="form-control" placeholder="Score" ></td>
                     <td><input type="text" id="xcount" class="form-control" placeholder="X" ></td>
@@ -93,7 +93,7 @@
                     foreach ($value as $vKey => $vData) { ?>
                         <tr>
                             <td> <?= $i++; ?></td>
-                            <td> <?= $vData['first_name'] . " " . $vData['last_name'] ?></td>
+                            <td> <?= ucfirst($vData['first_name']) . " " . ucfirst($vData['last_name']) ?></td>
                             <td> <?= $vData['average'] ?></td>
                             <td> <?= ($vData['score'] + $vData['handicap']) ?></td>
                             <td> <?= $vData['xcount'] ?></td>
