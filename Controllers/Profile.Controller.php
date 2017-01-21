@@ -25,6 +25,9 @@ class Profile extends Base
         $this->render('Profile', 'profile.view', $viewData);
     }
 
+    /**
+     * Updates a users profile
+     */
     public function updateProfile()
     {
         $profile = new User();
@@ -38,6 +41,9 @@ class Profile extends Base
         $this->viewProfile();
     }
 
+    /**
+     * Updates an association between users
+     */
     public function updateAssociation()
     {
         $user = new User();
