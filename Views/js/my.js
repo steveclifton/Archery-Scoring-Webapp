@@ -20,7 +20,7 @@ $(document).ready(function () {
     if (!$('#correctScores').is(' :checked')) {
         $('#submit').prop('disabled', true);
     }
-    $('#correctScores').change(function() {
+    $('#correctScores').change(function () {
         if (!$('#correctScores').is(' :checked')) {
             $('#submit').prop('disabled', true);
         } else {
@@ -185,6 +185,7 @@ $(document).ready(function () {
         $('tr.archer').each(function () {
             $("#invalidScore").remove();
             $("#invalidXCount").remove();
+            $(".existingscore").remove();
         });
 
 
@@ -228,9 +229,10 @@ $(document).ready(function () {
                             $this = $(this);
                             var name = $this.find("span.name").html();
                             if (name == archer.name) {
-                                $('<p id="invalidXCount" style="color: red">Score already entered</p>').insertAfter($($this.find("span.name")));
+                                $('<p><span class="existingscore" style="color: red">Score already entered</span></p>').insertAfter($($this.find("span.name")));
                             }
-
+                            $('#submit').prop('disabled', true);
+                            $('#correctScores').prop('checked', false);
                         });
                     } else {
                         $("tr.archer").each(function() {
@@ -243,9 +245,8 @@ $(document).ready(function () {
                     }
                 }
             });
+
         });
-
-
 
 
         function checkScore(score) {
@@ -266,12 +267,9 @@ $(document).ready(function () {
 
             return true;
         }
-
-
-
-
-
     });
+
+
 
 
 
