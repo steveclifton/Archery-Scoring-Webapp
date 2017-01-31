@@ -305,13 +305,13 @@ class User extends Base
     {
         $userId = $_SESSION['id'];
 
+
         $sql = "SELECT users.first_name, users.prefered_type, users.last_name, users.anz_num, users.club, users.email, join_users.status 
                 FROM `join_users` 
                 INNER JOIN users 
                 ON `join_users`.associate_id = users.id 
                 WHERE `join_users`.user_id = '$userId'
-                AND `join_users`.status = 'CONFIRMED'
-                OR `join_users`.status = 'TEMP'
+                AND (`join_users`.status = 'CONFIRMED' OR `join_users`.status = 'TEMP')
                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
