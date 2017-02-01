@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-    //$('#spinning').append('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
-
     var $loading = $('#spinning').hide();
     $(document)
         .ajaxStart(function () {
@@ -20,6 +18,7 @@ $(document).ready(function () {
     if (!$('#correctScores').is(' :checked')) {
         $('#submit').prop('disabled', true);
     }
+
     $('#correctScores').change(function () {
         if (!$('#correctScores').is(' :checked')) {
             $('#submit').prop('disabled', true);
@@ -90,6 +89,8 @@ $(document).ready(function () {
             toggleView('#pendingusers', '#pendingbutton');
         });
     });
+
+
 
     /****************************************************************
      *                      Profile Methods                           *
@@ -168,27 +169,24 @@ $(document).ready(function () {
                 }
             }
         });
-
-
-
     });
 
-    // Method here that when they press 'Add archer for scoring' the post data is sent and the page is refreshed (displaying the new person)
 
 
     /**
      *  On Submit button, scores are sent via AJAX to be entered in the DB
-     *
+     *   - If score exists, displays a message below users name to show the mistake
+     *   - If score is legit, removes all rows in the table and appends the new data to it
      */
     $('#submit').on('click', function () {
 
         $('tr.archer').each(function () {
             $("#invalidScore").remove();
             $("#invalidXCount").remove();
-            $(".existingscore").remove();
+            $("#hasscore").remove();
         });
 
-
+        var failed = [];
         $("tr.archer").each(function() {
             $this = $(this);
             var name = $this.find("span.name").html();
@@ -215,7 +213,6 @@ $(document).ready(function () {
 
             var archer = { "name":name, "anz":anz, "score":score, "xcount":xcount, "div":div, "week":week };
 
-
             $.ajax({
                 type: 'POST',
                 url: '/ajax_submitScore',
@@ -224,12 +221,14 @@ $(document).ready(function () {
                 },
                 success: function (data) {
                     var json = $.parseJSON(data);
+
                     if (json.status == 'failed') {
                         $("tr.archer").each(function() {
                             $this = $(this);
                             var name = $this.find("span.name").html();
                             if (name == archer.name) {
-                                $('<p><span class="existingscore" style="color: red">Score already entered</span></p>').insertAfter($($this.find("span.name")));
+                                failed.push(name);
+                                $('<p id="hasscore" style="color: red">Score already entered</p>').insertAfter($($this.find("span.name")));
                             }
                             $('#submit').prop('disabled', true);
                             $('#correctScores').prop('checked', false);
@@ -238,16 +237,39 @@ $(document).ready(function () {
                         $("tr.archer").each(function() {
                             $this = $(this);
                             var name = $this.find("span.name").html();
+                            var div = $this.find("select#div").val();
+                            var score = $this.find("input#score").val('');
+                            var xCount = $this.find("input#xcount").val('');
                             if (name == archer.name) {
                                 $('<p id="invalidXCount" style="color: green">Score Updated</p>').insertAfter($($this.find("span.name")));
+                                return false;
                             }
+
+                        });
+                        if (div == 'recurve barebow') {
+                            div = 'recurvebb';
+                        }
+                        var table = "#table-" + div;
+                        var tableTBody = "#table-" + div + " tbody";
+                        $(tableTBody).empty();
+                        var archersScores = json.allScores;
+
+                        var i = 1;
+                        $(archersScores).each(function() {
+                            $(tableTBody).append('<tr>' +
+                                                    '<td> ' + i + '</td>' +
+                                                    '<td> ' + capitalizeFirstLetter(this.first_name) + " " + capitalizeFirstLetter(this.last_name) + '</td>' +
+                                                    '<td> ' + this.average + '</td>' +
+                                                    '<td> ' + this.xcount + '</td>' +
+                                                    '<td> ' + this.score + '</td>' +
+                                                 '</tr>'
+                                                );
+                            i++;
                         });
                     }
                 }
             });
-
         });
-
 
         function checkScore(score) {
             if (isNaN(score)) {
@@ -267,6 +289,7 @@ $(document).ready(function () {
 
             return true;
         }
+
     });
 
 
@@ -276,8 +299,6 @@ $(document).ready(function () {
     /****************************************************************
      *                      Register Methods                        *
      ****************************************************************/
-
-
 
 
     /**
@@ -322,35 +343,7 @@ $(document).ready(function () {
         }
     });
 
-});
-
-
-//     $('div.bow select').ready(function () {
-//         checkIfSubmitted();
-//     });
-//
-//     $('div.bow select').on('change', function () {
-//         $("#incorrect").html("");
-//         checkIfSubmitted();
-//     });
-//
-//
-//
-// function checkIfSubmitted() {
-//     // var div = $('div.bow select').val();
-//     // var weekNum = $('#week_num').val();
-//     // console.log(div);
-//     //
-//     // $.get("/ajax_searchScoreWeekDiv?div=" + div + "&week=" + weekNum, function (data) {
-//     //     if (data == 'true') {
-//     //         div = capitalizeFirstLetter(div);
-//     //         $("#incorrect").html("Score Submitted for " + div + " Division");
-//     //         $('input[type="submit"]').prop('disabled', true);
-//     //     } else {
-//     //         $('input[type="submit"]').prop('disabled', false);
-//     //     }
-//     // });
-// }
+}); // end of document ready
 
 
 /**
