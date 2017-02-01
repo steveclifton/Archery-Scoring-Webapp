@@ -154,27 +154,27 @@ class Score extends Base
             if ($d['division'] == 'compound'){
                 $d3 = $this->getTotalScoresAveraged($d['id'], "compound");
                 $d['average'] = $d3['average'];
-                $d['handicap'] = $d3['handicap'];
+//                $d['handicap'] = $d3['handicap'];
                 array_push($returnData['compound'], $d);
             } else if ($d['division'] == 'recurve'){
                 $d3 = $this->getTotalScoresAveraged($d['id'], "recurve");
                 $d['average'] = $d3['average'];
-                $d['handicap'] = $d3['handicap'];
+//                $d['handicap'] = $d3['handicap'];
                 array_push($returnData['recurve'], $d);
             } else if ($d['division'] == 'crossbow'){
                 $d3 = $this->getTotalScoresAveraged($d['id'], "crossbow");
                 $d['average'] = $d3['average'];
-                $d['handicap'] = $d3['handicap'];
+//                $d['handicap'] = $d3['handicap'];
                 array_push($returnData['crossbow'], $d);
             } else if ($d['division'] == 'recurve barebow'){
                 $d3 = $this->getTotalScoresAveraged($d['id'], "recurve barebow");
                 $d['average'] = $d3['average'];
-                $d['handicap'] = $d3['handicap'];
+//                $d['handicap'] = $d3['handicap'];
                 array_push($returnData['recurve barebow'], $d);
             } else if ($d['division'] == 'longbow'){
                 $d3 = $this->getTotalScoresAveraged($d['id'], "longbow");
                 $d['average'] = $d3['average'];
-                $d['handicap'] = $d3['handicap'];
+//                $d['handicap'] = $d3['handicap'];
                 array_push($returnData['longbow'], $d);
             }
         }

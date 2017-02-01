@@ -77,31 +77,30 @@
     <?php } ?>
 
     <br><br>
-    <?php foreach ($viewData['scores'] as $key => $value) {?>
+    <?php foreach ($viewData['scores'] as $key => $value) { ?>
 
     <div class="row">
         <legend><?= ucwords($key); ?></legend>
         <div class="table">
-            <table class="table table-bordered table-hover table-responsive" id="table-<?= ucwords($key); ?>">
+            <table class="table table-bordered table-hover table-responsive" id="table-<?= $key; ?>">
                 <thead>
                     <tr>
                         <th class="col-sm-1 col-md-1">#</th>
-                        <th class="col-sm-1 col-md-2">Name</th>
-                        <th class="col-sm-1 col-md-2">Average</th>
-                        <th class="col-sm-1 col-md-2">Handicap Score</th>
-                        <th class="col-sm-1 col-md-2">X</th>
-                        <th class="col-sm-1 col-md-2">Score</th>
+                        <th class="col-sm-1 col-md-3">Name</th>
+                        <th class="col-sm-1 col-md-3">Average</th>
+                        <th class="col-sm-1 col-md-3">X</th>
+                        <th class="col-sm-1 col-md-3">Score</th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
                     $i = 1;
                     foreach ($value as $vKey => $vData) { ?>
+
                         <tr>
                             <td> <?= $i++; ?></td>
                             <td> <?= ucfirst($vData['first_name']) . " " . ucfirst($vData['last_name']) ?></td>
                             <td> <?= $vData['average'] ?></td>
-                            <td> <?= ($vData['score'] + $vData['handicap']) ?></td>
                             <td> <?= $vData['xcount'] ?></td>
                             <td> <?= $vData['score'] ?></td>
                         </tr>
