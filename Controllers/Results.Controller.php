@@ -53,7 +53,9 @@ class Results extends Base
         $existingScore = $score->getCWScore($userId, $archer['week'], $archer['div']);
         if (!isset($existingScore[0])) {
             $score->setScore($userId, $archer['score'], $archer['xcount'], $archer['week'], $archer['div']);
-            echo json_encode(array('status' => 'passed', 'message' => 'Score entered'));
+            $archerScore = $score->getTotalScoresAveraged($userId, $archer['div']);
+            $divScores = $score->all_getCWScores($archer['week']);
+            echo json_encode(array('status' => 'passed', 'message' => 'Score entered', 'average' => $archerScore['average'], 'allScores' =>$divScores[$archer['div']]));
         } else {
             echo json_encode(array('status' => 'failed', 'message' => 'Score already entered'));
         }
