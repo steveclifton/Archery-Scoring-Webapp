@@ -38,7 +38,7 @@
 
     <form class="form-horizontal" action="/updatesetup" method="POST">
         <div>
-            <legend class="">Marking System Setup</legend>
+            <legend class="">Archery System Setup</legend>
         </div>
         <fieldset>
             <div class="control-group">
