@@ -80,7 +80,7 @@
     <?php foreach ($viewData['scores'] as $key => $value) { ?>
 
     <div class="row">
-        <legend><?= ucwords($key); ?></legend>
+        <legend><?= ucwords($key); if ($key == 'recurve barebow') {$key = 'recurvebb';}?></legend>
         <div class="table">
             <table class="table table-bordered table-hover table-responsive" id="table-<?= $key; ?>">
                 <thead>
@@ -98,7 +98,7 @@
                     foreach ($value as $vKey => $vData) { ?>
 
                         <tr>
-                            <td> <?= $i++; ?></td>
+                            <td id="rank"> <?= $i++; ?></td>
                             <td> <?= ucfirst($vData['first_name']) . " " . ucfirst($vData['last_name']) ?></td>
                             <td> <?= $vData['average'] ?></td>
                             <td> <?= $vData['xcount'] ?></td>
