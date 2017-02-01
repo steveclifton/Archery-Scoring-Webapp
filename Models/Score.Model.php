@@ -131,7 +131,7 @@ class Score extends Base
                 INNER JOIN users 
                 ON `$table`.user_id = users.id
                 WHERE `$table`.week = '$week'
-                ORDER BY `$table`.score DESC 
+                ORDER BY `$table`.score DESC, `$table`.xcount DESC
                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
