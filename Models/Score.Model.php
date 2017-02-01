@@ -183,7 +183,6 @@ class Score extends Base
     }
 
 
-
     /**
      * Returns all the scores for a user
      * - Ordered by score
