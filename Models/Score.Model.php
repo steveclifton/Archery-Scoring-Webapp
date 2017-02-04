@@ -147,7 +147,7 @@ class Score extends Base
         $returnData['compound'] = array();
         $returnData['recurve'] = array();
         $returnData['recurve barebow'] = array();
-        $returnData['crossbow'] = array();
+        //$returnData['crossbow'] = array();
         $returnData['longbow'] = array();
         foreach ($data as $d) {
 
@@ -161,12 +161,14 @@ class Score extends Base
                 $d['average'] = $d3['average'];
 //                $d['handicap'] = $d3['handicap'];
                 array_push($returnData['recurve'], $d);
-            } else if ($d['division'] == 'crossbow'){
-                $d3 = $this->getTotalScoresAveraged($d['id'], "crossbow");
-                $d['average'] = $d3['average'];
-//                $d['handicap'] = $d3['handicap'];
-                array_push($returnData['crossbow'], $d);
-            } else if ($d['division'] == 'recurve barebow'){
+            }
+//            else if ($d['division'] == 'crossbow'){
+//                $d3 = $this->getTotalScoresAveraged($d['id'], "crossbow");
+//                $d['average'] = $d3['average'];
+////                $d['handicap'] = $d3['handicap'];
+//                array_push($returnData['crossbow'], $d);
+//            }
+            else if ($d['division'] == 'recurve barebow'){
                 $d3 = $this->getTotalScoresAveraged($d['id'], "recurve barebow");
                 $d['average'] = $d3['average'];
 //                $d['handicap'] = $d3['handicap'];
