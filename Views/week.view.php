@@ -68,7 +68,6 @@
             <div class="col-xs col-sm col-md-2">
                 <i class="fa fa-spinner fa-spin" style="font-size:40px" id="spinning"></i>
             </div>
-
         </div>
 
         <div class="row">
@@ -86,9 +85,8 @@
             </form>
             <div class="validation"></div>
         </div>
-
-        <?php } ?>
     </div>
+<?php } ?>
     <br><br>
     <?php foreach ($viewData['scores'] as $key => $value) { ?>
 
