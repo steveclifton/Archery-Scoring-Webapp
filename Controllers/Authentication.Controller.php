@@ -138,6 +138,10 @@ class Authentication extends Base
         $_SESSION['gender'] = ucfirst($data['gender']);
         $_SESSION['user_type'] = $data['user_type'];
         $_SESSION['prefered_type'] = $data['prefered_type'];
+
+        $setup = new AdminConfig();
+        $_SESSION['current_week'] = $setup->getCurrentWeek();
+
     }
     
 }
