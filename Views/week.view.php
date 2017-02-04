@@ -7,7 +7,7 @@
 <div class="container">
 
 <!--    Button to show and hide the scoring-->
-    <?php if (isset($_SESSION['id'])) { ?>
+    <?php if (isset($_SESSION['id']) && ($_GET['week'] == $_SESSION['current_week'])) { ?>
         <div class="row">
             <div class="col-xs-2 col-xs-offset-4 col-sm-2 col-sm-offset-5 col-md-2 col-md-offset-5">
                 <input type="button" value="Scoring" id="openScoring" class="btn btn-success" style="margin-left: 40%">
