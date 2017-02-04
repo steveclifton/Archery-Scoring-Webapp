@@ -59,16 +59,13 @@ class Results extends Base
             echo json_encode(array('status' => 'failed', 'message' => 'Score already entered'));
         }
 
+        // Removes the association of temp users
+        $tempAssoc = $user->checkAssociation($_SESSION['id'], $userId);
 
+        if (isset($tempAssoc[0]) && $tempAssoc[0]['status'] == 'TEMP') {
+            $user->removeAssociation($_SESSION['id'], $userId);
+        }
         die();
-
-
-            // Removes the association of temp users
-            $tempAssoc = $archer->checkAssociation($_SESSION['id'], $archerId);
-            if (isset($tempAssoc[0]) && $tempAssoc[0]['status'] == 'TEMP') {
-                $archer->removeAssociation($_SESSION['id'], $archerId);
-            }
-
     }
 
 
