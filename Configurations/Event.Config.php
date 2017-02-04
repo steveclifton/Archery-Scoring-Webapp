@@ -27,7 +27,7 @@ class Event
         $maxxCount = $_POST['maxxcount'];
 
         $this->setup->setSetup($currentWeek, $numWeeks, $currentRound, $currentEvent, $tableName, $maxScore, $maxxCount);
-
+        $_SESSION['current_week'] = $currentWeek;
         header('location: /admin');
         die();
     }
