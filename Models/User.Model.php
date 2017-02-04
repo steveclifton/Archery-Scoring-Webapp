@@ -100,6 +100,10 @@ class User extends Base
 
         $success = $stm->execute(array('$anzNum, $firstName, $lastName, $gender, $userType, $email, $password, $preferedType, $ipAddress'));
 
+        $userId = $this->getUserIdByAnzNum($anzNum);
+
+        $this->setAssociatedUser($userId, $userId, "CONFIRMED");
+
         return $success;
     }
 
@@ -128,6 +132,10 @@ class User extends Base
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
         $success = $stm->execute(array('$anzNum, $firstName, $lastName, $gender, $userType, $email, $password, $preferedType, $ipAddress'));
+
+        $userId = $this->getUserIdByAnzNum($anzNum);
+
+        $this->setAssociatedUser($userId, $userId, "CONFIRMED");
 
         return $success;
     }
