@@ -14,10 +14,10 @@ $(document).ready(function () {
     $('#addArcherButton').prop('disabled', true);
 
 
-    // Toggles the confirm scores button
-    if (!$('#correctScores').is(' :checked')) {
-        $('#submit').prop('disabled', true);
-    }
+    // // Toggles the confirm scores button
+    // if (!$('#correctScores').is(' :checked')) {
+    //     $('#submit').prop('disabled', true);
+    // }
 
     $('#correctScores').change(function () {
         if (!$('#correctScores').is(' :checked')) {
@@ -76,6 +76,15 @@ $(document).ready(function () {
         $(element).toggleClass('hidden');
     }
 
+    function toggleViewScoring(element, button) {
+        if ($(button).val() == 'Hide') {
+            $(button).prop('value', 'Scoring');
+        } else {
+            $(button).prop('value', 'Hide');
+        }
+        $(element).toggleClass('hidden');
+    }
+
 
     /****************************************************************
      *                      Admin Methods                           *
@@ -126,6 +135,14 @@ $(document).ready(function () {
      *                      Scoring Methods                           *
      ****************************************************************/
 
+    /**
+     * Displays the scoring tables
+     */
+    $('#openScoring').ready(function () {
+        $('#openScoring').on('click', function () {
+            toggleViewScoring('#scoringTable', '#openScoring');
+        });
+    });
 
     /**
      * Ajax finds the user if they exist ready to be added to temp scoring
