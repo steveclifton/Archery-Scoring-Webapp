@@ -3,7 +3,7 @@
     <legend>Update Details</legend>
     <input type="button" value="Show" id="profileformbutton" class="btn btn-warning">
     <hr>
-    <form class="form-horizontal hidden" action="/userprofileupdate" method="POST" id="userprofileform" onsubmit="return checkProfileUpdate()">
+    <form class="form-horizontal hidden" action="/#" method="POST" id="userprofileform" onsubmit="return checkProfileUpdate()">
         <fieldset>
             <div class="control-group">
                 <label class="control-label">ANZ Number</label>

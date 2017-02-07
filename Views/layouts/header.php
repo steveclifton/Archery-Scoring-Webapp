@@ -55,7 +55,6 @@
                                 </div>
                                 <button type=\"submit\" class=\"btn btn-default\">Sign In</button>
                                 </form>
-                                <li><a href='/#'>Reset Password</a></li>
                         ";
                     }
                 ?>
