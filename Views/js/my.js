@@ -354,8 +354,11 @@ $(document).ready(function () {
             if (password != confirmPassword) {
                 $('#confirm_password').parent().after("<div id='validation_password' style='color:red;'>Passwords do not match</div>");
                 $('#registerAccount').prop('disabled', true);
+                $('#updateProfile').prop('disabled', true);
             } else {
                 $('#registerAccount').prop('disabled', false);
+                $('#updateProfile').prop('disabled', false);
+
             }
         }
     });
@@ -457,6 +460,47 @@ function checkProfileForm()
 
 }
 
+function checkProfileUpdate()
+{
+    var values = {};
+    $.each($('#userprofileform').serializeArray(), function (i, field) {
+        values[field.name] = field.value;
+    });
+
+    if (values['password'] != values['confirm_password']) {
+        return false;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '/ajaxUpdateProfile',
+        data: {
+            'address': values['address'],
+            'anz_num': values['anz_num'],
+            'club': values['club'],
+            'phone': values['phone'],
+            'password': values['password'],
+            'confirm_password': values['confirm_password'],
+            'email': values['email'],
+            'first_name': values['first_name'],
+            'last_name': values['last_name'],
+            'prefered_type': values['prefered_type'],
+            'gender': values['gender']
+        },
+        success: function (data) {
+            var json = $.parseJSON(data);
+            if (json.status == 'failed') {
+                alert(json.message);
+            } else {
+                alert('Profile updated');
+                location.reload();
+            }
+
+        }
+    });
+    return false;
+
+}
 
 
 
