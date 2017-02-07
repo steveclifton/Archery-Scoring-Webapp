@@ -25,21 +25,34 @@ class Profile extends Base
         $this->render('Profile', 'profile.view', $viewData);
     }
 
+
     /**
-     * Updates a users profile
+     * Receives info from the profile update page (from Ajax)
      */
-    public function updateProfile()
+    public function ajaxUpdateProfile()
     {
-        $profile = new User();
-        $auth = new Authentication();
 
-        $profile->updateUserProfileDetails($_POST);
-        
-        $userDetails = $profile->getUserByEmail($_POST['email']);
-        $auth->setSession($userDetails[0]);
+        $password = trim($_POST['password']);
+        $confirmPassword = trim($_POST['confirm_password']);
 
-        $this->viewProfile();
+        if ($password != $confirmPassword) {
+            echo json_encode(array("status" => "failed", "message" => "passwords do not match"));
+            return;
+        }
+
+        $user = new User();
+        $result = $user->updateUserProfileDetails($_POST);
+
+
+        if ($result) {
+            echo json_encode(array("status" => "success", "message" => "Profile Updated"));
+            return;
+        } else {
+            echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
+            return;
+        }
     }
+
 
     /**
      * Updates an association between users
