@@ -3,13 +3,13 @@
     <legend>Update Details</legend>
     <input type="button" value="Show" id="profileformbutton" class="btn btn-warning">
     <hr>
-    <form class="form-horizontal hidden" action="/userprofileupdate" method="POST" id="userprofileform">
+    <form class="form-horizontal hidden" action="/userprofileupdate" method="POST" id="userprofileform" onsubmit="return checkProfileUpdate()">
         <fieldset>
             <div class="control-group">
                 <label class="control-label">ANZ Number</label>
                 <div class="controls">
                     <input type="text" id="anz_num" name="anz_num" class="input-xlarge"
-                           value="<?= $viewData['user']['anz_num'] ?>" disabled>
+                           value="<?= $viewData['user']['anz_num'] ?>" readonly>
                 </div>
             </div>
             <div class="control-group">
@@ -33,6 +33,23 @@
                            value="<?= $viewData['user']['email'] ?>" required>
                 </div>
             </div>
+
+<!--            Update Password-->
+            <div class="control-group">
+                <!-- Password-->
+                <label class="control-label">Update Password</label>
+                <div class="controls">
+                    <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+                </div>
+            </div>
+            <div class="control-group">
+                <!-- Password-->
+                <label class="control-label">Confirm Password</label>
+                <div class="controls">
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="" class="input-xlarge">
+                </div>
+            </div>
+
             <div class="control-group">
                 <label class="control-label">Club</label>
                 <div class="controls">
@@ -71,7 +88,7 @@
             <br>
             <div class="control-group">
                 <div class="controls">
-                    <button class="btn btn-success" id="update">Update</button>
+                    <button class="btn btn-success" id="updateProfile">Update</button>
                 </div>
             </div>
         </fieldset>
@@ -80,9 +97,6 @@
     <div class="row">
     <legend>Associated Archers</legend>
     <form class="form-inline" action="/updateassociateduser" method="POST" name="addassocusers">
-        <div class="form-group">
-            <input type="text" class="form-control" name="name" placeholder="Full Name">
-        </div>
         <div class="form-group">
             <input type="text" class="form-control" name="anz_num" placeholder="Anz Number">
         </div>
@@ -107,7 +121,7 @@
                         <tr>
                             <form action="/updateassociateduser" method="post">
                                 <td><input style="text-align: center" class="form-control" type="text" value="<?= $user['anz_num'] ?>" name="anz_num" readonly></td>
-                                <td><input style="text-align: center" class="form-control" type="text" value="<?= $user['first_name'] ?> <?= $user['last_name'] ?>" name="full_name" readonly></td>
+                                <td><input style="text-align: center" class="form-control" type="text" value="<?= ucwords($user['first_name']) . " " . ucwords($user['last_name']) ?>" name="full_name" readonly></td>
                                 <td><input style="text-align: center" class="form-control" type="text" value="<?= $user['club'] ?>" name="club" readonly></td>
                                 <td style="text-align: center"><input type="submit" name="submit" class="btn btn-danger" value="Remove"></td>
                             </form>
