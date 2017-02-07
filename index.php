@@ -66,9 +66,10 @@ else if ($uri == 'userprofile') {
     $user = new Profile();
     $user->viewProfile();
 }
-else if ($uri == 'userprofileupdate') {
+
+else if ($uri == 'ajaxUpdateProfile') {
     $user = new Profile();
-    $user->updateProfile();
+    $user->ajaxUpdateProfile();
 }
 
 else if ($uri == 'updateassociateduser') {
