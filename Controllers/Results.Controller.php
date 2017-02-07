@@ -83,7 +83,8 @@ class Results extends Base
             $result = $user->checkAssociation($_SESSION['id'], $anzNum);
             if (!isset($result[0])) {
                 $result = $user->setAssociatedUser($_SESSION['id'], $anzNum, "TEMP");
-                echo json_encode(array("status" => "success", "message" => "added")); die();
+                echo json_encode(array("status" => "success", "message" => "added"));
+                die();
             }
         }
         echo json_encode(array("status" => "failed", "message" => "Could Not Add Association")); die();
