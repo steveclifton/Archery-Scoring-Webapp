@@ -18,35 +18,64 @@ class Authentication extends Base
     {
         $this->isLoggedIn();
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $user = new User();
-            $existingUser = $user->verify($_POST);
+        $score = new Score();
+        $setup = new AdminConfig();
+        $currentWeek = $setup->getCurrentWeek();
+        $viewData['scores'] = $score->all_getCWScores($currentWeek);
+        $viewData['current_week'] = $currentWeek;
 
-            if (isset($existingUser)) {
-                $this->setSession($existingUser);
-                $viewData['first_name'] = $_SESSION['first_name'];
-                $viewData['last_name'] = $_SESSION['last_name'];
-
-                $scores = new Score();
-                $scores = $scores->liu_getAllScores();
-                $viewData['scores'] = $scores;
-
-                header('location: /welcome');
-                die();
-
-            } else {
-                header('location: /login');
-                die();
-            }
-        } else {
-            $score = new Score();
-            $setup = new AdminConfig();
-            $currentWeek = $setup->getCurrentWeek();
-            $viewData['scores'] = $score->all_getCWScores($currentWeek);
-            $viewData['current_week'] = $currentWeek;
-        }
 
         $this->render('Login Page', 'week.view', $viewData);
+    }
+
+    /**
+     * Ajax checking of the users account
+     */
+    public function ajaxCheckLogin()
+    {
+        if (!isset($_POST['email']) || !isset($_POST['password'])) {
+            echo json_encode(array("status" => "failed", "message" => "Check details and try again!"));
+            die();
+        }
+        $existingUser = $this->verifyUser($_POST['email'], $_POST['password']);
+
+        if (isset($existingUser)) {
+            $this->setSession($existingUser);
+            $viewData['first_name'] = $_SESSION['first_name'];
+            $viewData['last_name'] = $_SESSION['last_name'];
+
+            $scores = new Score();
+            $scores = $scores->liu_getAllScores();
+            $viewData['scores'] = $scores;
+
+            echo json_encode(array("status" => "success", "message" => "valid user"));
+            die();
+
+        } else {
+            echo json_encode(array("status" => "failed", "message" => "Check account details and try again!"));
+            die();
+        }
+    }
+
+    /**
+     * Used to verify the users login details
+     */
+    private function verifyUser($email, $password)
+    {
+        $user = new User();
+        $existingUser = $user->getUserByEmail(strtolower($email));
+
+        if (isset($existingUser['0'])) {
+            $existingUser = $existingUser['0'];
+            if (password_verify($password, $existingUser['password'])) {
+                return $existingUser;
+            }
+        } else {
+            return false;
+        }
+
+
+
     }
 
     /**
