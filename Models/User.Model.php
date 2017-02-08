@@ -52,10 +52,10 @@ class User extends Base
         $preferedType = $userData['prefered_type'];
         $ipAddress = $_SERVER['REMOTE_ADDR'];
 
-        $password = password_hash($userData['password'], PASSWORD_DEFAULT);
-
-        $sql = "UPDATE `users` 
-                SET 
+        if ($userData['password'] != null){
+            $password = password_hash($userData['password'], PASSWORD_DEFAULT);
+            $sql = "UPDATE `users` 
+                  SET 
                   `first_name` = '$firstName',
                   `last_name` = '$lastName',
                   `email` = '$email',
@@ -67,7 +67,20 @@ class User extends Base
                   `last_ip` = '$ipAddress',
                   `updated_at` = CURRENT_TIMESTAMP 
                 WHERE `users`.`id` = '$id'";
-
+        } else {
+            $sql = "UPDATE `users` 
+                  SET 
+                  `first_name` = '$firstName',
+                  `last_name` = '$lastName',
+                  `email` = '$email',
+                  `club` = '$club', 
+                  `phone` = '$phone',
+                  `address` = '$address',
+                  `prefered_type` = '$preferedType',
+                  `last_ip` = '$ipAddress',
+                  `updated_at` = CURRENT_TIMESTAMP 
+                WHERE `users`.`id` = '$id'";
+        }
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
