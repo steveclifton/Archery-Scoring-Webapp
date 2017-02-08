@@ -348,26 +348,6 @@ class User extends Base
     }
 
     /**
-     * Verifies whether the users account exists
-     */
-    public function verify($userData)
-    {
-        $existingUser = $this->getUserByEmail(strtolower($userData['email']));
-
-        if (isset($existingUser['0'])) {
-            $existingUser = $existingUser['0'];
-            if (password_verify($userData['password'], $existingUser['password'])) {
-                return $existingUser;
-            }
-        }
-
-        /* Checks the database to see whether passwords match, if they do, user details are returned */
-         else {
-            $_SESSION['failedLogin'] = "*Invalid Login";
-        }
-    }
-
-    /**
      * Check to see whether the ANZ number exists in the database or not
      */
     public function doesAnzNumberExist($numToCheck)
