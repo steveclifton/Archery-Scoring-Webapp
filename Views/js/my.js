@@ -460,6 +460,48 @@ function checkProfileForm()
 
 }
 
+
+/**
+ * Checks the users login details
+ */
+function checkLogin()
+{
+    var values = {};
+    $.each($('#loginForm').serializeArray(), function (i, field) {
+        values[field.name] = field.value;
+    });
+
+    if (values['password'] == "" || values['email'] == "") {
+        alert('Please check details and try again');
+        return false;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '/ajaxCheckLogin',
+        data: {
+            'password': values['password'],
+            'email': values['email']
+        },
+        success: function (data) {
+            var json = $.parseJSON(data);
+            if (json.status == 'failed') {
+                alert(json.message);
+            } else {
+                window.location.href = "/welcome";
+            }
+
+        }
+    });
+    return false;
+
+}
+
+
+/**
+ * Checks the profile update form
+ *
+ */
 function checkProfileUpdate()
 {
     var values = {};
@@ -501,7 +543,6 @@ function checkProfileUpdate()
     return false;
 
 }
-
 
 
 
