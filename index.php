@@ -32,6 +32,11 @@ else if ($uri == 'login') {
     $authentication->login();
 }
 
+else if ($uri == 'ajaxCheckLogin') {
+    $auth = new Authentication();
+    $auth->ajaxCheckLogin();
+}
+
 else if ($uri == 'welcome') {
     $accounts = new Welcome();
     $accounts->processWelcome();
