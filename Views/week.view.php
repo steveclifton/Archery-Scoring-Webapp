@@ -107,7 +107,6 @@
                 <?php
                     $i = 1;
                     foreach ($value as $vKey => $vData) { ?>
-
                         <tr>
                             <td id="rank"> <?= $i++; ?></td>
                             <td> <?= ucfirst($vData['first_name']) . " " . ucfirst($vData['last_name']) ?></td>
