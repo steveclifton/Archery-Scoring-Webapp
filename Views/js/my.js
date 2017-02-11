@@ -488,7 +488,7 @@ function checkLogin()
             if (json.status == 'failed') {
                 alert(json.message);
             } else {
-                window.location.href = "/welcome";
+                window.location.href = "/week?week=" + json.week;
             }
 
         }
