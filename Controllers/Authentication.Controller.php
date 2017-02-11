@@ -44,11 +44,10 @@ class Authentication extends Base
             $viewData['first_name'] = $_SESSION['first_name'];
             $viewData['last_name'] = $_SESSION['last_name'];
 
-            $scores = new Score();
-            $scores = $scores->liu_getAllScores();
-            $viewData['scores'] = $scores;
+            $admin = new AdminConfig();
+            $week = $admin->getCurrentWeek();
 
-            echo json_encode(array("status" => "success", "message" => "valid user"));
+            echo json_encode(array("status" => "success", "message" => "valid user", "week" => $week));
             die();
 
         } else {
