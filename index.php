@@ -57,8 +57,6 @@ else if ($uri == 'updatesetup') {
     $admin->setSetup();
 }
 
-
-
 else if ($uri == 'admin') {
     $admin = new Admin();
     $admin->adminView();
