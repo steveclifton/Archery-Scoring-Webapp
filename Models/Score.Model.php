@@ -25,34 +25,43 @@ class Score extends Base
     {
         $entered = $_SESSION['id'];
 
+        date_default_timezone_set('NZ');
+        $date = date("H:i:s d-m-Y");
+
         $table = $this->tableName;
 
         $sql = "INSERT INTO `$table` 
                                 (`id`, `entered_by_id`,`user_id`, `score`, `xcount`, `week`, `division`, `created_at`) 
                             VALUES 
-                                (NULL, '$entered','$archerId', '$score', '$xCount', '$week', '$div', CURRENT_TIMESTAMP);
+                                (NULL, '$entered','$archerId', '$score', '$xCount', '$week', '$div', '$date');
                ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $stm->execute(array('$entered, $archeryId, $score, $xCount, $week, $div'));
+        $stm->execute(array('$entered, $archeryId, $score, $xCount, $week, $div, $date'));
 
         return true;
     }
 
+    /**
+     *
+     */
     public function setHandicap($archerId, $score, $week, $div)
     {
         $table = $this->tableName;
 
+        date_default_timezone_set('NZ');
+        $date = date("H:i:s d-m-Y");
+
         $sql = "INSERT INTO `handicap_score` 
-                                (`id`, `user_id`, `week`, `division`, `handicap_score`, `created_at`) 
+                                (`id`, `user_id`, `week`, `division`, `average`, `handicap_score`, `created_at`) 
                             VALUES 
-                                (NULL, '$archerId', '$week', '$div', '$score', CURRENT_TIMESTAMP);
+                                (NULL, '$archerId', '$week', '$div', '$score', '$date');
                ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $stm->execute(array('$archeryId, $week, $div, $score'));
+        $stm->execute(array('$archeryId, $week, $div, $score, $date'));
 
         return true;
     }
