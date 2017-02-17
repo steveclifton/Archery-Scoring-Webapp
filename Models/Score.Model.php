@@ -46,22 +46,19 @@ class Score extends Base
     /**
      *
      */
-    public function setHandicap($archerId, $score, $week, $div)
+    public function setHandicap($archerId, $week, $weekScore, $div, $average, $handicap, $handicapScore)
     {
         $table = $this->tableName;
 
         date_default_timezone_set('NZ');
         $date = date("H:i:s d-m-Y");
 
-        $sql = "INSERT INTO `handicap_score` 
-                                (`id`, `user_id`, `week`, `division`, `average`, `handicap_score`, `created_at`) 
-                            VALUES 
-                                (NULL, '$archerId', '$week', '$div', '$score', '$date');
-               ";
+        $sql = "INSERT INTO `handicap_scores` (`id`, `user_id`, `week`, `week_score`, `division`, `average`, `handicap`, `handicap_score`, `created_at`) 
+                VALUES (NULL, '$archerId', '$week', '$weekScore', '$div', '$average', '$handicap', '$handicapScore', '$date');";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $stm->execute(array('$archeryId, $week, $div, $score, $date'));
+        $stm->execute(array('$archerId, $week, $weekScore, $div, $average, $handicap, $handicapScore'));
 
         return true;
     }
@@ -105,7 +102,7 @@ class Score extends Base
      *  Returns
      *   - All data from the round for a logged in users week
      */
-    public function getCWScore($userId, $week, $div)
+    public function getCWScore($userId, $week, $div, $event)
     {
         $table = $this->tableName;
 
@@ -137,8 +134,7 @@ class Score extends Base
 
         $sql = "SELECT users.id, users.anz_num, users.prefered_type, users.first_name, users.last_name, `$table`.score, `$table`.xcount, `$table`.division  
                 FROM `$table`
-                INNER JOIN users 
-                ON `$table`.user_id = users.id
+                INNER JOIN users ON `$table`.user_id = users.id
                 WHERE `$table`.week = '$week'
                 ORDER BY `$table`.score DESC, `$table`.xcount DESC
                 ";
@@ -156,41 +152,59 @@ class Score extends Base
         $returnData['compound'] = array();
         $returnData['recurve'] = array();
         $returnData['recurve barebow'] = array();
-        //$returnData['crossbow'] = array();
         $returnData['longbow'] = array();
         foreach ($data as $d) {
-
             if ($d['division'] == 'compound'){
-                $d3 = $this->getTotalScoresAveraged($d['id'], "compound");
-                $d['average'] = $d3['average'];
-//                $d['handicap'] = $d3['handicap'];
+                $averageData = $this->getHandicapScores($d['id'], $week, 'compound');
+                $d['average'] = $averageData['average'];
+                $d['handicap_score'] = $averageData['handicap_score'];
                 array_push($returnData['compound'], $d);
-            } else if ($d['division'] == 'recurve'){
-                $d3 = $this->getTotalScoresAveraged($d['id'], "recurve");
-                $d['average'] = $d3['average'];
-//                $d['handicap'] = $d3['handicap'];
+            }
+
+            else if ($d['division'] == 'recurve'){
+                $averageData = $this->getHandicapScores($d['id'], $week, 'recurve');
+                $d['average'] = $averageData['average'];
+                $d['handicap_score'] = $averageData['handicap_score'];
                 array_push($returnData['recurve'], $d);
             }
-//            else if ($d['division'] == 'crossbow'){
-//                $d3 = $this->getTotalScoresAveraged($d['id'], "crossbow");
-//                $d['average'] = $d3['average'];
-////                $d['handicap'] = $d3['handicap'];
-//                array_push($returnData['crossbow'], $d);
-//            }
+
             else if ($d['division'] == 'recurve barebow'){
-                $d3 = $this->getTotalScoresAveraged($d['id'], "recurve barebow");
-                $d['average'] = $d3['average'];
-//                $d['handicap'] = $d3['handicap'];
+                $averageData = $this->getHandicapScores($d['id'], $week, 'recurve barebow');
+                $d['average'] = $averageData['average'];
+                $d['handicap_score'] = $averageData['handicap_score'];
                 array_push($returnData['recurve barebow'], $d);
-            } else if ($d['division'] == 'longbow'){
-                $d3 = $this->getTotalScoresAveraged($d['id'], "longbow");
-                $d['average'] = $d3['average'];
-//                $d['handicap'] = $d3['handicap'];
+            }
+
+            else if ($d['division'] == 'longbow'){
+                $averageData = $this->getHandicapScores($d['id'], $week, 'longbow');
+                $d['average'] = $averageData['average'];
+                $d['handicap_score'] = $averageData['handicap_score'];
                 array_push($returnData['longbow'], $d);
             }
         }
 
         return $returnData;
+    }
+
+    public function getHandicapScores($userId, $week, $div)
+    {
+        $sql = "SELECT average, handicap_score 
+                FROM `handicap_scores` 
+                WHERE `user_id` = '$userId'
+                AND `week` = '$week'
+                AND `division` = '$div'
+                ";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute(array('$userId'));
+
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+        if (isset($data[0])) {
+            return $data[0];
+        } else {
+            return false;
+        }
     }
 
 
@@ -215,6 +229,7 @@ class Score extends Base
         $stm->execute(array('$userId'));
 
         $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
         if (isset($data[0])) {
             $i = 0;
             $total = 0;
@@ -224,13 +239,10 @@ class Score extends Base
             }
             $admin = new AdminConfig();
             $data['average'] = round($total / $i, 1);
-            $data['handicap'] = $admin->getCurrentMaxScore() - $data['average'];
             return $data;
         } else {
             return 0;
         }
-
-
     }
 
     /**
