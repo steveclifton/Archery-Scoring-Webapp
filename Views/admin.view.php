@@ -1,3 +1,6 @@
+<h3><a href="/create_event">Create Event</a> </h3>
+
+
 <h3>Pending Users : <?= count($viewData['pending_users'])?></h3>
 <input type="button" value="Show" id="pendingbutton" class="btn btn-danger">
 <hr>
