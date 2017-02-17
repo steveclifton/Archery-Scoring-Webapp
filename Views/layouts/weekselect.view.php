@@ -6,7 +6,7 @@
                     $weeks = new \Archery\Configurations\Event();
                     $weeks = $weeks->getCurrentWeek();
                     if (isset($_SESSION['id'])) { ?>
-                        <option value="welcome">My Scores</option>
+                        <option value="myscores">My Scores</option>
                     <?php } ?>
                     <?php
                     for ($i = 1; $i <= $weeks; $i++) { ?>
