@@ -20,16 +20,14 @@ $dotenv->load();
 
 if (isset($_SERVER['REDIRECT_URL'])) {
     $uri = str_replace('/', '', $_SERVER['REDIRECT_URL']);
+} else if (isset($_SERVER['REQUEST_URI'])) {
+    $uri = str_replace('/', '', $_SERVER['REQUEST_URI']);
 }
+
 
 if ($uri == '') {
-    header('location: /login');
-    die();
-}
-
-else if ($uri == 'login') {
-    $authentication = new Authentication();
-    $authentication->login();
+    $welcome = new Welcome();
+    $welcome->welcome();
 }
 
 else if ($uri == 'ajaxCheckLogin') {
@@ -37,7 +35,7 @@ else if ($uri == 'ajaxCheckLogin') {
     $auth->ajaxCheckLogin();
 }
 
-else if ($uri == 'welcome') {
+else if ($uri == 'myscores') {
     $accounts = new Welcome();
     $accounts->processWelcome();
 }
@@ -120,8 +118,13 @@ else if ($uri == 'resetpassword') {
     var_dump($_GET);die();
 }
 
+else if ($uri == 'create_event') {
+    $admin = new Admin();
+    $admin->createEvent();
+}
+
 else {
-    header('location: /login');
+    header('location: /');
     die();
 }
 
