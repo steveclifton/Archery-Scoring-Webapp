@@ -34,6 +34,9 @@ class Results extends Base
             $viewData['weekRequested'] = $_GET['week'];
             $viewData['scores'] = $score->all_getCWScores($_GET['week']);
         } else {
+            if (isset($_SESSION['id'])) {
+                $viewData['archers'] = $user->getAllUsersForScoring();
+            }
             $viewData['scores'] = $score->all_getCWScores($currentWeek);
             $viewData['canScore'] = true;
         }
