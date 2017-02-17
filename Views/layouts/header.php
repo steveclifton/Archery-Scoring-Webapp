@@ -6,18 +6,27 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="login">Archery OSA</a>
+            <a class="navbar-brand" href="/">Archery OSA</a>
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
                 <li><a></a></li>
-                <li><a href="/rules">Rules</a></li>
-                <li><a href="mailto:anzindoor@gmail.com">Contact</a></li>
+                <li><a href='/week'>2017 Outdoor League</a></li>
+                <li class='dropdown'>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href='#'>Past Events</a></li>
+                        <li><a href='#'>Upcoming Events</a></li>
+                    </ul>
+                </li>
+
                 <li><a href="/register">Register</a></li>
-                <li><a href="http://www.facebook.com/ArcheryNZIndoor" target="_blank">Facebook</a></li>
+                <li><a href="mailto:anzindoor@gmail.com">Contact</a></li>
+
                 <?php if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin') { ?>
                     <li><a href="/admin">Admin</a></li>
                 <?php } ?>
+
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
