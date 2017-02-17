@@ -4,7 +4,6 @@ namespace Archery\Controllers;
 
 
 use Archery\Models\AdminConfig;
-use Archery\Models\TempUser;
 use Archery\Models\User;
 
 class Admin extends Base
@@ -52,6 +51,13 @@ class Admin extends Base
 
         $user->confirmPendingUsers($updatedUser);
         $this->adminView();
+    }
+
+    public function createEvent()
+    {
+
+
+        $this->render('Create Event', 'create_event.view');
     }
 
 }
