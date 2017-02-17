@@ -3,7 +3,9 @@
 
 namespace Archery\Controllers;
 
+use Archery\Models\AdminConfig;
 use Archery\Models\Score;
+use Archery\Models\Scores;
 use Archery\Models\User;
 
 /**
@@ -16,28 +18,31 @@ class Results extends Base
 
     public function viewScores()
     {
+        $user = new User();
+        $score = new Score();
+        $setup = new AdminConfig();
+        $currentWeek = $setup->getCurrentWeek();
 
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            if (!isset($_GET['week'])) {
-                header('location: /welcome');
-                die();
-            }
-            $score = new Score();
-            $viewData['scores'] = $score->all_getCWScores($_GET['week']);
-
+        if (isset($_GET['week']) && is_numeric($_GET['week'])) {
             if (isset($_SESSION['id'])) {
                 $user = new User();
                 $viewData['archers'] = $user->getAllUsersForScoring();
-
-                $this->render('Scoring', 'week.view', $viewData);
-                die();
+                if ($_GET['week'] == $_SESSION['current_week']) {
+                    $viewData['canScore'] = true;
+                }
             }
+            $viewData['weekRequested'] = $_GET['week'];
+            $viewData['scores'] = $score->all_getCWScores($_GET['week']);
         } else {
-            header('location: /welcome');
-            die();
+            $viewData['scores'] = $score->all_getCWScores($currentWeek);
+            $viewData['canScore'] = true;
         }
 
-        $this->render('Scoring', 'week.view', $viewData);
+        $viewData['current_week'] = $currentWeek;
+
+        $this->render('Weekly Scores', 'week.view', $viewData);
+        die();
+
     }
 
     /**
@@ -50,11 +55,24 @@ class Results extends Base
         $archer = $_POST['archer'];
 
         $userId = $user->getUserIdByAnzNum($archer['anz']);
-        $existingScore = $score->getCWScore($userId, $archer['week'], $archer['div']);
+        $existingScore = $score->getCWScore($userId, $archer['week'], $archer['div'], '2017_outdoor_league');
+
+
         if (!isset($existingScore[0])) {
             $score->setScore($userId, $archer['score'], $archer['xcount'], $archer['week'], $archer['div']);
+            $average = $score->getTotalScoresAveraged($userId, $archer['div']);
+            $average = $average['average'];
+
+
+            $handicap = 360 - $average;
+            $handicapScore = $archer['score'] + $handicap;
+
+            $score->setHandicap($userId, $archer['week'], $archer['score'], $archer['div'], $average, $handicap, $handicapScore);
+
             $divScores = $score->all_getCWScores($archer['week']);
-            echo json_encode(array('status' => 'passed', 'message' => 'Score entered', 'allScores' =>$divScores[$archer['div']]));
+
+
+            echo json_encode(array('status' => 'passed', 'message' => 'Score entered', 'allScores' => $divScores[$archer['div']]));
         } else {
             echo json_encode(array('status' => 'failed', 'message' => 'Score already entered'));
         }
