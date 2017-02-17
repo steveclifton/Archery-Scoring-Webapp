@@ -20,7 +20,7 @@ abstract class Base
     public function isLoggedIn()
     {
         if (isset($_SESSION['id'])) {
-            header('location: /welcome');
+            header('location: /myscores');
             die();
         }
     }
@@ -33,7 +33,7 @@ abstract class Base
     {
         if (isset($_SESSION['id'])) {
             if ($_SESSION['user_type'] != 'admin') {
-                header('location: /welcome');
+                header('location: /');
                 die();
             }
 
@@ -48,7 +48,7 @@ abstract class Base
     public function isNotLoggedIn()
     {
         if (!isset($_SESSION['id'])) {
-            header('location: /login');
+            header('location: /');
             die();
         }
     }
