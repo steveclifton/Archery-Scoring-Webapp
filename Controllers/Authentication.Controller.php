@@ -10,23 +10,7 @@ use Archery\Models\Score;
 
 class Authentication extends Base
 {
-    /**
-     * Checks the users login credentials
-     * - If authorised, redirect to account view
-     */
-    public function login()
-    {
-        $this->isLoggedIn();
 
-        $score = new Score();
-        $setup = new AdminConfig();
-        $currentWeek = $setup->getCurrentWeek();
-        $viewData['scores'] = $score->all_getCWScores($currentWeek);
-        $viewData['current_week'] = $currentWeek;
-
-
-        $this->render('Login Page', 'week.view', $viewData);
-    }
 
     /**
      * Ajax checking of the users account
@@ -83,7 +67,7 @@ class Authentication extends Base
     public function logout()
     {
         session_destroy();
-        header('location: /login');
+        header('location: /');
     }
 
     /**
