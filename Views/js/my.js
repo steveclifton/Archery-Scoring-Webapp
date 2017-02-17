@@ -40,28 +40,35 @@ $(document).ready(function () {
         var url = window.location.href;
         var data = url.split('?');
         var welcome = url.split('/');
-        if (welcome[3] == 'welcome') {
+        if (welcome[3] == 'myscores') {
             $('#archeryselect').selectpicker('val', welcome['3']);
-        } else if (welcome[3] == 'login') {
+        } else if (welcome[3] == 'week' && !isNaN(welcome[4])) {
             var currentweek = $('#currentWeek').text();
             $('#archeryselect').selectpicker('val', currentweek);
         } else {
-            $('#archeryselect').selectpicker('val', data);
+            var weekValue = $('#selectedWeek').text();
+            console.log(weekValue);
+            $('#archeryselect').selectpicker('val', weekValue);
         }
-
-
     });
+
 
     /**
      * Redirects the page to the right week after being selected
      */
     $('#archeryselect').on('change', function () {
         var week = $('#archeryselect').children('option').filter(":selected").val();
-        //console.log(week);
-        var url = "week?" + week;
-        if (url) {
-            window.location = url;
+        console.log(week);
+        if (week == 'myscores') {
+            window.location = '/myscores';
+        } else {
+            var url = "week?" + week;
+            if (url) {
+                window.location = url;
+            }
         }
+        return;
+
     });
 
     /**
@@ -239,6 +246,8 @@ $(document).ready(function () {
                 success: function (data) {
                     var json = $.parseJSON(data);
 
+                    //console.log(data); return;
+
                     if (json.status == 'failed') {
                         $("tr.archer").each(function() {
                             $this = $(this);
@@ -247,7 +256,7 @@ $(document).ready(function () {
                                 failed.push(name);
                                 $('<p id="hasscore" style="color: red">Score already entered</p>').insertAfter($($this.find("span.name")));
                             }
-                            $('#submit').prop('disabled', true);
+                            // $('#submit').prop('disabled', true);
                             $('#correctScores').prop('checked', false);
                         });
                     } else {
@@ -276,9 +285,11 @@ $(document).ready(function () {
                             $(tableTBody).append('<tr>' +
                                                     '<td> ' + i + '</td>' +
                                                     '<td> ' + capitalizeFirstLetter(this.first_name) + " " + capitalizeFirstLetter(this.last_name) + '</td>' +
-                                                    '<td> ' + this.average + '</td>' +
-                                                    '<td> ' + this.xcount + '</td>' +
                                                     '<td> ' + this.score + '</td>' +
+                                                    '<td> ' + this.xcount + '</td>' +
+                                                    '<td> ' + this.average + '</td>' +
+                                                    '<td> ' + this.handicap_score + '</td>' +
+                                                    '<td>0</td>' +
                                                  '</tr>'
                                                 );
                             i++;
