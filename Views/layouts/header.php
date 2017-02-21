@@ -12,15 +12,17 @@
             <ul class="nav navbar-nav">
                 <li><a></a></li>
                 <li><a href='/week'>2017 Outdoor League</a></li>
-                <li class='dropdown'>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href='#'>Past Events</a></li>
-                        <li><a href='#'>Upcoming Events</a></li>
-                    </ul>
-                </li>
-
-                <li><a href="/register">Register</a></li>
+<!--                -->
+<!--                <li class='dropdown'>-->
+<!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a href='#'>Past Events</a></li>-->
+<!--                        <li><a href='#'>Upcoming Events</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+                    
+                <li><a href="#">Results</a></li>
+                <li><a href="#">Records</a></li>
                 <li><a href="mailto:anzindoor@gmail.com">Contact</a></li>
 
                 <?php if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin') { ?>
@@ -30,6 +32,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="/register">Register</a></li>
                 <?php
                     if (isset($_SESSION['id'])) {
                         $username = $_SESSION['first_name'] . " " . $_SESSION['last_name'];
