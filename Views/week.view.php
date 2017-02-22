@@ -118,7 +118,7 @@
                                 <td> <?= ucfirst($vData['first_name']) . " " . ucfirst($vData['last_name']) ?></td>
                                 <td> <?= $vData['score'] ?></td>
                                 <td> <?= $vData['xcount'] ?></td>
-                                <td> <?= $vData['average'] ?></td>
+                                <td> <?= $vData['average_score'] ?></td>
                                 <td> <?= $vData['handicap_score'] ?> </td>
                                 <td> 0 </td>
                             </tr>

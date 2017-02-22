@@ -40,7 +40,9 @@ $(document).ready(function () {
         var url = window.location.href;
         var data = url.split('?');
         var welcome = url.split('/');
-        if (welcome[3] == 'myscores') {
+        if (welcome[3] == 'overall') {
+            $('#archeryselect').selectpicker('val', welcome['3']);
+        } else if (welcome[3] == 'myscores') {
             $('#archeryselect').selectpicker('val', welcome['3']);
         } else if (welcome[3] == 'week' && !isNaN(welcome[4])) {
             var currentweek = $('#currentWeek').text();
@@ -58,18 +60,88 @@ $(document).ready(function () {
      */
     $('#archeryselect').on('change', function () {
         var week = $('#archeryselect').children('option').filter(":selected").val();
-        console.log(week);
-        if (week == 'myscores') {
+
+        if (week == 'overall') {
+            window.location = '/overall';
+        } else if (week == 'myscores') {
             window.location = '/myscores';
         } else {
             var url = "week?" + week;
             if (url) {
                 window.location = url;
+            } else {
+                window.location = '/myscoers';
             }
         }
         return;
 
     });
+
+
+    $('#overallSelector').on('change', function () {
+        var div = $('#overallSelector').children('option').filter(":selected").val();
+        console.log(div);
+        $.ajax({
+            type: 'POST',
+            url: '/ajax_viewOverall',
+            data: {
+                division:div
+            },
+            success: function (data) {
+                var json = $.parseJSON(data);
+
+                //console.log(data); return;
+
+                if (json.status == 'failed') {
+                    alert('Please try again later');
+                    location.reload();
+                } else {
+                    var tableAverages = "#tableAverages tbody";
+                    var tablePoints = "#tablePoints tbody";
+                    $(tableAverages).empty();
+                    $(tablePoints).empty();
+                    var averages = json.averages;
+                    var points = json.points;
+
+                    var i = 1;
+                    $(averages).each(function() {
+                        $(tableAverages).append('<tr>' +
+                            '<td> ' + i + '</td>' +
+                            '<td> ' + capitalizeFirstLetter(this.first_name) + " " + capitalizeFirstLetter(this.last_name) + '</td>' +
+                            '<td> ' + this.average_score + '</td>' +
+                            '<td> ' + this.average_x + '</td>' +
+                            '</tr>'
+                        );
+                        i++;
+                    });
+
+                    i = 1;
+                    $(points).each(function() {
+                        $(tablePoints).append('<tr>' +
+                            '<td> ' + i + '</td>' +
+                            '<td> ' + capitalizeFirstLetter(this.first_name) + " " + capitalizeFirstLetter(this.last_name) + '</td>' +
+                            '<td> ' + this.top_ten_points + '</td>' +
+                            '</tr>'
+                        );
+                        i++;
+                    });
+                }
+            }
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Function to toggle the view
@@ -287,7 +359,7 @@ $(document).ready(function () {
                                                     '<td> ' + capitalizeFirstLetter(this.first_name) + " " + capitalizeFirstLetter(this.last_name) + '</td>' +
                                                     '<td> ' + this.score + '</td>' +
                                                     '<td> ' + this.xcount + '</td>' +
-                                                    '<td> ' + this.average + '</td>' +
+                                                    '<td> ' + this.average_score + '</td>' +
                                                     '<td> ' + this.handicap_score + '</td>' +
                                                     '<td>0</td>' +
                                                  '</tr>'
@@ -319,6 +391,12 @@ $(document).ready(function () {
         }
 
     });
+
+
+
+
+
+
 
 
 

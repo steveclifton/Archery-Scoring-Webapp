@@ -44,6 +44,11 @@ else if ($uri == 'myscores') {
     $accounts->processWelcome();
 }
 
+else if ($uri == 'overall') {
+    $result = new Results();
+    $result->viewOverallScores();
+}
+
 else if ($uri == 'logout') {
     $authentication = new Authentication();
     $authentication->logout();
@@ -75,6 +80,11 @@ else if ($uri == 'userprofile') {
 else if ($uri == 'ajaxUpdateProfile') {
     $user = new Profile();
     $user->ajaxUpdateProfile();
+}
+
+else if ($uri == 'ajax_viewOverall') {
+    $result = new Results();
+    $result->ajax_viewOverall();
 }
 
 else if ($uri == 'updateassociateduser') {

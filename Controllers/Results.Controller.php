@@ -4,6 +4,9 @@
 namespace Archery\Controllers;
 
 use Archery\Models\AdminConfig;
+use Archery\Models\Handicap_Scores;
+use Archery\Models\Points;
+use Archery\Models\PointTotals;
 use Archery\Models\Score;
 use Archery\Models\Scores;
 use Archery\Models\User;
@@ -48,6 +51,62 @@ class Results extends Base
 
     }
 
+    public function viewOverallScores()
+    {
+        if (isset($_POST['division'])) {
+            $division = $_POST['division'];
+            if ($division == 'recurvebb') {
+                $division = 'recurve barebow';
+            }
+        } else {
+            $division = 'compound';
+        }
+
+
+        $points = new Points();
+        $averages = new Handicap_Scores();
+        $admin = new AdminConfig();
+        $week = $admin->getCurrentWeek();
+
+        $viewData['points'] = $points->getTopTenPoints($division);
+
+
+        $viewData['averages'] = $averages->getAllAverages($division);
+
+        $this->render('Weekly Scores', 'overall.view', $viewData);
+        die();
+
+    }
+
+
+
+
+    /**
+     * Method for Ajax to update the averages/points
+     */
+    public function ajax_viewOverall()
+    {
+        if (isset($_POST['division'])) {
+            $division = $_POST['division'];
+            if ($division == 'recurvebb') {
+                $division = 'recurve barebow';
+            }
+        } else {
+            $division = 'compound';
+        }
+
+        $points = new Points();
+        $averages = new Handicap_Scores();
+        $admin = new AdminConfig();
+        $week = $admin->getCurrentWeek();
+
+        $overallPoints = $points->getTopTenPoints($division);
+        $overallAverage = $averages->getAllAverages($division);
+
+        echo json_encode(array('status' => 'success', 'averages' => $overallAverage, 'points' => $overallPoints));
+
+    }
+
     /**
      * Processes score for a weeks view submission
      */
@@ -64,16 +123,15 @@ class Results extends Base
         if (!isset($existingScore[0])) {
             $score->setScore($userId, $archer['score'], $archer['xcount'], $archer['week'], $archer['div']);
             $average = $score->getTotalScoresAveraged($userId, $archer['div']);
-            $average = $average['average'];
+            $averageScore = $average['average'];
+            $averageX = $average['xcount'];
 
-
-            $handicap = 360 - $average;
+            $handicap = 360 - $averageScore;
             $handicapScore = $archer['score'] + $handicap;
 
-            $score->setHandicap($userId, $archer['week'], $archer['score'], $archer['div'], $average, $handicap, $handicapScore);
+            $score->setHandicap($userId, $archer['week'], $archer['score'], $archer['div'], $averageScore, $averageX, $handicap, $handicapScore);
 
             $divScores = $score->all_getCWScores($archer['week']);
-
 
             echo json_encode(array('status' => 'passed', 'message' => 'Score entered', 'allScores' => $divScores[$archer['div']]));
         } else {

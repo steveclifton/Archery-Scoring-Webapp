@@ -20,8 +20,8 @@
 <!--                        <li><a href='#'>Upcoming Events</a></li>-->
 <!--                    </ul>-->
 <!--                </li>-->
-                    
-                <li><a href="#">Results</a></li>
+
+                <li><a href="#">Archery Results</a></li>
                 <li><a href="#">Records</a></li>
                 <li><a href="mailto:anzindoor@gmail.com">Contact</a></li>
 
