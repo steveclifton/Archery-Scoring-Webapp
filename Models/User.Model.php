@@ -118,7 +118,7 @@ class User extends Base
 
         $userId = $this->getUserIdByAnzNum($anzNum);
 
-        $this->setAssociatedUser($userId, $userId, "CONFIRMED");
+        $this->setAssociatedUser($userId, $userId, "PENDING");
 
         return $success;
     }
@@ -151,7 +151,7 @@ class User extends Base
 
         $userId = $this->getUserIdByAnzNum($anzNum);
 
-        $this->setAssociatedUser($userId, $userId, "CONFIRMED");
+        $this->setAssociatedUser($userId, $userId, "PENDING");
 
         return $success;
     }
@@ -161,9 +161,10 @@ class User extends Base
      */
     public function getPendingUsers()
     {
-        $sql = "SELECT * 
-                FROM `users` 
-                WHERE `user_type`='PENDING'
+        $sql = "SELECT `join_users`.id, `join_users`.user_id, `join_users`.associate_id, `users`.first_name, `users`.last_name, `users`.anz_num, `users`.email
+                FROM `join_users` 
+                JOIN `users` ON `users`.id = `join_users`.user_id
+                WHERE `status`='PENDING'
                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -208,12 +209,12 @@ class User extends Base
      */
     public function confirmPendingUsers($userData)
     {
+
+        
         $firstName = strtolower($userData['first_name']);
         $lastName = strtolower($userData['last_name']);
         $anzNum = $userData['anz_num'];
         $userType = 'user';
-
-        $club = strtolower($userData['club']);
         $email = strtolower($userData['email']);
 
         $ipAddress = $_SERVER['REMOTE_ADDR'];
@@ -223,7 +224,6 @@ class User extends Base
                   `anz_num` = '$anzNum', 
                   `first_name` = '$firstName',
                   `last_name` = '$lastName',
-                  `club` = '$club', 
                   `user_type` = '$userType',
                   `last_ip` = '$ipAddress',
                   `updated_at` = CURRENT_TIMESTAMP
@@ -234,11 +234,20 @@ class User extends Base
 
         $success = $stm->execute(array('$anzNum, $firstName, $lastName, $club, $userType, $ipAddress, $email'));
 
-        $userId = $this->getUserIdByAnzNum($anzNum);
-
-        $this->setAssociatedUser($userId, $userId, "CONFIRMED");
+        $this->updateAssociation($userData['id'], "CONFIRMED");
 
         return $success;
+    }
+
+    private function updateAssociation($userId, $status)
+    {
+        $sql = "UPDATE `join_users` SET `status` = '$status' WHERE `join_users`.`id` = '$userId';";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute(array('$userId, $assocUser, $status'));
+
+        return;
     }
 
     /**
