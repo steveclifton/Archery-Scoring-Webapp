@@ -161,7 +161,8 @@ class User extends Base
      */
     public function getPendingUsers()
     {
-        $sql = "SELECT `join_users`.id, `join_users`.user_id, `join_users`.associate_id, `users`.first_name, `users`.last_name, `users`.anz_num, `users`.email
+        $sql = "SELECT `join_users`.id, `join_users`.user_id, `join_users`.associate_id, 
+                        `users`.first_name, `users`.last_name, `users`.anz_num, `users`.email
                 FROM `join_users` 
                 JOIN `users` ON `users`.id = `join_users`.user_id
                 WHERE `status`='PENDING'
@@ -210,7 +211,7 @@ class User extends Base
     public function confirmPendingUsers($userData)
     {
 
-        
+
         $firstName = strtolower($userData['first_name']);
         $lastName = strtolower($userData['last_name']);
         $anzNum = $userData['anz_num'];
