@@ -83,6 +83,66 @@ class Authentication extends Base
      */
     public function ajaxRegisterAccount()
     {
+        if (isset($_POST['anz_num'])) {
+            if ($_POST['anz_num'] == '') {
+                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
+                return;
+            } else {
+                $anzNum = $_POST['anz_num'];
+            }
+        }
+        if (isset($_POST['email'])) {
+            if ($_POST['email'] == '') {
+                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
+                return;
+            } else {
+                $email = $_POST['email'];
+            }
+        }
+        if (isset($_POST['first_name'])) {
+            if ($_POST['first_name'] == '' ) {
+                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
+                return;
+            } else {
+                $firstName = $_POST['first_name'];
+            }
+        }
+        if (isset($_POST['last_name'])) {
+            if ($_POST['last_name'] == '' ) {
+                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
+                return;
+            } else {
+                $lastName = $_POST['last_name'];
+            }
+        }
+        if (isset($_POST['gender'])) {
+            if ($_POST['gender'] == '' ) {
+                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
+                return;
+            } else {
+                $gender = $_POST['gender'];
+            }
+        }
+        if (isset($_POST['prefered_type'])) {
+            if ($_POST['prefered_type'] == '' ) {
+                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
+                return;
+            } else {
+                $type = $_POST['prefered_type'];
+            }
+        }
+        if (isset($_POST['club'])) {
+            if ($_POST['club'] == '' ) {
+                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
+                return;
+            } else {
+                $club = $_POST['club'];
+            }
+        }
+
+
+
+
         $password = trim($_POST['password']);
         $confirmPassword = trim($_POST['confirm_password']);
 
@@ -91,11 +151,13 @@ class Authentication extends Base
             return;
         }
 
+
+
         $user = new User();
-        $existingAnzNum = $user->doesAnzNumberExist($_POST['anz_num']);
+        $existingAnzNum = $user->doesAnzNumberExist($anzNum);
 
         if (!$existingAnzNum) {
-            $result = $user->createAccount($_POST);
+            $result = $user->createAccount($anzNum, $firstName, $lastName, $gender, $club, $email, $type, $password);
             if ($result) {
                 echo json_encode(array("status" => "success", "message" => "Account Created"));
                 return;
@@ -116,11 +178,63 @@ class Authentication extends Base
      */
     public function ajaxRegisterProfile()
     {
+        if (isset($_POST['anz_num'])) {
+            if ($_POST['anz_num'] == '') {
+                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
+                return;
+            } else {
+                $anzNum = $_POST['anz_num'];
+            }
+        }
+        if (isset($_POST['email'])) {
+            if ($_POST['email'] == '') {
+                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
+                return;
+            } else {
+                $email = $_POST['email'];
+            }
+        }
+        if (isset($_POST['first_name'])) {
+            if ($_POST['first_name'] == '' ) {
+                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
+                return;
+            } else {
+                $firstName = $_POST['first_name'];
+            }
+        }
+        if (isset($_POST['last_name'])) {
+            if ($_POST['last_name'] == '' ) {
+                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
+                return;
+            } else {
+                $lastName = $_POST['last_name'];
+            }
+        }
+        if (isset($_POST['gender'])) {
+            if ($_POST['gender'] == '' ) {
+                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
+                return;
+            } else {
+                $gender = $_POST['gender'];
+            }
+        }
+        if (isset($_POST['prefered_type'])) {
+            if ($_POST['prefered_type'] == '' ) {
+                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
+                return;
+            } else {
+                $type = $_POST['prefered_type'];
+            }
+        }
+
+
         $user = new User();
-        $existingAnzNum = $user->doesAnzNumberExist($_POST['anz_num']);
+        $existingAnzNum = $user->doesAnzNumberExist($anzNum);
+
+
 
         if (!$existingAnzNum) {
-            $result = $user->createProfile($_POST);
+            $result = $user->createProfile($anzNum, $firstName, $lastName, $gender, $email, $type);
             if ($result) {
                 echo json_encode(array("status" => "success", "message" => "Account Created"));
                 return;

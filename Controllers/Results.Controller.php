@@ -19,6 +19,9 @@ use Archery\Models\User;
 class Results extends Base
 {
 
+    /**
+     * Gets the weeks scores and passes to view to be displayed
+     */
     public function viewScores()
     {
         $user = new User();
@@ -51,6 +54,12 @@ class Results extends Base
 
     }
 
+
+
+
+    /*
+     * Controller to view all the Points and Averages for the League Series
+     */
     public function viewOverallScores()
     {
         if (isset($_POST['division'])) {
@@ -202,7 +211,7 @@ class Results extends Base
 
 
     /**
-     * Working on this later
+     * Used to check whether an archer has a score for that week and division or not
      */
     public function ajaxSearchUserScoreWeekDiv()
     {
@@ -214,9 +223,12 @@ class Results extends Base
 
         $results = $score->liu_getCWAndBowTypeScores($week, $div, $anz);
 
-        if (isset($results)) {return false;} else {return true;}
+        if (isset($results)) {
+            return false;
+        } else {
+            return true;
+        }
 
-//        $this->renderAjax('searchresults.view', $results);
     }
 
 }

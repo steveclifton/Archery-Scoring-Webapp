@@ -28,10 +28,6 @@ if (isset($_SERVER['REDIRECT_URL'])) {
 if ($uri == '') {
     $week = new Results();
     $week->viewScores();
-
-
-//    $welcome = new Welcome();
-//    $welcome->welcome();
 }
 
 else if ($uri == 'ajaxCheckLogin') {

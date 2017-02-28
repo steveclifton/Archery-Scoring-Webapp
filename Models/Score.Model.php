@@ -21,6 +21,9 @@ class Score extends Base
      *                                         Setters                                           *
      *********************************************************************************************/
 
+    /*
+     * Sets a score in the League Database for an Archer
+     */
     public function setScore($archerId, $score, $xCount, $week, $div)
     {
         $entered = $_SESSION['id'];
@@ -44,7 +47,7 @@ class Score extends Base
     }
 
     /**
-     *
+     * Sets an Archers handicap and averages into the database
      */
     public function setHandicap($archerId, $week, $weekScore, $div, $average, $averageX, $handicap, $handicapScore)
     {
@@ -54,7 +57,7 @@ class Score extends Base
         $date = date("H:i:s d-m-Y");
 
         $sql = "INSERT INTO `2017_outdoor_handicap_scores` (`id`, `user_id`, `week`, `week_score`, `division`, `average_score`, `average_x`, `handicap`, `handicap_score`, `created_at`) 
-                              VALUES (NULL, '$archerId', '$week', '$weekScore', '$div', '$average', '$averageX', '$handicap', '$handicapScore', '$date');";
+                VALUES (NULL, '$archerId', '$week', '$weekScore', '$div', '$average', '$averageX', '$handicap', '$handicapScore', '$date');";
 
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -127,9 +130,7 @@ class Score extends Base
 
 
     /**
-     * Logged In User Method
-     *  Returns
-     *   - All data from the round for a logged in users week
+     * Gets the current weeks score for an Archer and Div
      */
     public function getCWScore($userId, $week, $div, $event)
     {

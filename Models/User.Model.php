@@ -93,19 +93,19 @@ class User extends Base
      * Creates an account if registration information is valid
      * - returns a new user object - used to log the user in automatically
      */
-    public function createAccount($userData)
+    public function createAccount($anz, $fName, $lName, $gen, $aClub, $emailAddress, $type, $pass)
     {
-        $anzNum = trim($userData['anz_num']);
-        $firstName = strtolower(trim($userData['first_name']));
-        $lastName = strtolower(trim($userData['last_name']));
-        $gender = strtolower(trim($userData['gender']));
-        $club = strtolower(trim($userData['club']));
-        $email = strtolower(trim($userData['email']));
-        $preferedType = strtolower(trim($userData['prefered_type']));
+        $anzNum = trim($anz);
+        $firstName = strtolower(trim($fName));
+        $lastName = strtolower(trim($lName));
+        $gender = strtolower(trim($gen));
+        $club = strtolower(trim($aClub));
+        $email = strtolower(trim($emailAddress));
+        $preferedType = strtolower(trim($type));
         $userType = 'user';
 
         $ipAddress = $_SERVER['REMOTE_ADDR'];
-        $password = password_hash($userData['password'], PASSWORD_DEFAULT);
+        $password = password_hash($pass, PASSWORD_DEFAULT);
 
         $sql = "INSERT INTO `users` 
                   (`id`, `anz_num`, `first_name`, `last_name`, `gender`, `club`, `phone`, `address`, `user_type`, `email`, `password`, `prefered_type`, `last_ip`, `created_at`) 
@@ -128,14 +128,14 @@ class User extends Base
      * Creates a profile if registration information is valid
      * - returns a new user object - used to log the user in automatically
      */
-    public function createProfile($userData)
+    public function createProfile($anz, $fName, $lName, $gen, $emailAddress, $pType)
     {
-        $anzNum = $_POST['anz_num'];
-        $firstName = strtolower(trim($userData['first_name']));
-        $lastName = strtolower(trim($userData['last_name']));
-        $gender = strtolower(trim($userData['gender']));
-        $email = strtolower(trim($userData['email']));
-        $preferedType = strtolower(trim($userData['prefered_type']));
+        $anzNum = trim($anz);
+        $firstName = strtolower(trim($fName));
+        $lastName = strtolower(trim($lName));
+        $gender = strtolower(trim($gen));
+        $email = strtolower(trim($emailAddress));
+        $preferedType = strtolower(trim($pType));
         $userType = 'user';
 
         $ipAddress = $_SERVER['REMOTE_ADDR'];
