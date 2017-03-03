@@ -133,6 +133,11 @@ else if ($uri == 'create_event') {
     $admin->createEvent();
 }
 
+else if ($uri == 'contact') {
+    $admin = new Admin();
+    $admin->contact();
+}
+
 else {
     header('location: /');
     die();
