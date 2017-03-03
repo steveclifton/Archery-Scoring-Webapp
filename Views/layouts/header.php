@@ -11,19 +11,39 @@
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
                 <li><a></a></li>
-                <li><a href='/week'>2017 Outdoor League</a></li>
-<!--                -->
-<!--                <li class='dropdown'>-->
-<!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>-->
-<!--                    <ul class="dropdown-menu">-->
-<!--                        <li><a href='#'>Past Events</a></li>-->
-<!--                        <li><a href='#'>Upcoming Events</a></li>-->
-<!--                    </ul>-->
-<!--                </li>-->
 
-                <li><a href="#">Archery Results</a></li>
-                <li><a href="#">Records</a></li>
-                <li><a href="mailto:anzindoor@gmail.com">Contact</a></li>
+                <li class='dropdown'>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href='/week'>2017 Outdoor League</a></li>
+                    </ul>
+                </li>
+
+                <li class='dropdown'>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Results<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href='#'>Competitions</a></li>
+                        <li><a href='#'>Archer Stats</a></li>
+                    </ul>
+                </li>
+
+
+                <li class='dropdown'>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Records<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Archery NZ</a></li>
+                        <li><a href="#">NZFAA NZ</a></li>
+                    </ul>
+                </li>
+
+                <li class='dropdown'>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/register">Register</a></li>
+                        <li><a href="#">Password Reset</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </li>
 
                 <?php if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin') { ?>
                     <li><a href="/admin">Admin</a></li>
@@ -32,7 +52,6 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/register">Register</a></li>
                 <?php
                     if (isset($_SESSION['id'])) {
                         $username = $_SESSION['first_name'] . " " . $_SESSION['last_name'];
