@@ -9,6 +9,11 @@ use Archery\Models\User;
 class Admin extends Base
 {
 
+    public function contact()
+    {
+        $this->render('Contact', 'contact.view');
+    }
+
     public function adminView()
     {
         $this->isAdminLoggedIn();
