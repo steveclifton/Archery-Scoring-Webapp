@@ -18,7 +18,6 @@ class Handicap_Scores extends Base
 
         $averageList = array();
         foreach ($archerList as $archer) {
-
             $sql = "SELECT user_id, average_score, division, average_x, `users`.first_name, `users`.last_name
                     FROM `$table`
                     JOIN `users` ON `$table`.user_id = `users`.id
@@ -37,8 +36,7 @@ class Handicap_Scores extends Base
             }
         }
 
-
-
+        // Sorts the array by average_score
         arsort($averageList);
 
 
