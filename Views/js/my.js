@@ -1,1 +1,682 @@
-function capitalizeFirstLetter(a){return a.charAt(0).toUpperCase()+a.slice(1)}function checkAccountForm(){var a={};return $.each($("#formAccount").serializeArray(),function(b,c){a[c.name]=c.value}),a.password==a.confirm_password&&($.ajax({type:"POST",url:"/ajax_createaccount",data:{anz_num:a.anz_num,club:a.club,password:a.password,confirm_password:a.confirm_password,email:a.email,first_name:a.first_name,last_name:a.last_name,prefered_type:a.prefered_type,gender:a.gender},success:function(a){var b=$.parseJSON(a);"failed"==b.status?alert(b.message):(alert("Profile created"),location.reload())}}),!1)}function checkProfileForm(){var a={};return $.each($("#formProfile").serializeArray(),function(b,c){a[c.name]=c.value}),a.password==a.confirm_password&&($.ajax({type:"POST",url:"/ajax_createprofile",data:{anz_num:a.anz_num,email:a.email,first_name:a.first_name,last_name:a.last_name,prefered_type:a.prefered_type,gender:a.gender},success:function(a){var b=$.parseJSON(a);"failed"==b.status?alert(b.message):(alert("Profile created"),location.reload())}}),!1)}function checkLogin(){var a={};return $.each($("#loginForm").serializeArray(),function(b,c){a[c.name]=c.value}),""==a.password||""==a.email?(alert("Please check details and try again"),!1):($.ajax({type:"POST",url:"/ajaxCheckLogin",data:{password:a.password,email:a.email},success:function(a){var b=$.parseJSON(a);"failed"==b.status?alert(b.message):window.location.href="/week?week="+b.week}}),!1)}function checkProfileUpdate(){var a={};return $.each($("#userprofileform").serializeArray(),function(b,c){a[c.name]=c.value}),a.password==a.confirm_password&&($.ajax({type:"POST",url:"/ajaxUpdateProfile",data:{address:a.address,anz_num:a.anz_num,club:a.club,phone:a.phone,password:a.password,confirm_password:a.confirm_password,email:a.email,first_name:a.first_name,last_name:a.last_name,prefered_type:a.prefered_type,gender:a.gender},success:function(a){var b=$.parseJSON(a);"failed"==b.status?alert(b.message):(alert("Profile updated"),location.reload())}}),!1)}$(document).ready(function(){function b(a,b){"Hide"==$(b).val()?$(b).prop("value","Show"):$(b).prop("value","Hide"),$(a).toggleClass("hidden")}function c(a,b){"Hide"==$(b).val()?$(b).prop("value","Scoring"):$(b).prop("value","Hide"),$(a).toggleClass("hidden")}var a=$("#spinning").hide();$(document).ajaxStart(function(){a.show()}).ajaxStop(function(){a.hide()}),$("#addArcherButton").prop("disabled",!0),$("#correctScores").change(function(){$("#correctScores").is(" :checked")?$("#submit").prop("disabled",!1):$("#submit").prop("disabled",!0)}),$("#archeryselect").ready(function(){var a=window.location.href,c=(a.split("?"),a.split("/"));if("overall"==c[3])$("#archeryselect").selectpicker("val",c[3]);else if("myscores"==c[3])$("#archeryselect").selectpicker("val",c[3]);else if("week"!=c[3]||isNaN(c[4])){var e=$("#selectedWeek").text();console.log(e),$("#archeryselect").selectpicker("val",e)}else{var d=$("#currentWeek").text();$("#archeryselect").selectpicker("val",d)}}),$("#archeryselect").on("change",function(){var a=$("#archeryselect").children("option").filter(":selected").val();if("overall"==a)window.location="/overall";else if("myscores"==a)window.location="/myscores";else{var b="week?"+a;b?window.location=b:window.location="/myscoers"}}),$("#overallSelector").on("change",function(){var a=$("#overallSelector").children("option").filter(":selected").val();console.log(a),$.ajax({type:"POST",url:"/ajax_viewOverall",data:{division:a},success:function(a){var b=$.parseJSON(a);if("failed"==b.status)alert("Please try again later"),location.reload();else{var c="#tableAverages tbody",d="#tablePoints tbody";$(c).empty(),$(d).empty();var e=b.averages,f=b.points,g=1;$(e).each(function(){$(c).append("<tr><td> "+g+"</td><td> "+capitalizeFirstLetter(this.first_name)+" "+capitalizeFirstLetter(this.last_name)+"</td><td> "+this.average_score+"</td><td> "+this.average_x+"</td></tr>"),g++}),g=1,$(f).each(function(){$(d).append("<tr><td> "+g+"</td><td> "+capitalizeFirstLetter(this.first_name)+" "+capitalizeFirstLetter(this.last_name)+"</td><td> "+this.top_ten_points+"</td></tr>"),g++})}}})}),$("#pendingbutton").ready(function(){$("#pendingbutton").on("click",function(){b("#pendingusers","#pendingbutton")})}),$("#phone").on("change",function(){var a=$(this).val();reg=/^[0-9]+$/,$("#valid_phone").remove(),reg.test(a)||$("#phone").parent().after("<div id='valid_phone' style='color:red;'>Numbers only</div>")}),$("#profileformbutton").ready(function(){$("#profileformbutton").on("click",function(){b("#userprofileform","#profileformbutton")})}),$("#openScoring").ready(function(){$("#openScoring").on("click",function(){c("#scoringTable","#openScoring")})}),$("#searcharcher").on("keyup",function(){var a=$(this).val();$.get("/ajax_searchAnzArcher?anz_num="+a,function(a){"failed"==a.status?($("#validation").remove(),$('<p id="validation" style="color: red; margin-left: 14px">Not Found</p>').insertAfter($("div.validation")),$("#addArcherButton").prop("disabled",!0)):"success"==a.status&&($("#validation").remove(),$('<p id="validation" style="color: green; margin-left: 14px">Found</p>').insertAfter($("div.validation")),$("#addArcherButton").prop("disabled",!1))})}),$("#addArcherButton").on("click",function(){var a=$("#searcharcher").val();$.ajax({type:"POST",url:"/ajax_addTempUser",data:{anz_num:a},success:function(a){var b=$.parseJSON(a);"failed"==b.status?alert("Cannot add account"):location.reload()}})}),$("#submit").on("click",function(){function b(a){return!isNaN(a)&&!(a>360||a<0)}function c(a){return!isNaN(a)&&!(a>36||a<0)}$("tr.archer").each(function(){$("#invalidScore").remove(),$("#invalidXCount").remove(),$("#hasscore").remove()});var a=[];$("tr.archer").each(function(){$this=$(this);var d=$this.find("span.name").html(),e=$this.find("input#anz_num").val(),f=$this.find("input#score").val();if(""!=f&&!b(f))return void $('<p id="invalidScore" style="color: red">Invalid Score</p>').insertAfter($($this.find("input#score")));var g=$this.find("input#xcount").val();if(""!=g&&!c(g))return void $('<p id="invalidXCount" style="color: red">Invalid XCount</p>').insertAfter($($this.find("input#xcount")));if(""!=f||""!=g){var h=$this.find("select#div").val(),i=$this.find("span.week").html(),j={name:d,anz:e,score:f,xcount:g,div:h,week:i};$.ajax({type:"POST",url:"/ajax_submitScore",data:{archer:j},success:function(b){var c=$.parseJSON(b);if("failed"==c.status)$("tr.archer").each(function(){$this=$(this);var b=$this.find("span.name").html();b==j.name&&(a.push(b),$('<p id="hasscore" style="color: red">Score already entered</p>').insertAfter($($this.find("span.name")))),$("#correctScores").prop("checked",!1)});else{$("tr.archer").each(function(){$this=$(this);var a=$this.find("span.name").html();$this.find("select#div").val(),$this.find("input#score").val(""),$this.find("input#xcount").val("");if(a==j.name)return $('<p id="invalidXCount" style="color: green">Score Updated</p>').insertAfter($($this.find("span.name"))),!1}),"recurve barebow"==h&&(h="recurvebb");var e="#table-"+h+" tbody";$(e).empty();var f=c.allScores,g=1;$(f).each(function(){$(e).append("<tr><td> "+g+"</td><td> "+capitalizeFirstLetter(this.first_name)+" "+capitalizeFirstLetter(this.last_name)+"</td><td> "+this.score+"</td><td> "+this.xcount+"</td><td> "+this.average_score+"</td><td> "+this.handicap_score+"</td><td>0</td></tr>"),g++})}}})}})}),$("#anz_num").on("focusout",function(){var a=$("#anz_num").val();reg=/^[0-9]+$/,$("#validation_anz").length>0&&$("#validation_anz").remove(),""!=a&&(reg.test(a)?$("#registerAccount").prop("disabled",!1):($("#anz_num").parent().after("<div id='validation_anz' style='color:red;'>Please enter a valid ANZ Number</div>"),$("#registerAccount").prop("disabled",!0)))}),$("#confirm_password").on("focusout",function(){var a=$("#password").val(),b=$("#confirm_password").val();$("#validation_password").length>0&&$("#validation_password").remove(),null!=a&&null!=b&&(a!=b?($("#confirm_password").parent().after("<div id='validation_password' style='color:red;'>Passwords do not match</div>"),$("#registerAccount").prop("disabled",!0),$("#updateProfile").prop("disabled",!0)):($("#registerAccount").prop("disabled",!1),$("#updateProfile").prop("disabled",!1)))})});
+/**
+ * Created by Steve on 1/03/2017.
+ */
+
+$(document).ready(function () {
+
+    var $loading = $('#spinning').hide();
+    $(document)
+        .ajaxStart(function () {
+            $loading.show();
+        })
+        .ajaxStop(function () {
+            $loading.hide();
+        });
+
+
+    // Disables the Add Archer Button by Default
+    $('#addArcherButton').prop('disabled', true);
+
+
+    // // Toggles the confirm scores button
+    // if (!$('#correctScores').is(' :checked')) {
+    //     $('#submit').prop('disabled', true);
+    // }
+
+    $('#correctScores').change(function () {
+        if (!$('#correctScores').is(' :checked')) {
+            $('#submit').prop('disabled', true);
+        } else {
+            $('#submit').prop('disabled', false);
+        }
+    });
+
+
+
+    /***************************************************************
+     *       SELECT PICKER CONTROLS
+     ****************************************************************/
+
+    /**
+     * Sets the button display to be where the url is
+     */
+    $('#archeryselect').ready(function () {
+        var url = window.location.href;
+        var data = url.split('?');
+        var welcome = url.split('/');
+        if (welcome[3] == 'overall') {
+            $('#archeryselect').selectpicker('val', welcome['3']);
+        } else if (welcome[3] == 'myscores') {
+            $('#archeryselect').selectpicker('val', welcome['3']);
+        } else if (welcome[3] == 'week' && !isNaN(welcome[4])) {
+            var currentweek = $('#currentWeek').text();
+            $('#archeryselect').selectpicker('val', currentweek);
+        } else {
+            var weekValue = $('#selectedWeek').text();
+            console.log(weekValue);
+            $('#archeryselect').selectpicker('val', weekValue);
+        }
+    });
+
+
+    /**
+     * Redirects the page to the right week after being selected
+     */
+    $('#archeryselect').on('change', function () {
+        var week = $('#archeryselect').children('option').filter(":selected").val();
+
+        if (week == 'overall') {
+            window.location = '/overall';
+        } else if (week == 'myscores') {
+            window.location = '/myscores';
+        } else {
+            var url = "week?" + week;
+            if (url) {
+                window.location = url;
+            } else {
+                window.location = '/myscoers';
+            }
+        }
+        return;
+
+    });
+
+
+    $('#overallSelector').on('change', function () {
+        var div = $('#overallSelector').children('option').filter(":selected").val();
+        console.log(div);
+        $.ajax({
+            type: 'POST',
+            url: '/ajax_viewOverall',
+            data: {
+                division:div
+            },
+            success: function (data) {
+                var json = $.parseJSON(data);
+
+                //console.log(data); return;
+
+                if (json.status == 'failed') {
+                    alert('Please try again later');
+                    location.reload();
+                } else {
+                    var tableAverages = "#tableAverages tbody";
+                    var tablePoints = "#tablePoints tbody";
+                    $(tableAverages).empty();
+                    $(tablePoints).empty();
+                    var averages = json.averages;
+                    var points = json.points;
+
+                    var i = 1;
+                    $(averages).each(function() {
+                        $(tableAverages).append('<tr>' +
+                            '<td> ' + i + '</td>' +
+                            '<td> ' + capitalizeFirstLetter(this.first_name) + " " + capitalizeFirstLetter(this.last_name) + '</td>' +
+                            '<td> ' + this.average_score + '</td>' +
+                            '<td> ' + this.average_x + '</td>' +
+                            '</tr>'
+                        );
+                        i++;
+                    });
+
+                    i = 1;
+                    $(points).each(function() {
+                        $(tablePoints).append('<tr>' +
+                            '<td> ' + i + '</td>' +
+                            '<td> ' + capitalizeFirstLetter(this.first_name) + " " + capitalizeFirstLetter(this.last_name) + '</td>' +
+                            '<td> ' + this.top_ten_points + '</td>' +
+                            '</tr>'
+                        );
+                        i++;
+                    });
+                }
+            }
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Function to toggle the view
+     */
+    function toggleView(element, button) {
+        if ($(button).val() == 'Hide') {
+            $(button).prop('value', 'Show');
+        } else {
+            $(button).prop('value', 'Hide');
+        }
+        $(element).toggleClass('hidden');
+    }
+
+    function toggleViewScoring(element, button) {
+        if ($(button).val() == 'Hide') {
+            $(button).prop('value', 'Scoring');
+        } else {
+            $(button).prop('value', 'Hide');
+        }
+        $(element).toggleClass('hidden');
+    }
+
+
+    /****************************************************************
+     *                      Admin Methods                           *
+     ****************************************************************/
+
+    /**
+     * Hides/Shows the pending users table
+     */
+    $('#pendingbutton').ready(function () {
+        $('#pendingbutton').on('click', function () {
+            toggleView('#pendingusers', '#pendingbutton');
+        });
+    });
+
+
+
+    /****************************************************************
+     *                      Profile Methods                           *
+     ****************************************************************/
+
+    /**
+     * Checks that the phone number is only digits
+     */
+    $('#phone').on('change', function () {
+        var phone = $(this).val();
+        reg = /^[0-9]+$/;
+
+        $('#valid_phone').remove();
+        if (!reg.test(phone)) {
+            $('#phone').parent().after("<div id='valid_phone' style='color:red;'>Numbers only</div>");
+        }
+    });
+
+
+    /**
+     * Toggles the view of profile form button
+     */
+    $('#profileformbutton').ready(function () {
+        $('#profileformbutton').on('click', function () {
+            toggleView('#userprofileform', '#profileformbutton');
+        });
+    });
+
+
+
+
+    /****************************************************************
+     *                      Scoring Methods                           *
+     ****************************************************************/
+
+    /**
+     * Displays the scoring tables
+     */
+    $('#openScoring').ready(function () {
+        $('#openScoring').on('click', function () {
+            toggleViewScoring('#scoringTable', '#openScoring');
+        });
+    });
+
+    /**
+     * Ajax finds the user if they exist ready to be added to temp scoring
+     */
+    $('#searcharcher').on('keyup', function () {
+        var anzNum = $(this).val();
+
+        $.get("/ajax_searchAnzArcher?anz_num=" + anzNum, function (data) {
+            if (data.status == "failed") {
+                $('#validation').remove();
+                $('<p id="validation" style="color: red; margin-left: 14px">Not Found</p>').insertAfter($('div.validation'));
+                $('#addArcherButton').prop('disabled', true);
+            } else if (data.status == "success") {
+                $('#validation').remove();
+                $('<p id="validation" style="color: green; margin-left: 14px">Found</p>').insertAfter($('div.validation'));
+                $('#addArcherButton').prop('disabled', false);
+            }
+        });
+
+    });
+
+
+    /**
+     * Adds a temp association between users
+     */
+    $('#addArcherButton').on('click', function () {
+        var anzNum = $('#searcharcher').val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/ajax_addTempUser',
+            data: {
+                'anz_num': anzNum
+            },
+            success: function (data) {
+                var json = $.parseJSON(data);
+                if (json.status == 'failed') {
+                    alert('Cannot add account');
+                } else {
+                    location.reload();
+                }
+            }
+        });
+    });
+
+
+
+    /**
+     *  On Submit button, scores are sent via AJAX to be entered in the DB
+     *   - If score exists, displays a message below users name to show the mistake
+     *   - If score is legit, removes all rows in the table and appends the new data to it
+     */
+    $('#submit').on('click', function () {
+
+        $('tr.archer').each(function () {
+            $("#invalidScore").remove();
+            $("#invalidXCount").remove();
+            $("#hasscore").remove();
+        });
+
+        var failed = [];
+        $("tr.archer").each(function() {
+            $this = $(this);
+            var name = $this.find("span.name").html();
+            var anz = $this.find("input#anz_num").val();
+
+            var score = $this.find("input#score").val();
+            if (score != '' && !checkScore(score)) {
+                $('<p id="invalidScore" style="color: red">Invalid Score</p>').insertAfter($($this.find("input#score")));
+                return;
+            }
+
+            var xcount = $this.find("input#xcount").val();
+            if (xcount != '' && !checkXCount(xcount)) {
+                $('<p id="invalidXCount" style="color: red">Invalid XCount</p>').insertAfter($($this.find("input#xcount")));
+                return;
+            }
+
+            if (score == '' && xcount == '') {
+                return;
+            }
+
+            var div = $this.find("select#div").val();
+            var week = $this.find("span.week").html();
+
+            var archer = { "name":name, "anz":anz, "score":score, "xcount":xcount, "div":div, "week":week };
+
+            $.ajax({
+                type: 'POST',
+                url: '/ajax_submitScore',
+                data: {
+                    archer:archer
+                },
+                success: function (data) {
+                    var json = $.parseJSON(data);
+
+                    //console.log(data); return;
+
+                    if (json.status == 'failed') {
+                        $("tr.archer").each(function() {
+                            $this = $(this);
+                            var name = $this.find("span.name").html();
+                            if (name == archer.name) {
+                                failed.push(name);
+                                $('<p id="hasscore" style="color: red">Score already entered</p>').insertAfter($($this.find("span.name")));
+                            }
+                            // $('#submit').prop('disabled', true);
+                            $('#correctScores').prop('checked', false);
+                        });
+                    } else {
+                        $("tr.archer").each(function() {
+                            $this = $(this);
+                            var name = $this.find("span.name").html();
+                            var div = $this.find("select#div").val();
+                            var score = $this.find("input#score").val('');
+                            var xCount = $this.find("input#xcount").val('');
+                            if (name == archer.name) {
+                                $('<p id="invalidXCount" style="color: green">Score Updated</p>').insertAfter($($this.find("span.name")));
+                                return false;
+                            }
+
+                        });
+                        if (div == 'recurve barebow') {
+                            div = 'recurvebb';
+                        }
+                        var table = "#table-" + div;
+                        var tableTBody = "#table-" + div + " tbody";
+                        $(tableTBody).empty();
+                        var archersScores = json.allScores;
+
+                        var i = 1;
+                        $(archersScores).each(function() {
+                            $(tableTBody).append('<tr>' +
+                                '<td> ' + i + '</td>' +
+                                '<td> ' + capitalizeFirstLetter(this.first_name) + " " + capitalizeFirstLetter(this.last_name) + '</td>' +
+                                '<td> ' + this.score + '</td>' +
+                                '<td> ' + this.xcount + '</td>' +
+                                '<td> ' + this.average_score + '</td>' +
+                                '<td> ' + this.handicap_score + '</td>' +
+                                '<td>0</td>' +
+                                '</tr>'
+                            );
+                            i++;
+                        });
+                    }
+                }
+            });
+        });
+
+        function checkScore(score) {
+            if (isNaN(score)) {
+                return false;
+            } else if (score > 360 || score < 0) {
+                return false;
+            }
+
+            return true;
+        }
+        function checkXCount(xcount) {
+            if (isNaN(xcount)) {
+                return false;
+            } else if (xcount > 36 || xcount < 0) {
+                return false;
+            }
+
+            return true;
+        }
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+    /****************************************************************
+     *                      Register Methods                        *
+     ****************************************************************/
+
+
+    /**
+     * Alerts the user that the ANZ number needs to be a number
+     */
+    $('#anz_num').on('focusout', function () {
+        var anzNum = $('#anz_num').val();
+        reg = /^[0-9]+$/;
+
+        if ($('#validation_anz').length > 0) {
+            $('#validation_anz').remove();
+        }
+
+        if (anzNum != "") {
+            if (!reg.test(anzNum)) {
+                $('#anz_num').parent().after("<div id='validation_anz' style='color:red;'>Please enter a valid ANZ Number</div>");
+                $('#registerAccount').prop('disabled', true);
+            } else {
+                $('#registerAccount').prop('disabled', false);
+            }
+        }
+    });
+
+
+    /**
+     * Ensures that the passwords match, disables the submit button if not
+     */
+    $('#confirm_password').on('focusout', function () {
+        var password = $('#password').val();
+        var confirmPassword = $('#confirm_password').val();
+
+        if ($('#validation_password').length > 0) {
+            $('#validation_password').remove();
+        }
+        if (password != null && confirmPassword != null) {
+            if (password != confirmPassword) {
+                $('#confirm_password').parent().after("<div id='validation_password' style='color:red;'>Passwords do not match</div>");
+                $('#registerAccount').prop('disabled', true);
+                $('#updateProfile').prop('disabled', true);
+            } else {
+                $('#registerAccount').prop('disabled', false);
+                $('#updateProfile').prop('disabled', false);
+
+            }
+        }
+    });
+
+}); // end of document ready
+
+
+/**
+ * Capitalises the first letter of a string
+ */
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
+
+
+/**
+ * Checks the register account form, if correct, AJAX Sends the data to be added
+ */
+function checkAccountForm()
+{
+    var values = {};
+    $.each($('#formAccount').serializeArray(), function (i, field) {
+        values[field.name] = field.value;
+    });
+
+    if (values['password'] != values['confirm_password']) {
+        return false;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '/ajax_createaccount',
+        data: {
+            'anz_num': values['anz_num'],
+            'club': values['club'],
+            'password': values['password'],
+            'confirm_password': values['confirm_password'],
+            'email': values['email'],
+            'first_name': values['first_name'],
+            'last_name': values['last_name'],
+            'prefered_type': values['prefered_type'],
+            'gender': values['gender']
+        },
+        success: function (data) {
+            var json = $.parseJSON(data);
+            //console.log(data);return;
+
+            if (json.status == 'failed') {
+                alert(json.message);
+            } else {
+                alert('Profile created');
+                location.reload();
+            }
+
+        }
+    });
+    return false;
+
+}
+
+/**
+ *
+ * Checks the Profile Form data and if correct, AJAX sends to be created in system
+ */
+
+function checkProfileForm()
+{
+    var values = {};
+    $.each($('#formProfile').serializeArray(), function (i, field) {
+        values[field.name] = field.value;
+    });
+
+    if (values['password'] != values['confirm_password']) {
+        return false;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '/ajax_createprofile',
+        data: {
+            'anz_num': values['anz_num'],
+            'email': values['email'],
+            'first_name': values['first_name'],
+            'last_name': values['last_name'],
+            'prefered_type': values['prefered_type'],
+            'gender': values['gender']
+        },
+        success: function (data) {
+            var json = $.parseJSON(data);
+
+            //console.log(data);return;
+
+            if (json.status == 'failed') {
+                alert(json.message);
+            } else {
+                alert('Profile created');
+                location.reload();
+            }
+        }
+    });
+    return false;
+
+}
+
+
+/**
+ * Checks the users login details
+ */
+function checkLogin()
+{
+    var values = {};
+    $.each($('#loginForm').serializeArray(), function (i, field) {
+        values[field.name] = field.value;
+    });
+
+    if (values['password'] == "" || values['email'] == "") {
+        alert('Please check details and try again');
+        return false;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '/ajaxCheckLogin',
+        data: {
+            'password': values['password'],
+            'email': values['email']
+        },
+        success: function (data) {
+            var json = $.parseJSON(data);
+            if (json.status == 'failed') {
+                alert(json.message);
+            } else {
+                window.location.href = "/week?week=" + json.week;
+            }
+
+        }
+    });
+    return false;
+
+}
+
+
+/**
+ * Checks the profile update form
+ *
+ */
+function checkProfileUpdate()
+{
+    var values = {};
+    $.each($('#userprofileform').serializeArray(), function (i, field) {
+        values[field.name] = field.value;
+    });
+
+    if (values['password'] != values['confirm_password']) {
+        return false;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '/ajaxUpdateProfile',
+        data: {
+            'address': values['address'],
+            'anz_num': values['anz_num'],
+            'club': values['club'],
+            'phone': values['phone'],
+            'password': values['password'],
+            'confirm_password': values['confirm_password'],
+            'email': values['email'],
+            'first_name': values['first_name'],
+            'last_name': values['last_name'],
+            'prefered_type': values['prefered_type'],
+            'gender': values['gender']
+        },
+        success: function (data) {
+            var json = $.parseJSON(data);
+            if (json.status == 'failed') {
+                alert(json.message);
+            } else {
+                alert('Profile updated');
+                location.reload();
+            }
+
+        }
+    });
+    return false;
+
+}
+
+/**
+ *
+ */
+function submitContactForm()
+{
+    var values = {};
+    $.each($('#contact').serializeArray(), function (i, field) {
+        values[field.name] = field.value;
+    });
+
+    $.ajax({
+        type: 'POST',
+        url: '/ajax_submitContact',
+        data: {
+            'email': values['email'],
+            'name' : values['name'],
+            'message' : values['message']
+        },
+        success: function (data) {
+            var json = $.parseJSON(data);
+            //console.log(data);return;
+
+            if (json.status == 'failed') {
+                alert(json.message);
+            } else {
+                alert(json.message);
+                location.reload();
+            }
+
+        }
+    });
+    return false;
+
+}
+
+
+
+

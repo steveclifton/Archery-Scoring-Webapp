@@ -138,6 +138,11 @@ else if ($uri == 'contact') {
     $admin->contact();
 }
 
+else if ($uri == 'ajax_submitContact') {
+    $admin = new Admin();
+    $admin->ajax_contactForm();
+}
+
 else {
     header('location: /');
     die();
