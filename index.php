@@ -5,6 +5,7 @@ namespace Archery;
 
 require 'vendor/autoload.php';
 
+use Archery\Controllers\Contact;
 use Dotenv\Dotenv;
 use Archery\Configurations\Event;
 use Archery\Controllers\Admin;
@@ -134,12 +135,12 @@ else if ($uri == 'create_event') {
 }
 
 else if ($uri == 'contact') {
-    $admin = new Admin();
+    $admin = new Contact();
     $admin->contact();
 }
 
 else if ($uri == 'ajax_submitContact') {
-    $admin = new Admin();
+    $admin = new Contact();
     $admin->ajax_contactForm();
 }
 

@@ -10,29 +10,6 @@ use Archery\Models\User;
 class Admin extends Base
 {
 
-    public function contact()
-    {
-        $this->render('Contact', 'contact.view');
-    }
-
-    public function ajax_contactForm()
-    {
-        $name = strtolower(trim($_POST['name']));
-        $email = strtolower(trim($_POST['email']));
-        $message = strtolower(trim($_POST['message']));
-
-        $contact = new Contact_Messages();
-        $result = $contact->setMessage($name, $email, $message);
-
-        if ($result) {
-            echo json_encode(array('status' => 'passed', 'message' => 'Message Sent'));
-        } else {
-            echo json_encode(array('status' => 'failed', 'message' => 'Please try again later'));
-        }
-
-
-    }
-
     public function adminView()
     {
         $this->isAdminLoggedIn();

@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="Views/css/contact.css">
 <div class="container">
     <form id="contact" action="#" method="post" onsubmit="return submitContactForm()">
-        <h4>Contact us for custom quote</h4>
+        <h4>Contact Archery OSA</h4>
         <fieldset>
             <input id="name" name="name" placeholder="Your name" type="text" tabindex="1" required autofocus>
         </fieldset>
