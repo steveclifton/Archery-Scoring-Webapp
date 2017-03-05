@@ -41,9 +41,9 @@
                     <ul class="dropdown-menu">
                         <li><a href="/register">Register</a></li>
                         <li><a href="#">Password Reset</a></li>
-                        <li><a href="/contact">Contact</a></li>
                     </ul>
                 </li>
+                <li><a href="/contact">Contact</a></li>
 
                 <?php if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin') { ?>
                     <li><a href="/admin">Admin</a></li>
