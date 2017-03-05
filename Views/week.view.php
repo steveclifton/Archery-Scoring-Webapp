@@ -104,8 +104,8 @@
                             <th class="col-xs-1 col-sm-1 col-md-3">Name</th>
                             <th class="col-xs-1 col-sm-1 col-md-3">Score</th>
                             <th class="col-xs-1 col-sm-1 col-md-3">X</th>
-                            <th class="hidden-xs hidden-sm col-xs-1 col-sm-1 col-md-1">Average</th>
-                            <th class="col-xs-1 col-sm-1 col-md-1">Handicap</th>
+                            <th class="col-xs-1 col-sm-1 col-md-1">Average</th>
+                            <th class="hidden-xs hidden-sm col-xs-1 col-sm-1 col-md-1">Handicap</th>
                             <th class="col-xs-1 col-sm-1 col-md-1">Points</th>
                         </tr>
                     </thead>
@@ -118,8 +118,8 @@
                                 <td> <?= ucfirst($vData['first_name']) . " " . ucfirst($vData['last_name']) ?></td>
                                 <td> <?= $vData['score'] ?></td>
                                 <td> <?= $vData['xcount'] ?></td>
-                                <td class="hidden-xs hidden-sm"> <?= $vData['average_score'] ?></td>
-                                <td> <?= $vData['handicap_score'] ?> </td>
+                                <td> <?= $vData['average_score'] ?></td>
+                                <td class="hidden-xs hidden-sm"> <?= $vData['handicap_score'] ?> </td>
                                 <td> 0 </td>
                             </tr>
                     <?php } ?>
