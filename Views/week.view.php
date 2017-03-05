@@ -97,16 +97,16 @@
         <div class="row">
             <legend><?= ucwords($key); if ($key == 'recurve barebow') {$key = 'recurvebb';}?></legend>
             <div class="table">
-                <table class="table table-bordered table-hover table-responsive" id="table-<?= $key; ?>">
+                <table class="table table-bordered table-hover table-responsive" id="table-<?= $key; ?>" >
                     <thead>
                         <tr>
-                            <th class="col-sm-1 col-md-1">#</th>
-                            <th class="col-sm-1 col-md-3">Name</th>
-                            <th class="col-sm-1 col-md-3">Week's Score</th>
-                            <th class="col-sm-1 col-md-3">X</th>
-                            <th class="col-sm-1 col-md-1">Average</th>
-                            <th class="col-sm-1 col-md-1">Handicap</th>
-                            <th class="col-sm-1 col-md-1">Points</th>
+                            <th class="col-xs-1 col-sm-1 col-md-1">#</th>
+                            <th class="col-xs-1 col-sm-1 col-md-3">Name</th>
+                            <th class="col-xs-1 col-sm-1 col-md-3">Score</th>
+                            <th class="col-xs-1 col-sm-1 col-md-3">X</th>
+                            <th class="col-xs-1 col-sm-1 col-md-1">Average</th>
+                            <th class="col-xs-1 col-sm-1 col-md-1">Handicap</th>
+                            <th class="col-xs-1 col-sm-1 col-md-1">Points</th>
                         </tr>
                     </thead>
                     <tbody>
