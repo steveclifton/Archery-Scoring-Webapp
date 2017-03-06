@@ -116,6 +116,7 @@ class Points extends Base
                     FROM `$table`
                     JOIN `users` ON `$table`.user_id = `users`.id
                     WHERE `user_id` = '$archer'
+                    AND `division` = '$div'
                     ORDER BY `$table`.id DESC
                     LIMIT 1
                     ";

@@ -22,6 +22,7 @@ class Handicap_Scores extends Base
                     FROM `$table`
                     JOIN `users` ON `$table`.user_id = `users`.id
                     WHERE `user_id` = '$archer'
+                    AND `division` = '$div'
                     ORDER BY `$table`.id DESC
                     LIMIT 1
                     ";
@@ -38,7 +39,6 @@ class Handicap_Scores extends Base
 
         // Sorts the array by average_score
         rsort($averageList);
-
 
         return $averageList;
 
