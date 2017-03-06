@@ -84,7 +84,7 @@ $(document).ready(function () {
 
     $('#overallSelector').on('change', function () {
         var div = $('#overallSelector').children('option').filter(":selected").val();
-        console.log(div);
+        //console.log(div);
         $.ajax({
             type: 'POST',
             url: '/ajax_viewOverall',

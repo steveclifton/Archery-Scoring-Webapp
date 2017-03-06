@@ -112,6 +112,7 @@ class Results extends Base
         $overallPoints = $points->getTopTenPoints($division);
         $overallAverage = $averages->getAllAverages($division);
 
+
         echo json_encode(array('status' => 'success', 'averages' => $overallAverage, 'points' => $overallPoints));
 
     }

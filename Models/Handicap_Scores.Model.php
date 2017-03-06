@@ -37,27 +37,10 @@ class Handicap_Scores extends Base
         }
 
         // Sorts the array by average_score
-        arsort($averageList);
+        rsort($averageList);
 
 
         return $averageList;
-
-
-
-
-
-
-
-
-
-        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-        $stm->execute();
-
-        $data = $stm->fetchAll();
-
-
-        return $data;
 
     }
 
