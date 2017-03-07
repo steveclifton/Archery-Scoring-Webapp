@@ -120,7 +120,7 @@
                                 <td> <?= $vData['xcount'] ?></td>
                                 <td> <?= $vData['average_score'] ?></td>
                                 <td class="hidden-xs hidden-sm"> <?= $vData['handicap_score'] ?> </td>
-                                <td> 0 </td>
+                                <td> <?= $vData['points'] ?> </td>
                             </tr>
                     <?php } ?>
                     </tbody>
