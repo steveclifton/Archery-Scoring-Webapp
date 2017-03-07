@@ -208,6 +208,8 @@ class Score extends Base
                 $averageData = $this->getHandicapScores($d['id'], $week, 'compound');
                 $d['average_score'] = $averageData['average_score'];
                 $d['handicap_score'] = $averageData['handicap_score'];
+                $points = $this->getWeekPoints($d['id'], $week, 'compound');
+                $d['points'] = $points;
                 array_push($returnData['compound'], $d);
             }
 
@@ -215,6 +217,8 @@ class Score extends Base
                 $averageData = $this->getHandicapScores($d['id'], $week, 'recurve');
                 $d['average_score'] = $averageData['average_score'];
                 $d['handicap_score'] = $averageData['handicap_score'];
+                $points = $this->getWeekPoints($d['id'], $week, 'recurve');
+                $d['points'] = $points;
                 array_push($returnData['recurve'], $d);
             }
 
@@ -222,6 +226,8 @@ class Score extends Base
                 $averageData = $this->getHandicapScores($d['id'], $week, 'recurve barebow');
                 $d['average_score'] = $averageData['average_score'];
                 $d['handicap_score'] = $averageData['handicap_score'];
+                $points = $this->getWeekPoints($d['id'], $week, 'recurve barebow');
+                $d['points'] = $points;
                 array_push($returnData['recurve barebow'], $d);
             }
 
@@ -229,6 +235,8 @@ class Score extends Base
                 $averageData = $this->getHandicapScores($d['id'], $week, 'longbow');
                 $d['average_score'] = $averageData['average_score'];
                 $d['handicap_score'] = $averageData['handicap_score'];
+                $points = $this->getWeekPoints($d['id'], $week, 'longbow');
+                $d['points'] = $points;
                 array_push($returnData['longbow'], $d);
             }
         }
@@ -236,11 +244,37 @@ class Score extends Base
         return $returnData;
     }
 
+    private function getWeekPoints($userId, $week, $div)
+    {
+        $sql = "SELECT points
+                FROM `2017_outdoor_points` 
+                WHERE `user_id` = '$userId'
+                AND `week` = '$week'
+                AND `division` = '$div'
+                LIMIT 1
+                ";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute(array('$userId, $week, $div'));
+
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+        if (isset($data[0])) {
+            if (isset($data[0]['points'])) {
+                return $data[0]['points'];
+            }
+        }
+
+        return 0;
+
+    }
+
+
 
     /**
      * Returns the handicap scores for a user
      */
-    public function getHandicapScores($userId, $week, $div)
+    private function getHandicapScores($userId, $week, $div)
     {
         $sql = "SELECT average_score, handicap_score 
                 FROM `2017_outdoor_handicap_scores` 
