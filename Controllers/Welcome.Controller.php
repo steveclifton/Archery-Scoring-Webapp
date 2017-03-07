@@ -10,22 +10,22 @@ use Archery\Models\Score;
 class Welcome extends Base
 {
 
-    /**
-     * Checks the users login credentials
-     * - If authorised, redirect to account view
-     */
-    public function welcome()
-    {
-
-        $score = new Score();
-        $setup = new AdminConfig();
-        $currentWeek = $setup->getCurrentWeek();
-
-        $viewData['scores'] = $score->all_getCWScores($currentWeek);
-        $viewData['current_week'] = $currentWeek;
-
-        $this->render('Welcome', 'home.view', $viewData);
-    }
+//    /**
+//     * Checks the users login credentials
+//     * - If authorised, redirect to account view
+//     */
+//    public function welcome()
+//    {
+//
+//        $score = new Score();
+//        $setup = new AdminConfig();
+//        $currentWeek = $setup->getCurrentWeek();
+//
+//        $viewData['scores'] = $score->all_getCWScores($currentWeek);
+//        $viewData['current_week'] = $currentWeek;
+//
+//        $this->render('Welcome', 'home.view', $viewData);
+//    }
 
     /**
      * Gets the users details from SESSION and passes to the view
