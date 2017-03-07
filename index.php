@@ -25,10 +25,11 @@ if (isset($_SERVER['REDIRECT_URL'])) {
     $uri = str_replace('/', '', $_SERVER['REQUEST_URI']);
 }
 
-
 if ($uri == '') {
-    $week = new Results();
-    $week->viewScores();
+    header('Location: /overall');
+    die();
+//    $week = new Results();
+//    $week->viewScores();
 }
 
 else if ($uri == 'ajaxCheckLogin') {
