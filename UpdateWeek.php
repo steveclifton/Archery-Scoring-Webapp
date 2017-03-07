@@ -29,7 +29,7 @@ $maxXcount = $admin->getCurrentMaxXCount();
 
 $currentWeek = $currentWeek + 1;
 
-//$admin->setSetup($currentWeek, $numWeeks, $currentRound, $currentEvent, $tableName, $maxScore, $maxXcount);
+$admin->setSetup($currentWeek, $numWeeks, $currentRound, $currentEvent, $tableName, $maxScore, $maxXcount);
 $currentWeek--;
 
 /**
