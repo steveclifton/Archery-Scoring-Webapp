@@ -14,11 +14,6 @@
                 <input type="button" value="Scoring" id="openScoring" class="btn btn-success" style="margin-left: 40%">
             </div>
         </div>
-    <?php } ?>
-
-
-
-    <?php if (isset($_SESSION['id'])) { ?>
         <div class="hidden" id="scoringTable">
             <div class="row" id="subscores">
                 <legend>Submit Scores</legend>
@@ -43,12 +38,11 @@
                                 <td><input type="text" id="score" class="form-control" placeholder="Score" ></td>
                                 <td><input type="text" id="xcount" class="form-control" placeholder="X" ></td>
                                 <td>
-                                    <select class="selectpicker" id="div" data-width="fit">
-                                        <option value="compound" <?php if ($archer['prefered_type'] == 'compound') echo "selected"; ?>>Compound</option>
-                                        <option value="recurve" <?php if ($archer['prefered_type'] == 'recurve') echo "selected"; ?>>Recurve</option>
-                                        <option value="recurve barebow" <?php if ($archer['prefered_type'] == 'recurve barebow') echo "selected"; ?>>Recurve Barebow</option>
-                                        <option value="longbow" <?php if ($archer['prefered_type'] == 'longbow') echo "selected"; ?>>Longbow</option>
-                                        <option value="crossbow" <?php if ($archer['prefered_type'] == 'crossbow') echo "selected"; ?>>Crossbow</option>
+                                    <select class="selectpicker" id="div" data-width="70%">
+                                        <option value="compound" <?php if ($archer['prefered_type'] == 'compound') echo "selected"; ?>>Comp</option>
+                                        <option value="recurve" <?php if ($archer['prefered_type'] == 'recurve') echo "selected"; ?>>Recur</option>
+                                        <option value="recurve barebow" <?php if ($archer['prefered_type'] == 'recurve barebow') echo "selected"; ?>>RecBB</option>
+                                        <option value="longbow" <?php if ($archer['prefered_type'] == 'longbow') echo "selected"; ?>>L-Bow</option>
                                     </select>
                                 </td>
                                 <td class="hidden-xs hidden-sm hidden-md hidden-lg"><span class="week"><?= $viewData['current_week'] ?></td>
@@ -56,18 +50,13 @@
                         </tbody>
                         <?php } ?>
                     </table>
-                    </div>
+                </div>
             </div>
 
             <div class="row">
                 <div class="col-xs col-xs col-md-1" style="padding-left: 0px">
                     <button class="btn btn-success" id="submit">Submit</button>
                 </div>
-    <!--            <div class="col-xs col-sm col-md-2">-->
-    <!--                <label>-->
-    <!--                    <input class="col-xs" type="checkbox" id="correctScores" style="margin-top: 10px"> Scores Correct-->
-    <!--                </label>-->
-    <!--            </div>-->
                 <div class="col-xs col-sm col-md-2">
                     <i class="fa fa-spinner fa-spin" style="font-size:40px" id="spinning"></i>
                 </div>
@@ -89,6 +78,7 @@
                 <div class="validation"></div>
             </div>
         </div>
+
     <?php } ?>
 
     <br><br>
@@ -106,7 +96,7 @@
                             <th class="col-xs-1 col-sm-1 col-md-3">X</th>
                             <th class="col-xs-1 col-sm-1 col-md-1">Average</th>
                             <th class="hidden-xs hidden-sm col-xs-1 col-sm-1 col-md-1">Handicap</th>
-                            <th class="col-xs-1 col-sm-1 col-md-1">Points</th>
+                            <th class="hidden-xs hidden-sm col-xs-1 col-sm-1 col-md-1">Points</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -120,7 +110,7 @@
                                 <td> <?= $vData['xcount'] ?></td>
                                 <td> <?= $vData['average_score'] ?></td>
                                 <td class="hidden-xs hidden-sm"> <?= $vData['handicap_score'] ?> </td>
-                                <td> <?= $vData['points'] ?> </td>
+                                <td class="hidden-xs hidden-sm"> <?= $vData['points'] ?> </td>
                             </tr>
                     <?php } ?>
                     </tbody>
