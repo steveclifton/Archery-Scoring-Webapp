@@ -364,8 +364,8 @@ $(document).ready(function () {
                                 '<td> ' + this.score + '</td>' +
                                 '<td> ' + this.xcount + '</td>' +
                                 '<td> ' + this.average_score + '</td>' +
-                                // '<td> ' + this.handicap_score + '</td>' +
-                                '<td>0</td>' +
+                                '<td class="hidden-xs hidden-sm"> ' + this.handicap_score + '</td>' +
+                                '<td class="hidden-xs hidden-sm">0</td>' +
                                 '</tr>'
                             );
                             i++;
