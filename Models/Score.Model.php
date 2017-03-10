@@ -311,7 +311,7 @@ class Score extends Base
                 WHERE `user_id` = '$userId' 
                 AND `division` LIKE '$division' 
                 ORDER BY `score` DESC
-                LIMIT 10
+                LIMIT 15
                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
