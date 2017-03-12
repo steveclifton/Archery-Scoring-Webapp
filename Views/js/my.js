@@ -74,7 +74,7 @@ $(document).ready(function () {
             if (url) {
                 window.location = url;
             } else {
-                window.location = '/myscoers';
+                window.location = '/myscores';
             }
         }
         return;
