@@ -21,8 +21,9 @@ class Results extends Base
 
     /**
      * Gets the weeks scores and passes to view to be displayed
+     * @param string $event
      */
-    public function viewScores()
+    public function viewScores($event = '')
     {
         $user = new User();
         $score = new Score();
