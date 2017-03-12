@@ -77,10 +77,10 @@ class Results extends Base
         $admin = new AdminConfig();
         $week = $admin->getCurrentWeek();
 
-        $viewData['points'] = $points->getTopTenPoints($division);
+        $viewData['points'] = $points->getTopTenPoints(2, $division);
 
 
-        $viewData['averages'] = $averages->getAllAverages($division);
+        $viewData['averages'] = $averages->getAllAverages(2, $division);
 
         $this->render('Weekly Scores', 'overall.view', $viewData);
         die();
@@ -109,8 +109,8 @@ class Results extends Base
         $admin = new AdminConfig();
         $week = $admin->getCurrentWeek();
 
-        $overallPoints = $points->getTopTenPoints($division);
-        $overallAverage = $averages->getAllAverages($division);
+        $overallPoints = $points->getTopTenPoints(2, $division);
+        $overallAverage = $averages->getAllAverages(2, $division);
 
 
         echo json_encode(array('status' => 'success', 'averages' => $overallAverage, 'points' => $overallPoints));
@@ -124,6 +124,7 @@ class Results extends Base
     {
         $score = new Score();
         $user = new User();
+        $hCap = new Handicap_Scores();
         $archer = $_POST['archer'];
 
         $userId = $user->getUserIdByAnzNum($archer['anz']);
@@ -139,7 +140,7 @@ class Results extends Base
             $handicap = 360 - $averageScore;
             $handicapScore = $archer['score'] + $handicap;
 
-            $score->setHandicap($userId, $archer['week'], $archer['score'], $archer['div'], $averageScore, $averageX, $handicap, $handicapScore);
+            $hCap->setHandicap(2, $userId, $archer['week'], $archer['score'], $archer['div'], $averageScore, $averageX, $handicap, $handicapScore);
 
             $divScores = $score->all_getCWScores($archer['week']);
 
