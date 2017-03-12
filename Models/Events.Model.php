@@ -10,7 +10,9 @@ class Events extends Base
 {
     public function getEvent($eventName)
     {
-        $sql = "SELECT * FROM `events` WHERE `events`.`name` = '$eventName'
+        $sql = "SELECT * 
+                FROM `events` 
+                WHERE `events`.`name` = '$eventName'
                 ";
 
 
