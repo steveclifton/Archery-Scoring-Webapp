@@ -5,9 +5,9 @@ namespace Archery;
 
 require 'vendor/autoload.php';
 
-use Archery\Controllers\Contact;
 use Dotenv\Dotenv;
-use Archery\Configurations\Event;
+use Archery\Configurations\AdminSetup;
+use Archery\Controllers\Contact;
 use Archery\Controllers\Admin;
 use Archery\Controllers\Authentication;
 use Archery\Controllers\Profile;
@@ -58,7 +58,7 @@ else if ($uri == 'register') {
 }
 
 else if ($uri == 'updatesetup') {
-    $admin = new Event();
+    $admin = new AdminSetup();
     $admin->setSetup();
 }
 
