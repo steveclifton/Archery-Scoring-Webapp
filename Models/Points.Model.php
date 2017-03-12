@@ -7,55 +7,39 @@ use PDO;
 
 class Points extends Base
 {
+    private $pointsTable = '2017_outdoor_points';
+    private $pointsTotalTable = '2017_outdoor_point_totals';
+
 
     /**
      * Sets the weekly points
      */
-    public function setWeeklyPoints($userId, $week, $div, $points)
+    public function setWeeklyPoints($event, $userId, $week, $div, $points)
     {
         date_default_timezone_set('NZ');
         $date = date("H:i:s d-m-Y");
 
-        $sql = "INSERT INTO `2017_outdoor_points` (`id`, `user_id`, `week`, `division`, `points`, `created_at`) 
-                VALUES (NULL, '$userId', '$week', '$div', '$points', '$date');";
+        $sql = "INSERT INTO `$this->pointsTable` (`id`, `event`, `user_id`, `week`, `division`, `points`, `created_at`) 
+                VALUES (NULL, '$event', '$userId', '$week', '$div', '$points', '$date');";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $stm->execute(array('$userId, $week, $div, $points'));
+        $stm->execute(array('$event, $userId, $week, $div, $points'));
 
         return true;
     }
 
-
     /**
-     * Returns the Archers top ten points tallied
+     * Gets an archers top 10 points
      */
-    public function getArchersTopTen($userId, $div)
-    {
-        $table = '2017_outdoor_point_totals';
-
-        $sql = "SELECT top_ten_points, user_id, division, `users`.first_name, `users`.last_name, `users`.anz_num 
-                FROM `$table`
-                WHERE `user_id` = '$userId'
-                AND `division` = '$div'
-                LIMIT 1
-                ";
-
-        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-        $stm->execute();
-
-        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-        return $data;
-    }
-
-    public function getArchersTotalPoints($userId, $div)
+    public function getArchersTotalPoints($event, $userId, $div)
     {
         $sql = "SELECT points 
-                FROM `2017_outdoor_points`
+                FROM `$this->pointsTable`
                 WHERE `user_id` = '$userId'
                 AND `division` = '$div'
+                AND `event` = '$event'
+                ORDER BY `points`
                 LIMIT 10
                 ";
 
@@ -73,22 +57,45 @@ class Points extends Base
         return $totalPoints;
     }
 
+//
+//    /**
+//     * Returns the Archers top ten points tallied
+//     */
+//    public function getArchersTopTen($event, $userId, $div)
+//    {
+//
+//        $sql = "SELECT top_ten_points, user_id, division, `users`.first_name, `users`.last_name, `users`.anz_num
+//                FROM `$this->pointsTotalTable`
+//                WHERE `user_id` = '$userId'
+//                AND `division` = '$div'
+//                AND `event` = '$event'
+//                LIMIT 1
+//                ";
+//
+//        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+//
+//        $stm->execute();
+//
+//        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+//
+//        return $data;
+//    }
+
 
     /**
      * Sets a users total points in the database
      */
-    public function setTotalPoints($userId, $div, $points)
+    public function setTotalPoints($event, $userId, $div, $points)
     {
         date_default_timezone_set('NZ');
         $date = date("H:i:s d-m-Y");
-        $table = '2017_outdoor_point_totals';
 
-        $sql = "INSERT INTO `2017_outdoor_point_totals` (`id`, `user_id`, `division`, `top_ten_points`, `created_at`) 
-                VALUES (NULL, '$userId', '$div', '$points', '$date');";
+        $sql = "INSERT INTO `$this->pointsTotalTable` (`id`, `event`, `user_id`, `division`, `top_ten_points`, `created_at`) 
+                VALUES (NULL, '$event', '$userId', '$div', '$points', '$date');";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $stm->execute(array('$userId, $div, $points'));
+        $stm->execute(array('$event, $userId, $div, $points'));
 
         return true;
     }
@@ -100,10 +107,11 @@ class Points extends Base
      * Returns the top ten points for
      *  - All archers in a DIV
      *  - For the week
+     *
+     * Sorts them by the top ten points
      */
-    public function getTopTenPoints($div)
+    public function getTopTenPoints($event, $div)
     {
-        $table = '2017_outdoor_point_totals';
 
         $score = new Score();
 
@@ -113,11 +121,12 @@ class Points extends Base
         foreach ($archerList as $archer) {
 
             $sql = "SELECT top_ten_points, `users`.first_name, `users`.last_name
-                    FROM `$table`
-                    JOIN `users` ON `$table`.user_id = `users`.id
+                    FROM `$this->pointsTotalTable`
+                    JOIN `users` ON `$this->pointsTotalTable`.user_id = `users`.id
                     WHERE `user_id` = '$archer'
                     AND `division` = '$div'
-                    ORDER BY `$table`.id DESC
+                    AND `event` = '$event'
+                    ORDER BY `$this->pointsTotalTable`.id DESC
                     LIMIT 1
                     ";
 

@@ -8,22 +8,55 @@ use PDO;
 class Handicap_Scores extends Base
 {
 
-    public function getAllAverages($div)
+    private $table = '2017_outdoor_handicap_scores';
+
+
+    /**
+     * Sets an Archers handicap and averages into the database
+     */
+    public function setHandicap($event, $archerId, $week, $weekScore, $div, $average, $averageX, $handicap, $handicapScore)
     {
-        $table = '2017_outdoor_handicap_scores';
+        date_default_timezone_set('NZ');
+        $date = date("H:i:s d-m-Y");
+
+        $sql = "INSERT INTO `$this->table` (`id`, `event`, `user_id`, `week`, `week_score`, `division`, `average_score`, `average_x`, `handicap`, `handicap_score`, `created_at`) 
+                VALUES (NULL, '$event', '$archerId', '$week', '$weekScore', '$div', '$average', '$averageX', '$handicap', '$handicapScore', '$date');";
+
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute(array('$archerId, $week, $weekScore, $div, $average, $averageX, $handicap, $handicapScore'));
+
+        return true;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    public function getAllAverages($event, $div)
+    {
 
         $score = new Score();
 
         $archerList = $score->getAllDivisionArchers($div);
 
         $averageList = array();
+
         foreach ($archerList as $archer) {
             $sql = "SELECT user_id, average_score, division, average_x, `users`.first_name, `users`.last_name
-                    FROM `$table`
-                    JOIN `users` ON `$table`.user_id = `users`.id
+                    FROM `$this->table`
+                    JOIN `users` ON `$this->table`.user_id = `users`.id
                     WHERE `user_id` = '$archer'
                     AND `division` = '$div'
-                    ORDER BY `$table`.id DESC
+                    AND `event` = '$event'
+                    ORDER BY `$this->table`.id DESC
                     LIMIT 1
                     ";
 
@@ -46,14 +79,14 @@ class Handicap_Scores extends Base
 
     // Returns all the current weeks scores for handicap point calcs
     //
-    public function all_getHandicapForPoints($week)
+    public function all_getHandicapForPoints($event, $week)
     {
-        $table = '2017_outdoor_handicap_scores';
 
         $sql = "SELECT user_id, division, average_score, handicap_score
-                FROM `$table`
-                JOIN `users` ON `$table`.user_id = `users`.id
+                FROM `$this->table`
+                JOIN `users` ON `$this->table`.user_id = `users`.id
                 AND `week` = '$week'
+                AND `event` = '$event'
                 ORDER BY `handicap_score` DESC, `average_score` DESC 
                 ";
 
