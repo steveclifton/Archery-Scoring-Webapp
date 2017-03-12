@@ -5,7 +5,7 @@ namespace Archery\Configurations;
 
 use Archery\Models\AdminConfig;
 
-class Event
+class AdminSetup
 {
     private $setup;
 
