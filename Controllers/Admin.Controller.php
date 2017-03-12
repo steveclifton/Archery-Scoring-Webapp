@@ -10,6 +10,9 @@ use Archery\Models\User;
 class Admin extends Base
 {
 
+    /**
+     * Routes to Admin View
+     */
     public function adminView()
     {
         $this->isAdminLoggedIn();
@@ -30,6 +33,10 @@ class Admin extends Base
         $this->render('Admin', 'admin.view', $viewData);
     }
 
+
+    /**
+     * Returns the users that are pending
+     */
     private function getPendingAccounts()
     {
         $pendingUsers = new User();
@@ -40,9 +47,11 @@ class Admin extends Base
         } else {
             return false;
         }
-
     }
 
+    /**
+     * Confirms a user
+     */
     public function confirmPendingAccounts()
     {
         $this->isAdminLoggedIn();
@@ -54,6 +63,10 @@ class Admin extends Base
         $this->adminView();
     }
 
+
+    /**
+     * Future - to be used to create an event
+     */
     public function createEvent()
     {
 
