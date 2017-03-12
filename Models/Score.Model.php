@@ -7,15 +7,7 @@ use PDO;
 
 class Score extends Base
 {
-    private $tableName;
-
-    public function __construct()
-    {
-        parent::__CONSTRUCT();
-        $name = new Event();
-        $this->tableName = $name->getTableName();
-    }
-
+    private $tableName = '2017_outdoor_league';
 
     /*********************************************************************************************
      *                                         Setters                                           *
@@ -45,28 +37,6 @@ class Score extends Base
 
         return true;
     }
-
-    /**
-     * Sets an Archers handicap and averages into the database
-     */
-    public function setHandicap($archerId, $week, $weekScore, $div, $average, $averageX, $handicap, $handicapScore)
-    {
-        $table = $this->tableName;
-
-        date_default_timezone_set('NZ');
-        $date = date("H:i:s d-m-Y");
-
-        $sql = "INSERT INTO `2017_outdoor_handicap_scores` (`id`, `user_id`, `week`, `week_score`, `division`, `average_score`, `average_x`, `handicap`, `handicap_score`, `created_at`) 
-                VALUES (NULL, '$archerId', '$week', '$weekScore', '$div', '$average', '$averageX', '$handicap', '$handicapScore', '$date');";
-
-
-        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-        $stm->execute(array('$archerId, $week, $weekScore, $div, $average, $averageX, $handicap, $handicapScore'));
-
-        return true;
-    }
-
 
 
     /**********************************************************************************************
