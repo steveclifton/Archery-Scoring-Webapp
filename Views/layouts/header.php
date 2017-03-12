@@ -16,6 +16,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href='/week'>2017 Outdoor League</a></li>
+                        <li><a href='/week'>2017 Indoor League</a></li>
                     </ul>
                 </li>
 
