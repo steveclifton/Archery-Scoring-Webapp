@@ -8,21 +8,29 @@ use PDO;
 
 class Events extends Base
 {
-    public function getEvent($eventName)
+
+    /**
+     * Returns the Event ID number
+     */
+    public function getEventId($eventName)
     {
-        $sql = "SELECT * 
+        $sql = "SELECT id 
                 FROM `events` 
                 WHERE `events`.`name` = '$eventName'
                 ";
-
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
         $stm->execute(array('$eventName'));
 
-        $data = $stm->fetchAll();
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
-        return $data;
+        if (isset($data[0]['id'])) {
+            return $data[0]['id'];
+        } else {
+            return -1;
+        }
+
     }
 
     public function setEvent()
