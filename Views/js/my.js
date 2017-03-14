@@ -114,6 +114,7 @@ $(document).ready(function () {
                             '<td> ' + capitalizeFirstLetter(this.first_name) + " " + capitalizeFirstLetter(this.last_name) + '</td>' +
                             '<td> ' + this.average_score + '</td>' +
                             '<td> ' + this.average_x + '</td>' +
+                            '<td> ' + this.top10 + '</td>' +
                             '</tr>'
                         );
                         i++;
