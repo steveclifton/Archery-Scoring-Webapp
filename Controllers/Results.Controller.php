@@ -39,12 +39,12 @@ class Results extends Base
                 }
             }
             $viewData['weekRequested'] = $_GET['week'];
-            $viewData['scores'] = $score->all_getCWScores($_GET['week']);
+            $viewData['scores'] = $score->all_getCWScores(2, $_GET['week']);
         } else {
             if (isset($_SESSION['id'])) {
                 $viewData['archers'] = $user->getAllUsersForScoring();
             }
-            $viewData['scores'] = $score->all_getCWScores($currentWeek);
+            $viewData['scores'] = $score->all_getCWScores(2, $currentWeek);
             $viewData['canScore'] = true;
         }
 
@@ -72,14 +72,10 @@ class Results extends Base
             $division = 'compound';
         }
 
-
         $points = new Points();
         $averages = new Handicap_Scores();
-        $admin = new AdminConfig();
-        $week = $admin->getCurrentWeek();
 
         $viewData['points'] = $points->getTopTenPoints(2, $division);
-
 
         $viewData['averages'] = $averages->getAllAverages(2, $division);
 
@@ -129,11 +125,17 @@ class Results extends Base
         $archer = $_POST['archer'];
 
         $userId = $user->getUserIdByAnzNum($archer['anz']);
-        $existingScore = $score->getCWScore($userId, $archer['week'], $archer['div'], '2017_outdoor_league');
+
+        //GET EVENT NUMBER HERE
+
+        $existingScore = $score->getCWScore(2, $userId, $archer['week'], $archer['div'], '2017_outdoor_league');
 
 
         if (!isset($existingScore[0])) {
-            $score->setScore($userId, $archer['score'], $archer['xcount'], $archer['week'], $archer['div']);
+
+            //Get Event Number HERE
+            $score->setScore(2, $userId, $archer['score'], $archer['xcount'], $archer['week'], $archer['div']);
+
             $average = $score->getTotalScoresAveraged($userId, $archer['div']);
             $averageScore = $average['average'];
             $averageX = $average['xcount'];
@@ -141,9 +143,12 @@ class Results extends Base
             $handicap = 360 - $averageScore;
             $handicapScore = $archer['score'] + $handicap;
 
-            $hCap->setHandicap(2, $userId, $archer['week'], $archer['score'], $archer['div'], $averageScore, $averageX, $handicap, $handicapScore);
+            //Get Event Number HERE
+            $best10 = $score->getTop10Scores(2, $userId, $archer['div']);
 
-            $divScores = $score->all_getCWScores($archer['week']);
+            $hCap->setHandicap(2, $userId, $archer['week'], $archer['score'], $archer['div'], $averageScore, $averageX, $handicap, $handicapScore, $best10);
+
+            $divScores = $score->all_getCWScores(2, $archer['week']);
 
             echo json_encode(array('status' => 'passed', 'message' => 'Score entered', 'allScores' => $divScores[$archer['div']]));
         } else {
