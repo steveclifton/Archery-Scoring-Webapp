@@ -3,8 +3,7 @@
     "classmap" : [
       "Controllers/",
       "Models/",
-      "Services/",
-      "Configurations/"
+      "Services/"
     ]
   },
   "require": {
