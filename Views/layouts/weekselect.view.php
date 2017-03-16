@@ -5,7 +5,7 @@
                 <option value="overall">Overall Results</option>
                 <?php
                     $weeks = new \Archery\Controllers\Admin();
-                    $weeks = $weeks->getCurrentWeek();
+                    $weeks = $weeks->getCurrentWeek(2);
                     if (isset($_SESSION['id'])) { ?>
                         <option value="myscores">My Scores</option>
                     <?php } ?>
