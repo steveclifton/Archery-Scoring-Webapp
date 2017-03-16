@@ -4,7 +4,7 @@
             <select class="selectpicker" id="archeryselect">
                 <option value="overall">Overall Results</option>
                 <?php
-                    $weeks = new \Archery\Configurations\AdminSetup();
+                    $weeks = new \Archery\Controllers\Admin();
                     $weeks = $weeks->getCurrentWeek();
                     if (isset($_SESSION['id'])) { ?>
                         <option value="myscores">My Scores</option>
