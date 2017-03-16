@@ -23,6 +23,7 @@
 
 <div class="container">
     <div class="row">
+
         <div class="col-sm-6 col-md-6">
             <div id="legend">
                 <legend class="">Averages</legend>
@@ -34,7 +35,8 @@
                             <th class="col-sm-1 col-md-1">#</th>
                             <th class="col-sm-1 col-md-3">Name</th>
                             <th class="col-sm-1 col-md-3">Score</th>
-                            <th class="col-sm-1 col-md-3">X-Count</th>
+                            <th class="col-sm-1 col-md-2">X-Count</th>
+                            <th class="col-sm-1 col-md-2">Top 10 Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,6 +48,7 @@
                                 <td> <?= ucwords($archer['first_name']) . " " . ucwords($archer['last_name']) ?></td>
                                 <td> <?= $archer['average_score'] ?></td>
                                 <td> <?= $archer['average_x'] ?></td>
+                                <td> <?= $archer['top10'] ?></td>
                             </tr>
                         <?php } ?>
                     </tbody>
@@ -81,7 +84,7 @@
                 </table>
             </div>
         </div>
-        </div>
+
     </div>
 </div>
 
