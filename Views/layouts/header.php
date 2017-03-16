@@ -15,14 +15,18 @@
                 <li class='dropdown'>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href='/week'>2017 Indoor League</a></li>
+                        <?php
+                            $weeks = new \Archery\Controllers\Admin();
+                            $weeks = $weeks->getCurrentWeek(2);
+                            echo "<li><a href='/week?week=$weeks'>2017 Indoor League</a></li>";
+                        ?>
                     </ul>
                 </li>
 
                 <li class='dropdown'>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Results<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href='#'>Competitions</a></li>
+                        <li><a href='/competitions'>Competitions</a></li>
                         <li><a href='#'>Archer Stats</a></li>
                     </ul>
                 </li>
@@ -44,6 +48,7 @@
                     </ul>
                 </li>
                 <li><a href="/contact">Contact</a></li>
+                <li><a href='/rules'>League Rules</a></li>
 
                 <?php if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin') { ?>
                     <li><a href="/admin">Admin</a></li>
