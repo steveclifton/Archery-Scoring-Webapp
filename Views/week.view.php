@@ -1,4 +1,8 @@
 <div class="row">
+    <h2 style="font-family: 'Droid Sans', sans-serif; text-align: center;">Archery OSA</h2>
+</div>
+
+<div class="row">
     <?php include('layouts/weekselect.view.php') ?>
     <br>
 </div>
