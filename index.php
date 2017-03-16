@@ -6,7 +6,6 @@ namespace Archery;
 require 'vendor/autoload.php';
 
 use Dotenv\Dotenv;
-use Archery\Configurations\AdminSetup;
 use Archery\Controllers\Contact;
 use Archery\Controllers\Admin;
 use Archery\Controllers\Authentication;
@@ -18,6 +17,29 @@ session_start();
 
 $dotenv = new Dotenv(__DIR__);
 $dotenv->load();
+
+//$web = explode('/', $_SERVER['REDIRECT_URL']);
+
+//if ($web[1] == 'indoorleague') {
+//    if ($web[2] == '2017') {
+//        $week = new Results();
+//        $week->viewScores('2017 Indoor League Series');
+//    }
+//}
+//
+//
+//else if ($web[1] == 'outdoorleague') {
+//    if ($web[2] == '2017') {
+//        $week = new Results();
+//        $week->viewScores('2017 Outdoor League Series');
+//    }
+//}
+
+
+
+
+
+
 
 if (isset($_SERVER['REDIRECT_URL'])) {
     $uri = str_replace('/', '', $_SERVER['REDIRECT_URL']);
@@ -58,7 +80,7 @@ else if ($uri == 'register') {
 }
 
 else if ($uri == 'updatesetup') {
-    $admin = new AdminSetup();
+    $admin = new Admin();
     $admin->setSetup();
 }
 
