@@ -19,8 +19,8 @@ $admin = new AdminConfig();
  * Increase the week by 1
  */
 
-$currentWeek = $admin->getCurrentWeek();
-$numWeeks = $admin->getNumWeeks();
+$currentWeek = $admin->getCurrentWeek(2);
+$numWeeks = $admin->getNumWeeks(2);
 
 $currentWeek = $currentWeek + 1;
 
