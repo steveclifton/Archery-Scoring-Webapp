@@ -5,6 +5,7 @@ namespace Archery\Controllers;
 
 use Archery\Models\AdminConfig;
 use Archery\Models\Contact_Messages;
+use Archery\Models\Events;
 use Archery\Models\User;
 
 class Admin extends Base
@@ -21,8 +22,9 @@ class Admin extends Base
         $viewData['pending_users'] = $pendingUsers;
 
         $setup = new AdminConfig();
-        $viewData['current_week'] = $setup->getCurrentWeek();
-        $viewData['num_weeks'] = $setup->getNumWeeks();
+        $events = new Events();
+
+        $viewData['events'] = $events->getAllEvents();
 
         $this->render('Admin', 'admin.view', $viewData);
     }
@@ -66,8 +68,8 @@ class Admin extends Base
     {
         $admin = new AdminConfig();
 
-        $currentWeek = $_POST['currentweek'];
-        $numWeeks = $_POST['numweeks'];
+        $currentWeek = $_POST['currentEventWeek'];
+        $numWeeks = $_POST['currentEventNumWeeks'];
 
         // TODO get the event number here
 
@@ -78,14 +80,29 @@ class Admin extends Base
         die();
     }
 
+    public function ajax_getEventDetails()
+    {
+        $eventId = $_POST['id'];
+
+        $admin = new AdminConfig();
+
+        $currentWeek = $admin->getCurrentWeek($eventId);
+
+        $numWeeks = $admin->getNumWeeks($eventId);
+
+        echo json_encode(array("status" => "success", "currentWeek" => $currentWeek, "numWeeks" => $numWeeks));
+        return;
+
+    }
+
     /*
      * Returns the number of weeks
      */
-    public function getCurrentWeek()
+    public function getCurrentWeek($event)
     {
         $admin = new AdminConfig();
 
-        return $admin->getCurrentWeek();
+        return $admin->getCurrentWeek($event);
     }
 
 
