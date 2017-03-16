@@ -5,6 +5,7 @@ namespace Archery;
 
 require 'vendor/autoload.php';
 
+use Archery\Controllers\Competition;
 use Dotenv\Dotenv;
 use Archery\Controllers\Contact;
 use Archery\Controllers\Admin;
@@ -48,10 +49,8 @@ if (isset($_SERVER['REDIRECT_URL'])) {
 }
 
 if ($uri == '') {
-    header('Location: /overall');
-    die();
-//    $week = new Results();
-//    $week->viewScores();
+    $welcome = new Welcome();
+    $welcome->welcome();
 }
 
 else if ($uri == 'ajaxCheckLogin') {
@@ -107,9 +106,19 @@ else if ($uri == 'ajax_viewOverall') {
     $result->ajax_viewOverall();
 }
 
+else if ($uri == 'ajax_getEventDetails') {
+    $admin = new Admin;
+    $admin->ajax_getEventDetails();
+}
+
 else if ($uri == 'updateassociateduser') {
     $profile = new Profile();
     $profile->updateAssociation();
+}
+
+else if ($uri == 'competitions') {
+    $comp = new Competition();
+    $comp->getCompetitions();
 }
 
 else if ($uri == 'rules') {
