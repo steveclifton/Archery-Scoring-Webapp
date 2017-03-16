@@ -10,6 +10,26 @@ class Events extends Base
 {
 
     /**
+     * Returns all the events in the system
+     */
+    public function getAllEvents()
+    {
+        $sql = "SELECT id, name, start_date, end_date, round
+                FROM `events` 
+                ";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute(array('$eventName'));
+
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        return $data;
+
+    }
+
+
+    /**
      * Returns the Event ID number
      */
     public function getEventId($eventName)
