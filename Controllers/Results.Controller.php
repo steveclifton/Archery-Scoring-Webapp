@@ -28,7 +28,7 @@ class Results extends Base
         $user = new User();
         $score = new Score();
         $setup = new AdminConfig();
-        $currentWeek = $setup->getCurrentWeek();
+        $currentWeek = $setup->getCurrentWeek(2);
 
         if (isset($_GET['week']) && is_numeric($_GET['week'])) {
             if (isset($_SESSION['id'])) {
@@ -41,11 +41,8 @@ class Results extends Base
             $viewData['weekRequested'] = $_GET['week'];
             $viewData['scores'] = $score->all_getCWScores(2, $_GET['week']);
         } else {
-            if (isset($_SESSION['id'])) {
-                $viewData['archers'] = $user->getAllUsersForScoring();
-            }
-            $viewData['scores'] = $score->all_getCWScores(2, $currentWeek);
-            $viewData['canScore'] = true;
+            header('Location: /');
+            die();
         }
 
         $viewData['current_week'] = $currentWeek;
@@ -104,7 +101,7 @@ class Results extends Base
         $points = new Points();
         $averages = new Handicap_Scores();
         $admin = new AdminConfig();
-        $week = $admin->getCurrentWeek();
+        $week = $admin->getCurrentWeek(2);
 
         $overallPoints = $points->getTopTenPoints(2, $division);
         $overallAverage = $averages->getAllAverages(2, $division);
