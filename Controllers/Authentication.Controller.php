@@ -29,7 +29,7 @@ class Authentication extends Base
             $viewData['last_name'] = $_SESSION['last_name'];
 
             $admin = new AdminConfig();
-            $week = $admin->getCurrentWeek();
+            $week = $admin->getCurrentWeek(2);
 
             echo json_encode(array("status" => "success", "message" => "valid user", "week" => $week));
             die();
@@ -266,7 +266,7 @@ class Authentication extends Base
         $_SESSION['prefered_type'] = $data['prefered_type'];
 
         $setup = new AdminConfig();
-        $_SESSION['current_week'] = $setup->getCurrentWeek();
+        $_SESSION['current_week'] = $setup->getCurrentWeek(2);
 
     }
     
