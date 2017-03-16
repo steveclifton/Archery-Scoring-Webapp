@@ -7,8 +7,8 @@ use PDO;
 
 class Points extends Base
 {
-    private $pointsTable = '2017_outdoor_points';
-    private $pointsTotalTable = '2017_outdoor_point_totals';
+    private $pointsTable = 'league_points';
+    private $pointsTotalTable = 'league_point_totals';
 
 
     /**
@@ -115,7 +115,9 @@ class Points extends Base
 
         $score = new Score();
 
-        $archerList = $score->getAllDivisionArchers($div);
+        // GET EVENT NUMBER HERE
+
+        $archerList = $score->getAllDivisionArchers(2, $div);
 
         $pointList = array();
         foreach ($archerList as $archer) {
@@ -143,6 +145,33 @@ class Points extends Base
 
         return $pointList;
     }
+
+
+    public function getWeekPoints($userId, $week, $div)
+    {
+        $sql = "SELECT points
+                FROM `2017_outdoor_points` 
+                WHERE `user_id` = '$userId'
+                AND `week` = '$week'
+                AND `division` = '$div'
+                LIMIT 1
+                ";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute(array('$userId, $week, $div'));
+
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+        if (isset($data[0])) {
+            if (isset($data[0]['points'])) {
+                return $data[0]['points'];
+            }
+        }
+
+        return 0;
+
+    }
+
 
 
 }
