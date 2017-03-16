@@ -18,15 +18,18 @@ class AdminConfig extends Base
     /**
      * Sets the admin config
      */
-    public function setSetup($currentWeek, $numWeeks, $currentRound, $currentEvent, $tableName, $maxScore, $maxXCount)
+    public function setSetup($event, $currentWeek, $numWeeks)
     {
-        $sql = "INSERT INTO `admin_configuration` (`id`, `current_week`, `number_weeks`, `current_round`, `current_event`, `table_name`, `max_score`, `max_xcount`) 
-                VALUES (NULL, '$currentWeek', '$numWeeks', '$currentRound', '$currentEvent', '$tableName', '$maxScore', '$maxXCount');
+        date_default_timezone_set('NZ');
+        $date = date("H:i:s d-m-Y");
+
+        $sql = "INSERT INTO `admin_configuration` (`id`, `event`, `current_week`, `number_weeks`, `created_at`) 
+                VALUES (NULL, '$event', '$currentWeek', '$numWeeks', '$date');
                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $stm->execute(array('$currentWeek, $numWeeks, $currentRound, $currentEvent, $tableName, $maxScore, $maxXCount'));
+        $stm->execute(array('$event, $currentWeek, $numWeeks, $date'));
 
         return;
     }
