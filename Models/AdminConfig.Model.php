@@ -38,17 +38,18 @@ class AdminConfig extends Base
     /**
      * Returns the current week
      */
-    public function getCurrentWeek()
+    public function getCurrentWeek($event)
     {
         $sql = "SELECT `current_week` 
                 FROM `admin_configuration` 
+                WHERE `event` = '$event'
                 ORDER BY created_at DESC 
                 LIMIT 1
                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $stm->execute();
+        $stm->execute(array('$event'));
 
         $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
@@ -63,17 +64,18 @@ class AdminConfig extends Base
     /**
      * Returns the number of weeks the event goes for
      */
-    public function getNumWeeks()
+    public function getNumWeeks($event)
     {
         $sql = "SELECT `number_weeks` 
                 FROM `admin_configuration` 
+                WHERE `event` = '$event'
                 ORDER BY created_at DESC 
                 LIMIT 1
                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $stm->execute();
+        $stm->execute(array('$event'));
 
         $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
@@ -84,125 +86,7 @@ class AdminConfig extends Base
         die();
     }
 
-    /**
-     * Returns the current Event name
-     */
-    public function getCurrentEvent()
-    {
-        $sql = "SELECT `current_event` 
-                FROM `admin_configuration` 
-                ORDER BY created_at DESC 
-                LIMIT 1
-                ";
 
-        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-        $stm->execute();
-
-        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-        if (isset($data[0]['current_event'])) {
-            return $data[0]['current_event'];
-        }
-        header('location: /welcome');
-        die();
-    }
-
-    /**
-     * Returns the current round name
-     */
-    public function getCurrentRound()
-    {
-        $sql = "SELECT `current_round` 
-                FROM `admin_configuration` 
-                ORDER BY created_at DESC 
-                LIMIT 1
-                ";
-
-        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-        $stm->execute();
-
-        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-        if (isset($data[0]['current_round'])) {
-            return $data[0]['current_round'];
-        }
-        header('location: /welcome');
-        die();
-    }
-
-    /**
-     * Returns the current DB in use
-     */
-    public function getCurrentDB()
-    {
-        $sql = "SELECT `table_name` 
-                FROM `admin_configuration` 
-                ORDER BY created_at DESC 
-                LIMIT 1
-                ";
-
-        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-        $stm->execute();
-
-        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-        if (isset($data[0]['table_name'])) {
-            return $data[0]['table_name'];
-        }
-        header('location: /welcome');
-        die();
-    }
-
-    /**
-     * Returns the current max score
-     */
-    public function getCurrentMaxScore()
-    {
-        $sql = "SELECT `max_score` 
-                FROM `admin_configuration` 
-                ORDER BY created_at DESC 
-                LIMIT 1
-                ";
-
-        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-        $stm->execute();
-
-        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-        if (isset($data[0]['max_score'])) {
-            return $data[0]['max_score'];
-        }
-        header('location: /welcome');
-        die();
-    }
-
-    /**
-     * Returns the current max X-Count
-     */
-    public function getCurrentMaxXCount()
-    {
-        $sql = "SELECT `max_xcount` 
-                FROM `admin_configuration` 
-                ORDER BY created_at DESC 
-                LIMIT 1
-                ";
-
-        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-        $stm->execute();
-
-        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-        if (isset($data[0]['max_xcount'])) {
-            return $data[0]['max_xcount'];
-        }
-        header('location: /welcome');
-        die();
-    }
 
 
 
