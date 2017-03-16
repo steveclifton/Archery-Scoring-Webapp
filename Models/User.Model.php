@@ -102,7 +102,7 @@ class User extends Base
         $club = strtolower(trim($aClub));
         $email = strtolower(trim($emailAddress));
         $preferedType = strtolower(trim($type));
-        $userType = 'user';
+        $userType = 'pending';
 
         $ipAddress = $_SERVER['REMOTE_ADDR'];
         $password = password_hash($pass, PASSWORD_DEFAULT);
@@ -136,7 +136,7 @@ class User extends Base
         $gender = strtolower(trim($gen));
         $email = strtolower(trim($emailAddress));
         $preferedType = strtolower(trim($pType));
-        $userType = 'user';
+        $userType = 'pending';
 
         $ipAddress = $_SERVER['REMOTE_ADDR'];
 
@@ -161,11 +161,9 @@ class User extends Base
      */
     public function getPendingUsers()
     {
-        $sql = "SELECT `join_users`.id, `join_users`.user_id, `join_users`.associate_id, 
-                        `users`.first_name, `users`.last_name, `users`.anz_num, `users`.email
-                FROM `join_users` 
-                JOIN `users` ON `users`.id = `join_users`.user_id
-                WHERE `status`='PENDING'
+        $sql = "SELECT *
+                FROM `users` 
+                WHERE `user_type` = 'pending'
                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -210,8 +208,10 @@ class User extends Base
      */
     public function confirmPendingUsers($userData)
     {
+        date_default_timezone_set('NZ');
+        $date = date("H:i:s d-m-Y");
 
-
+        $userId = $userData['id'];
         $firstName = strtolower($userData['first_name']);
         $lastName = strtolower($userData['last_name']);
         $anzNum = $userData['anz_num'];
@@ -227,22 +227,28 @@ class User extends Base
                   `last_name` = '$lastName',
                   `user_type` = '$userType',
                   `last_ip` = '$ipAddress',
-                  `updated_at` = CURRENT_TIMESTAMP
-                WHERE `users`.`email` = '$email'
+                  `updated_at` = '$date'
+                WHERE `users`.`id` = '$userId'
                 ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $success = $stm->execute(array('$anzNum, $firstName, $lastName, $club, $userType, $ipAddress, $email'));
+        $success = $stm->execute(array('$anzNum, $firstName, $lastName, $club, $userType, $ipAddress, $email, $date'));
 
         $this->updateAssociation($userData['id'], "CONFIRMED");
 
         return $success;
     }
 
+    /*
+     * Updates a users association in the Join Table
+     */
     private function updateAssociation($userId, $status)
     {
-        $sql = "UPDATE `join_users` SET `status` = '$status' WHERE `join_users`.`id` = '$userId';";
+        $sql = "UPDATE `join_users` 
+                SET `status` = '$status' 
+                WHERE `join_users`.`user_id` = '$userId';
+                ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
