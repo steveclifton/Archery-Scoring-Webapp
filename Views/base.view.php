@@ -27,9 +27,7 @@
             <div class="row">
                 <?php include('Views/layouts/header.php'); ?>
             </div>
-            <div class="row">
-                <h2 style="font-family: 'Droid Sans', sans-serif; text-align: center;">2017 Outdoor League</h2>
-            </div>
+
         </div>
         <br>
 
