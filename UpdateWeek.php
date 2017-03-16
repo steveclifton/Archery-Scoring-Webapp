@@ -21,19 +21,14 @@ $admin = new AdminConfig();
 
 $currentWeek = $admin->getCurrentWeek();
 $numWeeks = $admin->getNumWeeks();
-$currentRound = $admin->getCurrentRound();
-$currentEvent = $admin->getCurrentEvent();
-$tableName = $admin->getCurrentDB();
-$maxScore = $admin->getCurrentMaxScore();
-$maxXcount = $admin->getCurrentMaxXCount();
 
 $currentWeek = $currentWeek + 1;
 
-$admin->setSetup($currentWeek, $numWeeks, $currentRound, $currentEvent, $tableName, $maxScore, $maxXcount);
+$admin->setSetup(2, $currentWeek, $numWeeks);
+
+
+// resets it back to the current week number for the below calculations
 $currentWeek--;
-
-
-
 
 
 
@@ -55,7 +50,7 @@ $points = new Points();
 
 $pointValue = 10;
 foreach ($results['compound'] as $archer) {
-    $num = $score->countUsersScores($archer['user_id'], 'compound');
+    $num = $score->countUsersScores($eventNumber, $archer['user_id'], 'compound');
     if ($num > 1 && $pointValue > 0) {
         $points->setWeeklyPoints($eventNumber, $archer['user_id'], $currentWeek, 'compound', $pointValue);
         $pointValue--;
@@ -64,7 +59,7 @@ foreach ($results['compound'] as $archer) {
 
 $pointValue = 10;
 foreach ($results['recurve'] as $archer) {
-    $num = $score->countUsersScores($archer['user_id'], 'recurve');
+    $num = $score->countUsersScores($eventNumber, $archer['user_id'], 'recurve');
     if ($num > 1 && $pointValue > 0) {
         $points->setWeeklyPoints($eventNumber, $archer['user_id'], $currentWeek, 'recurve', $pointValue);
         $pointValue--;
@@ -73,7 +68,7 @@ foreach ($results['recurve'] as $archer) {
 
 $pointValue = 10;
 foreach ($results['recurve barebow'] as $archer) {
-    $num = $score->countUsersScores($archer['user_id'], 'recurve barebow');
+    $num = $score->countUsersScores($eventNumber, $archer['user_id'], 'recurve barebow');
     if ($num > 1 && $pointValue > 0) {
         $points->setWeeklyPoints($eventNumber, $archer['user_id'], $currentWeek, 'recurve barebow', $pointValue);
         $pointValue--;
@@ -82,32 +77,32 @@ foreach ($results['recurve barebow'] as $archer) {
 
 $pointValue = 10;
 foreach ($results['longbow'] as $archer) {
-    $num = $score->countUsersScores($archer['user_id'], 'longbow');
+    $num = $score->countUsersScores($eventNumber, $archer['user_id'], 'longbow');
     if ($num > 1 && $pointValue > 0) {
         $points->setWeeklyPoints($eventNumber, $archer['user_id'], $currentWeek, 'longbow', $pointValue);
         $pointValue--;
     }
 }
 
-$result = $score->getAllDivisionArchers('compound');
+$result = $score->getAllDivisionArchers($eventNumber, 'compound');
 foreach ($result as $r) {
     $archerTotalPoints = $points->getArchersTotalPoints($eventNumber, $r, 'compound');
     $points->setTotalPoints($eventNumber, $r, 'compound', $archerTotalPoints);
 }
 
-$result = $score->getAllDivisionArchers('recurve');
+$result = $score->getAllDivisionArchers($eventNumber, 'recurve');
 foreach ($result as $r) {
     $archerTotalPoints = $points->getArchersTotalPoints($eventNumber, $r, 'recurve');
     $points->setTotalPoints($eventNumber, $r, 'recurve', $archerTotalPoints);
 }
 
-$result = $score->getAllDivisionArchers('recurve barebow');
+$result = $score->getAllDivisionArchers($eventNumber, 'recurve barebow');
 foreach ($result as $r) {
     $archerTotalPoints = $points->getArchersTotalPoints($eventNumber, $r, 'recurve barebow');
     $points->setTotalPoints($eventNumber, $r, 'recurve barebow', $archerTotalPoints);
 }
 
-$result = $score->getAllDivisionArchers('longbow');
+$result = $score->getAllDivisionArchers($eventNumber, 'longbow');
 foreach ($result as $r) {
     $archerTotalPoints = $points->getArchersTotalPoints($eventNumber, $r, 'longbow');
     $points->setTotalPoints($eventNumber, $r, 'longbow', $archerTotalPoints);
