@@ -1,10 +1,14 @@
 <div class="container">
-    <h3><a href="/create_event">Create Event</a></h3>
-    
-    <h3>Pending Users : <?= count($viewData['pending_users']) ?></h3>
-    <input type="button" value="Show" id="pendingbutton" class="btn btn-danger">
-    <hr>
     <div class="row">
+        <h3><a href="/create_event">Create Event</a></h3>
+    </div>
+    <hr>
+    
+
+    <div class="row">
+        <h3>Pending Users : <?= count($viewData['pending_users']) ?></h3>
+        <input type="button" value="Show" id="pendingbutton" class="btn btn-danger">
+        <br><br>
         <div class="table hidden" id="pendingusers">
             <table class="table table-bordered table-hover">
                 <thead>
@@ -36,10 +40,20 @@
                 </tbody>
             </table>
         </div>
+        <hr>
     </div>
 
 
+
     <div class="row">
+        <select class="selectpicker" id="adminEvents">
+            <?php foreach ($viewData['events'] as $event) {?>
+                <option value="<?= $event['id'] ?>"><?= $event['name'] ?></option>
+            <?php } ?>
+        </select>
+        <br><br>
+
+
         <form class="form-horizontal" action="/updatesetup" method="POST">
             <div>
                 <legend class="">Archery System Setup</legend>
@@ -48,15 +62,13 @@
                 <div class="control-group">
                     <label class="control-label">Current Week Number</label>
                     <div class="controls">
-                        <input type="text" id="currentweek" name="currentweek" class="input-xlarge"
-                               value="<?= $viewData['current_week'] ?>" required>
+                        <input type="text" id="currentEventWeek" name="currentEventWeek" class="input-xlarge" required>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label">Number of Weeks</label>
                     <div class="controls">
-                        <input type="text" id="numweeks" name="numweeks" placeholder="" class="input-xlarge"
-                               value="<?= $viewData['num_weeks'] ?>" required>
+                        <input type="text" id="currentEventNumWeeks" name="currentEventNumWeeks" placeholder="" class="input-xlarge" required>
                     </div>
                 </div>
                 <br>
@@ -68,7 +80,8 @@
                 <div>
                     <h5 style="color: red;"><?php if (isset($viewData['updated'])) {
                             echo "Updated Successfully";
-                        } ?></h5>
+                        } ?>
+                    </h5>
                 </div>
             </fieldset>
         </form>
