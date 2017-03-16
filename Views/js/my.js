@@ -53,7 +53,6 @@ $(document).ready(function () {
             $('#archeryselect').selectpicker('val', currentweek);
         } else {
             var weekValue = $('#selectedWeek').text();
-            console.log(weekValue);
             $('#archeryselect').selectpicker('val', weekValue);
         }
     });
@@ -137,17 +136,6 @@ $(document).ready(function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Function to toggle the view
      */
@@ -180,6 +168,52 @@ $(document).ready(function () {
     $('#pendingbutton').ready(function () {
         $('#pendingbutton').on('click', function () {
             toggleView('#pendingusers', '#pendingbutton');
+        });
+    });
+
+
+    $('#adminEvents').ready(function () {
+        var event = $('#adminEvents').children('option').filter(":selected").val();
+        if (event > 1) {
+            $.ajax({
+                type: 'POST',
+                url: '/ajax_getEventDetails',
+                data: {
+                    'id': event
+                },
+                success: function (data) {
+                    var json = $.parseJSON(data);
+
+                    if (json.status == 'failed') {
+                        alert('Cannot add account');
+                    } else {
+                        $('#currentEventWeek').val(json.currentWeek);
+                        $('#currentEventNumWeeks').val(json.numWeeks);
+                    }
+                }
+            });
+        }
+    });
+
+    $('#adminEvents').change(function () {
+        var event = $('#adminEvents').children('option').filter(":selected").val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/ajax_getEventDetails',
+            data: {
+                'id': event
+            },
+            success: function (data) {
+                var json = $.parseJSON(data);
+
+                if (json.status == 'failed') {
+                    alert('Cannot add account');
+                } else {
+                    $('#currentEventWeek').val(json.currentWeek);
+                    $('#currentEventNumWeeks').val(json.numWeeks);
+                }
+            }
         });
     });
 
