@@ -8,36 +8,26 @@ use PDO;
 class Handicap_Scores extends Base
 {
 
-    private $table = '2017_outdoor_handicap_scores';
-
+    private $table = 'league_handicap_data';
 
     /**
      * Sets an Archers handicap and averages into the database
      */
-    public function setHandicap($event, $archerId, $week, $weekScore, $div, $average, $averageX, $handicap, $handicapScore)
+    public function setHandicap($event, $archerId, $week, $weekScore, $div, $average, $averageX, $handicap, $handicapScore, $top10)
     {
         date_default_timezone_set('NZ');
         $date = date("H:i:s d-m-Y");
 
-        $sql = "INSERT INTO `$this->table` (`id`, `event`, `user_id`, `week`, `week_score`, `division`, `average_score`, `average_x`, `handicap`, `handicap_score`, `created_at`) 
-                VALUES (NULL, '$event', '$archerId', '$week', '$weekScore', '$div', '$average', '$averageX', '$handicap', '$handicapScore', '$date');";
+        $sql = "INSERT INTO `$this->table` (`id`, `event`, `user_id`, `week`, `week_score`, `division`, `average_score`, `average_x`, `handicap`, `handicap_score`, `top10`, `created_at`) 
+                VALUES (NULL, '$event', '$archerId', '$week', '$weekScore', '$div', '$average', '$averageX', '$handicap', '$handicapScore', '$top10', '$date');";
 
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $stm->execute(array('$archerId, $week, $weekScore, $div, $average, $averageX, $handicap, $handicapScore'));
+        $stm->execute(array('$archerId, $week, $weekScore, $div, $average, $averageX, $handicap, $handicapScore, $top10'));
 
         return true;
     }
-
-
-
-
-
-
-
-
-
 
 
     public function getAllAverages($event, $div)
@@ -45,12 +35,14 @@ class Handicap_Scores extends Base
 
         $score = new Score();
 
-        $archerList = $score->getAllDivisionArchers($div);
+        // GET EVENT NUMBER HERE
+
+        $archerList = $score->getAllDivisionArchers(2, $div);
 
         $averageList = array();
 
         foreach ($archerList as $archer) {
-            $sql = "SELECT user_id, average_score, division, average_x, `users`.first_name, `users`.last_name
+            $sql = "SELECT user_id, top10, average_score, division, average_x, `users`.first_name, `users`.last_name
                     FROM `$this->table`
                     JOIN `users` ON `$this->table`.user_id = `users`.id
                     WHERE `user_id` = '$archer'
@@ -76,6 +68,35 @@ class Handicap_Scores extends Base
         return $averageList;
 
     }
+
+    /**
+     * Returns the handicap scores for a user
+     */
+    public function getHandicapScores($userId, $week, $div)
+    {
+        $sql = "SELECT average_score, handicap_score 
+                FROM `$this->table` 
+                WHERE `user_id` = '$userId'
+                AND `week` = '$week'
+                AND `division` = '$div'
+                ";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute(array('$userId'));
+
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+        if (isset($data[0])) {
+            return $data[0];
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+
 
     // Returns all the current weeks scores for handicap point calcs
     //
@@ -122,7 +143,6 @@ class Handicap_Scores extends Base
         return $returnData;
 
     }
-
 
 
 }
