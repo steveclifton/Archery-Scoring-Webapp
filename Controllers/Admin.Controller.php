@@ -23,12 +23,6 @@ class Admin extends Base
         $setup = new AdminConfig();
         $viewData['current_week'] = $setup->getCurrentWeek();
         $viewData['num_weeks'] = $setup->getNumWeeks();
-        $viewData['current_event'] = $setup->getCurrentEvent();
-        $viewData['current_round'] = $setup->getCurrentRound();
-        $viewData['db_name'] = $setup->getCurrentDB();
-        $viewData['max_score'] = $setup->getCurrentMaxScore();
-        $viewData['max_xcount'] = $setup->getCurrentMaxXCount();
-
 
         $this->render('Admin', 'admin.view', $viewData);
     }
@@ -57,10 +51,41 @@ class Admin extends Base
         $this->isAdminLoggedIn();
 
         $updatedUser = $_POST;
+
         $user = new User();
 
         $user->confirmPendingUsers($updatedUser);
         $this->adminView();
+    }
+
+
+    /*
+     * Sets the event setup
+     */
+    public function setSetup()
+    {
+        $admin = new AdminConfig();
+
+        $currentWeek = $_POST['currentweek'];
+        $numWeeks = $_POST['numweeks'];
+
+        // TODO get the event number here
+
+        $admin->setSetup(2, $currentWeek, $numWeeks);
+
+        $_SESSION['current_week'] = $currentWeek;
+        header('location: /admin');
+        die();
+    }
+
+    /*
+     * Returns the number of weeks
+     */
+    public function getCurrentWeek()
+    {
+        $admin = new AdminConfig();
+
+        return $admin->getCurrentWeek();
     }
 
 
@@ -73,5 +98,6 @@ class Admin extends Base
 
         $this->render('Create Event', 'create_event.view');
     }
+
 
 }
