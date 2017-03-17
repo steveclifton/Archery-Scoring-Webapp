@@ -40,31 +40,37 @@
                     scoring end is commenced.
                 </li>
                 <li>
-                    All scores must be verified by at least one member of each participating club, and emailed to
-                    the ANZ Indoor League Coordinator no later than 6pm the following Monday.
+                    All scores must be verified by at least one member of each participating club, and entered into
+                    ArcheryOSA.com no later than 10am the following Monday.
                 </li>
                 <li>
                     Entrance to the League is free of charge for all ArcheryNZ members.
+                    <ul>
+                        <li>
+                            Those wishing to participate in the League Series can join ArcheryNZ as a 'Postal Member' for $30nzd
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    Within each division, there shall be an overall championship and a handicapped
-                    championship:
+                    Within each division, there shall be an <b>Overall Champion</b> and a <b>Handicapped
+                        Champion</b>:
                     <ul>
                         <li>
                             The Overall Championship shall be determined based on the highest aggregate score
                             of each archer’s top 10 submitted scores.
                         </li>
+                        <li>
+                            The Handicapped Championship shall be determined based on the archer's highest 10 combined value of Points, awarded as follows:
+                        </li>
+                        <ul>
+                            <li>
+                                i. An archer’s handicap for each week is calculated = (360 – mean average of
+                                previous rounds shot to date in the calendar year). This handicap is added
+                                to the archers score to give an adjusted total.
+                            </li>
+                        </ul>
+
                     </ul>
-                <li>
-                    The Handicapped Championship shall be determined based on the archer's highest 10 combined value of Points, awarded as follows:
-                </li>
-                <ul>
-                    <li>
-                        i. An archer’s handicap for each week is calculated = (360 – mean average of
-                        previous rounds shot to date in the calendar year). This handicap is added
-                        to the archers score to give an adjusted total.
-                    </li>
-                </ul>
             </ul>
         </p>
         <br><br><br>
