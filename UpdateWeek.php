@@ -87,24 +87,24 @@ foreach ($results['longbow'] as $archer) {
 $result = $score->getAllDivisionArchers($eventNumber, 'compound');
 foreach ($result as $r) {
     $archerTotalPoints = $points->getArchersTotalPoints($eventNumber, $r, 'compound');
-    $points->setTotalPoints($eventNumber, $r, 'compound', $archerTotalPoints);
+    $points->setTotalPoints($eventNumber, $r, 'compound', $archerTotalPoints, $currentWeek);
 }
 
 $result = $score->getAllDivisionArchers($eventNumber, 'recurve');
 foreach ($result as $r) {
     $archerTotalPoints = $points->getArchersTotalPoints($eventNumber, $r, 'recurve');
-    $points->setTotalPoints($eventNumber, $r, 'recurve', $archerTotalPoints);
+    $points->setTotalPoints($eventNumber, $r, 'recurve', $archerTotalPoints, $currentWeek);
 }
 
 $result = $score->getAllDivisionArchers($eventNumber, 'recurve barebow');
 foreach ($result as $r) {
     $archerTotalPoints = $points->getArchersTotalPoints($eventNumber, $r, 'recurve barebow');
-    $points->setTotalPoints($eventNumber, $r, 'recurve barebow', $archerTotalPoints);
+    $points->setTotalPoints($eventNumber, $r, 'recurve barebow', $archerTotalPoints, $currentWeek);
 }
 
 $result = $score->getAllDivisionArchers($eventNumber, 'longbow');
 foreach ($result as $r) {
     $archerTotalPoints = $points->getArchersTotalPoints($eventNumber, $r, 'longbow');
-    $points->setTotalPoints($eventNumber, $r, 'longbow', $archerTotalPoints);
+    $points->setTotalPoints($eventNumber, $r, 'longbow', $archerTotalPoints, $currentWeek);
 }
 
