@@ -85,13 +85,14 @@ class Points extends Base
     /**
      * Sets a users total points in the database
      */
-    public function setTotalPoints($event, $userId, $div, $points)
+    public function setTotalPoints($event, $userId, $div, $points, $week)
     {
         date_default_timezone_set('NZ');
         $date = date("H:i:s d-m-Y");
 
-        $sql = "INSERT INTO `$this->pointsTotalTable` (`id`, `event`, `user_id`, `division`, `top_ten_points`, `created_at`) 
-                VALUES (NULL, '$event', '$userId', '$div', '$points', '$date');";
+        $sql = "INSERT INTO `$this->pointsTotalTable` (`id`, `event`, `user_id`, `division`, `top_ten_points`, `week_entered`, `created_at`) 
+                VALUES (NULL, '$event', '$userId', '$div', '$points', '$week', '$date');
+                ";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
@@ -147,10 +148,13 @@ class Points extends Base
     }
 
 
+    /**
+     * Returns the points for a user, week and div
+     */
     public function getWeekPoints($userId, $week, $div)
     {
         $sql = "SELECT points
-                FROM `2017_outdoor_points` 
+                FROM `$this->pointsTable` 
                 WHERE `user_id` = '$userId'
                 AND `week` = '$week'
                 AND `division` = '$div'
