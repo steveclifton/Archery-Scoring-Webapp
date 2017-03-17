@@ -35,17 +35,36 @@ class AdminConfig extends Base
     }
 
 
+    public function getCurrentSetup($event)
+    {
+        $sql = "SELECT `current_week`, `number_weeks` 
+                FROM `admin_configuration` 
+                WHERE `event` = '$event'
+                ORDER BY created_at DESC
+                LIMIT 1
+                ";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute(array('$event'));
+
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+
+        if (isset($data[0])) {
+            return $data[0];
+        }
+        header('location: /welcome');
+        die();
+    }
+
+
     /**
      * Returns the current week
      */
     public function getCurrentWeek($event)
     {
-        $sql = "SELECT `current_week` 
-                FROM `admin_configuration` 
-                WHERE `event` = '$event'
-                ORDER BY created_at DESC 
-                LIMIT 1
-                ";
+        $sql = "SELECT `current_week` FROM `admin_configuration` WHERE `event` = '$event' ORDER BY `created_at` DESC LIMIT 1";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
@@ -66,12 +85,7 @@ class AdminConfig extends Base
      */
     public function getNumWeeks($event)
     {
-        $sql = "SELECT `number_weeks` 
-                FROM `admin_configuration` 
-                WHERE `event` = '$event'
-                ORDER BY created_at DESC 
-                LIMIT 1
-                ";
+        $sql = "SELECT `number_weeks` FROM `admin_configuration` WHERE `event` = '$event' ORDER BY `created_at` DESC LIMIT 1";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
