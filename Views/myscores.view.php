@@ -1,7 +1,11 @@
-<div class="row">
-    <?php include('layouts/weekselect.view.php') ?>
-</div>
 <div class="container">
+    <div class="row">
+        <h2 style="font-family: 'Droid Sans', sans-serif; text-align: center;">2017 Indoor League Series</h2>
+        <hr>
+    </div>
+    <div class="row">
+        <?php include('layouts/weekselect.view.php') ?>
+    </div>
 
 <!--    <h1>Here is where I want to display the users profile with their scores and other info about them</h1>-->
     <h2>Welcome <?= $viewData['first_name'] ?></h2>

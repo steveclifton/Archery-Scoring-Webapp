@@ -1,15 +1,14 @@
-<div class="row">
-    <h2 style="font-family: 'Droid Sans', sans-serif; text-align: center;">Archery OSA</h2>
-</div>
-
-<div class="row">
-    <?php include('layouts/weekselect.view.php') ?>
-    <br>
-</div>
-<p hidden id="selectedWeek">week=<?php if (isset($viewData['weekRequested'])) {echo $viewData['weekRequested'];} else echo $viewData['current_week'] ?></p>
-
-
 <div class="container">
+    <div class="row">
+        <h2 style="font-family: 'Droid Sans', sans-serif; text-align: center;">2017 Indoor League Series</h2>
+        <hr>
+    </div>
+
+    <div class="row">
+        <?php include('layouts/weekselect.view.php') ?>
+        <br>
+    </div>
+    <p hidden id="selectedWeek">week=<?php if (isset($viewData['weekRequested'])) {echo $viewData['weekRequested'];} else echo $viewData['current_week'] ?></p>
 
     <!--    Button to show and hide the scoring-->
     <?php if (isset($_SESSION['id']) && isset($viewData['canScore'])) { ?>
@@ -43,10 +42,10 @@
                                 <td><input type="text" id="xcount" class="form-control" placeholder="X" ></td>
                                 <td>
                                     <select class="selectpicker" id="div" data-width="70%">
-                                        <option value="compound" <?php if ($archer['prefered_type'] == 'compound') echo "selected"; ?>>Comp</option>
-                                        <option value="recurve" <?php if ($archer['prefered_type'] == 'recurve') echo "selected"; ?>>Recur</option>
-                                        <option value="recurve barebow" <?php if ($archer['prefered_type'] == 'recurve barebow') echo "selected"; ?>>RecBB</option>
-                                        <option value="longbow" <?php if ($archer['prefered_type'] == 'longbow') echo "selected"; ?>>L-Bow</option>
+                                        <option value="compound" <?php if ($archer['prefered_type'] == 'compound') echo "selected"; ?>>Compound</option>
+                                        <option value="recurve" <?php if ($archer['prefered_type'] == 'recurve') echo "selected"; ?>>Recurve</option>
+                                        <option value="recurve barebow" <?php if ($archer['prefered_type'] == 'recurve barebow') echo "selected"; ?>>Recurve BB</option>
+                                        <option value="longbow" <?php if ($archer['prefered_type'] == 'longbow') echo "selected"; ?>>LongBow</option>
                                     </select>
                                 </td>
                                 <td class="hidden-xs hidden-sm hidden-md hidden-lg"><span class="week"><?= $viewData['current_week'] ?></td>
