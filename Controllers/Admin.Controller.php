@@ -86,9 +86,10 @@ class Admin extends Base
 
         $admin = new AdminConfig();
 
-        $currentWeek = $admin->getCurrentWeek($eventId);
+        $setup = $admin->getCurrentSetup($eventId);
 
-        $numWeeks = $admin->getNumWeeks($eventId);
+        $numWeeks = $setup['number_weeks'];
+        $currentWeek = $setup['current_week'];
 
         echo json_encode(array("status" => "success", "currentWeek" => $currentWeek, "numWeeks" => $numWeeks));
         return;
@@ -101,6 +102,8 @@ class Admin extends Base
     public function getCurrentWeek($event)
     {
         $admin = new AdminConfig();
+
+
 
         return $admin->getCurrentWeek($event);
     }
