@@ -307,6 +307,29 @@ $(document).ready(function () {
     });
 
 
+    /***********************************************************************************
+     * *********************************************************************************
+     *
+     *                  FOR TESTING
+     * *********************************************************************************
+     ***********************************************************************************/
+
+
+    $('#testingButton').on('click', function () {
+
+        $('tr.archer').each(function () {
+            $this = $(this);
+            var a = Math.floor(Math.random() * 300) + 260;
+            var score = $this.find("input#score").val(a);
+
+            var b = Math.floor(Math.random() * 30) + 10;
+            var xcount = $this.find("input#xcount").val(b);
+
+        });
+
+    });
+
+
 
     /**
      *  On Submit button, scores are sent via AJAX to be entered in the DB
@@ -413,7 +436,7 @@ $(document).ready(function () {
         function checkScore(score) {
             if (isNaN(score)) {
                 return false;
-            } else if (score > 360 || score < 0) {
+            } else if (score > 300 || score < 0) {
                 return false;
             }
 
@@ -422,7 +445,7 @@ $(document).ready(function () {
         function checkXCount(xcount) {
             if (isNaN(xcount)) {
                 return false;
-            } else if (xcount > 36 || xcount < 0) {
+            } else if (xcount > 30 || xcount < 0) {
                 return false;
             }
 
