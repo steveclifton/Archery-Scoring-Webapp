@@ -1,3 +1,3 @@
-# Archery-Scoring-Webapp
-Archery New Zealand League Series Online Webapp
+# Archery Online Scoring Application (ArcheryOSA)
+Used by Archery New Zealand for scoring the International League Series 
 
