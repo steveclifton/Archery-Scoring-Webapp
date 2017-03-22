@@ -17,6 +17,16 @@
                 <input type="button" value="Scoring" id="openScoring" class="btn btn-success" style="margin-left: 40%">
             </div>
         </div>
+        <?php if (isset($_SESSION['id']) && $_SESSION['user_type'] == 'admin') { ?>
+            <br>
+            <div class="row">
+                <div class="col-xs-2 col-xs-offset-4 col-sm-2 col-sm-offset-5 col-md-2 col-md-offset-5">
+                    <input type="button" value="Testing" id="testingButton" class="btn btn-success" style="margin-left: 40%">
+                </div>
+            </div>
+            <br>
+        <?php } ?>
+
         <div class="hidden" id="scoringTable">
             <div class="row" id="subscores">
                 <legend>Submit Scores</legend>
