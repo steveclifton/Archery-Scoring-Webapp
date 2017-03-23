@@ -44,7 +44,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="/register">Register</a></li>
-                        <li><a href="#">Password Reset</a></li>
+<!--                        <li><a href="#">Password Reset</a></li>-->
                     </ul>
                 </li>
                 <li><a href="/contact">Contact</a></li>
