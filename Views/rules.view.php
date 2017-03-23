@@ -1,11 +1,26 @@
 <div class="container">
     <div class="row">
-        <h3>ANZ Indoor League</h3>
+        <div style="text-align: center">
+            <a href="http://www.hoyt.com" target="_blank"><img src="Views/images/hoyt.png"></a>
+            <a href="http://www.pats-archery.com" target="_blank"><img src="Views/images/pats.jpg"></a>
+        </div>
+
+        <h2>ANZ Indoor League</h2>
+        <br>
+    </div>
+    <div class="row">
+        <h3>Starts : Monday 7th May
+            <br>
+            Finish :  <u>Saturday</u> 19th August (11.59pm NZT)
+        </h3>
         <br>
         <p>
             The ANZ League indoor league series is a fun event where archers of all skill levels can compete with each other.
-            The League series does not separate archers into divisions based on age or gender, only the bow type you shoot determines
+            The League series does not separate archers into divisions based on age or gender; only the bow type you shoot determines
             what division you are in.
+            <br>
+            This year we are fortunate to have Hoyt Archery and Pats-Archery sponsoring the event with some really awesome prizes for the winners of the
+            Compound and Recurve Handicap and Overall divisions. Prizes to be announced over the coming weeks
         </p>
         <br>
         <p>
@@ -30,8 +45,7 @@
                     Participants must be members of ArcheryNZ.
                 </li>
                 <li>
-                    Archers may shoot only 1 round per calendar week (Monday-Sunday) from May 14th until 19th
-                    August (Week 15 ends August 19th - Saturday 11.59pm)
+                    Archers may <u>shoot and score</u> only 1 round per calendar week (Monday-Sunday)
                 </li>
                 <li>
                     Clubs may organise multiple timeslots to shoot the event, but competitors may only shoot
