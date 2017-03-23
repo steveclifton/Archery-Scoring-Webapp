@@ -319,10 +319,10 @@ $(document).ready(function () {
 
         $('tr.archer').each(function () {
             $this = $(this);
-            var a = Math.floor(Math.random() * 300) + 260;
+            var a = Math.floor(Math.random() * 300) + 1;
             var score = $this.find("input#score").val(a);
 
-            var b = Math.floor(Math.random() * 30) + 10;
+            var b = Math.floor(Math.random() * 30) + 1;
             var xcount = $this.find("input#xcount").val(b);
 
         });
