@@ -37,6 +37,9 @@ abstract class Base
                 die();
             }
 
+        } else {
+            header('location: /');
+            die();
         }
     }
 
