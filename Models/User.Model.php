@@ -93,13 +93,13 @@ class User extends Base
      * Creates an account if registration information is valid
      * - returns a new user object - used to log the user in automatically
      */
-    public function createAccount($anz, $fName, $lName, $gen, $aClub, $emailAddress, $type, $pass)
+    public function createAccount($anz, $fName, $lName, $emailAddress, $type, $pass)
     {
         $anzNum = trim($anz);
         $firstName = strtolower(trim($fName));
         $lastName = strtolower(trim($lName));
-        $gender = strtolower(trim($gen));
-        $club = strtolower(trim($aClub));
+        $gender = "NULL";
+        $club = "NULL";
         $email = strtolower(trim($emailAddress));
         $preferedType = strtolower(trim($type));
         $userType = 'pending';
