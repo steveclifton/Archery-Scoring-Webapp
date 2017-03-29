@@ -546,14 +546,12 @@ function checkAccountForm()
         url: '/ajax_createaccount',
         data: {
             'anz_num': values['anz_num'],
-            'club': values['club'],
             'password': values['password'],
             'confirm_password': values['confirm_password'],
             'email': values['email'],
             'first_name': values['first_name'],
             'last_name': values['last_name'],
             'prefered_type': values['prefered_type'],
-            'gender': values['gender']
         },
         success: function (data) {
             var json = $.parseJSON(data);
