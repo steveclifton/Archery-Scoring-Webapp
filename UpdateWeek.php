@@ -18,13 +18,13 @@ $admin = new AdminConfig();
 /**
  * Increase the week by 1
  */
-
-$currentWeek = $admin->getCurrentWeek(2);
-$numWeeks = $admin->getNumWeeks(2);
+// TODO
+$currentWeek = $admin->getCurrentWeek(3);
+$numWeeks = $admin->getNumWeeks(3);
 
 $currentWeek = $currentWeek + 1;
 
-$admin->setSetup(2, $currentWeek, $numWeeks);
+$admin->setSetup(3, $currentWeek, $numWeeks);
 
 
 // resets it back to the current week number for the below calculations
@@ -37,7 +37,7 @@ $currentWeek--;
  * Issue points
  */
 
-$eventNumber = 2; // this is the ID of the outdoor event
+$eventNumber = 3; // this is the ID of the outdoor event
 
 
 $handicap = new Handicap_Scores();
