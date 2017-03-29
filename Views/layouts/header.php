@@ -6,49 +6,57 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Archery OSA</a>
+            <?php
+            $weeks = new \Archery\Controllers\Admin();
+            // TODO
+            $weeks = $weeks->getCurrentWeek(3);
+            echo "<a class=\"navbar-brand\" href=\"/week?week=$weeks\">Archery OSA<a>";
+            ?>
+
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
                 <li><a></a></li>
 
-                <li class='dropdown'>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
+<!--                <li class='dropdown'>-->
+<!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>-->
+<!--                    <ul class="dropdown-menu">-->
                         <?php
                             $weeks = new \Archery\Controllers\Admin();
-                            $weeks = $weeks->getCurrentWeek(2);
+                            // TODO
+                            $weeks = $weeks->getCurrentWeek(3);
                             echo "<li><a href='/week?week=$weeks'>2017 Indoor League</a></li>";
                         ?>
-                    </ul>
-                </li>
+<!--                    </ul>-->
+<!--                </li>-->
 
-                <li class='dropdown'>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Results<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href='/competitions'>Competitions</a></li>
-                        <li><a href='#'>Archer Stats</a></li>
-                    </ul>
-                </li>
+<!--                <li class='dropdown'>-->
+<!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Results<b class="caret"></b></a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a href='/competitions'>Competitions</a></li>-->
+<!--                        <li><a href='#'>Archer Stats</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
 
 
-                <li class='dropdown'>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Records<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Archery NZ</a></li>
-                        <li><a href="#">NZFAA NZ</a></li>
-                    </ul>
-                </li>
+<!--                <li class='dropdown'>-->
+<!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Records<b class="caret"></b></a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a href="#">Archery NZ</a></li>-->
+<!--                        <li><a href="#">NZFAA NZ</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+                <li><a href="/register">Register</a></li>
+<!--                <li class='dropdown'>-->
+<!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a href="/register">Register</a></li>-->
+<!--<!--                        <li><a href="#">Password Reset</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
 
-                <li class='dropdown'>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/register">Register</a></li>
-<!--                        <li><a href="#">Password Reset</a></li>-->
-                    </ul>
-                </li>
-                <li><a href="/contact">Contact</a></li>
                 <li><a href='/rules'>League Rules</a></li>
+                <li><a href="/contact">Contact</a></li>
 
                 <?php if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin') { ?>
                     <li><a href="/admin">Admin</a></li>
