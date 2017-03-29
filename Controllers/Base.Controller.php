@@ -22,6 +22,9 @@ abstract class Base
         if (isset($_SESSION['id'])) {
             header('location: /myscores');
             die();
+        } else {
+            header('location: /');
+            die();
         }
     }
 
@@ -46,7 +49,6 @@ abstract class Base
     /**
      * Redirects unauthorised access to 'logged in' Views back to the login page
      *
-     * eg - if a non logged in user tries to access the products page.
      */
     public function isNotLoggedIn()
     {

@@ -28,24 +28,28 @@ class Results extends Base
         $user = new User();
         $score = new Score();
         $setup = new AdminConfig();
-        $currentWeek = $setup->getCurrentWeek(2);
+        // TODO
+        $currentWeek = $setup->getCurrentWeek(3);
 
         if (isset($_GET['week']) && is_numeric($_GET['week'])) {
             if (isset($_SESSION['id'])) {
                 $user = new User();
                 $viewData['archers'] = $user->getAllUsersForScoring();
                 if ($_GET['week'] == $_SESSION['current_week']) {
-                    $viewData['canScore'] = true;
+                    //$viewData['canScore'] = true;
+                    //todo enable this
                 }
             }
             $viewData['weekRequested'] = $_GET['week'];
-            $viewData['scores'] = $score->all_getCWScores(2, $_GET['week']);
+            // TODO
+            $viewData['scores'] = $score->all_getCWScores(3, $_GET['week']);
         } else {
             header('Location: /');
             die();
         }
 
         $viewData['current_week'] = $currentWeek;
+
 
         $this->render('Weekly Scores', 'week.view', $viewData);
         die();
@@ -72,9 +76,11 @@ class Results extends Base
         $points = new Points();
         $averages = new Handicap_Scores();
 
-        $viewData['points'] = $points->getTopTenPoints(2, $division);
+        // TODO
+        $viewData['points'] = $points->getTopTenPoints(3, $division);
 
-        $viewData['averages'] = $averages->getAllAverages(2, $division);
+        // TODO
+        $viewData['averages'] = $averages->getAllAverages(3, $division);
 
         $this->render('Weekly Scores', 'overall.view', $viewData);
         die();
@@ -101,10 +107,13 @@ class Results extends Base
         $points = new Points();
         $averages = new Handicap_Scores();
         $admin = new AdminConfig();
-        $week = $admin->getCurrentWeek(2);
 
-        $overallPoints = $points->getTopTenPoints(2, $division);
-        $overallAverage = $averages->getAllAverages(2, $division);
+        // TODO
+        $week = $admin->getCurrentWeek(3);
+
+        // TODO
+        $overallPoints = $points->getTopTenPoints(3, $division);
+        $overallAverage = $averages->getAllAverages(3, $division);
 
 
         echo json_encode(array('status' => 'success', 'averages' => $overallAverage, 'points' => $overallPoints));
@@ -123,15 +132,14 @@ class Results extends Base
 
         $userId = $user->getUserIdByAnzNum($archer['anz']);
 
-        //GET EVENT NUMBER HERE
-
-        $existingScore = $score->getCWScore(2, $userId, $archer['week'], $archer['div'], '2017_outdoor_league');
+        // TODO
+        $existingScore = $score->getCWScore(3, $userId, $archer['week'], $archer['div'], '2017_outdoor_league');
 
 
         if (!isset($existingScore[0])) {
 
-            //Get Event Number HERE
-            $score->setScore(2, $userId, $archer['score'], $archer['xcount'], $archer['week'], $archer['div']);
+            // TODO
+            $score->setScore(3, $userId, $archer['score'], $archer['xcount'], $archer['week'], $archer['div']);
 
             $average = $score->getTotalScoresAveraged($userId, $archer['div']);
             $averageScore = $average['average'];
@@ -140,12 +148,14 @@ class Results extends Base
             $handicap = 360 - $averageScore;
             $handicapScore = $archer['score'] + $handicap;
 
-            //Get Event Number HERE
-            $best10 = $score->getTop10Scores(2, $userId, $archer['div']);
+            // TODO
+            $best10 = $score->getTop10Scores(3, $userId, $archer['div']);
 
-            $hCap->setHandicap(2, $userId, $archer['week'], $archer['score'], $archer['div'], $averageScore, $averageX, $handicap, $handicapScore, $best10);
+            // TODO
+            $hCap->setHandicap(3, $userId, $archer['week'], $archer['score'], $archer['div'], $averageScore, $averageX, $handicap, $handicapScore, $best10);
 
-            $divScores = $score->all_getCWScores(2, $archer['week']);
+            // TODO
+            $divScores = $score->all_getCWScores(3, $archer['week']);
 
             echo json_encode(array('status' => 'passed', 'message' => 'Score entered', 'allScores' => $divScores[$archer['div']]));
         } else {

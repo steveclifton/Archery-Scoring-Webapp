@@ -71,9 +71,8 @@ class Admin extends Base
         $currentWeek = $_POST['currentEventWeek'];
         $numWeeks = $_POST['currentEventNumWeeks'];
 
-        // TODO get the event number here
-
-        $admin->setSetup(2, $currentWeek, $numWeeks);
+        // TODO
+        $admin->setSetup(3, $currentWeek, $numWeeks);
 
         $_SESSION['current_week'] = $currentWeek;
         header('location: /admin');
@@ -102,8 +101,6 @@ class Admin extends Base
     public function getCurrentWeek($event)
     {
         $admin = new AdminConfig();
-
-
 
         return $admin->getCurrentWeek($event);
     }

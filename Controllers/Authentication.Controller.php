@@ -29,7 +29,8 @@ class Authentication extends Base
             $viewData['last_name'] = $_SESSION['last_name'];
 
             $admin = new AdminConfig();
-            $week = $admin->getCurrentWeek(2);
+            // TODO
+            $week = $admin->getCurrentWeek(3);
 
             echo json_encode(array("status" => "success", "message" => "valid user", "week" => $week));
             die();
@@ -115,14 +116,6 @@ class Authentication extends Base
                 $lastName = $_POST['last_name'];
             }
         }
-        if (isset($_POST['gender'])) {
-            if ($_POST['gender'] == '' ) {
-                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
-                return;
-            } else {
-                $gender = $_POST['gender'];
-            }
-        }
         if (isset($_POST['prefered_type'])) {
             if ($_POST['prefered_type'] == '' ) {
                 echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
@@ -131,15 +124,6 @@ class Authentication extends Base
                 $type = $_POST['prefered_type'];
             }
         }
-        if (isset($_POST['club'])) {
-            if ($_POST['club'] == '' ) {
-                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
-                return;
-            } else {
-                $club = $_POST['club'];
-            }
-        }
-
 
 
 
@@ -157,7 +141,7 @@ class Authentication extends Base
         $existingAnzNum = $user->doesAnzNumberExist($anzNum);
 
         if (!$existingAnzNum) {
-            $result = $user->createAccount($anzNum, $firstName, $lastName, $gender, $club, $email, $type, $password);
+            $result = $user->createAccount($anzNum, $firstName, $lastName, $email, $type, $password);
             if ($result) {
                 echo json_encode(array("status" => "success", "message" => "Account Created"));
                 return;
@@ -266,7 +250,8 @@ class Authentication extends Base
         $_SESSION['prefered_type'] = $data['prefered_type'];
 
         $setup = new AdminConfig();
-        $_SESSION['current_week'] = $setup->getCurrentWeek(2);
+        // TODO
+        $_SESSION['current_week'] = $setup->getCurrentWeek(3);
 
     }
     
