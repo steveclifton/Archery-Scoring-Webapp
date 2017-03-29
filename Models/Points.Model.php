@@ -116,9 +116,8 @@ class Points extends Base
 
         $score = new Score();
 
-        // GET EVENT NUMBER HERE
-
-        $archerList = $score->getAllDivisionArchers(2, $div);
+        // TODO
+        $archerList = $score->getAllDivisionArchers(3, $div);
 
         $pointList = array();
         foreach ($archerList as $archer) {
