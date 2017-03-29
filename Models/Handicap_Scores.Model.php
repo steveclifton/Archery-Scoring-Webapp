@@ -35,9 +35,9 @@ class Handicap_Scores extends Base
 
         $score = new Score();
 
-        // GET EVENT NUMBER HERE
+        // TODO
 
-        $archerList = $score->getAllDivisionArchers(2, $div);
+        $archerList = $score->getAllDivisionArchers(3, $div);
 
         $averageList = array();
 
