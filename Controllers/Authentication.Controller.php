@@ -194,14 +194,14 @@ class Authentication extends Base
                 $lastName = $_POST['last_name'];
             }
         }
-        if (isset($_POST['gender'])) {
-            if ($_POST['gender'] == '' ) {
-                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
-                return;
-            } else {
-                $gender = $_POST['gender'];
-            }
-        }
+//        if (isset($_POST['gender'])) {
+//            if ($_POST['gender'] == '' ) {
+//                echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
+//                return;
+//            } else {
+//                $gender = $_POST['gender'];
+//            }
+//        }
         if (isset($_POST['prefered_type'])) {
             if ($_POST['prefered_type'] == '' ) {
                 echo json_encode(array("status" => "failed", "message" => "Please check details and try again"));
@@ -218,7 +218,7 @@ class Authentication extends Base
 
 
         if (!$existingAnzNum) {
-            $result = $user->createProfile($anzNum, $firstName, $lastName, $gender, $email, $type);
+            $result = $user->createProfile($anzNum, $firstName, $lastName, $email, $type);
             if ($result) {
                 echo json_encode(array("status" => "success", "message" => "Account Created"));
                 return;

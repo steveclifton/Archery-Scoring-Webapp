@@ -594,13 +594,12 @@ function checkProfileForm()
             'email': values['email'],
             'first_name': values['first_name'],
             'last_name': values['last_name'],
-            'prefered_type': values['prefered_type'],
-            'gender': values['gender']
+            'prefered_type': values['prefered_type']
         },
         success: function (data) {
             var json = $.parseJSON(data);
 
-            //console.log(data);return;
+            //console.log(data);
 
             if (json.status == 'failed') {
                 alert(json.message);

@@ -128,12 +128,12 @@ class User extends Base
      * Creates a profile if registration information is valid
      * - returns a new user object - used to log the user in automatically
      */
-    public function createProfile($anz, $fName, $lName, $gen, $emailAddress, $pType)
+    public function createProfile($anz, $fName, $lName, $emailAddress, $pType)
     {
         $anzNum = trim($anz);
         $firstName = strtolower(trim($fName));
         $lastName = strtolower(trim($lName));
-        $gender = strtolower(trim($gen));
+        $gender = 'NULL';
         $email = strtolower(trim($emailAddress));
         $preferedType = strtolower(trim($pType));
         $userType = 'pending';
