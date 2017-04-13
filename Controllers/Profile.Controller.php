@@ -66,7 +66,7 @@ class Profile extends Base
             //user is requesting access here
             $result = $user->checkAssociation($_SESSION['id'], $requestAnz);
             if (!isset($result[0])) {
-                $result = $user->setAssociatedUser($_SESSION['id'], $requestAnz, 'PENDING');
+                $result = $user->setAssociatedUser($_SESSION['id'], $requestAnz, 'CONFIRMED');
             }
         } else if ($_POST['submit'] == 'Remove') {
             $result = $user->removeAssociation($_SESSION['id'], $requestAnz);
