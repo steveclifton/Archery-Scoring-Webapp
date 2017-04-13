@@ -49,6 +49,10 @@ if (isset($_SERVER['REDIRECT_URL'])) {
 }
 
 if ($uri == '') {
+    $week = new Admin();
+    $weekNum = $week->getCurrentWeek(3);
+    header("Location: /week?week=$weekNum");
+    die();
     $welcome = new Welcome();
     $welcome->welcome();
 }
