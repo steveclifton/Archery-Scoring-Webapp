@@ -23,7 +23,9 @@ $currentWeek = $admin->getCurrentWeek(3);
 $numWeeks = $admin->getNumWeeks(3);
 
 $currentWeek = $currentWeek + 1;
-
+if ($currentWeek == 16) {
+    $currentWeek--;
+}
 $admin->setSetup(3, $currentWeek, $numWeeks);
 
 
