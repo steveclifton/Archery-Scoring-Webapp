@@ -1,9 +1,9 @@
 <div class="container">
     <div class="row">
-    <legend>Update Details</legend>
-    <input type="button" value="Show" id="profileformbutton" class="btn btn-warning">
-    <hr>
-    <form class="form-horizontal hidden" action="/#" method="POST" id="userprofileform" onsubmit="return checkProfileUpdate()">
+        <legend>Update Details</legend>
+        <input type="button" value="Show" id="profileformbutton" class="btn btn-warning">
+        <hr>
+        <form class="form-horizontal hidden" action="/#" method="POST" id="userprofileform" onsubmit="return checkProfileUpdate()">
         <fieldset>
             <div class="control-group">
                 <label class="control-label">ANZ Number</label>
@@ -95,14 +95,14 @@
     </form>
     </div>
     <div class="row">
-    <legend>Associated Archers</legend>
-        <p>HERE</p>
-    <form class="form-inline" action="/updateassociateduser" method="POST" name="addassocusers">
-        <div class="form-group">
-            <input type="text" class="form-control" name="anz_num" placeholder="Anz Number">
-        </div>
-        <input type="submit" class="btn btn-primary" name="submit" value="Request Access"></input>
-    </form>
+        <legend>Associated Archers</legend>
+        <p>Enter the ANZ Number of the Archer you wish to score for</p>
+        <form class="form-inline" action="/updateassociateduser" method="POST" name="addassocusers">
+            <div class="form-group">
+                <input type="text" class="form-control" name="anz_num" placeholder="Anz Number">
+            </div>
+            <input type="submit" class="btn btn-primary" name="submit" value="Request Access"></input>
+        </form>
     </div>
     <hr>
     <div class="row">
