@@ -36,7 +36,7 @@ class Results extends Base
                 $user = new User();
                 $viewData['archers'] = $user->getAllUsersForScoring();
                 if ($_GET['week'] == $_SESSION['current_week']) {
-                    $viewData['canScore'] = true;
+                    //$viewData['canScore'] = true;
                     //todo enable this
                 }
             }
