@@ -303,7 +303,7 @@ class Score extends Base
                 WHERE `user_id` = '$userId'
                 AND `division` = '$div'
                 AND `event` = '$eventNum'
-                ORDER BY `score`
+                ORDER BY `score` DESC
                 LIMIT 10
                 ";
 
@@ -313,8 +313,10 @@ class Score extends Base
 
         $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
+
         $totalPoints = 0;
         foreach ($data as $d) {
+//            print_r($d);
             $totalPoints += $d['score'];
         }
 
@@ -322,6 +324,30 @@ class Score extends Base
 
     }
 
+    public function getAllScores($eventNum, $userId, $div)
+    {
+        $sql = "SELECT `score`
+                FROM `$this->tableName`
+                WHERE `user_id` = '$userId'
+                AND `division` = '$div'
+                AND `event` = '$eventNum'
+                ORDER BY `score`
+                ";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute();
+
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+//
+//        $totalPoints = 0;
+//        foreach ($data as $d) {
+//            $totalPoints += $d['score'];
+//        }
+
+        return $data;
+
+    }
 
 
 }
