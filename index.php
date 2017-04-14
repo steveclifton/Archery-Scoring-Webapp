@@ -38,10 +38,6 @@ $dotenv->load();
 
 
 
-
-
-
-
 if (isset($_SERVER['REDIRECT_URL'])) {
     $uri = str_replace('/', '', $_SERVER['REDIRECT_URL']);
 } else if (isset($_SERVER['REQUEST_URI'])) {
