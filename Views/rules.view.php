@@ -3,6 +3,7 @@
         <div style="text-align: center">
             <a href="http://www.hoyt.com" target="_blank"><img src="Views/images/hoyt.png"></a>
             <a href="http://www.pats-archery.com" target="_blank"><img src="Views/images/pats.jpg"></a>
+            <a href="http://www.eastonarchery.com" target="_blank"><img src="Views/images/easton.jpg" style="padding-left: 12px"></a>
         </div>
 
         <h2>ANZ Indoor League</h2>
@@ -86,6 +87,9 @@
 
                     </ul>
             </ul>
+        <li>
+            By submitting a score, archers are confirming that they are adhering to Archery NZ's Integrity and Shooting Polices as found on the Archery NZ Website
+        </li>
         </p>
         <br><br><br>
 
