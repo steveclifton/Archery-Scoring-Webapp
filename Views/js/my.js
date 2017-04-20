@@ -702,6 +702,7 @@ function checkProfileUpdate()
  */
 function submitContactForm()
 {
+    $('#contact-submit').prop('disabled', true);
     var values = {};
     $.each($('#contact').serializeArray(), function (i, field) {
         values[field.name] = field.value;
