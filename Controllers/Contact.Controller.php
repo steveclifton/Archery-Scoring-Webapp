@@ -32,6 +32,8 @@ class Contact extends Base
 
         if ($result) {
             echo json_encode(array('status' => 'passed', 'message' => 'Message Sent'));
+            $mail = new Mail();
+            $mail->sendEmail($email);
         } else {
             echo json_encode(array('status' => 'failed', 'message' => 'Please try again later'));
         }
