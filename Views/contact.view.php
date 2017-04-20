@@ -12,6 +12,7 @@
             <textarea id="message" name="message" placeholder="Type your message here...." tabindex="5" required></textarea>
         </fieldset>
         <fieldset>
+            <i class="fa fa-spinner fa-spin" style="font-size:40px; align-content: center" id="spinning"></i>
             <button name="submit" type="submit" id="contact-submit">Submit</button>
         </fieldset>
     </form>
