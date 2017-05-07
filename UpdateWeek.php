@@ -23,10 +23,17 @@ $currentWeek = $admin->getCurrentWeek(3);
 $numWeeks = $admin->getNumWeeks(3);
 
 $currentWeek = $currentWeek + 1;
-if ($currentWeek == 16) {
-    $currentWeek--;
+
+if ($currentWeek == 17) {
+    return;
 }
-$admin->setSetup(3, $currentWeek, $numWeeks);
+
+if ($currentWeek == 16) {
+    $admin->setSetup(3, 15, $numWeeks);
+} else {
+    $admin->setSetup(3, $currentWeek, $numWeeks);
+}
+
 
 
 // resets it back to the current week number for the below calculations
