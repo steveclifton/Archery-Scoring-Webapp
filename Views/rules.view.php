@@ -27,7 +27,7 @@
         <p>
             <ul>
                 <li>
-                    The event format is a 18m Vegas round – 30 arrows at 18m, 40cm 3-Spot target (can be vertical or triangle)
+                    The event format is a 18m Vegas round – 30 arrows at 18m, 40cm 3-Spot target (can be vertical or triangle) or single spot face.
                 </li>
                 <li>
                     Events shall be run to World Archery rules, but without a requirement for timing or judges.
