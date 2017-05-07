@@ -362,7 +362,12 @@ $(document).ready(function () {
                 return;
             }
 
-            if (score == '' && xcount == '') {
+            if (score == '' || xcount == '') {
+                if (score == '' && xcount != '') {
+                    $('<p id="invalidScore" style="color: red">Invalid Score</p>').insertAfter($($this.find("input#score")));
+                } else if (score != '' && xcount == '') {
+                    $('<p id="invalidXCount" style="color: red">Invalid XCount</p>').insertAfter($($this.find("input#xcount")));
+                }
                 return;
             }
 
