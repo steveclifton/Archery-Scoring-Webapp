@@ -79,7 +79,7 @@
                         </li>
                         <ul>
                             <li>
-                                i. An archer’s handicap for each week is calculated = (360 – mean average of
+                                i. An archer’s handicap for each week is calculated = (300 – mean average of
                                 previous rounds shot to date in the calendar year). This handicap is added
                                 to the archers score to give an adjusted total.
                             </li>

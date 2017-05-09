@@ -145,7 +145,7 @@ class Results extends Base
             $averageScore = $average['average'];
             $averageX = $average['xcount'];
 
-            $handicap = 360 - $averageScore;
+            $handicap = 300 - $averageScore;
             $handicapScore = $archer['score'] + $handicap;
 
             // TODO
