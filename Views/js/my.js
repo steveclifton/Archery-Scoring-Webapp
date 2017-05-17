@@ -307,6 +307,52 @@ $(document).ready(function () {
     });
 
 
+
+
+    /*********************************************************************************/
+
+    $('#editarcher').on('click', function () {
+        var anzNum = $('#editanzuser').val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/ajax_editUsersScore',
+            data: {
+                'anznum': anzNum
+            },
+            success: function (data) {
+                var json = $.parseJSON(data);
+                if (json.status == 'failed') {
+                    alert('Cannot add account');
+                } else {
+                    var table = "#editscore tbody";
+
+                    $(json.results).each(function() {
+                        var div = this.division;
+                        $(table).append('<tr>' +
+                            '<td> ' + '<input class="form-control" type="text" id="id" value="' + this.id +'">' + '</td>' +
+                            '<td> ' + '<input class="form-control" type="text" id="score" value="' + this.score +'">' + '</td>' +
+                            '<td> ' + '<input class="form-control" type="text" id="xcount" value="' + this.xcount +'">' + '</td>' +
+                            '<td> ' + '<select id="div">' +
+                                '<option value="compound">Compound</option>' +
+                                '<option value="recurve">Recurve</option>' +
+                                '<option value="recurve barebow">Recurve BB</option>' +
+                                '<option value="longbow">LongBow</option>' +
+                                '</select>' + '</td>' +
+                            '<td>' + '<button class="btn btn-danger" id="updatescore">Update Score</button>' + '</td>' +
+                            '</tr>'
+                        );
+
+                    });
+                }
+            }
+        });
+    });
+
+
+
+
+
     /***********************************************************************************
      * *********************************************************************************
      *
