@@ -24,6 +24,7 @@ class Admin extends Base
         $setup = new AdminConfig();
         $events = new Events();
 
+        $viewData['users'] = $setup->getCurrentUsers();
         $viewData['events'] = $events->getAllEvents();
 
         $this->render('Admin', 'admin.view', $viewData);
@@ -111,8 +112,6 @@ class Admin extends Base
      */
     public function createEvent()
     {
-
-
         $this->render('Create Event', 'create_event.view');
     }
 
