@@ -105,7 +105,7 @@ class Score extends Base
     /**
      * Gets the current weeks score for an Archer and Div
      */
-    public function getCWScore($eventNum, $userId, $week, $div, $event)
+    public function getCWScore($eventNum, $userId, $week, $div)
     {
 
         $sql =  "SELECT * 
@@ -349,5 +349,23 @@ class Score extends Base
 
     }
 
+    public function getAllCurrentWeekScores($userId, $currentWeek, $eventNum)
+    {
+        $sql = "SELECT id, user_id, score, xcount, week, division
+                FROM `$this->tableName`
+                WHERE `user_id` = '$userId'
+                AND `event` = '$eventNum'
+                AND `week` = '$currentWeek'
+                ";
+
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute();
+
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+
+        return $data;
+    }
 
 }
