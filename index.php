@@ -176,6 +176,11 @@ else if ($uri == 'ajax_submitContact') {
     $admin->ajax_contactForm();
 }
 
+else if ($uri == 'ajax_editUsersScore') {
+    $result = new Results();
+    $result->ajax_editUsersScore();
+}
+
 else {
     header('location: /');
     die();
