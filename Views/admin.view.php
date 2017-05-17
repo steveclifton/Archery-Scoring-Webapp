@@ -1,15 +1,5 @@
 <div class="container">
     <div class="row">
-        <h3><a href="/create_event">Create Event</a></h3>
-    </div>
-    <hr>
-    <div class="row">
-        <h3>Edit users score</h3>
-
-    </div>
-    <hr>
-
-    <div class="row">
         <h3>Pending Users : <?= count($viewData['pending_users']) ?></h3>
         <input type="button" value="Show" id="pendingbutton" class="btn btn-danger">
         <br><br>
@@ -46,6 +36,46 @@
         </div>
     </div>
     <hr>
+    <div class="row">
+        <h3>Edit users score</h3>
+        <div class="row">
+            <form class="form-inline" action="#" id="editscore" onsubmit="return false" style="padding-top: 10px; ">
+                <div class="form-group" >
+                    <div class="col-xs col-sm-2 col-md-2" style="padding-left: 0px" >
+                        <input class="form-control" type="text" placeholder="ANZ Num" id="editanzuser">
+                    </div>
+                </div>
+                <div class="form-group" id="editArcherForm">
+                    <div class="col-xs col-sm-2 col-md-2">
+                        <button class="btn btn-warning " id="editarcher">Edit Score</button>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="table">
+                    <table class="table table-bordered table-hover table-responsive" id="editscore" >
+                        <thead>
+                            <th class="col-xs-1 col-sm-1 col-md-2">DB Row ID</th>
+                            <th class="col-xs-1 col-sm-1 col-md-2">Score</th>
+                            <th class="col-xs-1 col-sm-1 col-md-2">Xcount</th>
+                            <th class="col-xs-1 col-sm-1 col-md-2">Division</th>
+                            <th class="col-xs-1 col-sm-1 col-md-2">Submit</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+            <div class="validation"></div>
+
+            <!-- Text boxes here -->
+
+
+        </div>
+    </div>
+    <hr>
+
+
     <div class="row">
         <h3>List of current users</h3>
         <div class="table">
