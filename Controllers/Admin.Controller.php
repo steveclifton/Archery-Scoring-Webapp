@@ -82,6 +82,8 @@ class Admin extends Base
 
     public function ajax_getEventDetails()
     {
+        echo json_encode(array("status" => "success")); return;
+
         $eventId = $_POST['id'];
 
         $admin = new AdminConfig();
