@@ -133,7 +133,7 @@ class Results extends Base
         $userId = $user->getUserIdByAnzNum($archer['anz']);
 
         // TODO
-        $existingScore = $score->getCWScore(3, $userId, $archer['week'], $archer['div'], '2017_outdoor_league');
+        $existingScore = $score->getCWScore(3, $userId, $archer['week'], $archer['div']);
 
 
         if (!isset($existingScore[0])) {
@@ -191,6 +191,23 @@ class Results extends Base
             }
         }
         echo json_encode(array("status" => "failed", "message" => "Could Not Add Association")); die();
+
+    }
+
+    public function ajax_editUsersScore()
+    {
+        $admin = new AdminConfig();
+        $week = $admin->getCurrentWeek(3);
+
+        $user = new User();
+        $userId = $user->getUserIdByAnzNum($_POST['anznum']);
+
+        $score = new Score();
+        $result = $score->getAllCurrentWeekScores($userId, $week, 3);
+
+
+        echo json_encode(array("status" => "success", "results" => $result));
+
 
     }
 
