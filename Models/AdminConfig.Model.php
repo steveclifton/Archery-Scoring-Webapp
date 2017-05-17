@@ -100,7 +100,23 @@ class AdminConfig extends Base
         die();
     }
 
+    public function getCurrentUsers()
+    {
+        $sql = "SELECT id, anz_num, first_name, last_name FROM `users` ORDER by id";
 
+        $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stm->execute(array('$event'));
+
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        if (isset($data[0])) {
+            return $data;
+        } else {
+            return false;
+        }
+
+    }
 
 
 
