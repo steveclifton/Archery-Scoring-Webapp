@@ -3,7 +3,11 @@
         <h3><a href="/create_event">Create Event</a></h3>
     </div>
     <hr>
-    
+    <div class="row">
+        <h3>Edit users score</h3>
+
+    </div>
+    <hr>
 
     <div class="row">
         <h3>Pending Users : <?= count($viewData['pending_users']) ?></h3>
@@ -12,14 +16,14 @@
         <div class="table hidden" id="pendingusers">
             <table class="table table-bordered table-hover">
                 <thead>
-                    <tr>
-                        <th class="col-md-1">User_ID</th>
-                        <th class="col-md-1">First Name</th>
-                        <th class="col-md-1">Last Name</th>
-                        <th class="col-md-1">Anz Num</th>
-                        <th class="col-md-1">Email</th>
-                        <th class="col-md-1">Authorise</th>
-                    </tr>
+                <tr>
+                    <th class="col-md-1">User_ID</th>
+                    <th class="col-md-1">First Name</th>
+                    <th class="col-md-1">Last Name</th>
+                    <th class="col-md-1">Anz Num</th>
+                    <th class="col-md-1">Email</th>
+                    <th class="col-md-1">Authorise</th>
+                </tr>
                 </thead>
                 <tbody>
                 <?php
@@ -40,8 +44,36 @@
                 </tbody>
             </table>
         </div>
-        <hr>
     </div>
+    <hr>
+    <div class="row">
+        <h3>List of current users</h3>
+        <div class="table">
+            <table class="table table-bordered table-hover table-responsive" id="currentusers" >
+                <thead>
+                <tr>
+                    <th class="col-xs-1 col-sm-1 col-md-2">ID</th>
+                    <th class="col-xs-1 col-sm-1 col-md-2">ANZ Number</th>
+                    <th class="col-xs-1 col-sm-1 col-md-2">Firstname</th>
+                    <th class="col-xs-1 col-sm-1 col-md-2">Lastname</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                foreach ($viewData['users'] as $data) { ?>
+                    <tr>
+                        <td><?= $data['id'] ?></td>
+                        <td><?= $data['anz_num'] ?></td>
+                        <td><?= ucfirst($data['first_name']) ?></td>
+                        <td><?= ucfirst($data['last_name']) ?></td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+    </div>
+    <hr>
+
+
 
 
 
