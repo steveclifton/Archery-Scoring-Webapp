@@ -64,7 +64,7 @@ class AdminConfig extends Base
      */
     public function getCurrentWeek($event)
     {
-        $sql = "SELECT `current_week` FROM `admin_configuration` WHERE `event` = '$event' ORDER BY `created_at` ASC LIMIT 1";
+        $sql = "SELECT `current_week` FROM `admin_configuration` WHERE `event` = '$event' ORDER BY `created_at` DESC LIMIT 1";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
