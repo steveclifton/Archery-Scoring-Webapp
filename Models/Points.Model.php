@@ -19,7 +19,7 @@ class Points extends Base
         date_default_timezone_set('NZ');
         $date = date("H:i:s d-m-Y");
 
-        $sql = "INSERT INTO `$this->pointsTable` (`id`, `event`, `user_id`, `week`, `division`, `points`, `created_at`) 
+        $sql = "INSERT INTO `$this->pointsTable` (`id`, `event`, `user_id`, `week`, `division`, `points`, `created_at`)
                 VALUES (NULL, '$event', '$userId', '$week', '$div', '$points', '$date');";
 
         $stm = $this->database->prepare(($sql), array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -39,7 +39,7 @@ class Points extends Base
                 WHERE `user_id` = '$userId'
                 AND `division` = '$div'
                 AND `event` = '$event'
-                ORDER BY `points`
+                ORDER BY `points` DESC
                 LIMIT 10
                 ";
 
